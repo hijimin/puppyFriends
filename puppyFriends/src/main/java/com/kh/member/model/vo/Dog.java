@@ -26,6 +26,12 @@ public class Dog {
 		this.dogVaccine = dogVaccine;
 		this.dogSignificant = dogSignificant;
 	}
+	
+	public Dog(int dogNo, String dogName) {
+		super();
+		this.dogNo = dogNo;
+		this.dogName = dogName;
+	}
 
 
 	public int getDogNo() {

@@ -12,6 +12,7 @@ import java.util.Properties;
 import static com.kh.common.JDBCTemplate.*;
 import com.kh.common.model.vo.Image;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.member.model.vo.Dog;
 
 public class DogforDao {
 
@@ -39,11 +40,10 @@ public class DogforDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, img.getFilePath());
-			pstmt.setInt(2, img.getFileLevel());
-			pstmt.setString(3, img.getFileName());
-			pstmt.setString(4, img.getChangeName());
-			pstmt.setInt(5, Integer.parseInt(img.getDogNo()));
-			pstmt.setString(6, img.getContent());
+			pstmt.setString(2, img.getFileName());
+			pstmt.setString(3, img.getChangeName());
+			pstmt.setInt(4, Integer.parseInt(img.getDogNo()));
+			pstmt.setString(5, img.getContent());
 			
 			result = pstmt.executeUpdate();
 			
@@ -126,9 +126,68 @@ public class DogforDao {
 	}
 	
 	
+	public int levelCheck(Connection conn, int level) {
+		
+		int check = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("levelCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, level);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				check = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return check;
+		
+	}
 	
 	
-	
+	public ArrayList<Dog> selectDog(Connection conn){
+		
+		ArrayList<Dog> list = new ArrayList<Dog>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectDog");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Dog d = new Dog(rset.getInt("dog_no"),rset.getString("dog_name"));
+				
+				list.add(d);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
 	
 	
 	

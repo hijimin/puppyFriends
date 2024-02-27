@@ -44,6 +44,9 @@
 
         <form action="<%= contextPath %>/insert.ga" id="enroll-form" method="post" enctype="multipart/form-data">
 			
+            
+
+
             <table align="center">
                 <tr>
                     <th width="120">강아지 번호</th>
@@ -67,16 +70,7 @@
                         <textarea name="content" required rows="5" cols="10" style="resize: none;"></textarea>
                     </td>
                 </tr>
-                <tr>
-                    <td><br></td>
-                </tr>
-                <tr>
-                    <th>사진 등급</th>
-                    <td><select name="level" style="height: 100%; width: 30%;">
-                        <option value="2" selected>기본</option>
-                        <option value="1">썸네일</option>
-                    </select></td>
-                </tr>
+               
             </table>
 
             <div id="file-area" style="display: none;">
@@ -84,6 +78,11 @@
             </div>
 
             <script>
+
+            
+
+
+
                 function loadImg(inputFile, num){
                     // inputFile : 현재 변화가 생긴 input type="file" 요소객체
                     // num : 몇번째 input요소인지 확인 후 해당 영역에 미리보기하기 위해 전달받는 숫자

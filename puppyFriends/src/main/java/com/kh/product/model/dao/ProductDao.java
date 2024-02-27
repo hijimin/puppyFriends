@@ -49,7 +49,7 @@ public class ProductDao {
 		return result;
 	}
 	
-	public int insertImgList(Connection conn, Image im) {
+	public int insertImgList(Connection conn, ArrayList<Image> list) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -57,13 +57,17 @@ public class ProductDao {
 		
 		try {
 			
-			pstmt = conn.prepareStatement(sql);
+			for(Image im : list) {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, im.getFilePath());
+				pstmt.setInt(2, im.getFileLevel());
+				pstmt.setString(3, im.getFileName());
+				pstmt.setString(4, im.getChangeName());
+				
+				result = pstmt.executeUpdate();					
+			}
 			
-			pstmt.setString(1, im.getFilePath());
-			pstmt.setString(2, im.getFileName());
-			pstmt.setString(3, im.getChangeName());
-			
-			result = pstmt.executeUpdate();	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

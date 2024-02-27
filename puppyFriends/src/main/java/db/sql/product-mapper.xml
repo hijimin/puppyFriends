@@ -32,6 +32,7 @@
 	  , REF_BNO
 	  , IMAGE_TYPE
 	  , FILE_PATH
+	  , FILE_LEVEL
 	  , FILE_NAME
 	  , CHANGE_NAME
 	  )
@@ -40,6 +41,7 @@
 	    SEQ_IMAGE.NEXTVAL
 	  , SEQ_PRODUCT.CURRVAL
 	  , 1
+	  , ?
 	  , ?
 	  , ?
 	  , ?
@@ -59,6 +61,7 @@
   JOIN IMAGE ON(PRODUCT_NO = REF_BNO)
  WHERE IMAGE_TYPE = 1
    AND PRODUCT_STATUS = 'Y'
+   AND FILE_LEVEL = 1
 	</entry>
 
 

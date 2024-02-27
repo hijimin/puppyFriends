@@ -49,16 +49,26 @@ public class ProductImgInsertController extends HttpServlet {
 			p.setPrice(multiRequest.getParameter("oriprice"));
 			p.setDiscount(Integer.parseInt(multiRequest.getParameter("discount")));
 			
-				String key = "file1";
-				Image im = null;
-				if(multiRequest.getOriginalFileName(key) != null) {		
-					im = new Image();
-					im.setFileName(multiRequest.getOriginalFileName(key));
-					im.setChangeName(multiRequest.getFilesystemName(key));
-					im.setFilePath("resources/upfiles/");
-					
-				}					
-			int result = new ProductService().insertPdBoard(p, im);
+				ArrayList<Image> list = new ArrayList<Image>();
+				
+				for(int i=1; i<=4; i++) {				
+					String key = "file"+i;
+					if(multiRequest.getOriginalFileName(key) != null) {		
+						Image im = new Image();
+						im = new Image();
+						im.setFileName(multiRequest.getOriginalFileName(key));
+						im.setChangeName(multiRequest.getFilesystemName(key));
+						im.setFilePath("resources/upfiles/");
+						
+						if(i == 1) { // 대표이미지 일 경우
+							im.setFileLevel(1);
+						}else { // 상세이미지 일 경우
+							im.setFileLevel(2);
+						}
+						list.add(im);
+					}					
+				}
+			int result = new ProductService().insertPdBoard(p, list);
 			
 			if(result > 0) {
 				response.sendRedirect(request.getContextPath());

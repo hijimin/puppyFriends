@@ -2,16 +2,16 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="loginMember">
-		SELECT 
-			   MEMBER_NO
-			 , MEMBER_ID
-			 , MEMBER_PWD
-			 , MEMBER_NAME
-			 , MEMBER_EMAIL
-			 , MEMBER_PHONE
-		  FROM MEMBER
-		 WHERE MEMBER_ID = ?
-		   AND MEMBER_PWD = ?
+		SELECT
+		MEMBER_NO
+		, MEMBER_ID
+		, MEMBER_PWD
+		, MEMBER_NAME
+		, MEMBER_EMAIL
+		, MEMBER_PHONE
+		FROM MEMBER
+		WHERE MEMBER_ID = ?
+		AND MEMBER_PWD = ?
 	</entry>
 
 </properties>

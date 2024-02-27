@@ -237,7 +237,7 @@
                    <li class="gallery"><a href="<%= contextPath %>/gallery.ga?cpage=1">갤러리</a></li>
                 </ul>
             </li>
-            <li class="goods"><a href="#">상품</a></li>
+            <li class="goods"><a href="<%= contextPath%>/list.pd">상품</a></li>
             <li class="search"><a href="#">게시판</a></li>
 
         </ul> <br>

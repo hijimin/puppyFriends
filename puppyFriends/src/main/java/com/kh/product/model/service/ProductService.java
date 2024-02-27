@@ -10,12 +10,12 @@ import com.kh.product.model.vo.Product;
 
 public class ProductService {
 	
-	public int insertPdBoard(Product p, Image im) {
+	public int insertPdBoard(Product p, ArrayList<Image> list) {
 		Connection conn = getConnection();
 		
 		int result1 = new ProductDao().insertPdBoard(conn, p);
 		
-		int result2 = new ProductDao().insertImgList(conn, im);
+		int result2 = new ProductDao().insertImgList(conn, list);
 		
 		if(result1 > 0 && result2 > 0) {
 			commit(conn);

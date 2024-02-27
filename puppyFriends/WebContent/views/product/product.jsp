@@ -40,7 +40,7 @@
         }
        
 
-        #content_2>div{width: 100%;}
+        #content_2>div{width: 80%; margin: auto;}
         #content2_1{
             /* height: 20%; */
             height: auto;
@@ -52,7 +52,7 @@
         #content2_3{
             height: auto;
             display: grid;
-            grid-template-columns: repeat(4,1fr);
+            grid-template-columns: repeat(3,1fr);
             gap: 15px;
         }
 

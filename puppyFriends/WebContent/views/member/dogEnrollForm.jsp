@@ -47,14 +47,24 @@
     }
 
     .enroll-member>div{height: 30px; float: left;}
-    .enroll-member-radio{width: 50%; height: 100%;}
-    .enroll-trainer-radio{width: 50%; height: 100%;}
+    
 
-    .enroll-member-info{
+    .enroll-dog-info{
         width: 260px;
         height: 348px;
         margin: auto;
+        
     }
+
+    .enroll-dog-info>div{
+        float: left;
+        height: 40px;
+        width: 50%;
+        text-align: center;
+        padding-top: 8px;
+    }
+
+    
 </style>
 </head>
 <body>
@@ -70,29 +80,39 @@
 
 					
                     <br><br><br>
-					<form action="<%= request.getContextPath()%>/enroll-form.dog">
+					<form action="<%= request.getContextPath()%>/insert.me">
 						
-						<input type="hidden" name="<%= memberId %>">
-	                    <input type="hidden" name="<%= memberPwd %>">
-	                    <input type="hidden" name="<%= memberName %>">
-	                    <input type="hidden" name="<%= memberEmail %>">
-	                    <input type="hidden" name="<%= memberPhone %>">
+						<input type="hidden" name="memberId" value="<%= memberId %>">
+	                    <input type="hidden" name="memberPwd" value="<%= memberPwd %>">
+	                    <input type="hidden" name="memberName" value="<%= memberName %>">
+	                    <input type="hidden" name="memberEmail" value="<%= memberEmail %>">
+	                    <input type="hidden" name="memberPhone" value="<%= memberPhone %>">
                     
 	                    <div class="enroll-member-idpwd" align="center">
-	                        <input type="text" name="memberId" placeholder="아이디 *" required style="width: 250px; height: 25px;"><br>
-	                        <input type="password" name="memberPwd" placeholder="비밀번호 *" required style="width: 250px; height: 25px;"><br>
-	                        <input type="password" name="checkPwd" placeholder="비밀번호 확인" required style="width: 250px; height: 25px;">
+	                        <input type="text" name="dogName" placeholder="반려견 이름 *" required style="width: 250px; height: 25px;"><br>
+	                        <input type="text" name="dogValue" placeholder="반려견 종 *" required style="width: 250px; height: 25px;"><br>
+	                        <input type="number" name="dogAge" placeholder="반려견 나이" required style="width: 250px; height: 25px;">
 	                    </div>
 	
 	                    <br>
 	                    
-	                    <div class="enroll-member-info">
-	                        <h4 style="margin: 0;">이름 *</h4>
-	                        <input type="text" name="memberName" placeholder="" required style="width: 250px; height: 25px;"><br><br>
-	                        <h4 style="margin: 0;">이메일 *</h4>
-	                        <input type="text" name="memberEmail" requeired style="width: 250px; height: 25px;"><br><br>
-	                        <h4 style="margin: 0;">연락처 *</h4>
-	                        <input type="text" name="memberPhone" required style="width: 250px; height: 25px;">
+	                    <div class="enroll-dog-info">
+	                        <h4 style="margin: 0;">반려견 성별 *</h4>
+	                        <div class="dog_gender1" >
+                                <input type="radio" id="genderM" name="gender" value="M">남
+                            </div>
+	                        <div class="dog_gender2">
+                                <input type="radio" id="genderF" name="gender" value="F">여
+                            </div>
+	                        <h4 style="margin: 0;">필수예방접종여부 *</h4>
+	                        <div class="dog_vacine1">
+                                <input type="radio" id="vacineO" name="vaccine" value="Y">O
+                            </div>
+	                        <div class="dog_vacine2">
+                                <input type="radio" id="vacineX" name="vaccine" value="N">X
+                            </div>
+	                        <h4 style="margin: 0;">반려견 특이사항</h4>
+	                        <textarea name="dogSignificant" id="" cols="34" rows="10" style="resize: none;"></textarea>
 	                    </div>
                         <button>다음</button>
                     </form>

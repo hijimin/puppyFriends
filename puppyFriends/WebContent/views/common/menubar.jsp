@@ -6,6 +6,7 @@
 	String contextPath = request.getContextPath(); //  "/Test"
 	
 	Member loginUser = (Member)session.getAttribute("loginUser");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -82,6 +83,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+		
+		<% if(alertMsg != null) { %>
+		<script>
+			alert("<%= alertMsg %>");
+		</script>
+		<% session.removeAttribute("alertMsg"); %>
+		<% } %>
+
         <div class="header">
             <div class="header_1">
                 <img src="로고.png" style="width: 150px; height: 150px; margin-left: 30px;">
@@ -104,7 +113,7 @@
                             <tr>
                                 <th colspan="2">
                                     <button type="submit">로그인</button>
-                                    <button type="button">회원가입</button>
+                                    <button onclick="location.href='<%= contextPath %>/enrollpage.me'" type="button">회원가입</button>
                                 </th>
                             </tr>
                         </table>

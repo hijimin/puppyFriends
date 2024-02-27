@@ -124,7 +124,7 @@
                     </tr>
                 </div>
                 <div class="btn_bar">
-                    <button onclick="#">예약하기</button>
+                    <button>예약하기</button> // onclick 예정
                 </div>
                 
             </div>

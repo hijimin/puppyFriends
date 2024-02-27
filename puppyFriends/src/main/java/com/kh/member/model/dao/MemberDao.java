@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import static com.kh.common.JDBCTemplate.*;
+
+import com.kh.member.model.vo.Dog;
 import com.kh.member.model.vo.Member;
 
 public class MemberDao {
@@ -59,5 +61,58 @@ private Properties prop = new Properties();
 		
 		return m;
 		
+	}
+	
+	public int insertMember(Connection conn, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberPwd());
+			pstmt.setString(3, m.getMemberName());
+			pstmt.setString(4, m.getMemberEmail());
+			pstmt.setString(5, m.getMemberPhone());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int insertDog(Connection conn, Dog d) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertDog");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, d.getDogName());
+			pstmt.setString(2, d.getDogValue());
+			pstmt.setInt(3, d.getDogAge());
+			pstmt.setString(4, d.getDogGender());
+			pstmt.setString(5, d.getDogVaccine());
+			pstmt.setString(6, d.getDogSignificant());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

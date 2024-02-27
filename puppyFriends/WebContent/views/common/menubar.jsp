@@ -177,7 +177,7 @@
                 <img src="로고.png" style="width: 150px; height: 150px; margin-left: 30px;">
             </div>
             <div class="header_2">
-            	<div id="header"><h1 style="margin-top: 100px;"><a href="<%= contextPath %>" style="color: white;">puppy friend</a></h1></div>
+            	<div id="header"><h1 style="margin-top: 100px;"><a href="<%= contextPath %>" style="color: white; text-decoration: none;">puppy friend</a></h1></div>
                 
             </div>
 

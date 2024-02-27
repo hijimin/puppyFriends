@@ -133,7 +133,7 @@
             <div class="menu"><a href="">소개</a></div>
             <div class="menu"><a href="">프로그램</a></div>
             <div class="menu"><a href="<%= contextPath %>/dogforMain.do">수업일지</a></div>
-            <div class="menu"><a href="<%= contextPath %>/list.pd">상품</a></div>
+            <div class="menu"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a></div>
             <div class="menu"><a href="">검색</a></div>
         </div>
 

@@ -43,11 +43,13 @@
                 </tr>
 
                 <tr>
-                    <th>상품이미지</th>
+                    <th>대표상품이미지</th>
                     <td colspan="3" align="center">
                         <img id="titleImg" width="250" height="170" onclick="chooseFile(1);">
                     </td>
                 </tr>
+                
+                
             </table>
 
             <div id="file-area" style="display:none">

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="adminSelectMember">
+		  SELECT *
+			  FROM(SELECT ROWNUM RNUM, A.*
+			          FROM(SELECT
+			                  MEMBER_NO
+			                , MEMBER_ID
+			                , MEMBER_NAME
+			                , DOG_NO
+			                , DOG_NAME
+			                , MEMBER_EMAIL
+			                , MEMBER_PHONE
+			              FROM MEMBER
+			              LEFT JOIN DOG USING(MEMBER_NO)
+			              ORDER 
+			                 BY MEMBER_NO DESC) A)
+			   WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	<entry key="adminSelectListCount">
+		  SELECT 
+		      COUNT(*) AS count
+		  FROM MEMBER
+		  WHERE STATUS = 'Y'
+	</entry>
+	
+	
+	<entry key="">
+	
+	</entry>
+	
+	
+	<entry key="">
+	
+	</entry>
+	
+	
+	<entry key="">
+	
+	</entry>
+	
+	
+	<entry key="">
+	
+	</entry>
+	
+	
+	<entry key="">
+	
+	</entry>
+
+</properties>
+
+
+

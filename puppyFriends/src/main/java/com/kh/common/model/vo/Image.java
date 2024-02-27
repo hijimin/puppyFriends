@@ -11,11 +11,14 @@ public class Image {
 	 private String fileName;
 	 private String changeName;
 	 private Date imageUpdate;
+	 private String dogNo;
+	 private String content; 
+	 private String titleImg;
 	 
 	 public Image() {}
 
 	public Image(int fileNo, int refBoardNo, int imageType, String filePath, int fileLevel, String fileName,
-			String changeName, Date imageUpdate) {
+			String changeName, Date imageUpdate, String dogNo) {
 		super();
 		this.fileNo = fileNo;
 		this.refBoardNo = refBoardNo;
@@ -25,6 +28,24 @@ public class Image {
 		this.fileName = fileName;
 		this.changeName = changeName;
 		this.imageUpdate = imageUpdate;
+		this.dogNo = dogNo;
+	}
+
+	
+	
+	public Image(int fileNo, String dogNo, String titleImg) {
+		super();
+		this.fileNo = fileNo;
+		this.dogNo = dogNo;
+		this.titleImg = titleImg;
+	}
+
+	public String getTitleImg() {
+		return titleImg;
+	}
+
+	public void setTitleImg(String titleImg) {
+		this.titleImg = titleImg;
 	}
 
 	public int getFileNo() {
@@ -91,11 +112,28 @@ public class Image {
 		this.imageUpdate = imageUpdate;
 	}
 
+	public String getDogNo() {
+		return dogNo;
+	}
+
+	public void setDogNo(String dogNo) {
+		this.dogNo = dogNo;
+	}
+	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	@Override
 	public String toString() {
 		return "Image [fileNo=" + fileNo + ", refBoardNo=" + refBoardNo + ", imageType=" + imageType + ", filePath="
 				+ filePath + ", fileLevel=" + fileLevel + ", fileName=" + fileName + ", changeName=" + changeName
-				+ ", imageUpdate=" + imageUpdate + "]";
+				+ ", imageUpdate=" + imageUpdate + ", dogNo=" + dogNo + "]";
 	}
 
+	 
 }

@@ -2,6 +2,75 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
+<entry key="insertImage">
+	INSERT
+	  INTO IMAGE
+	  (
+	    FILE_NO
+	  , IMAGE_TYPE
+	  , FILE_PATH
+	  , FILE_LEVEL
+	  , FILE_NAME
+	  , CHANGE_NAME
+	  , DOG_NO
+	  , CONTENT
+	  )
+	  VALUES
+	  (
+	    SEQ_IMAGE.NEXTVAL
+	  , 3
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  )
+
+</entry>
+
+<entry key="selectThCount">
+	SELECT
+	       COUNT(*) AS "COUNT"
+	  FROM IMAGE
+	 WHERE IMAGE_TYPE = 3
+	   AND FILE_LEVEL = 1
+</entry>
+
+<entry key="selectList">
+	SELECT *
+		FROM (SELECT ROWNUM RUM, A.*    
+		      FROM (SELECT
+		           FILE_NO
+		         , FILE_PATH || CHANGE_NAME AS "TITLEIMG"  
+		         , DOG_NAME
+		      FROM IMAGE   
+		      JOIN DOG USING(DOG_NO)
+		     WHERE FILE_LEVEL = 1
+		       AND IMAGE_TYPE = 3
+		     ORDER
+		        BY FILE_NO) A
+		        )
+		 WHERE RUM BETWEEN ? AND ?
+</entry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </properties>

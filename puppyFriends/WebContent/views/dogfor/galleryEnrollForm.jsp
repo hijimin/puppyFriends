@@ -6,24 +6,31 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    div{
-        border: 1px solid black;
-    }
     .outer{
-        background-color: black;
+        font-size: 20px;
+        background-color: rgb(255, 222, 239);
         color: white;
         width: 1000px;
-        height: 700px;
+        height: auto;
         margin: auto;
         margin-top: 50px;
+        padding-bottom: 30px;
+        margin-bottom: 100px;
     }
     #enroll-form table{
-        border: 1px solid white;
+        border: 0px solid white;
+        width: 500px;
+        height: 500px;
     }
-    #enroll-form input, #enroll-form textarea{
+    #enroll-form textarea{
         width: 100%;
+        height: 100%;
         box-sizing: border-box;
     }
+    #enroll-form input{
+        width: 50%;
+        height: 100%;
+    } 
 </style>
 </head>
 <body>
@@ -35,44 +42,45 @@
         <h2 align="center">사진게시판 작성하기</h2>
         <br>
 
-        <form action="<%= contextPath %>/insert.th" id="enroll-form" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="userNo" value="">
+        <form action="<%= contextPath %>/insert.ga" id="enroll-form" method="post" enctype="multipart/form-data">
+			
             <table align="center">
                 <tr>
-                    <th width="100">제목</th>
-                    <td colspan="3"><input type="text" name="title" required></td>
+                    <th width="120">강아지 번호</th>
+                    <td colspan="3"><input type="text" name="dogNo" required></td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <th>추가이미지</th>
+                    <td colspan="3">
+                        <img id="titleImg" width="300" height="200" onclick="chooseFile(1);">
+                    </td>
+                </tr>
+                <tr>
+                    <td><br></td>
                 </tr>
                 <tr>
                     <th>내용</th>
                     <td colspan="3">
-                        <textarea name="content" required rows="5" style="resize: none;"></textarea>
+                        <textarea name="content" required rows="5" cols="10" style="resize: none;"></textarea>
                     </td>
                 </tr>
                 <tr>
-                    <th>대표이미지</th>
-                    <td colspan="3" align="center">
-                        <img id="titleImg" width="250" height="170" onclick="chooseFile(1);">
-                    </td>
+                    <td><br></td>
                 </tr>
                 <tr>
-                    <th>상세이미지</th>
-                    <td>
-                        <img id="contentImg1" width="150" height="120" onclick="chooseFile(2);">
-                    </td>
-                    <td>
-                        <img id="contentImg2" width="150" height="120" onclick="chooseFile(3);">
-                    </td>
-                    <td>
-                        <img id="contentImg3" width="150" height="120" onclick="chooseFile(4);">
-                    </td>
+                    <th>사진 등급</th>
+                    <td><select name="level" style="height: 100%; width: 30%;">
+                        <option value="2" selected>기본</option>
+                        <option value="1">썸네일</option>
+                    </select></td>
                 </tr>
             </table>
 
             <div id="file-area" style="display: none;">
-                <input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" required>
-                <input type="file" name="file2" id="file2" onchange="loadImg(this, 2);">
-                <input type="file" name="file3" id="file3" onchange="loadImg(this, 3);">
-                <input type="file" name="file4" id="file4" onchange="loadImg(this, 4);">
+                <input type="file" name="file" id="file" onchange="loadImg(this, 1);" required>
             </div>
 
             <script>
@@ -98,9 +106,6 @@
                             // e.target.result => 읽어들인 파일의 고유한 url
                             switch(num){
                                 case 1 : $("#titleImg").attr("src", e.target.result); break;
-                                case 2 : $("#contentImg1").attr("src", e.target.result); break;
-                                case 3 : $("#contentImg2").attr("src", e.target.result); break;
-                                case 4 : $("#contentImg3").attr("src", e.target.result); break;
 
                             }
 
@@ -110,21 +115,16 @@
                        
                         switch(num){
                                 case 1 : $("#titleImg").attr("src", null); break;
-                                case 2 : $("#contentImg1").attr("src", null); break;
-                                case 3 : $("#contentImg2").attr("src", null); break;
-                                case 4 : $("#contentImg3").attr("src", null); break;
 
                             }
-
                             
                     }
-
 
                 }
 
                 function chooseFile(num){
 
-                    $("#file"+num).click();
+                    $("#file").click();
 
                 }
 
@@ -135,8 +135,8 @@
 
             <br>
 
-            <div align="center">
-                <button type="submit">등록하기</button>
+            <div align="right" style="width: 750px;">
+                <button type="submit" style="border: 0px; background-color: rgb(255, 244, 244);">등록하기</button>
             </div>
 
 

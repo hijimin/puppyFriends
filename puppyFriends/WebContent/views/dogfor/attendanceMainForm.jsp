@@ -8,15 +8,20 @@
 </head>
 <body>
 
-	<%@ include file="views/common/menubar.jsp" %>
+	<%@ include file="../common/menubar.jsp" %>
+
+	
 
 
 
-	<%@ include file="views/common/footerbar.jsp" %>
+	<h1>출석부</h1>
 
 
 
 
+
+
+	<%@ include file="../common/footerbar.jsp" %>
 
 </body>
 </html>

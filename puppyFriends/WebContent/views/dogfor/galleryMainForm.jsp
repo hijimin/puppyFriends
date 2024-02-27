@@ -8,15 +8,20 @@
 </head>
 <body>
 
-	<%@ include file="views/common/menubar.jsp" %>
+	<%@ include file="../common/menubar.jsp" %>
+
+	
 
 
 
-	<%@ include file="views/common/footerbar.jsp" %>
+	 <a href="<%= contextPath %>/galleryEnrollForm.ga">사진등록</a>
 
 
 
 
+
+
+	<%@ include file="../common/footerbar.jsp" %>
 
 </body>
 </html>

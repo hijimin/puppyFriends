@@ -240,7 +240,7 @@
             <% if(loginUser != null && loginUser.getMemberId().equals("admin")){ %>
             <div align="right" style="width: 1700px;">
                 <br><br><br><br>
-                <a href="<%= contextPath %>/enrollForm.pd" class="btn btn-sm btn-secondary">글작성</a>
+                <a href="<%= contextPath %>/enrollForm.pd" class="btn btn-sm btn-secondary">글작성1</a>
             </div>
             <% } %>
             

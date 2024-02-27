@@ -130,7 +130,7 @@
         </div>
 
         <div class="content4">
-            <a href="<%= contextPath %>/gallery.ga" class="btn btn-lg" style="background-color: rgb(255, 222, 239); color: white;">갤러리로</a>
+            <a href="<%= contextPath %>/gallery.ga?cpage=1" class="btn btn-lg" style="background-color: rgb(255, 222, 239); color: white;">갤러리로</a>
         </div>
 
 

@@ -231,10 +231,10 @@
                 <li class="kindergarten"><a href="#">유치원 예약</a></li>
               </ul>
             </li>
-            <li class="dog_data"><a href="#">강아지정보</a>
+            <li class="dog_data"><a href="<%= contextPath %>/dogforMain.do">강아지정보</a>
                 <ul class="dog_data2">
-                   <li class="attend"><a href="#">출석부</a></li>
-                   <li class="gallery"><a href="#">갤러리</a></li>
+                   <li class="attend"><a href="<%= contextPath %>/attendance.at">출석부</a></li>
+                   <li class="gallery"><a href="<%= contextPath %>/gallery.ga?cpage=1">갤러리</a></li>
                 </ul>
             </li>
             <li class="goods"><a href="#">상품</a></li>

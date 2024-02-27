@@ -1,3 +1,4 @@
+<%@page import="com.kh.common.model.vo.PageInfo"%>
 <%@page import="com.kh.product.model.vo.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,15 @@
 <%
 	ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
 	// 상품번호, 상품명, 상품상세설명, 상품원래가격, 상품할인율, 이미지경로
+	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	ArrayList<Product> list1 = (ArrayList<Product>)request.getAttribute("list1");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -287,126 +297,32 @@
                     </div>
                 </div>
                 <div id="content2_3">
-
+                
+					<% for(Product p : list1){ %>
                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
                         <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
                         <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
                         <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
+                            <div class="custom_pro" d-price="29900" d-custom="23900"><%= p.getDiscount() + "%" %></div>  
+                            <div class="prs prsLine"><%= p.getPrice() + "원" %></div>
+                            <div class="prs prsBold"><%= p.getdPrice() + "원" %></div>
                         </div>
                      </div>
+                     <% } %>
 
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
+                     
 
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
+                     
 
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
+                     
 
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
+                     
 
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
+                    
 
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
+                    
 
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
+                     
 
                      
                 </div>
@@ -414,16 +330,16 @@
                     <div class="page_nation">
                         <a class="arrow pprev" href="#"></a>
                         <a class="arrow prev" href="#"></a>
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">7</a>
-                        <a href="#">8</a>
-                        <a href="#">9</a>
-                        <a href="#">10</a>
+                        
+                        <% for(int p=startPage; p<=endPage; p++){ %>
+                        	<% if(p == currentPage){ %>
+                        	<a href="#" class="active"><%= p %></a>
+                        	<% }else{ %>
+                        	<a href="<%= contextPath %>/list.pd?cpage=<%= p %>" class="active"><%= p %></a>
+                        	<% } %>
+                      	<% } %>
+                        
+                        
                         <a class="arrow next" href="#"></a>
                         <a class="arrow nnext" href="#"></a>
                      </div>

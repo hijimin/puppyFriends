@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.common.model.vo.PageInfo;
 import com.kh.product.model.service.ProductService;
 import com.kh.product.model.vo.Product;
 
@@ -41,13 +42,26 @@ public class ProductListController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
+		listCount = new ProductService().selectProductListCount();
+		currentPage = Integer.parseInt(request.getParameter("cpage"));
+		pageLimit = 5;
+		boardLimit = 9;
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		endPage = startPage + pageLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		
+		ArrayList<Product> list1 = new ProductService().selectProductPageList(pi);
 		
 		
 		ArrayList<Product> list = new ProductService().selectProductList();
 		
+		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		request.setAttribute("list1", list1);
 		request.getRequestDispatcher("views/product/product.jsp").forward(request, response);
 	}
 

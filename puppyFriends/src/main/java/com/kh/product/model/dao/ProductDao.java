@@ -12,6 +12,7 @@ import java.util.Properties;
 import static com.kh.common.JDBCTemplate.*;
 
 import com.kh.common.model.vo.Image;
+import com.kh.common.model.vo.PageInfo;
 import com.kh.product.model.vo.Product;
 
 public class ProductDao {
@@ -104,6 +105,67 @@ public class ProductDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	public int selectProductListCount(Connection conn) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectProductListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
+	
+	public ArrayList<Product> selectProductPageList(Connection conn, PageInfo pi){
+		ArrayList<Product> list1 = new ArrayList<Product>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectProductPageList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list1.add(new Product(rset.getInt("product_no"),
+									   rset.getString("product_name"),
+									   rset.getString("product_desc"),
+									   rset.getString("price"),
+									   rset.getDate("product_update"),
+									   rset.getInt("product_discount"),
+									   rset.getInt("product_count"),
+									   rset.getString("dprice")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list1;
+		
 	}
 	
 

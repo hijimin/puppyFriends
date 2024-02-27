@@ -50,6 +50,20 @@ public class Product {
 		this.titleImg = titleImg;
 		this.dPrice = dPrice;
 	}
+	
+
+	public Product(int productNo, String productName, String productDesc, String price, Date productUpdate,
+			int discount, int count, String dPrice) {
+		super();
+		this.productNo = productNo;
+		this.productName = productName;
+		this.productDesc = productDesc;
+		this.price = price;
+		this.productUpdate = productUpdate;
+		this.discount = discount;
+		this.count = count;
+		this.dPrice = dPrice;
+	}
 
 
 

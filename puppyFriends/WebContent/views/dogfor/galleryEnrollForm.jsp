@@ -1,5 +1,10 @@
+<%@page import="com.kh.member.model.vo.Dog"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<Dog> list = (ArrayList<Dog>)request.getAttribute("list");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,8 +54,14 @@
 
             <table align="center">
                 <tr>
-                    <th width="120">강아지 번호</th>
-                    <td colspan="3"><input type="text" name="dogNo" required></td>
+                    <th width="120">강아지 이름</th>
+                    <td colspan="3">
+                        <select name="dogNo" id="dogNo">
+                        	<% for(Dog d : list){ %>
+                            <option value="<%= d.getDogNo() %>"><%= d.getDogName() %></option>
+                            <% } %>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td><br></td>
@@ -127,10 +138,7 @@
 
                 }
 
-
             </script>
-
-
 
             <br>
 
@@ -138,12 +146,9 @@
                 <button type="submit" style="border: 0px; background-color: rgb(255, 244, 244);">등록하기</button>
             </div>
 
-
         </form>
 
     </div>
-
-
 
     <%@ include file="../common/footerbar.jsp" %>
 

@@ -2,7 +2,12 @@
 <%@page import="com.kh.common.model.vo.Image"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
+    pageEncoding="UTF-8"%>  
+<%
+	ArrayList<Image> list = (ArrayList<Image>)request.getAttribute("list");
+	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+%>     
 <!DOCTYPE html>
 <html>
 <head>

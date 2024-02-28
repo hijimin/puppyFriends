@@ -11,7 +11,7 @@
             width: 1700px;
             height: 1000px;
             margin: auto;
-            margin-top: 50px;
+            margin-top: 10px;
         }
         .content1{
             width: 100%;
@@ -83,8 +83,12 @@
 
     <%@ include file="../common/menubar.jsp" %>
 
+    
     <div class="outer" align="center">
-
+    
+		<% if(loginUser != null){ %>
+        <h2 align="center" style="margin-bottom: 0px;">이번달 출석부</h2>
+        
         <div class="content1">
             
             <div class="check">
@@ -112,7 +116,7 @@
         <div class="content2">
             <a href="<%= contextPath %>/attendance.at" class="btn btn-lg" style="background-color: rgb(255, 222, 239); color: white;">출석부로</a>
         </div>
-
+		<% } %>
         <div class="content3" align="center">
 
             <div class="content3_1">

@@ -34,6 +34,7 @@ public class GalleryEnrollFormController extends HttpServlet {
 		
 		ArrayList<Dog> list = new DogforService().selectDog();
 		
+		System.out.println(list);
 		
 		request.setAttribute("list", list);
 		

@@ -72,7 +72,7 @@ public class GalleryInsertController extends HttpServlet {
 			int result = new DogforService().insertImage(img);
 			
 			if(result > 0) {
-				request.getRequestDispatcher("views/dogfor/galleryEnrollForm.jsp").forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/galleryEnrollForm.ga");
 			}
 			
 			

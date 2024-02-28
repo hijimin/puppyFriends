@@ -77,14 +77,20 @@ a:active, a:hover {
 	border-spacing: 0;
 }
 
-.calendar table thead tr:first-child{
-	background: #f6f6f6;
-}
-
-.calendar table td{
+.calendar table tbody td{
 	padding: 10px;
 	text-align: center;
 	border: 1px solid #ccc;
+	width: 85px;
+	height: 85px;
+}
+
+.calendar table thead td{
+	height: 30px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	text-align: center;
+	background: #f6f6f6; 
 }
 
 .calendar table td:nth-child(7n+1){
@@ -145,6 +151,9 @@ a:active, a:hover {
 	padding-top: 5px;
 	vertical-align: top;
 }
+#enroll{
+	width: 1440px;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
@@ -153,6 +162,8 @@ a:active, a:hover {
 	<%@ include file="../common/menubar.jsp" %>
 
 	<h2 align="center">출석부</h2>
+
+	<div id="enroll" align="right"><a href="">출석등록</a></div>
 	
 	<div class="outer1">
 		<div class="calendar">
@@ -242,20 +253,28 @@ a:active, a:hover {
 	<%@ include file="../common/footerbar.jsp" %>
 
 	<script>
+
 		function findElementByText(text) {
-			var jSpot = $("b:contains(" + text + ")")
-						.filter(function() { return $(this).children().length === 0;})
-						.parent();  // because you asked the parent of that element
+			var jSpot = $("td")
+				.filter(function() { 
+					return $(this).text().trim() === text && $(this).attr('class').trim() === ''; // 텍스트 일치 및 클래스가 공백인 경우 필터링
+				})
+				.filter(function() { 
+					return $(this).children().length === 0; 
+				});
 
 			return jSpot;
 		}
 
 		$(function(){
+			let a = findElementByText("2");
+			let a1 = findElementByText("3");
 
-			findElementByText()
+			console.log(a.html() + "<br> 지각");
 
-		})
-
+			a.html(a.html() + "<br><br> 결석");
+			a1.html(a1.html() + "<br><br> 결석");
+		});
 
 
 	</script>

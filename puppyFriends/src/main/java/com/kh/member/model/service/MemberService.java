@@ -5,6 +5,7 @@ import java.sql.Connection;
 import static com.kh.common.JDBCTemplate.*;
 
 import com.kh.member.model.dao.MemberDao;
+import com.kh.member.model.vo.Dog;
 import com.kh.member.model.vo.Member;
 
 public class MemberService {
@@ -18,4 +19,23 @@ public class MemberService {
 		
 		return loginUser;
 	}
+	
+	public int insertMember(Member m, Dog d) {
+		Connection conn = getConnection();
+		int result = new MemberDao().insertMember(conn, m);
+		int result2 = new MemberDao().insertDog(conn, d);
+		
+		if(result>0 && result2>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result * result2;
+				
+	}
+	
+	
 }

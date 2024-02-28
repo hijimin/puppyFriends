@@ -28,6 +28,9 @@ public class DogEnrollFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		
+		
 		String memberId = request.getParameter("memberId");
 		String memberPwd = request.getParameter("memberPwd");
 		String memberName = request.getParameter("memberName");
@@ -43,7 +46,7 @@ public class DogEnrollFormController extends HttpServlet {
 		request.setAttribute("memberPhone", memberPhone);
 		
 //		response.sendRedirect(request.getContextPath() + "/dogEnrollForm.jsp");
-		request.getRequestDispatcher("views/dogFor/dogEnrollForm.jsp").forward(request, response);;
+		request.getRequestDispatcher("views/member/dogEnrollForm.jsp").forward(request, response);;
 	}
 
 	/**

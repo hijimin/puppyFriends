@@ -19,7 +19,7 @@
 
 	<div class="outer">
 
-		<form action="insert.at" method="get">
+		<form action="insert.at" method="post">
 
 		회원번호 : <input type="text" name="userNo"> <br><br>
 

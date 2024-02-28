@@ -34,6 +34,7 @@
 </head>
 <body>
     <div class="wrap">
+        <div class="wrap1" style="border-top: 4px solid rgb(255, 222, 239); "></div>
         <div class="footer">
             <ul id="footerL"><br>
                 <strong style="color: black;">이용약관    |    QNA     |    개인정보처리방침</strong> <br><br><br>

@@ -190,7 +190,7 @@
                             
                             <% for(Member m : list) {  %>
                                 <tr>
-                                    <th><input type="checkbox" value="Y" name="deleteMember" onclick="checkMember();"></th>
+                                    <th><input type="checkbox" value="Y" name="deleteMember" onclick="checkList();"></th>
                                     <td id="detailInfo"><%= m.getMemberNo() %></td>
                                     <td><%= m.getMemberId() %></td>
                                     <td><%= m.getMemberName() %></td>
@@ -204,7 +204,8 @@
                             <button type="submit" id="deleteBtn" onclick="sendMember();">강제추방</button>
 
                         </tbody>
-                
+                        
+                       
                     
                 </table>
                 

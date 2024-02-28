@@ -1,4 +1,4 @@
-package com.kh.product.controller;
+package com.kh.review.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,20 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.kh.common.model.vo.PageInfo;
-import com.kh.product.model.service.ProductService;
-import com.kh.product.model.vo.Product;
+import com.kh.review.model.service.ReviewService;
+import com.kh.review.model.vo.Review;
 
 /**
- * Servlet implementation class ProductListController
+ * Servlet implementation class AjaxReviewListController
  */
-@WebServlet("/list.pd")
-public class ProductListController extends HttpServlet {
+@WebServlet("/rvList.rv")
+public class AjaxReviewListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductListController() {
+    public AjaxReviewListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +34,7 @@ public class ProductListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int productNo = Integer.parseInt(request.getParameter("pno"));
 		
 		int listCount;
 		int currentPage;
@@ -44,27 +45,28 @@ public class ProductListController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new ProductService().selectProductListCount();
-		currentPage = Integer.parseInt(request.getParameter("cpage"));
+		listCount = new ReviewService().selectListCount(productNo);
+		currentPage = 1;
 		pageLimit = 5;
-		boardLimit = 9;
+		boardLimit = 5;
 		maxPage = (int)Math.ceil((double)listCount / boardLimit);
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
-		endPage = startPage + pageLimit - 1;
+		endPage = startPage + pageLimit -1;
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);				
+		ArrayList<Review> reviewList = new ReviewService().selectReviewList(productNo);
 		
-		ArrayList<Product> list1 = new ProductService().selectProductPageList(pi);
+		System.out.println(reviewList);
 		
+		HashMap<String, Object> list = new HashMap<String, Object>();
+		list.put("pi", pi);
+		list.put("reviewList", reviewList);
 		
-		ArrayList<Product> list = new ProductService().selectProductList();
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(list, response.getWriter());
 		
-		request.setAttribute("pi", pi);
-		request.setAttribute("list", list);
-		request.setAttribute("list1", list1);
-		request.getRequestDispatcher("views/product/product.jsp").forward(request, response);
 		
 	}
 

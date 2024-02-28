@@ -16,6 +16,7 @@ public class Product {
 	 
 	 private String titleImg;
 	 private String dPrice;
+	 private int fileLevel;
 	 
 	 
 	 public Product() {}
@@ -51,9 +52,14 @@ public class Product {
 		this.dPrice = dPrice;
 	}
 	
+	
+	
+
+
+
 
 	public Product(int productNo, String productName, String productDesc, String price, Date productUpdate,
-			int discount, int count, String dPrice) {
+			int discount, int count, String titleImg, String dPrice) {
 		super();
 		this.productNo = productNo;
 		this.productName = productName;
@@ -62,7 +68,21 @@ public class Product {
 		this.productUpdate = productUpdate;
 		this.discount = discount;
 		this.count = count;
+		this.titleImg = titleImg;
 		this.dPrice = dPrice;
+	}
+	
+	public Product(int productNo, String productName, String productDesc, String price, int discount, String titleImg,
+			String dPrice, int fileLevel) {
+		super();
+		this.productNo = productNo;
+		this.productName = productName;
+		this.productDesc = productDesc;
+		this.price = price;
+		this.discount = discount;
+		this.titleImg = titleImg;
+		this.dPrice = dPrice;
+		this.fileLevel = fileLevel;
 	}
 
 
@@ -204,6 +224,20 @@ public class Product {
 
 	public void setdPrice(String dPrice) {
 		this.dPrice = dPrice;
+	}
+	
+	
+
+
+
+	public int getFileLevel() {
+		return fileLevel;
+	}
+
+
+
+	public void setFileLevel(int fileLevel) {
+		this.fileLevel = fileLevel;
 	}
 
 

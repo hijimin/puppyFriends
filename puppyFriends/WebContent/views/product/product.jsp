@@ -10,6 +10,7 @@
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	ArrayList<Product> list1 = (ArrayList<Product>)request.getAttribute("list1");
+	// 상품번호, 상품명, 상품상세설명, 상품원래가격, 상품할인율, 상품할인가격, 이미지경로, 조회수, 상품업데이트일자
 	
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -234,6 +235,9 @@
         color:#fff;
         border:1px solid #42454c;
     }
+    .content2_3c img:hover{
+        cursor: pointer;
+    }
 
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -291,41 +295,49 @@
                         <div id="next-btn" onclick="nextSlide()">&#10095;</div>
                       </div>
                 </div>
+                
                 <div id="content2_2">
                     <div align="right" style="width: 90%; margin-bottom: 5px;" >
                         <a href="">인기순|</a><a href="">최신순|</a><a href="">조회순</a> 
                     </div>
                 </div>
+                
+                <!-- 상품 전체목록 -->
                 <div id="content2_3">
                 
 					<% for(Product p : list1){ %>
-                    <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
+                    <div class="content2_3c"><img id="img1" src="<%= contextPath %>/<%= p.getTitleImg() %>" alt="Slide 4" width="100%" height="300">
+                        <input type="hidden" id="pdno" name="pno" value="<%= p.getProductNo()%>">
+                        <div style="margin: 0; border: 0px;"><%= p.getProductName() %></div>
+                        <div class="name_sub"><%= p.getProductDesc() %></div>
                         <div class="priceGroup">
                             <div class="custom_pro" d-price="29900" d-custom="23900"><%= p.getDiscount() + "%" %></div>  
                             <div class="prs prsLine"><%= p.getPrice() + "원" %></div>
                             <div class="prs prsBold"><%= p.getdPrice() + "원" %></div>
                         </div>
                      </div>
-                     <% } %>
-
-                     
-
-                     
-
-                     
-
-                     
-
+                     <% } %>                
                     
-
-                    
-
-                     
-
-                     
                 </div>
+                
+                <!-- 상품상세조회 script -->
+                <script>
+                	// function pdtest(){
+                	// 	// location.href ="<%= contextPath %>/detail.pd?pno="+$(".content2_3c input").val();
+                	// 	console.log($(this).children("input").val());
+                	// }
+                	
+                	$(function(){               		
+                		$(".content2_3c").click(function(){
+                			console.log($(this).children("input").val());
+                			// console.log($("#pdno").val());
+                			location.href ="<%= contextPath %>/detail.pd?pno="+$(this).children("input").val();
+                		})
+                	})
+                	
+		      </script>
+                
+                <!-- 페이징바 -->
                 <div id="content2_4">
                     <div class="page_nation">
                         <a class="arrow pprev" href="#"></a>
@@ -344,9 +356,8 @@
                         <a class="arrow nnext" href="#"></a>
                      </div>
                     </div>
-                    
-
-
+                    <!-- 페이징바 끝 -->
+                              
 
                 </div>
             </div>

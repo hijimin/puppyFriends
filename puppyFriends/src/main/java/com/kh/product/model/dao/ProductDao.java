@@ -154,8 +154,9 @@ public class ProductDao {
 									   rset.getString("product_desc"),
 									   rset.getString("price"),
 									   rset.getDate("product_update"),
-									   rset.getInt("product_discount"),
+									   rset.getInt("product_discount"),								
 									   rset.getInt("product_count"),
+									   rset.getString("titleimg"),
 									   rset.getString("dprice")));
 			}
 		} catch (SQLException e) {
@@ -164,8 +165,59 @@ public class ProductDao {
 			close(rset);
 			close(pstmt);
 		}
-		return list1;
+		return list1;	
+	}
+	
+	public int increaseCount(Connection conn, int productNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseCount");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, productNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Product> selectProductDetailList(Connection conn, int productNo) {
+		ArrayList<Product> list = new ArrayList<Product>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectProductDetailList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, productNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Product(rset.getInt("product_no"),
+								rset.getString("product_name"),
+								rset.getString("product_desc"),
+								rset.getString("price"),
+								rset.getInt("product_discount"),
+								rset.getString("titleimg"),
+								rset.getString("dprice"),
+								rset.getInt("file_level")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 	
 

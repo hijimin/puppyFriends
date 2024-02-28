@@ -29,13 +29,29 @@
 	</entry>
 	
 	
-	<entry key="">
-	
+	<entry key="adminDogInfo">
+		 SELECT 
+		      DOG_NO
+		    , MEMBER_NO
+		    , DOG_NAME
+		    , DOG_VALUE
+		    , DOG_AGE
+		    , DOG_GENDER
+		    , DOG_VACCINE
+		    , DOG_SIGNIFICANT
+		  FROM DOG
+		  JOIN MEMBER USING(MEMBER_NO)
+		 WHERE MEMBER_NO = ?
+		   
 	</entry>
 	
 	
-	<entry key="">
-	
+	<entry key="adminDeleteMember">
+		UPDATE
+		      MEMBER
+		  SET
+		     STATUS = 'N'
+		WHERE MEMBER_NO = ?
 	</entry>
 	
 	

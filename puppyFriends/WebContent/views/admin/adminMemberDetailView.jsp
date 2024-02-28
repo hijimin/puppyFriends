@@ -1,3 +1,4 @@
+<%@page import="com.kh.member.model.vo.Dog"%>
 <%@page import="com.kh.common.model.vo.AdminPageInfo"%>
 <%@page import="com.kh.member.model.vo.Member"%>
 <%@page import="java.util.ArrayList"%>
@@ -13,14 +14,8 @@
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");
     
-    ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
-    
-    AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi");
-    int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
-   	
+    Dog d = (Dog)request.getAttribute("d"); 
+	
    %>
     
     
@@ -28,7 +23,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 회원조회</title>
+<title>관리자 회원 상세</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	
   <!-- jQuery library -->
@@ -106,8 +101,12 @@
         .content{
             width: 1400px;
             height: 650px;
-            margin-top: 33px;
+            margin-top: 20px;
             margin-left: 130px;
+        }
+
+        .content a {
+            margin-left: 1130px;
         }
 
         .list-area{
@@ -115,7 +114,7 @@
         }
 
         h1{
-            margin-left: 560px;
+            margin-left: 500px;
         }
 
         .list-area td{
@@ -130,15 +129,18 @@
         .paging-area{
             margin-right: 150px;
         }
-        
-        .list-area>tbody>tr>#detailInfo:hover{
-        	cursor: pointer;
+
+
+
+        .content>ul>li{
+            font-size: 22px;
+            list-style-type: circle;
+            margin-left: 200px;
+            
         }
 
-        #deleteBtn{
-            margin-left: 1278px;
-            margin-bottom: 30px;
-        }
+       
+        
        
     </style>
 </head>
@@ -146,15 +148,15 @@
 
    <div class="outer">
         <div class="headerbar">
-                <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 760px;">PuppyFriends Manager</h1>
+                <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 760px;">회원번호&nbsp; : &nbsp;<%= d.getMemberNo() %>&nbsp;번님의 반려견 상세정보</h1>
         </div>
     
         <div class="mid">
             <div class="sidebar">
                 <ul style="list-style-type: none;">
                     <li><a href="">&nbsp;공지사항</a></li>
-                    <br><br><br><br>
-                    <li><a href="adminMember.jsp">&nbsp;&nbsp;&nbsp;&nbsp;회원</a></li>
+                    <br><br><br>
+                    <li><a href="views/admin/adminMain.jsp">&nbsp;&nbsp;&nbsp;&nbsp;회원</a></li>
                     <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;수업</a></li>
                     <br><br><br><br>
@@ -169,75 +171,31 @@
 
             <div class="content">
                 <table class="list-area" align="center"  style="border: 1px solid gray;">
-                    <br>
-                    <h1>회원조회</h1>
                     <br><br>
-                    <thead align="center">
-                        <tr>
-                        	<th width="45">선택</th>
-                            <th width="150">회원번호</th>
-                            <th width="150">회원아이디</th>
-                            <th width="150">회원이름</th>
-                            <th width="150">반려견식별번호</th>
-                            <th width="150">반려견이름</th>
-                            <th width="250">회원이메일</th>
-                            <th width="250">전화번호</th>
-                        </tr>
-                        
-                    </thead>
-                  
-                        <tbody align="center">
-                            
-                            <% for(Member m : list) {  %>
-                                <tr>
-                                    <th><input type="checkbox" value="Y" name="deleteMember" onclick="checkMember();"></th>
-                                    <td id="detailInfo"><%= m.getMemberNo() %></td>
-                                    <td><%= m.getMemberId() %></td>
-                                    <td><%= m.getMemberName() %></td>
-                                    <td><%= m.getDogNo() %></td>
-                                    <td><%= m.getDogName() %></td>
-                                    <td><%= m.getMemberEmail() %></td>
-                                    <td><%= m.getMemberPhone() %></td>
-                                </tr>
-                        <% } %>
-                        
-                            <button type="submit" id="deleteBtn" onclick="sendMember();">강제추방</button>
+                    <ul>
+                        <a href="<%= contextPath %>/adminSelectMember.me?cpage=1" class="btn btn-sm btn-secondary" style="background-color:rgb(255, 222, 239); color: rgb(255, 118, 189); border: none;">목록으로</a>
+                        <li>반려견 식별번호&nbsp; : &nbsp;<%= d.getDogNo() %></li>
+                        <br>
+                        <li>반려견이름&nbsp; : &nbsp;<%= d.getDogName() %></li>
+                        <br>
+                        <li>견종&nbsp; : &nbsp;<%= d.getDogValue() %></li>
+                        <br>
+                        <li>반려견나이&nbsp; : &nbsp;<%= d.getDogAge() %></li>
+                        <br>
+                        <li>필수접종 여부&nbsp; : &nbsp;<%= d.getDogVaccine() %></li>
+                        <br>
+                        <li>특이사항 : </li>
+                        <br>
+                        <% if(d.getDogSignificant() == null) { %>
+                        <li style="list-style-type: none;"><textarea id="dsf" cols="80" rows="10" style="resize: none;" readonly>특이사항 미입력</textarea></li>
+                   		<% } else { %>
+                   		<li style="list-style-type: none;"><textarea id="dsf" cols="80" rows="10" style="resize: none;" readonly><%= d.getDogSignificant() %></textarea></li>
+                   		<% } %>
 
-                        </tbody>
-                
-                    
+                           
+                    </ul> 	
                 </table>
-                
-                
 
-				<script>
-					$(function(){
-						$(".list-area>tbody>tr>#detailInfo").click(function(){
-							location.href='<%= contextPath %>/adminDog.me?mno=' + $(this).text();
-						})
-					})
-				</script>
-
-                <br><br>
-                
-                <div class="paging-area" align="center">
-                    <% if(currentPage != 1) { %>
-                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage - 1 %>'"> &lt; </button>
-                    <% } %>
-                    
-                    <% for(int p=startPage; p<=endPage; p++) { %>
-                        <% if(p == currentPage) { %>
-                        <button style="background-color:pink;"><%= p %></button>
-                        <% } else { %>
-                        <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= p %>'"><%= p %></button>
-                        <% } %>
-                    <% } %>
-                    
-                    <% if(currentPage != maxPage) { %>
-                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage + 1 %>'"> &gt; </button>
-                    <% } %>
-                </div>
-                <br>
             </div>
             
         </div>

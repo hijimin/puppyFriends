@@ -7,8 +7,8 @@ package com.kh.review.model.vo;
 public class Review {
 	
 	 private int reviewNo;
-	 private String product;
-	 private String reviewWriter;
+	 private String product; // 상품번호임 (상품명이랑 혼용하기위해)
+	 private String reviewWriter; // 회원번호임(회원아이디랑 혼용하기위해)
 	 private String reviewTitle;
 	 private String reviewText;
 	 private String reviewDate;

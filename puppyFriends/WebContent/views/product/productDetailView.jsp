@@ -184,14 +184,16 @@
 
 
         <div id="content3">
+        	<% if(loginUser != null){ %>
             <div class="review">
                 <div class="review0"><p>리뷰작성</p></div>
 
                 <div class="review1">
-                    <form action="" id="enroll-form">
+                  
+                    
                         <table>
                             <tr>
-                                <th width="150px">월화수목금토일월화</th>
+                                <th width="150px"><%= p1.getProductName() %></th>
                             </tr>
 
                             <tr>
@@ -200,19 +202,18 @@
 
                             <tr>
                                 <th>작성</th>
-                                <td><textarea rows="2" style="resize: none;" name="content"></textarea></td>
+                                <td><textarea rows="2" style="resize: none;" id="reviewContent"></textarea></td>
                             </tr>
                         </table>
                         <br>
                         <div align="center">
-                            <button type="submit">등록하기</button>
+                            <button onclick="insertReview();">등록하기</button>
                         </div>
-                    </form>                  
+                                     
                 </div>
-
-               
-                
             </div>
+            <% } %>
+            
         </div>
 
         <div id="content4">
@@ -235,6 +236,29 @@
         </div>
         
         <script>
+        
+        	/*
+        	function insertReview(){
+        		$.ajax({
+        			url:"rinsert.rv",
+        			data:{pno:<%= p1.getProductNo()%>,
+        				  content:$("#reviewContent").val()
+        				  },
+        			type:"post",
+        			success:function(result){ // result에는 0 또는 1이 있음
+        				if(result > 0){
+        					 window.onload();
+        					$("#reviewContent").val("");
+        				}
+        			}, error:function(){
+        				console.log("리뷰 작석용 ajax 통신 실패!")
+        			}
+        			
+        		});
+        	}	
+        	*/
+        	
+        
         	window.onload=function(){
         		$.ajax({
         			url:"rvList.rv",

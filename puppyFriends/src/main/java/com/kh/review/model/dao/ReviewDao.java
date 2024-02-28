@@ -80,9 +80,27 @@ public class ReviewDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	public int insertReview(Connection conn, Review r) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertReview");
 		
-		
-		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(r.getProduct()));
+			pstmt.setInt(2, Integer.parseInt(r.getReviewWriter()));
+			pstmt.setString(3, r.getReviewText());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

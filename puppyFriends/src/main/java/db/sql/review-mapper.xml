@@ -24,6 +24,26 @@
 		 WHERE PRODUCT_NO = ?
 	       AND REVIEW_STATUS = 'Y'
 	</entry>
+	
+	<entry key="insertReview">
+		INSERT
+	  INTO REVIEW
+	  (
+	    REVIEW_NO
+	  , PRODUCT_NO
+	  , MEMBER_NO
+	  , REVIEW_TITLE
+	  , REVIEW_TEXT
+	  )
+	  VALUES
+	  (
+	    SEQ_REVIEW.NEXTVAL
+	  , ?
+	  , ?
+	  , '공통'
+	  , ?
+	  )
+	</entry>
 
 
 </properties>

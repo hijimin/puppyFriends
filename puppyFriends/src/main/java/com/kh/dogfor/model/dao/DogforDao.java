@@ -12,6 +12,7 @@ import java.util.Properties;
 import static com.kh.common.JDBCTemplate.*;
 import com.kh.common.model.vo.Image;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.dogfor.model.vo.Attendance;
 import com.kh.member.model.vo.Dog;
 
 public class DogforDao {
@@ -189,7 +190,30 @@ public class DogforDao {
 		
 	}
 	
-	
+	public int insertAttendance(Connection conn, Attendance at) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttendance");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(at.getMemberNo()));
+			pstmt.setString(2, at.getDate());
+			pstmt.setString(3, at.getStatus());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 	
 	
 	

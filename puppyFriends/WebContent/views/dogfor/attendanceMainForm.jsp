@@ -163,7 +163,7 @@ a:active, a:hover {
 
 	<h2 align="center">출석부</h2>
 
-	<div id="enroll" align="right"><a href="">출석등록</a></div>
+	<div id="enroll" align="right"><a href="<%= contextPath %>/enroll.at">출석등록</a></div>
 	
 	<div class="outer1">
 		<div class="calendar">

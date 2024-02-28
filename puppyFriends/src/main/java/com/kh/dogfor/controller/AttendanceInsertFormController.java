@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.dogfor.model.service.DogforService;
+import com.kh.dogfor.model.vo.Attendance;
+
 /**
- * Servlet implementation class AjaxCheckLevelController
+ * Servlet implementation class AttendanceInsertFormController
  */
-@WebServlet("/check.ga")
-public class AjaxCheckLevelController extends HttpServlet {
+@WebServlet("/insert.at")
+public class AttendanceInsertFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxCheckLevelController() {
+    public AttendanceInsertFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,9 +30,20 @@ public class AjaxCheckLevelController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//String level = request.getParameter(getServletName());
+		String userNo = request.getParameter("userNo");
+		String date = request.getParameter("date");
+		String status = request.getParameter("status");
 		
-		//int levelCheck = new DogforService().levelCheck(level); 
+		Attendance at = new Attendance();
+		at.setMemberNo(userNo);
+		at.setDate(date);
+		at.setStatus(status);
+		
+		int result = new DogforService().insertAttendance(at);
+		
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath() + "/attendance.at");
+		}
 		
 		
 		

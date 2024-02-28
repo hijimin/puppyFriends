@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.kh.common.model.vo.Image;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.dogfor.model.dao.DogforDao;
+import com.kh.dogfor.model.vo.Attendance;
 import com.kh.member.model.vo.Dog;
 
 import static com.kh.common.JDBCTemplate.*;
@@ -66,18 +67,23 @@ import static com.kh.common.JDBCTemplate.*;
 		
 	}
 	
-	/*
-	public int levelCheck(int level) {
+	public int insertAttendance(Attendance at) {
 		
 		Connection conn = getConnection();
+				
+		int result = new DogforDao().insertAttendance(conn, at);
 		
-		int levelCheck = new DogforDao().levelCheck(conn, level);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		
+		close(conn);
 		
-		
+		return result;
 		
 	}
-	*/
 	
 	
 	

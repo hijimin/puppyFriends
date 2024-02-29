@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ReservationEnrollController
+ * Servlet implementation class HotelDetailController
  */
-@WebServlet("/enrollForm.rv")
-public class ReservationEnrollController extends HttpServlet {
+@WebServlet("/detail.hrv")
+public class HotelDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationEnrollController() {
+    public HotelDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,13 +26,8 @@ public class ReservationEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("views/reservation/hotelDetailView.jsp").forward(request, response);
 
-		request.getRequestDispatcher("views/reservation/hotelUpdateForm.jsp").forward(request, response);
-		// 예약하기 눌렀을 때 예약하기 페이지로 넘어가져야 함
-		
-		
-		
-		
 	}
 
 	/**

@@ -46,31 +46,35 @@
         height: 80%;
         padding: 15px;
     }
-
+    .thum_tool:hover{
+            cursor: pointer;
+        }
     .thumbnail{
         width: 300px;
         height: 250px;
+        margin-top: 18px;
     }
-
 
     .btn_bar{
         width: 100%;
         height: 8%;
         position: relative;
     }
-    .btn_bar>button{
+    .btn_bar>.H_enroll{
         padding: 10px 15px;
         border: none;
         background-color: rgb(255, 222, 239);
         position: absolute;
         bottom: 0;
         right: 0;
-        border-radius: 20px
+        border-radius: 20px;
+        text-decoration: none;
+        color: white;
     }
     /* 페이징 바*/
     .page_wrap {
-	text-align:center;
-	font-size:0;
+        text-align:center;
+        font-size:0;
     }
     .page_nation {
         display:inline-block;
@@ -149,7 +153,7 @@
         <!-- 썸네일 -->
         <div class="list-area">
             <div class="thum_tool">
-                <div class="thumbnail" align="center";>
+                <div class="thumbnail" onclick="location.href='<%=contextPath%>/detail.hrv'" align="center";>
                         <input type="hidden" value="#" >
                             <img src=" # " width="250px" height="190px"> <br> 이미지 들어가게
                             <div>
@@ -157,9 +161,11 @@
                                 소개 or 사이즈 전용여부 : # <br>
                             </div>
                 </div>
-        </div>
+           </div>
+
+			 if = 관리자 로그인 시 등록 가능, 일반 유저는 등록하기 안 보임
             <div class="btn_bar">
-                <button>등록하기// onclick 예정/ 관리자한테만 보이게</button> 
+        	    <a href="<%= contextPath %>/enrollForm.hrv" class="H_enroll">등록하기</a> 
             </div>
         
             <div class="content1">

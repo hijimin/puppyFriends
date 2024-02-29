@@ -3,7 +3,7 @@
 <properties>
 
 	<entry key="adminSelectMember">
-		  SELECT *
+		 	 SELECT *
 			  FROM(SELECT ROWNUM RNUM, A.*
 			          FROM(SELECT
 			                  MEMBER_NO

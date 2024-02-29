@@ -5,20 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+	<style>
+	    .outer{
+            margin: auto;
+            margin-top: 80px;
+        }
+	</style>
+	
 </head>
 <body>
-
-	<%@ include file="views/common/menubar.jsp" %>
-
-
-	
-	
-	<%@ include file="views/common/topBtn.jsp" %>
-	<%@ include file="views/common/footerbar.jsp" %>
-
-
-
-
 
 </body>
 </html>

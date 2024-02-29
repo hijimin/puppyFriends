@@ -10,35 +10,72 @@ public class Member {
 	private String memberPhone;
 	private String status;
 	
+	// 회원조회용 추가
+	private int dogNo;
+	private String dogName;
+	private int count;
+	
+	
 	public Member() {}
-
-	public Member(int memberNo, String memberId, String memberPwd, String memberName, String memberEmail,
-			String memberPhone, String status) {
+	
+	public Member(int memberNo, String memberId, String memberName, int dogNo,String dogName
+			, String memberEmail, String memberPhone) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
-		this.memberPwd = memberPwd;
 		this.memberName = memberName;
+		this.dogNo = dogNo;
+		this.dogName = dogName;
 		this.memberEmail = memberEmail;
 		this.memberPhone = memberPhone;
-		this.status = status;
+		
 	}
 	
 	
-	
-	
-
-	public Member(int memberNo, String memberId, String memberPwd, String memberName, String memberEmail,
-			String memberPhone) {
+	// 회원 조회용
+	public Member(int memberNo, String memberId, String memberName, int dogNo,
+			String dogName, String memberEmail, String memberPhone, int count) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
-		this.memberPwd = memberPwd;
 		this.memberName = memberName;
 		this.memberEmail = memberEmail;
 		this.memberPhone = memberPhone;
+		this.dogNo = dogNo;
+		this.dogName = dogName;
+		this.count = count;
 	}
 
+	
+
+
+	public int getCount() {
+		return count;
+	}
+	
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public int getDogNo() {
+		return dogNo;
+	}
+	
+	
+	public void setDogNo(int dogNo) {
+		this.dogNo = dogNo;
+	}
+
+	public String getDogName() {
+		return dogName;
+	}
+
+	public void setDogName(String dogName) {
+		this.dogName = dogName;
+	}
+
+	
 	public Member(String memberId, String memberPwd) {
 		super();
 		
@@ -106,6 +143,14 @@ public class Member {
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName="
 				+ memberName + ", memberEmail=" + memberEmail + ", memberPhone=" + memberPhone + ", status=" + status
-				+ "]";
+				+ ", dogNo=" + dogNo + ", dogName=" + dogName + ", count=" + count + "]";
 	}
+
+
+
+	
+
+	
+
+	
 }

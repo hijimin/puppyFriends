@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="insertPdBoard">
+	INSERT
+  INTO PRODUCT
+  (
+    PRODUCT_NO
+  , PRODUCT_NAME
+  , PRODUCT_DESC
+  , PRODUCT_PRICE
+  , PRODUCT_STOCK
+  , PRODUCT_DISCOUNT 
+  )
+  VALUES
+  (
+    SEQ_PRODUCT.NEXTVAL
+  , ? 
+  , ?
+  , ?
+  , 10
+  , ?
+  )	
+	</entry>
+	
+	<entry key="insertImgList">
+		INSERT
+	  INTO IMAGE
+	  (
+	    FILE_NO
+	  , REF_BNO
+	  , IMAGE_TYPE
+	  , FILE_PATH
+	  , FILE_LEVEL
+	  , FILE_NAME
+	  , CHANGE_NAME
+	  )
+	  VALUES
+	  (
+	    SEQ_IMAGE.NEXTVAL
+	  , SEQ_PRODUCT.CURRVAL
+	  , 1
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  )
+	</entry>
+	
+	<entry key="selectProductList">
+		SELECT
+       PRODUCT_NO
+     , PRODUCT_NAME
+     , PRODUCT_DESC
+     , TO_CHAR(PRODUCT_PRICE, '999,999,999') "PRICE"
+     , PRODUCT_DISCOUNT
+     , FILE_PATH || CHANGE_NAME "TITLEIMG"
+     , TO_CHAR(PRODUCT_PRICE - (PRODUCT_PRICE * PRODUCT_DISCOUNT / 100), '999,999,999') "DPRICE"
+  FROM PRODUCT
+  JOIN IMAGE ON(PRODUCT_NO = REF_BNO)
+ WHERE IMAGE_TYPE = 1
+   AND PRODUCT_STATUS = 'Y'
+   AND FILE_LEVEL = 1
+	</entry>
+	
+	<entry key="selectProductListCount">
+		SELECT
+	       COUNT(*) "count"
+	  FROM PRODUCT
+	  JOIN IMAGE ON(PRODUCT_NO = REF_BNO)
+	 WHERE PRODUCT_STATUS = 'Y'
+	   AND FILE_LEVEL = 1
+	</entry>
+	
+	<entry key="selectProductPageList">
+		SELECT *
+	FROM(
+	SELECT ROWNUM RNUM, A.*
+	FROM(
+	SELECT 
+	       PRODUCT_NO
+	     , PRODUCT_NAME
+	     , PRODUCT_DESC
+	     , TO_CHAR(PRODUCT_PRICE, '999,999,999') "PRICE"
+	     , PRODUCT_UPDATE
+	     , PRODUCT_DISCOUNT
+	     , FILE_PATH || CHANGE_NAME "TITLEIMG"
+	     , PRODUCT_COUNT
+	     , TO_CHAR(PRODUCT_PRICE - (PRODUCT_PRICE * PRODUCT_DISCOUNT / 100), '999,999,999') "DPRICE"
+	  FROM PRODUCT
+	  JOIN IMAGE ON(PRODUCT_NO = REF_BNO)
+	 WHERE PRODUCT_STATUS = 'Y'
+	   AND FILE_LEVEL = 1) A
+	   )
+	 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="increaseCount">
+		UPDATE
+	       PRODUCT
+	   SET PRODUCT_COUNT = PRODUCT_COUNT + 1
+	 WHERE PRODUCT_NO = ?
+	   AND PRODUCT_STATUS = 'Y'	
+	</entry>
+	
+	<entry key="selectProductDetailList">
+	SELECT
+       PRODUCT_NO
+     , PRODUCT_NAME
+     , PRODUCT_DESC
+     , TO_CHAR(PRODUCT_PRICE, '999,999,999') "PRICE"
+     , PRODUCT_DISCOUNT
+     , FILE_PATH || CHANGE_NAME "TITLEIMG"
+     , TO_CHAR(PRODUCT_PRICE - (PRODUCT_PRICE * PRODUCT_DISCOUNT / 100), '999,999,999') "DPRICE"
+     , FILE_LEVEL
+  FROM PRODUCT
+  JOIN IMAGE ON(PRODUCT_NO = REF_BNO)
+ WHERE IMAGE_TYPE = 1
+   AND PRODUCT_STATUS = 'Y'
+   AND PRODUCT_NO = ?
+	</entry>
+		
+	
+
+
+
+</properties>

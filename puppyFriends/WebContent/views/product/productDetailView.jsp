@@ -246,9 +246,9 @@
         				  },
         			type:"post",
         			success:function(result){ // result에는 0 또는 1이 있음
-        				if(result > 0){
-        					 window.onload();
+        				if(result > 0){        					 
         					$("#reviewContent").val("");
+        					selectReviewList(1); // 한번 더 조회하기위해 호출해줘야함!!!
         				}
         			}, error:function(){
         				console.log("리뷰 작석용 ajax 통신 실패!")

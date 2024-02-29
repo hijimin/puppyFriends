@@ -160,7 +160,7 @@
 
                         <div>
                             <a href="#" class="btn btn-sm btn-warning">장바구니</a>
-                            <a href="<%= contextPath %>/order." class="btn btn-sm btn-warning">구매하기</a>
+                            <a href="<%= contextPath %>/order.od?pno=<%= p1.getProductNo() %>" class="btn btn-sm btn-warning">구매하기</a>
                         </div>
 
                     </div>

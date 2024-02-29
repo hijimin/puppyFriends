@@ -241,11 +241,7 @@
                    <li class="gallery"><a href="#">갤러리</a></li>
                 </ul>
             </li>
-<<<<<<< HEAD
-            <li class="goods"><a href="<%= contextPath %>/list.pd">상품</a></li>
-=======
             <li class="goods"><a href="<%= contextPath%>/list.pd?cpage=1">상품</a></li>
->>>>>>> product
             <li class="search"><a href="#">게시판</a></li>
 
         </ul> <br>

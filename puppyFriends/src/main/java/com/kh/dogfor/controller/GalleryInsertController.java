@@ -54,8 +54,7 @@ public class GalleryInsertController extends HttpServlet {
 			
 			String dogNo = multiRequest.getParameter("dogNo");
 			String content = multiRequest.getParameter("content");
-			int level = Integer.parseInt(multiRequest.getParameter("level"));
-			
+
 			String key = "file";
 			
 			Image img = new Image();
@@ -64,16 +63,16 @@ public class GalleryInsertController extends HttpServlet {
 				img.setFileName(multiRequest.getOriginalFileName(key));
 				img.setChangeName(multiRequest.getFilesystemName(key));
 				img.setFilePath("resources/upfiles/");
-				img.setFileLevel(level);
 				img.setDogNo(dogNo);
 				img.setContent(content);
 			}
+
 			
 			
 			int result = new DogforService().insertImage(img);
 			
 			if(result > 0) {
-				request.getRequestDispatcher("views/dogfor/galleryEnrollForm.jsp").forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/galleryEnrollForm.ga");
 			}
 			
 			

@@ -11,6 +11,7 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+	
 %>    
 <!DOCTYPE html>
 <html>
@@ -56,6 +57,15 @@
 
 			<h1 align="center">강아지 갤러리</h1>
 
+			<div align="right" style="width: 1500px;">
+				<% if(loginUser != null){ %>
+				<a href="<%= contextPath %>/galleryEnrollForm.ga">사진등록</a>
+				<% } %>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="text" placeholder="강아지 이름을 입력해주세요">
+				<button>검색</button>
+			</div>
+
 			<div id="img-area" >
 				<% for(Image i : list){ %>
 				<div class="img" align="center">
@@ -84,18 +94,6 @@
 
 
 		</div>
-
-
-
-
-
-
-
-
-	 <a href="<%= contextPath %>/galleryEnrollForm.ga">사진등록</a>
-
-
-
 
 
 

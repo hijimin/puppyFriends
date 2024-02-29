@@ -6,6 +6,9 @@
 	String contextPath = request.getContextPath(); //  "/Test"
 	
 	Member loginUser = (Member)session.getAttribute("loginUser");
+
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -13,24 +16,20 @@
 <meta charset="UTF-8">
 <title>PUPPY</title>
 <style>
-
-        
     body{
-        margin: 0px;
+            margin: 0px;
     }
-
+    
     .header{
         width: 1903px;
         height: 300px;
         background-color: rgb(255, 222, 239);
     }
     .header>*{
-        
         height: 100%;
         float: left;
     }
     .header_1{
-        
         width: 25%;
         /* font-size: 50px; */
         /* text-align: center; */
@@ -50,7 +49,6 @@
         height: 100px;
         background-color: rgb(255, 222, 239);
         list-style-type: none;
-        
     }
     .menu{
         width: 200px;
@@ -64,9 +62,8 @@
         height: 100%;
         width: 100%;
         font-weight: 600;
-        text-decoration: none; /* 언더바 제거 */
+        text-decoration: none;
         display: block;
-        
     }
     .header_2{
         text-align: center;
@@ -75,7 +72,7 @@
         display: contents;
         
     }
-
+    
     /* 네비바 스타일 시작 */
     .navigator_tool {
     list-style-type: none; /* 기호 미지정 */
@@ -159,7 +156,6 @@
     /* 네비바 스타일 끝 */
 
 </style>
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
     <!-- jQuery library -->
@@ -172,12 +168,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+		
+		<% if(alertMsg != null) { %>
+			<script>
+				alert("<%= alertMsg %>");
+			</script>
+		<% session.removeAttribute("alertMsg"); %>
+		<% } %>
+
         <div class="header">
             <div class="header_1">
                 <img src="로고.png" style="width: 150px; height: 150px; margin-left: 30px;">
             </div>
             <div class="header_2">
-            	<div id="header"><h1 style="margin-top: 100px;"><a href="<%= contextPath %>" style="color: white;">puppy friend</a></h1></div>
+            	<div id="header"><h1 style="margin-top: 100px;"><a href="<%= contextPath %>" style="color: white; text-decoration: none;">puppy friend</a></h1></div>
                 
             </div>
 
@@ -194,7 +198,7 @@
                             <tr>
                                 <th colspan="2">
                                     <button type="submit">로그인</button>
-                                    <button type="button">회원가입</button>
+                                    <button onclick="location.href='<%= contextPath %>/enrollpage.me'" type="button">회원가입</button>
                                 </th>
                             </tr>
                         </table>
@@ -207,7 +211,7 @@
             
                         <b><%= loginUser.getMemberName() %>님</b>의 방문을 환영합니다 <br><br>
                         <div align="center">
-                            <a href="#">마이페이지</a>
+                            <a href="<%= contextPath %>/mypage">마이페이지</a>
                             <a href="<%= contextPath %>/logout">로그아웃</a>
                         </div>
             
@@ -227,17 +231,21 @@
             </li>
             <li class="program"><a href="#">프로그램</a>
               <ul class="reservation">
-                <li class="hotel"><a href="#">호텔 예약</a></li>
+                <li class="hotel"><a href="<%= contextPath %>/enrollForm.rv">호텔 예약</a></li>
                 <li class="kindergarten"><a href="#">유치원 예약</a></li>
               </ul>
             </li>
-            <li class="dog_data"><a href="<%= contextPath %>/dogforMain.do">강아지정보</a>
+            <li class="dog_data"><a href="#">강아지정보</a>
                 <ul class="dog_data2">
-                   <li class="attend"><a href="<%= contextPath %>/attendance.at">출석부</a></li>
-                   <li class="gallery"><a href="<%= contextPath %>/gallery.ga?cpage=1">갤러리</a></li>
+                   <li class="attend"><a href="<%= contextPath %>/dogforMain.do">출석부</a></li>
+                   <li class="gallery"><a href="#">갤러리</a></li>
                 </ul>
             </li>
+<<<<<<< HEAD
+            <li class="goods"><a href="<%= contextPath %>/list.pd">상품</a></li>
+=======
             <li class="goods"><a href="<%= contextPath%>/list.pd?cpage=1">상품</a></li>
+>>>>>>> product
             <li class="search"><a href="#">게시판</a></li>
 
         </ul> <br>

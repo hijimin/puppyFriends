@@ -160,7 +160,7 @@
 
                         <div>
                             <a href="#" class="btn btn-sm btn-warning">장바구니</a>
-                            <a href="#" class="btn btn-sm btn-warning">구매하기</a>
+                            <a href="<%= contextPath %>/order." class="btn btn-sm btn-warning">구매하기</a>
                         </div>
 
                     </div>
@@ -197,7 +197,7 @@
                             </tr>
 
                             <tr>
-                                <th>user01</th>
+                                <th><%= loginUser.getMemberId() %></th>
                             </tr>
 
                             <tr>
@@ -237,7 +237,7 @@
         
         <script>
         
-        	/*
+        	
         	function insertReview(){
         		$.ajax({
         			url:"rinsert.rv",
@@ -256,33 +256,58 @@
         			
         		});
         	}	
-        	*/
         	
+        	</script>
+        	
+        	<script>
+        	// 처음 최초로 한번만 실행되는 함수! window.onload는 한번 실행하고 끝나고 그냥 function은 계속 사용할 수 있다
+        	// 처음 페이지를 1page로 그리기 위해서 selectReviewList를 호출하면서 매개변수로 값 1을 줌
+        		$(function(){
+        			selectReviewList(1);
+        		})
+        	</script>
         
-        	window.onload=function(){
+        	<script>     	
+        	function selectReviewList(cpage){ 
+        		// capage에 1이 꽂히고 rvList.rv로 가서 1page의 currentPage를 생성함
         		$.ajax({
         			url:"rvList.rv",
-        			data:{pno:<%= p1.getProductNo() %>},
+        			data:{pno:<%= p1.getProductNo() %>, cpage:cpage},
         			success:function(map){
-        				const pi = map.pi
-        				var currentPage = pi.currentPage;
-        				var startPage = pi.startPage;
-        				var endPage = pi.endPage;
-        				var maxPage = pi.maxPage
-        			var $paging = $(".paging-area");
+        				let pi = map.pi
+        				let currentPage = pi.currentPage;
+        				let startPage = pi.startPage;
+        				let endPage = pi.endPage;
+        				let maxPage = pi.maxPage;
+        				let $paging = $(".paging-area");
+        				
+        				$(".review4").empty();
+        				$paging.html(""); // ajax은 페이지 전환이 없기때문에 새로운 요소를 불러와야할때는 비워줘야한다
+        				
+        				if(currentPage != 1){
+        					//$paging.append("<button onclick='selectReviewList(" + (currentPage-1) + ");'>" &lt; </button>)
+        					$paging.append("<button onclick='selectReviewList(" + (currentPage - 1) + ");'>&lt;</button>");
+        				}
         				
         				for(let p=startPage; p<=endPage; p++){
         					if(p == currentPage){
         						$paging.append("<button>" + p + "</button>");
         					}else{
-        						$paging.append("<button>" + p + "</button>")
+        						$paging.append("<button onclick='selectReviewList(" + p + ");'>" + p + "</button>") // p는 "+" 방식으로 감싸줘야 변수로 인식함
+        						// 위 함수가 실행이되고 이 구문은 이 구문만을 위한 함수이기 때문에 한번더 cpage값을 줘야한다.
+        						// 2페이지 원해서 2페이지 버튼 클릭시 selectReviewList함수를 호출하면서 매개변수로 숫자2를 줌
+        						// p에는 내가 보고있는 페이지 숫자가 들어갈꺼고 p에 2가 들어갈시 capge에 2가 들어가면서 다시 rvList.rv로가서
+        						// currentPage를 2page로 요소를 그려준다
         					}
         				}
         				
-        			  const list = map.reviewList
+        				if(currentPage != maxPage){
+        					$paging.append("<button onclick='selectReviewList(" + (currentPage + 1) + ");'>&gt;</button>");
+        				}
+        				
+        			  let list = map.reviewList
         			
-        			  var review = $(".review4");
-        			  
+        			  let review = $(".review4");
         			for(let i=0; i<list.length; i++){
         				review.append("<div class=\"review4_1\">" + "사진" + "</div>"
         							+ "<div class=\"review4_2\">"
@@ -296,8 +321,8 @@
         				console.log("aJax 통신 실패!");
         			}
         		});
-        	}
-        </script>
+        	} 		
+        		</script>
 
     </div>
 

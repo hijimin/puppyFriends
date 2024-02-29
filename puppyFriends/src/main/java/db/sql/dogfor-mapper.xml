@@ -9,7 +9,6 @@
 	    FILE_NO
 	  , IMAGE_TYPE
 	  , FILE_PATH
-	  , FILE_LEVEL
 	  , FILE_NAME
 	  , CHANGE_NAME
 	  , DOG_NO
@@ -24,7 +23,6 @@
 	  , ?
 	  , ?
 	  , ?
-	  , ?
 	  )
 
 </entry>
@@ -34,7 +32,6 @@
 	       COUNT(*) AS "COUNT"
 	  FROM IMAGE
 	 WHERE IMAGE_TYPE = 3
-	   AND FILE_LEVEL = 1
 </entry>
 
 <entry key="selectList">
@@ -46,17 +43,28 @@
 		         , DOG_NAME
 		      FROM IMAGE   
 		      JOIN DOG USING(DOG_NO)
-		     WHERE FILE_LEVEL = 1
-		       AND IMAGE_TYPE = 3
+		     WHERE IMAGE_TYPE = 3
 		     ORDER
 		        BY FILE_NO) A
 		        )
 		 WHERE RUM BETWEEN ? AND ?
 </entry>
 
+<entry key="levelCheck">
+	SELECT COUNT(*) AS "COUNT"
+	  FROM IMAGE
+	 WHERE DOG_NO = ?
+	   AND FILE_LEVEL = 1
+</entry>
 
-
-
+<entry key="selectDog">
+	SELECT 
+	       DOG_NO
+	     , DOG_NAME
+	  FROM DOG
+	 ORDER
+	    BY DOG_NAME 
+</entry>
 
 
 

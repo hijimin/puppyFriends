@@ -43,7 +43,7 @@ public class DogEnrollFormController extends HttpServlet {
 		request.setAttribute("memberPhone", memberPhone);
 		
 //		response.sendRedirect(request.getContextPath() + "/dogEnrollForm.jsp");
-		request.getRequestDispatcher("views/dogFor/dogEnrollForm.jsp").forward(request, response);;
+		request.getRequestDispatcher("views/member/dogEnrollForm.jsp").forward(request, response);;
 	}
 
 	/**

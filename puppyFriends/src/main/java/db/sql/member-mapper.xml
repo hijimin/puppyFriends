@@ -14,4 +14,51 @@
 		AND MEMBER_PWD = ?
 	</entry>
 
+	<entry key="insertMember">
+		INSERT
+		  INTO MEMBER
+		  (
+		    MEMBER_NO
+		  , MEMBER_ID
+		  , MEMBER_PWD
+		  , MEMBER_NAME
+		  , MEMBER_EMAIL
+		  , MEMBER_PHONE
+		  )
+		  VALUES
+		  (
+		    SEQ_MEMBER.NEXTVAL
+		  , ? 
+		  , ? 
+		  , ?
+		  , ?
+		  , ?
+		  )
+	</entry>
+	
+	<entry key="insertDog">
+		 INSERT
+		   INTO DOG
+		   (
+		     DOG_NO
+		   , MEMBER_NO
+		   , DOG_NAME
+		   , DOG_VALUE
+		   , DOG_AGE
+		   , DOG_GENDER
+		   , DOG_VACCINE
+		   , DOG_SIGNIFICANT
+		   )
+		   VALUES
+		   (
+		     SEQ_DOG.NEXTVAL
+		   , SEQ_MEMBER.CURRVAL
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   )
+	</entry>
 </properties>

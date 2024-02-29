@@ -21,6 +21,7 @@
      }
 
      .enroll-form-header{height: 10%;}
+     h1{cursor: pointer;}
      .enroll-form-content{height: 80%}
      .enroll-form-content1{
         width: 90%;
@@ -58,11 +59,13 @@
     <div class="enroll-form-wrap">
         <div class="enroll-form">
             <div class="enroll-form-header">
-                <h1>PUPPY FRIENDS</h1>
+                <h1 onclick="location.href='<%= request.getContextPath() %>'">PUPPY FRIENDS</h1>
             </div>
             <div class="enroll-form-content">
                 <div class="enroll-form-content1">
-                    <div class="enroll-picture"><i class="fa-solid fa-user" ></i></div>
+                    <div class="enroll-picture">
+                        <i class="fa-solid fa-user fa-3x"></i>
+                    </div>
                     
 
 					
@@ -84,7 +87,7 @@
 	                        <h4 style="margin: 0;">연락처 *</h4>
 	                        <input type="text" name="memberPhone" required style="width: 250px; height: 25px;">
 	                    </div>
-                        <button>다음</button>
+                        <input type="submit" value="다음">
                     </form>
                 </div>
             </div>

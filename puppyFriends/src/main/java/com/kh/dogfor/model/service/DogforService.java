@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.kh.common.model.vo.Image;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.dogfor.model.dao.DogforDao;
+import com.kh.member.model.vo.Dog;
 
 import static com.kh.common.JDBCTemplate.*;
 
@@ -52,6 +53,31 @@ import static com.kh.common.JDBCTemplate.*;
 		return list;
 		
 	}
+	
+	public ArrayList<Dog> selectDog(){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Dog> list = new DogforDao().selectDog(conn);
+		
+		close(conn);
+		
+		return list;
+		
+	}
+	
+	/*
+	public int levelCheck(int level) {
+		
+		Connection conn = getConnection();
+		
+		int levelCheck = new DogforDao().levelCheck(conn, level);
+		
+		
+		
+		
+	}
+	*/
 	
 	
 	

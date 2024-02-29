@@ -30,6 +30,7 @@ public class OrderInsertController extends HttpServlet {
 		int productNo = Integer.parseInt(request.getParameter("pno"));
 		
 		request.getRequestDispatcher("views/order/orderInsertForm.jsp").forward(request, response);
+		int b = 20;
 	}
 
 	/**

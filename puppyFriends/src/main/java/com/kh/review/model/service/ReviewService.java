@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import static com.kh.common.JDBCTemplate.*;
 
+import com.kh.common.model.vo.PageInfo;
 import com.kh.review.model.dao.ReviewDao;
 import com.kh.review.model.vo.Review;
 
@@ -18,10 +19,10 @@ public class ReviewService {
 		
 	}
 	
-	public ArrayList<Review> selectReviewList(int productNo){
+	public ArrayList<Review> selectReviewList(int productNo, PageInfo pi){
 		Connection conn = getConnection();
 		
-		ArrayList<Review> reviewList = new ReviewDao().selectReviewList(conn, productNo);
+		ArrayList<Review> reviewList = new ReviewDao().selectReviewList(conn, productNo, pi);
 		close(conn);
 		return reviewList;
 		

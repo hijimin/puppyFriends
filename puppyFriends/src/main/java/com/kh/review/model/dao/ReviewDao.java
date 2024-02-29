@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import static com.kh.common.JDBCTemplate.*;
+
+import com.kh.common.model.vo.PageInfo;
 import com.kh.review.model.vo.Review;
 
 public class ReviewDao {
@@ -51,7 +53,7 @@ public class ReviewDao {
 		
 	}
 	
-	public ArrayList<Review> selectReviewList(Connection conn, int productNo){
+	public ArrayList<Review> selectReviewList(Connection conn, int productNo, PageInfo pi){
 		ArrayList<Review> list = new ArrayList<Review>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -61,7 +63,12 @@ public class ReviewDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
 			pstmt.setInt(1, productNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			

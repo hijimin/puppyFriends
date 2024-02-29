@@ -11,18 +11,27 @@
 	</entry>
 
 	<entry key="selectReviewList">
-		SELECT
-		       REVIEW_NO
+	SELECT * 
+	FROM(
+	SELECT ROWNUM RNUM, A.*
+	FROM(
+	SELECT
+	           REVIEW_NO
 	         , PRODUCT_NAME  
-		     , MEMBER_ID
-		     , REVIEW_TEXT
-		     , TO_CHAR(REVIEW_DATE, 'YYYY/MM/DD') "REVIEW_DATE"    
-		  FROM
-		       REVIEW
-		  JOIN PRODUCT USING (PRODUCT_NO)
-		  JOIN MEMBER USING (MEMBER_NO)
-		 WHERE PRODUCT_NO = ?
+	         , MEMBER_ID
+	         , REVIEW_TEXT
+	         , TO_CHAR(REVIEW_DATE, 'YYYY/MM/DD') "REVIEW_DATE"    
+	      FROM
+	           REVIEW
+	      JOIN PRODUCT USING (PRODUCT_NO)
+	      JOIN MEMBER USING (MEMBER_NO)
+	     WHERE PRODUCT_NO = ?
 	       AND REVIEW_STATUS = 'Y'
+	       ORDER
+	       BY REVIEW_NO DESC
+	       )A
+	    )
+	    WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
 	<entry key="insertReview">

@@ -1,5 +1,10 @@
+<%@page import="com.kh.reservation.model.vo.Hotel"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	ArrayList<Hotel> list = (ArrayList<Hotel>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,16 +157,19 @@
     
         <!-- 썸네일 -->
         <div class="list-area">
+        
+        <% for(Hotel h : list){ %>
             <div class="thum_tool">
-                <div class="thumbnail" onclick="location.href='<%=contextPath%>/detail.hrv'" align="center";>
+                <div class="thumbnail" onclick="location.href='<%=contextPath%>/detail.hrv'" align="center">
                         <input type="hidden" value="#" >
                             <img src=" # " width="250px" height="190px"> <br> 이미지 들어가게
                             <div>
-                                호텔명 : # <br> 
-                                소개 or 사이즈 전용여부 : # <br>
+                                호텔명 : <%= h.getHotelName() %>"/ <br> 
+                                소개 or 사이즈 전용여부 : <%= h.getHotelText() %> <br>
                             </div>
                 </div>
            </div>
+           <% } %>
 
 			 if = 관리자 로그인 시 등록 가능, 일반 유저는 등록하기 안 보임
             <div class="btn_bar">

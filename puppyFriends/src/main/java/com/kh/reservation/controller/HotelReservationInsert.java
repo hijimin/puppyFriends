@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.reservation.model.service.ReservationService;
+import com.kh.reservation.model.vo.Hotel;
 import com.kh.reservation.model.vo.Reservation;
 
 /**
@@ -32,10 +33,10 @@ public class HotelReservationInsert extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("views/reservation/hotelReservationForm.jsp").forward(request, response);
-		ArrayList<Reservation> list = new ReservationService().selectReservationList(); // 전달해 줄 거 없음
+		ArrayList<Hotel> list = new ReservationService().selectHotelList(); // 전달해 줄 거 없음
 
 		request.setAttribute("list",list);
-		request.getRequestDispatcher("views/reservation/hotelDetailView.jsp");
+		request.getRequestDispatcher("views/reservation/hotelDetailView.jsp").forward(request, response);
 		
 		
 		

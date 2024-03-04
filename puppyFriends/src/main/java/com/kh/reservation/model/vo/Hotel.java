@@ -7,25 +7,23 @@ public class Hotel {
 	private String hotelName; // 호텔명
 	private String hotelText; // 호텔 설명글
 	private int dNumber; // 수용 마리 수
-	private String memberId;
+	private String memberId; // 회원 아이디
 
 	public Hotel() {}
 
-	public Hotel(int hotelNo, int reservationNo, String hotelName, String hotelText, int dNumber, String memberId) {
+	public Hotel(int hotelNo, int reservationNo, String hotelName, String hotelText, int dNumber) {
 		super();
 		this.hotelNo = hotelNo;
 		this.reservationNo = reservationNo;
 		this.hotelName = hotelName;
 		this.hotelText = hotelText;
 		this.dNumber = dNumber;
-		this.memberId = memberId;
 	}
 
 	public Hotel(int hotelNo, String hotelName, String memberId) {
 		super();
 		this.hotelNo = hotelNo;
 		this.hotelName = hotelName;
-		this.memberId = memberId;
 	}
 
 	
@@ -68,7 +66,7 @@ public class Hotel {
 	public void setdNumber(int dNumber) {
 		this.dNumber = dNumber;
 	}
-
+	
 	public String getMemberId() {
 		return memberId;
 	}

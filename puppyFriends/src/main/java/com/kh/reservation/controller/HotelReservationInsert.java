@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Hotel;
-import com.kh.reservation.model.vo.Reservation;
 
 /**
  * Servlet implementation class HotelReservationInsert
@@ -32,12 +31,16 @@ public class HotelReservationInsert extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/reservation/hotelReservationForm.jsp").forward(request, response);
-		ArrayList<Hotel> list = new ReservationService().selectHotelList(); // 전달해 줄 거 없음
+		int page = 1; // 기본 페이지 번호
+		String requestedPage = request.getParameter("page"); // 쿼리 문자열에서 페이지 번호 가져오기
+		if (requestedPage != null) {
+		    page = Integer.parseInt(requestedPage);
+		}
+		
+		ArrayList<Hotel> list = new ReservationService().selectHotelList(page); // 전달해 줄 거 없음
 
 		request.setAttribute("list",list);
-		request.getRequestDispatcher("views/reservation/hotelDetailView.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("views/reservation/hotelReservationForm.jsp").forward(request, response);
 		
 		
 	}

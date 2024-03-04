@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-	<entry key = "selectReservationList">
+	<entry key = "selectHotelList">
 	SELECT 
 	       HOTEL_NO
 	     , HOTEL_NAME

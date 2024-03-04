@@ -11,43 +11,48 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.reservation.model.vo.Hotel;
-import com.kh.reservation.model.vo.Reservation;
 
 public class ReservationDao {
 	private Properties prop = new Properties();
 
 	public ReservationDao() {
 		
-		String filePath = MemberDao.class.getResource("db/sql/reservation-mapper.xml").getPath();
-		
 		try {
-			prop.loadFromXML(new FileInputStream(filePath));
+			prop.loadFromXML(new FileInputStream(MemberDao.class.getResource("/db/sql/reservation-mapper.xml").getPath()));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 	}
-	public ArrayList<Hotel> selectHotelList(Connection conn) {
-	
+
+	public ArrayList<Hotel> selectHotelList(Connection conn, PageInfo pi) {
+
 		ArrayList<Hotel> list = new ArrayList<Hotel>(); // [텅 빈 리스트]
-	
+		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = prop.getProperty("selectReservationList");
+		String sql = prop.getProperty("selectHotelList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				list.add(new Hotel(rset.getInt("hotel_no"),
 								   rset.getString("hotel_name"),
-								   rset.getString("member_id"))); // db 확인 후 마저 하자
+								   rset.getString("member_id")));
 			}
 			
 		} catch (SQLException e) {
@@ -61,6 +66,8 @@ public class ReservationDao {
 	return list;
 	
 	}
+	
+	
 	
 	
 }

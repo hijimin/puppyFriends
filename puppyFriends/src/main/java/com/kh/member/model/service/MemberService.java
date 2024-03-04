@@ -37,5 +37,12 @@ public class MemberService {
 				
 	}
 	
+	public Member selectOrderMember(int userNo) {
+		Connection conn = getConnection();
+		Member m = new MemberDao().selectOrderMember(conn, userNo);
+		close(conn);
+		return m;
+	}
+	
 	
 }

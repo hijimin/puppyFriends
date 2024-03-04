@@ -44,7 +44,6 @@ public class ProductDetailController extends HttpServlet {
 			
 			// 상품명, 상품설명, 원래가격, 할인가격, 사진경로, 파일레벨1, 파일레벨2
 			ArrayList<Product> list = pService.selectProductDetailList(productNo);
-		
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("views/product/productDetailView.jsp").forward(request, response);
 			

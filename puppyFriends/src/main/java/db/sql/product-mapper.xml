@@ -120,6 +120,16 @@
    AND PRODUCT_STATUS = 'Y'
    AND PRODUCT_NO = ?
 	</entry>
+	
+	<entry key="selectPrice">
+	SELECT
+	      PRODUCT_NO,
+	      TO_CHAR(PRODUCT_PRICE - (PRODUCT_PRICE * PRODUCT_DISCOUNT / 100)+3000, '999,999,999') "DPRICE"
+	 FROM PRODUCT
+	WHERE PRODUCT_NO = ?
+	</entry>
+	
+
 		
 	
 

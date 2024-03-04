@@ -61,4 +61,16 @@
 		   , ?
 		   )
 	</entry>
+	
+	<entry key="selectOrderMember">
+			SELECT
+	       MEMBER_NO
+	     , MEMBER_NAME
+	     , SUBSTR(MEMBER_PHONE,5,4) "PHONE1"
+	     , SUBSTR(MEMBER_PHONE,10,4) "PHONE2"
+	     , SUBSTR(MEMBER_EMAIL, 1, INSTR(MEMBER_EMAIL, '@') - 1) "EMAIL1"
+	     , SUBSTR(MEMBER_EMAIL, INSTR(MEMBER_EMAIL, '@') + 1) "EMAIL2"
+	  FROM MEMBER
+	 WHERE MEMBER_NO = ?	
+	</entry>
 </properties>

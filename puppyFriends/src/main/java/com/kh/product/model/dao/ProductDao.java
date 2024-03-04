@@ -220,5 +220,36 @@ public class ProductDao {
 		return list;
 	}
 	
+	public Product selectPrice(Connection conn, int productNo) {
+		Product p = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectPrice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, productNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				p = new Product();
+				p.setProductNo(rset.getInt("product_no"));
+				p.setdPrice(rset.getString("dprice"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return p;
+		
+	}
+	
+
+	
 
 }

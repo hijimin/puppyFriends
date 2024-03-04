@@ -1,18 +1,31 @@
+<%@page import="com.kh.order.model.vo.Order"%>
+<%@page import="com.kh.product.model.vo.Product"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
+	Product p1 = list.get(0); // 파일레벨1
+	Product p2 = list.get(1); // 파일레벨2
+	
+	Product p = (Product)request.getAttribute("p");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <style>
     div{
         box-sizing: border-box; 
-        border: 1px solid red;
+        /* border: 1px solid red; */
     }
     
     body{
         margin: 0px;
+        font-size: 1.3rem;
     }   
     
     #content{
@@ -49,6 +62,77 @@
         border-top: 1px solid lightgray;
     }
 
+    input[type=text]{ /*주말추가*/
+        
+        line-height: 25px;
+        padding: 2px 4px;
+        border: 1px solid #97a6c0;
+        font-size: 12px;
+        background: transparent;
+    }
+    input{
+        vertical-align: middle;
+    }
+    th{
+        vertical-align: top;
+    }
+    table{
+        width: 100%;
+        text-indent: initial;
+    }
+    input[type="text" i] {
+    padding-block: 1px;
+    padding-inline: 2px;
+    }
+    .radder2{
+        width: 460px;
+        height: 24px;
+    }
+    .radder3{
+        width: 190px;
+        height: 24;
+    }
+    [class^='btnNormal']{
+        display: inline-block;
+        box-sizing: border-box;
+        padding: 2px 8px;
+        border: 1px solid #97a6c0;
+        border-radius: 2px;
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: normal;
+        color: #083681;
+    }
+    #content3_2 tbody th, #content2_2 tbody th{
+        padding: 11px 0 10px 18px;
+        border: 1px solid #eee;
+        border-bottom-width: 0;
+        color: #353535;
+        text-align: left;
+        font-weight: normal;
+    }
+    #content3_2, #content2_2 table{
+        line-height: 1.5;
+    }
+    select{
+        height: 24px;
+    }
+    #content4_2, #content6_1{
+        text-align: center;
+    }
+
+    #content1_2c1{
+        display: inline;
+        float: right;
+        margin-right: 50px;
+    }
+
+    .ec-base-table thead th{
+        border-bottom: 1px solid #d7d5d5;
+    }
+
+
+
 
 
 
@@ -83,14 +167,21 @@
 
     #content4>div{width: 100%;}
     #content4_1{height: 20%;}
-    #content4_2{height: 80%;}
+    #content4_2{
+        height: 80%;
+        border: 1px solid #777;
+    }
 
     /*최종결제 확인*/
     #content5{
         height: 200px;
     }
     #content5>div{width: 100%;}
-    #content5_1{height: 20%;}
+    #content5_1{
+        height: 20%;
+        border-bottom: 1px solid #d7d5d5;
+
+    }
     #content5_2{height: 80%;}
 
     #content6{
@@ -106,8 +197,31 @@
     .list-area{
         text-align: center;
     }
+    /*
+    .tossimg{
+        width: 100px;
+        height: 50px;
+        background: url('resources/image/logo-toss-pay.png') no-repeat center center;
+    }
+    */
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+	<!-- 포트원 결제 -->
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <!-- 포트원 결제 -->
+    
+    <!-- 카카오페이 -->
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <meta charset="UTF-8">
+    <title>Sample Payment</title>
 </head>
 <body>
 	
@@ -128,68 +242,36 @@
                                 <th width="50">수량</th>
                                 <th width="100">배송구분</th>
                                 <th width="100">배송비</th>
-                                <th>판매가</th>
+                                <th>합계</th>
                             </tr>
                         </thead>
                     
                 </div>
                 <div id="content1_2b">
-                    <tbody>
+                    <tbody>                
                         <tr>
                             <td>
                                 <input type="checkbox" name="plist" value="상품번호">
-                                <label for="product"><img src="https://pethroom.com/web/product/medium/202203/d8a532a1c4e90f4b81f2b727e6a2fed1.jpg" width="100" height="100"></label>
+                                <label for="product"><img src="<%= contextPath %>/<%= p1.getTitleImg()%>" width="100" height="100"></label>
                             </td>
-                            <td>치카치카셋트</td>
-                            <td>1개</td>
+                            <td><%= p1.getProductName() %></td>
+                            <td>1</td>
                             <td>기본배송</td>
                             <td>3,000원</td>
-                            <td>10,000원</td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="plist" value="상품번호">
-                                <label for="product"><img src="https://pethroom.com/web/product/medium/202203/d8a532a1c4e90f4b81f2b727e6a2fed1.jpg" width="100" height="100"></label>
-                            </td>
-                            <td>치카치카셋트</td>
-                            <td>1개</td>
-                            <td>기본배송</td>
-                            <td>3,000원</td>
-                            <td>10,000원</td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="plist" value="상품번호">
-                                <label for="product"><img src="https://pethroom.com/web/product/medium/202203/d8a532a1c4e90f4b81f2b727e6a2fed1.jpg" width="100" height="100"></label>
-                            </td>
-                            <td>치카치카셋트</td>
-                            <td>1개</td>
-                            <td>기본배송</td>
-                            <td>3,000원</td>
-                            <td>10,000원</td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="plist" value="상품번호">
-                                <label for="product"><img src="https://pethroom.com/web/product/medium/202203/d8a532a1c4e90f4b81f2b727e6a2fed1.jpg" width="100" height="100"></label>
-                            </td>
-                            <td>치카치카셋트</td>
-                            <td>1개</td>
-                            <td>기본배송</td>
-                            <td>3,000원</td>
-                            <td>10,000원</td>
-                        </tr>
-
-                        
+                            <td><%= p1.getdPrice() %>원</td>
+                        </tr>                    
                     </tbody>
                 </div>
+                
+                
+                
             </table>
                 
                     <div id="content1_2c">                       
-                        <span>선택삭제</span> <span>상품금액</span> <span>10000원</span>                  
+                        <span><a href="#">선택삭제</a></span>
+                        <div id="content1_2c1">
+                            <span>상품금액</span> <span><%= p.getdPrice() %>원</span>                                      
+                        </div>                
                     </div>
                
                 
@@ -218,8 +300,8 @@
                                 주문하시는분
                                 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif">
                             </th>
-                            <td>
-                                <input type="text" placegolder size="15">
+                            <td style="padding: 10px;">
+                                <input type="text" placegolder size="15" class="radder3">
                             </td>
                         </tr>
 
@@ -229,7 +311,7 @@
                                 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif">
                             </th>
 
-                            <td>
+                            <td style="padding: 10px;">
                                 <select name="phone" id="phone">
                                     <option value="010">010</option>
                                     <option value="011">011</option>
@@ -250,12 +332,12 @@
                                 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif">
                             </th>
 
-                            <td>
+                            <td style="padding: 10px;">
                                 <input type="text" id="email1" name="email1">
                                 @
                                 <input type="text" id="email2" name="email2" readonly>
 
-                                <select name="email3" id="email3">
+                                <select name="email3" id="email3" onchange="input_email(this);">
                                     <option value selected="selected">이메일 선택</option>
                                     <option value="naver.com">naver.com</option>
                                     <option value="daum.net">daum.net</option>
@@ -264,9 +346,22 @@
                                 </select>
                             </td>
                         </tr>
-
                     </tbody>
                 </table>
+
+                <script>
+                    function input_email(result){
+                        if($("#email3").val() == "etc"){
+                            $("#email2").val("");
+                            $("#email2").attr("readonly", false);
+                        }else{
+                            $("#email2").val(result.value);
+                            $("#email2").attr("readonly", true);                                      
+                        }
+                    }
+                </script>
+
+
             </div>
         </div>
 
@@ -291,7 +386,7 @@
                         <tr>
                             <th>배송지선택</th>
                             <td>
-                                <div class="address">
+                                <div class="address" style="padding: 10px;">
                                     <input type="radio" name="sameaddr">
                                     <label for="sameaddr0">주문자 정보와 동일</label>
                                     <input type="radio" name="smaeaddr">
@@ -305,8 +400,8 @@
                                 받으시는분
                                 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif">              
                             </th>
-                            <td>
-                                <input type="text" name="rname" placeholder size="15">
+                            <td style="padding: 10px;">
+                                <input type="text" name="rname" placeholder size="15" class="radder3">
                             </td>
                         </tr>
 
@@ -316,14 +411,13 @@
                                 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif">
                             </th>
 
-                            <td>
-                                <input type="text" id="sample4_postcode" placeholder="우편번호">
-                                <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
-                                <br>
-                                <input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-                                <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-                                <span id="guide" style="color:#999;display:none"></span>                               
-                                <input type="text" id="sample4_detailAddress" placeholder="상세주소">
+                            <td id="ordertd" style="padding: 10px;">
+                                <input type="text" id="sample2_postcode" placeholder="우편번호">
+                                <a href="#none" id="btn_search_rzipcode" class="btnNormal" onclick="sample2_execDaumPostcode()">우편번호</a><br>
+								<!--<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>-->
+								<input type="text" id="sample2_address" placeholder="주소" placeholder size="40" class="radder2"><br>
+								<input type="text" id="sample2_detailAddress" placeholder="상세주소" placeholder size="40" class="radder2">
+								<input type="text" id="sample2_extraAddress" placeholder="참고항목" class="radder2">
                             </td>
                         </tr>
                     </tbody>
@@ -333,10 +427,8 @@
                             <th scope="row">
                                 배송메시지                             
                             </th>
-                            <td>
-                                <textarea id="omessage" maxlength="255" cols="70">
-
-                                </textarea>
+                            <td style="padding: 10px;">
+                                <textarea id="omessage" maxlength="255" cols="70"></textarea>
                             </td>
                         </tr>
                     </tbody>
@@ -345,63 +437,97 @@
             </div>
         </div>
 
+        <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+			<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+		</div>
+
         <script>
-            //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-            function sample4_execDaumPostcode() {
+            // 우편번호 찾기 화면을 넣을 element
+            var element_layer = document.getElementById('layer');
+    
+            function closeDaumPostcode() {
+                // iframe을 넣은 element를 안보이게 한다.
+                element_layer.style.display = 'none';
+            }
+    
+            function sample2_execDaumPostcode() {
                 new daum.Postcode({
                     oncomplete: function(data) {
-                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-        
-                        // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                        // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+    
+                        // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                         // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                        var roadAddr = data.roadAddress; // 도로명 주소 변수
-                        var extraRoadAddr = ''; // 참고 항목 변수
-        
-                        // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                            extraRoadAddr += data.bname;
+                        var addr = ''; // 주소 변수
+                        var extraAddr = ''; // 참고항목 변수
+    
+                        //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                        if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                            addr = data.roadAddress;
+                        } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                            addr = data.jibunAddress;
                         }
-                        // 건물명이 있고, 공동주택일 경우 추가한다.
-                        if(data.buildingName !== '' && data.apartment === 'Y'){
-                           extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                        }
-                        // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                        if(extraRoadAddr !== ''){
-                            extraRoadAddr = ' (' + extraRoadAddr + ')';
-                        }
-        
-                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                        document.getElementById('sample4_postcode').value = data.zonecode;
-                        document.getElementById("sample4_roadAddress").value = roadAddr;
-                        document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+    
+                        // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                        if(data.userSelectedType === 'R'){
+                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                extraAddr += data.bname;
+                            }
+                            // 건물명이 있고, 공동주택일 경우 추가한다.
+                            if(data.buildingName !== '' && data.apartment === 'Y'){
+                                extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                            }
+                            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                            if(extraAddr !== ''){
+                                extraAddr = ' (' + extraAddr + ')';
+                            }
+                            // 조합된 참고항목을 해당 필드에 넣는다.
+                            document.getElementById("sample2_extraAddress").value = extraAddr;
                         
-                        // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-                        if(roadAddr !== ''){
-                            document.getElementById("sample4_extraAddress").value = extraRoadAddr;
                         } else {
-                            document.getElementById("sample4_extraAddress").value = '';
+                            document.getElementById("sample2_extraAddress").value = '';
                         }
-        
-                        var guideTextBox = document.getElementById("guide");
-                        // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                        if(data.autoRoadAddress) {
-                            var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                            guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                            guideTextBox.style.display = 'block';
-        
-                        } else if(data.autoJibunAddress) {
-                            var expJibunAddr = data.autoJibunAddress;
-                            guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                            guideTextBox.style.display = 'block';
-                        } else {
-                            guideTextBox.innerHTML = '';
-                            guideTextBox.style.display = 'none';
-                        }
-                    }
-                }).open();
+    
+                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                        document.getElementById('sample2_postcode').value = data.zonecode;
+                        document.getElementById("sample2_address").value = addr;
+                        // 커서를 상세주소 필드로 이동한다.
+                        document.getElementById("sample2_detailAddress").focus();
+    
+                        // iframe을 넣은 element를 안보이게 한다.
+                        // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
+                        element_layer.style.display = 'none';
+                    },
+                    width : '100%',
+                    height : '100%',
+                    maxSuggestItems : 5
+                }).embed(element_layer);
+    
+                // iframe을 넣은 element를 보이게 한다.
+                element_layer.style.display = 'block';
+    
+                // iframe을 넣은 element의 위치를 화면의 가운데로 이동시킨다.
+                initLayerPosition();
             }
-        </script>
+    
+            // 브라우저의 크기 변경에 따라 레이어를 가운데로 이동시키고자 하실때에는
+            // resize이벤트나, orientationchange이벤트를 이용하여 값이 변경될때마다 아래 함수를 실행 시켜 주시거나,
+            // 직접 element_layer의 top,left값을 수정해 주시면 됩니다.
+            function initLayerPosition(){
+                var width = 300; //우편번호서비스가 들어갈 element의 width
+                var height = 400; //우편번호서비스가 들어갈 element의 height
+                var borderWidth = 5; //샘플에서 사용하는 border의 두께
+    
+                // 위에서 선언한 값들을 실제 element에 넣는다.
+                element_layer.style.width = width + 'px';
+                element_layer.style.height = height + 'px';
+                element_layer.style.border = borderWidth + 'px solid';
+                // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
+                element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
+                element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
+            }
+            </script>
 
 
 
@@ -410,7 +536,7 @@
                 <p>결제수단</p>
             </div>
             <div id="content4_2">
-                <a href="#">네이버페이</a>
+                <a href="#" class="tossimg">토스페이</a>
             </div>
         </div>
 
@@ -419,7 +545,7 @@
                 <p>결제 예정 금액</p>
             </div>
             <div id="content5_2">
-                <table>
+                <table class="ec-base-table">
                     <thead>
                         <tr>
                             <th>총 주문 금액</th>
@@ -460,16 +586,47 @@
 
         <div id="content6">
             <div id="content6_1">
-                <button>결제하기</button>
-                <button>뒤로가기</button>
+                <a href="#" onclick="requestPay()" class="btn btn-dark">결제하기</a>
+                <a href="#" class="btn btn-dark">뒤로가기</a>
             </div>
-
         </div>
-
     </div>
+    
+    <script>
+        var IMP = window.IMP; 
+        IMP.init("imp16540835"); 
+      
+        var today = new Date();   
+        var hours = today.getHours(); // 시
+        var minutes = today.getMinutes();  // 분
+        var seconds = today.getSeconds();  // 초
+        var milliseconds = today.getMilliseconds();
+        var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+        
 
-
-
+        function requestPay() {
+            IMP.request_pay({
+                pg : 'tosspay',
+                pay_method : 'card',
+                merchant_uid: makeMerchantUid, //상점에서 생성한 고유 주문번호
+                name : '주문명:결제테스트',   //필수 파라미터 입니다.
+                amount : 1004,
+                buyer_email : 'iamport@siot.do',
+                buyer_name : '구매자이름',
+                buyer_tel : '010-1234-5678',
+                buyer_addr : '서울특별시 강남구 삼성동',
+                buyer_postcode : '123-456',
+                m_redirect_url : '{결제 완료 후 리디렉션 될 URL}'
+            }, function (rsp) { // callback
+                if (rsp.success) {
+                    console.log(rsp);
+                } else {
+                    console.log(rsp);
+                }
+            });
+        }
+    </script>
+    
 
 
 	<%@ include file="../common/footerbar.jsp" %>

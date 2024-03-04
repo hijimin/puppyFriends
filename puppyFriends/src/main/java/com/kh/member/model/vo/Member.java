@@ -47,6 +47,7 @@ public class Member {
 	}
 
 	
+	
 
 
 	public int getCount() {

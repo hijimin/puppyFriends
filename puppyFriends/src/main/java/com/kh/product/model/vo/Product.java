@@ -84,6 +84,8 @@ public class Product {
 		this.dPrice = dPrice;
 		this.fileLevel = fileLevel;
 	}
+	
+	
 
 
 

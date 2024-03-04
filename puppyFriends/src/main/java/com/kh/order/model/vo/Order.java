@@ -30,6 +30,7 @@ public class Order {
 		this.orderDelivery = orderDelivery;
 		this.paymentNo = paymentNo;
 	}
+	
 
 	public int getOrderNo() {
 		return orderNo;
@@ -110,6 +111,7 @@ public class Order {
 	public void setPaymentNo(int paymentNo) {
 		this.paymentNo = paymentNo;
 	}
+	
 
 	@Override
 	public String toString() {

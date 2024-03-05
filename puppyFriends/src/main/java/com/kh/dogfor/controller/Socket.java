@@ -20,7 +20,7 @@ public class Socket {
     @OnOpen
     public void onOpen(Session session) {
         sessions.add(session);
-        broadcast("New user joined");
+        broadcast(session.getId() + " : New user joined");
     }
 
     @OnMessage

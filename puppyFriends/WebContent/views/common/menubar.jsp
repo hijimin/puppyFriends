@@ -241,9 +241,7 @@
                    <li class="gallery"><a href="#">갤러리</a></li>
                 </ul>
             </li>
-            
-            <li class="goods"><a href="<%= contextPath %>/list.pd">상품</a></li>
-
+            <li class="goods"><a href="<%= contextPath%>/list.pd?cpage=1">상품</a></li>
             <li class="search"><a href="<%= contextPath %>/noticeList.no?cpage=1">게시판</a>
                 <ul>
                     <li><a href="">공지사항</a></li>

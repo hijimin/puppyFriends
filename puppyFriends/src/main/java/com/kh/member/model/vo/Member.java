@@ -10,10 +10,20 @@ public class Member {
 	private String memberPhone;
 	private String status;
 	
+	
+	
 	// 회원조회용 추가
 	private int dogNo;
 	private String dogName;
 	private int count;
+	
+	// 회원 조회용 추가2
+	
+	private String email1;
+	private String email2;
+	private String phone1;
+	private String phone2;
+	
 	
 	
 	public Member() {}
@@ -45,14 +55,23 @@ public class Member {
 		this.dogName = dogName;
 		this.count = count;
 	}
-
 	
-
+	// 회원 조회용2
+	public Member(int memberNo, String memberName, String email1, String email2, String phone1, String phone2) {
+		super();
+		this.memberNo = memberNo;
+		this.memberName = memberName;
+		this.email1 = email1;
+		this.email2 = email2;
+		this.phone1 = phone1;
+		this.phone2 = phone2;
+	}
 
 	public int getCount() {
 		return count;
 	}
 	
+
 
 	public void setCount(int count) {
 		this.count = count;
@@ -146,11 +165,36 @@ public class Member {
 				+ ", dogNo=" + dogNo + ", dogName=" + dogName + ", count=" + count + "]";
 	}
 
+	public String getEmail1() {
+		return email1;
+	}
 
+	public void setEmail1(String email1) {
+		this.email1 = email1;
+	}
 
-	
+	public String getEmail2() {
+		return email2;
+	}
 
-	
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
 
+	public String getPhone1() {
+		return phone1;
+	}
+
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
+	}
+
+	public String getPhone2() {
+		return phone2;
+	}
+
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
+	}
 	
 }

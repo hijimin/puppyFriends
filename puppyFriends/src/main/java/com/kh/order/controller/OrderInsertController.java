@@ -1,4 +1,4 @@
-package com.kh.product.controller;
+package com.kh.order.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,20 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
+import com.kh.order.model.service.OrderService;
+import com.kh.order.model.vo.Order;
 import com.kh.product.model.service.ProductService;
 import com.kh.product.model.vo.Product;
 
 /**
- * Servlet implementation class ProductDetailController
+ * Servlet implementation class OrderInsertController
  */
-@WebServlet("/detail.pd")
-public class ProductDetailController extends HttpServlet {
+@WebServlet("/order.od")
+public class OrderInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductDetailController() {
+    public OrderInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +35,19 @@ public class ProductDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		int productNo = Integer.parseInt(request.getParameter("pno"));
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		
-		// 조회수 증가부터
-		// 게시판 조회
+		ArrayList<Product> list = new ProductService().selectProductDetailList(productNo);
+		Product p = new ProductService().selectPrice(productNo);
+		Member m = new MemberService().selectOrderMember(userNo);
 		
-		ProductService pService = new ProductService();
-		
-		int result = pService.increaseCount(productNo);
-		
-		if(result > 0) {
-			
-			// 상품명, 상품설명, 원래가격, 할인가격, 사진경로, 파일레벨1, 파일레벨2
-			ArrayList<Product> list = pService.selectProductDetailList(productNo);
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/product/productDetailView.jsp").forward(request, response);
-			
-		}
-		
+		request.setAttribute("p", p);
+	
+		request.setAttribute("m", m);
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/order/orderInsertForm.jsp").forward(request, response);
 		
 	}
 

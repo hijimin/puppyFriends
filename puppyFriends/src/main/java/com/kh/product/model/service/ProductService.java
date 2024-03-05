@@ -88,5 +88,13 @@ public class ProductService {
 		close(conn);
 		return list;
 	}
+	
+	public Product selectPrice(int productNo) {
+		Connection conn = getConnection();
+		Product p = new ProductDao().selectPrice(conn, productNo);
+		close(conn);
+		return p;
+	}
+	
 
 }

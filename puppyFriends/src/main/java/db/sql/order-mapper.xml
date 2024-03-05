@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="orderInsert">
+	INSERT
+  INTO P_ORDER
+  (
+    ORDER_NO
+  , MEMBER_NO
+  , PRODUCT_NO
+  , ORDER_NAME
+  , ORDER_ADDRESS
+  , ORDER_PHONE
+  , ORDER_REQ
+  , ORDER_DELIVERY  
+  )
+  VALUES
+  (
+    SEQ_ORDER.NEXTVAL
+  , ? 
+  , ? 
+  , ? 
+  , ? 
+  , ? 
+  , ? 
+  , 3000  
+  )	
+	</entry>
+
+	<entry key="paymentInsert">
+INSERT
+  INTO TOSS_PAYMENT
+  (
+    TOSS_PAYMENT_NO
+  , TOSS_PAYMENT_ONO
+  , CARD_NAME
+  , IMP_UID
+  , MERCHANT_UID
+  , PAY_AMOUNT
+  )
+  VALUES
+  (
+    SEQ_TOSS_PAYMENT.NEXTVAL
+  , SEQ_ORDER.CURRVAL
+  , '카드'
+  , ? 
+  , ? 
+  , ? 
+  )
+	</entry>
+	
+	<entry key="orderUpdate">
+	UPDATE
+       P_ORDER
+   SET PAYMENT_NO = SEQ_TOSS_PAYMENT.CURRVAL
+ WHERE PRODUCT_NO = ?	
+	</entry>
+
+
+
+
+
+
+</properties>

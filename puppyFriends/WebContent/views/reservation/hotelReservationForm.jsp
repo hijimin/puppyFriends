@@ -50,7 +50,6 @@
             cursor: pointer;
         }
     .thumbnail{
-        float: left;
         width: 300px;
         height: 250px;
         margin-top: 18px;

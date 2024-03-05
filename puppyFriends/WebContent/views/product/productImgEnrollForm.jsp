@@ -43,13 +43,14 @@
                 </tr>
 
                 <tr>
-                    <th>베스트상품이미지</th>
+                    <th>대표상품이미지</th>
                     <td colspan="3" align="center">
                         <img id="titleImg" width="250" height="170" onclick="chooseFile(1);">
                     </td>
                 </tr>
+                
                 <tr>
-                    <th>상품이미지</th>
+                    <th>상세이미지</th>
                     <td>
                         <img id="contentImg1" width="150" height="120" onclick="chooseFile(2);">
                     </td>
@@ -62,19 +63,22 @@
                         <img id="contentImg3" width="150" height="120" onclick="chooseFile(4);">  
                     </td>
                 </tr>
+                
+                
+                
+                
             </table>
 
-            <div id="file-area">
+            <div id="file-area" style="display:none">
                 <input type="file" name="file1" id="file1" onchange="loadImg(this,1);">
-                <input type="file" name="file2" id="file2" onchange="loadImg(this,2);"> 
-                <input type="file" name="file3" id="file3" onchange="loadImg(this,3);"> 
+                <input type="file" name="file2" id="file2" onchange="loadImg(this,2);"> <!-- 매개변수를 같이 주면 함수이름이 똑같아서 실행이 되더라도 대표이미지인지 상세이미지 어디인지 구별이 가능 -->
+                <input type="file" name="file3" id="file3" onchange="loadImg(this,3);">
                 <input type="file" name="file4" id="file4" onchange="loadImg(this,4);">
             </div>
             
            <script>
             	function chooseFile(num){
-            		$("#file"+num).click();
-            		
+            		$("#file"+num).click();       		
             	}
             
             
@@ -107,23 +111,13 @@
                                 case 4 : $("#contentImg3").attr("src", null); break;
                             }
                     }
-
-
-
                 }
             </script>
-
 			<br>
-
-
             <div align="center">
                 <button type="submit">등록하기</button>
-            </div>
-                   
+            </div>                
         </form>
-
-        
-    </div>
-	
+    </div>	
 </body>
 </html>

@@ -1,6 +1,8 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,15 +43,36 @@ public class LoginController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		if(loginUser != null) {
-			session.setAttribute("loginUser", loginUser);
+		if(loginUser == null) {
+			session.setAttribute("alertMsg", "아이디 또는 비밀번호가 다릅니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/login.jsp");
+			view.forward(request, response);
+		} else {
+			if(loginUser.getMemberId().equals("ADMIN")) {
+				session.setAttribute("loginUser", loginUser);
+				response.sendRedirect(request.getContextPath() + "/views/admin/adminMain.jsp");
+			} else if(loginUser != null){
+				session.setAttribute("loginUser", loginUser);
+				response.sendRedirect(request.getContextPath());		
+			}
 			
-			response.sendRedirect(request.getContextPath());
-		}else {
-			session.setAttribute("alertMsg", "아이디 및 비밀번호가 일치하지 않습니다.");
-			response.sendRedirect(request.getContextPath() + "/views/common/login.jsp");
-		}	
-	}
+		}
+		
+		
+		// if(loginUser == null) {
+			// session.setAttribute("alertMsg", "아이디 및 비밀번호가 일치하지 않습니다.");
+			// response.sendRedirect(request.getContextPath() + "/views/common/login.jsp");
+			// }
+		
+		
+		// 기존존재
+		// session.setAttribute("loginUser", loginUser);
+		// response.sendRedirect(request.getContextPath());
+		
+	}	
+	
+	
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

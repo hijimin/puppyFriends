@@ -10,10 +10,17 @@
 
 	<%@ include file="views/common/menubar.jsp" %>
 
+<<<<<<< HEAD
 	
 	<%@ include file="views/chatting/chatting.jsp" %>
 	
 
+=======
+
+	
+	
+	<%@ include file="views/common/topBtn.jsp" %>
+>>>>>>> beaad3d52c0edd9706b7eb349c5ef22830967fce
 	<%@ include file="views/common/footerbar.jsp" %>
 
 

@@ -27,6 +27,7 @@
   
  <!-- HTML -->
  <i id="top_btn" class="fa-regular fa-circle-up fa-2xl" style="position: fixed; right: 40px; bottom: 60px; color: #ffdeef; cursor: pointer;"></i>
+ <!-- <i id="top_btn" class="fa-regular fa-circle-up fa-2xl" style="position: fixed; right: 40px; bottom: 60px; color: #b11d69; cursor: pointer;"></i> -->
  
  <!-- jQuery -->
  <script>

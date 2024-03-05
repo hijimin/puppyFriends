@@ -1,5 +1,22 @@
+<%@page import="com.kh.common.model.vo.PageInfo"%>
+<%@page import="com.kh.product.model.vo.Product"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
+	// 상품번호, 상품명, 상품상세설명, 상품원래가격, 상품할인율, 이미지경로
+	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	ArrayList<Product> list1 = (ArrayList<Product>)request.getAttribute("list1");
+	// 상품번호, 상품명, 상품상세설명, 상품원래가격, 상품할인율, 상품할인가격, 이미지경로, 조회수, 상품업데이트일자
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +51,7 @@
         }
        
 
-        #content_2>div{width: 100%;}
+        #content_2>div{width: 80%; margin: auto;}
         #content2_1{
             /* height: 20%; */
             height: auto;
@@ -46,7 +63,7 @@
         #content2_3{
             height: auto;
             display: grid;
-            grid-template-columns: repeat(4,1fr);
+            grid-template-columns: repeat(3,1fr);
             gap: 15px;
         }
 
@@ -218,6 +235,9 @@
         color:#fff;
         border:1px solid #42454c;
     }
+    .content2_3c img:hover{
+        cursor: pointer;
+    }
 
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -237,7 +257,7 @@
 
         <div id="bestproduct">
             <p align="center" id="bestproduct-p">이번주 Best Product!!</p>
-            <% if(loginUser != null && loginUser.getMemberId().equals("admin")){ %>
+            <% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")){ %>
             <div align="right" style="width: 1700px;">
                 <br><br><br><br>
                 <a href="<%= contextPath %>/enrollForm.pd" class="btn btn-sm btn-secondary">글작성</a>
@@ -251,244 +271,93 @@
                 <div id="content2_1"><!-- 상품슬라이더-->
                     <div id="slider-container">
                         <div id="slider">
-                          <div class="slide" id="slidefirst"><img src="https://pethroom.com/web/product/medium/202203/d8a532a1c4e90f4b81f2b727e6a2fed1.jpg" alt="Slide 1" width="100%" height="300">
-                                <div style="margin: 0; border: 0px;">더스트 프리 벤토나이트 오리지널</div>
-                                <div class="name_sub">먼지 최소화 & 단단 응고력 & 사막화 방지</div>
+                        	<% for(Product p : list){ %>
+                          <div class="slide" id="slidefirst">
+                          
+                          <div class="tag1">
+                          <span style="background-color:#f7af36">BEST</span><span style="background-color:#e84200">new</span>
+                          </div>
+                          
+                          <img src="<%= contextPath %>/<%= p.getTitleImg() %>" alt="Slide 1" width="100%" height="350">
+                                <div style="margin: 0; border: 0px;"><%= p.getProductName() %></div>
+                                <div class="name_sub"><%= p.getProductDesc() %></div>
                                 <div class="priceGroup">
-                                    <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                                    <div class="prs prsLine">15,000원</div>
-                                    <div class="prs prsBold">7,500원</div>
+                                    <div class="custom_pro" d-price="29900" d-custom="23900"><%= p.getDiscount() + "%"%></div>  
+                                    <div class="prs prsLine"><%= p.getPrice() + "원" %></div>
+                                    <div class="prs prsBold"><%= p.getdPrice() + "원" %></div>
                                 </div>
                             </div>
-
-                          <div class="slide"><img src="https://pethroom.com/web/product/medium/202401/5d96fc6fc0a74c85c6e5586983842169.jpg" alt="Slide 2" width="100%" height="300">
-                            <div style="margin: 0; border: 0px;">허니 터키츄 (스틱/본/링/롤리팝)</div>
-                            <div class="name_sub">자연에서 얻은 황금빛 마누카꿀이 가득!</div>
-                            <div class="priceGroup">
-                                <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                                <div class="prs prsLine">30,000원</div>
-                                <div class="prs prsBold">15,000원</div>
-                            </div>                     
-                          </div>
-
-
-                          <div class="slide"><img src="https://pethroom.com/web/product/medium/202208/6406178e3005b192086b575413018e52.jpg" alt="Slide 3" width="100%" height="300">
-                            <div style="margin: 0; border: 0px;">제로 워터리스 샴푸</div>
-                            <div class="name_sub">물없이 간편하게 세정할 수 있는 샴푸</div>
-                            <div class="priceGroup">
-                                <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                                <div class="prs prsLine">18,000원</div>
-                                <div class="prs prsBold">9,000원</div>
-                            </div>
-
-                          </div>
-
-                          <div class="slide"><img src="https://pethroom.com/web/product/medium/202302/3501a22b0acdb62258137a837a8d7f45.jpg" alt="Slide 4" width="100%" height="300">
-                            <div style="margin: 0; border: 0px;">힐링 슬리커 브러쉬</div>
-                            <div class="name_sub">306개의 폴리케톤 빛살로 편안하게</div>
-                            <div class="priceGroup">
-                                <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                                <div class="prs prsLine">30,000원</div>
-                                <div class="prs prsBold">15,000원</div>
-                            </div>                    
-                         </div>
-
-                          <div class="slide"><img src="https://pethroom.com/web/product/medium/202401/fa7a888991bd4636431a01bcb5312ffd.jpg" alt="Slide 1" width="100%" height="300">
-                            <div style="margin: 0; border: 0px;">크럼블 프리 카사바</div>
-                            <div class="name_sub">부스러기 완벽 방어! 천연 카사바 모래</div>
-                            <div class="priceGroup">
-                                <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                                <div class="prs prsLine">40,000원</div>
-                                <div class="prs prsBold">20,000원</div>
-                            </div>
-                          </div>
-
-                          <div class="slide"><img src="https://pethroom.com/web/product/medium/202203/025c6256e23d84273e6ac8d7b344d432.jpg" alt="Slide 2" width="100%" height="300">
-                            <div style="margin: 0; border: 0px;">오도어 프리 벤토나이트 포레스트</div>
-                            <div class="name_sub">강력 탈취력 & 먼지 최소화</div>
-                            <div class="priceGroup">
-                                <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                                <div class="prs prsLine">30,000원</div>
-                                <div class="prs prsBold">15,000원</div>
-                            </div>
-                         </div>
-
-                          <div class="slide"><img src="https://pethroom.com/web/product/medium/202202/9d1877e9709444e4d4eaed3b5c284e5e.jpg" alt="Slide 3" width="100%" height="300">
-                            <div style="margin: 0; border: 0px;">와이드 커브 화장실</div>
-                            <div class="name_sub">초대형 돔 형태 화장실</div>
-                            <div class="priceGroup">
-                                <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                                <div class="prs prsLine">80,000원</div>
-                                <div class="prs prsBold">40,000원</div>
-                            </div>
-                        
-                          </div>
-
-                          <div class="slide"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                            <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                            <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                            <div class="priceGroup">
-                                <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                                <div class="prs prsLine">15,000원</div>
-                                <div class="prs prsBold">7,500원</div>
-                            </div>
-                         </div>
+							<% } %>
+                          
                           <!-- Add more slides as needed -->
                         </div>
                         <div id="prev-btn" onclick="prevSlide()">&#10094;</div>
                         <div id="next-btn" onclick="nextSlide()">&#10095;</div>
                       </div>
                 </div>
+                
                 <div id="content2_2">
                     <div align="right" style="width: 90%; margin-bottom: 5px;" >
                         <a href="">인기순|</a><a href="">최신순|</a><a href="">조회순</a> 
                     </div>
                 </div>
+                
+                <!-- 상품 전체목록 -->
                 <div id="content2_3">
-
-                    <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
+                
+					<% for(Product p : list1){ %>
+                    <div class="content2_3c"><img id="img1" src="<%= contextPath %>/<%= p.getTitleImg() %>" alt="Slide 4" width="100%" height="300">
+                        <input type="hidden" id="pdno" name="pno" value="<%= p.getProductNo()%>">
+                        <div style="margin: 0; border: 0px;"><%= p.getProductName() %></div>
+                        <div class="name_sub"><%= p.getProductDesc() %></div>
                         <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
+                            <div class="custom_pro" d-price="29900" d-custom="23900"><%= p.getDiscount() + "%" %></div>  
+                            <div class="prs prsLine"><%= p.getPrice() + "원" %></div>
+                            <div class="prs prsBold"><%= p.getdPrice() + "원" %></div>
                         </div>
                      </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     <div class="content2_3c"><img src="https://pethroom.com/web/product/medium/202301/0120e2a2fd062625451a7ffad4db374e.jpg" alt="Slide 4" width="100%" height="300">
-                        <div style="margin: 0; border: 0px;">페스룸X위글위글 슬로우 피더</div>
-                        <div class="name_sub">급하게 먹는 아이들을 위한 급체방지식기</div>
-                        <div class="priceGroup">
-                            <div class="custom_pro" d-price="29900" d-custom="23900">50%</div>  
-                            <div class="prs prsLine">15,000원</div>
-                            <div class="prs prsBold">7,500원</div>
-                        </div>
-                     </div>
-
-                     
+                     <% } %>                
+                    
                 </div>
+                
+                <!-- 상품상세조회 script -->
+                <script>
+                	// function pdtest(){
+                	// 	// location.href ="<%= contextPath %>/detail.pd?pno="+$(".content2_3c input").val();
+                	// 	console.log($(this).children("input").val());
+                	// }
+                	
+                	$(function(){               		
+                		$(".content2_3c").click(function(){
+                			console.log($(this).children("input").val());
+                			// console.log($("#pdno").val());
+                			location.href ="<%= contextPath %>/detail.pd?pno="+$(this).children("input").val();
+                		})
+                	})
+                	
+		      </script>
+                
+                <!-- 페이징바 -->
                 <div id="content2_4">
                     <div class="page_nation">
                         <a class="arrow pprev" href="#"></a>
                         <a class="arrow prev" href="#"></a>
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">7</a>
-                        <a href="#">8</a>
-                        <a href="#">9</a>
-                        <a href="#">10</a>
+                        
+                        <% for(int p=startPage; p<=endPage; p++){ %>
+                        	<% if(p == currentPage){ %>
+                        	<a href="#" class="active"><%= p %></a>
+                        	<% }else{ %>
+                        	<a href="<%= contextPath %>/list.pd?cpage=<%= p %>" class="active"><%= p %></a>
+                        	<% } %>
+                      	<% } %>
+                        
+                        
                         <a class="arrow next" href="#"></a>
                         <a class="arrow nnext" href="#"></a>
                      </div>
                     </div>
-                    
-
-
+                    <!-- 페이징바 끝 -->
+                              
 
                 </div>
             </div>
@@ -503,7 +372,7 @@
         const slides = document.querySelectorAll('.slide');
       
         function showSlides() {
-          const totalSlides = (slides.length/4)+1;
+          const totalSlides = (slides.length/4);
           currentIndex = (currentIndex + totalSlides) % totalSlides;
       
           const translateValue = -currentIndex * 100 + '%';

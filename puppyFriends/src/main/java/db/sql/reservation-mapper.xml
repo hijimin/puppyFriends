@@ -2,8 +2,19 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-
-
+	<entry key = "selectHotelList">
+	SELECT 
+	       HOTEL_NO
+	     , HOTEL_NAME
+	     , MEMBER_ID
+	  FROM HOTEL H
+	  JOIN RESERVATION RV ON (HOTEL_NO = FACILITY_NO)
+	  JOIN MEMBER M USING (MEMBER_NO)
+	 WHERE M.STATUS = 'Y'
+	 ORDER BY SYSDATE DESC
+	
+	</entry>
+	
 
 
 

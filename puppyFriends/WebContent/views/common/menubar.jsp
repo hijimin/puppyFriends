@@ -6,9 +6,7 @@
 	String contextPath = request.getContextPath(); //  "/Test"
 	
 	Member loginUser = (Member)session.getAttribute("loginUser");
-
 	String alertMsg = (String)session.getAttribute("alertMsg");
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -241,14 +239,8 @@
                    <li class="gallery"><a href="#">갤러리</a></li>
                 </ul>
             </li>
-            
             <li class="goods"><a href="<%= contextPath %>/list.pd">상품</a></li>
-
-            <li class="search"><a href="<%= contextPath %>/noticeList.no?cpage=1">게시판</a>
-                <ul>
-                    <li><a href="">공지사항</a></li>
-                </ul>
-            </li>
+            <li class="search"><a href="#">게시판</a></li>
 
         </ul> <br>
 

@@ -633,14 +633,15 @@
         
         function requestPay() {
         	var add1 = document.getElementById("sample2_address").value; 
-        	
+        	let priceStr = '<%= p.getdPrice()%>';
+        	let price = parseInt(priceStr.replace(/,/g, ''), 10);
         	
             IMP.request_pay({
                 pg : 'tosspay',
                 pay_method : 'card',
                 merchant_uid: makeMerchantUid, //상점에서 생성한 고유 주문번호
                 name : '주문명:결제테스트',   //필수 파라미터 입니다.
-                amount : 100,
+                amount : price,
                 buyer_email : '<%= m.getEmail1() + '@' %><%= m.getEmail2()%>',
                 buyer_name : '<%= m.getMemberName()%>',
                 buyer_tel : '<%= "010" + '-' + m.getPhone1() + '-' + m.getPhone2()%>',

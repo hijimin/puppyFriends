@@ -4,18 +4,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("list");
-// 상품번호, 상품명, 상품상세설명, 상품원래가격, 상품할인율, 이미지경로
-
-PageInfo pi = (PageInfo) request.getAttribute("pi");
-
-ArrayList<Product> list1 = (ArrayList<Product>) request.getAttribute("list1");
-// 상품번호, 상품명, 상품상세설명, 상품원래가격, 상품할인율, 상품할인가격, 이미지경로, 조회수, 상품업데이트일자
-
-int currentPage = pi.getCurrentPage();
-int startPage = pi.getStartPage();
-int endPage = pi.getEndPage();
-int maxPage = pi.getMaxPage();
+	ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("list");
+	// 상품번호, 상품명, 상품상세설명, 상품원래가격, 상품할인율, 이미지경로
+	
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	
+	ArrayList<Product> list1 = (ArrayList<Product>) request.getAttribute("list1");
+	// 상품번호, 상품명, 상품상세설명, 상품원래가격, 상품할인율, 상품할인가격, 이미지경로, 조회수, 상품업데이트일자
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -369,18 +369,11 @@ body {
 			</div>
 
 			<!-- 상품상세조회 script -->
-			<script>
-                	// function pdtest(){
-                	// 	// location.href ="<%=contextPath%>/detail.pd?pno="+$(".content2_3c input").val();
-                	// 	console.log($(this).children("input").val());
-                	// }
-                	
+			<script>              	
                 	$(function(){               		
                 		$(".content2_3c").click(function(){
-                			console.log($(this).children("input").val());
-                			// console.log($("#pdno").val());
-                			location.href ='"<%=contextPath%>/detail.pd?pno=" + $(this).children(input).val()';
-									})
+                			location.href ='<%=contextPath%>/detail.pd?pno=' + $(this).children('input').val();
+									});
 				})
 			</script>
 
@@ -391,10 +384,10 @@ body {
 
 					<%
 					for (int p = startPage; p <= endPage; p++) {
-					%>
+						%>
 					<%
 					if (p == currentPage) {
-					%>
+						%>
 					<a href="#" class="active"><%=p%></a>
 					<%
 					} else {
@@ -402,7 +395,7 @@ body {
 					<a href="<%=contextPath%>/list.pd?cpage=<%=p%>" class="active"><%=p%></a>
 					<%
 					}
-					%>
+						%>
 					<%
 					}
 					%>
@@ -417,7 +410,7 @@ body {
 		</div>
 	</div>
 
-	</div>
+	
 
 
 

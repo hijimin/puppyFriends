@@ -27,7 +27,40 @@ public class ReservationDao {
 			e.printStackTrace();
 		}
 		
+	}public ArrayList<Hotel> selectHotelList(Connection conn) {
+
+		ArrayList<Hotel> list = new ArrayList<Hotel>(); // [텅 빈 리스트]
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectHotelList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Hotel(rset.getInt("hotel_no"),
+								   rset.getString("hotel_name"),
+								   rset.getString("member_id")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+	return list;
+	
 	}
+	
+	
+	
+	/*
 
 	public ArrayList<Hotel> selectHotelList(Connection conn, PageInfo pi) {
 
@@ -67,7 +100,7 @@ public class ReservationDao {
 	
 	}
 	
-	
+	*/
 	
 	
 }

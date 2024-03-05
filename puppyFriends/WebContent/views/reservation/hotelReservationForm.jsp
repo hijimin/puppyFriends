@@ -60,6 +60,7 @@
             cursor: pointer;
         }
     .thumbnail{
+        float: left;
         flex: 1 0 21%; /* flex-grow | flex-shrink | flex-basis */
         margin: 1%; /* Adjust as needed */
         width: 300px;

@@ -10,7 +10,17 @@ import com.kh.reservation.model.dao.ReservationDao;
 import com.kh.reservation.model.vo.Hotel;
 
 public class ReservationService {
+	
+	public ArrayList<Hotel> selectHotelList() {
+		Connection conn = getConnection();
+		
+		ArrayList<Hotel> list = new ReservationDao().selectHotelList(conn);
+		
+		close(conn);
+		return list;
+	}
 
+/*
 	public ArrayList<Hotel> selectHotelList(PageInfo pi) {
 		Connection conn = getConnection();
 		
@@ -20,7 +30,11 @@ public class ReservationService {
 		return list;
 	}
 
+	public ArrayList<Hotel> selectHotelList(int page) {
+		return null;
+	}
 
+*/
 	
 	
 

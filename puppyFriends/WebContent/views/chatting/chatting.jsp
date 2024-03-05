@@ -26,6 +26,7 @@
         z-index: 999; 
         outline: none; 
         border-radius: 20px;
+		flex-direction:column-reverse;
         } 
         .chat, .input{
             width: 100%;
@@ -173,24 +174,41 @@
         var chatArea = $(".chat");
         var user = $(".textbox")
 
-        socket.onmessage = function(event) {
-        	console.log(event);
-            chatArea.html(chatArea.html()
-	            		+ "<div class='ch ch1'>"
-			            + "<div class='icon' align='center'>"
-	            		+ "<p>zzz</p>"
-	            		+ "</div>"
-			            + "<div class='textbox'>"+event.data+"</div>"
-			        	+ "</div>"
-		        	);
-        };
+  
+        
+		function scrollToBottom() {
 
-        function sendMessage() {
-            var messageInput = $("#messageInput");
-            var message = messageInput.val();
-            socket.send(message);
-            messageInput.val("");
-        }
+			var chatContainer = document.querySelector('.chat');
+			chatContainer.scrollTop = chatContainer.scrollHeight;
+		}
+
+		// WebSocket 메시지를 받았을 때 처리
+		socket.onmessage = function(event) {
+			chatArea.html(chatArea.html()
+				+ "<div class='ch ch1'>"
+				+ "<div class='icon' align='center'>"
+				+ "<p>zzz</p>"
+				+ "</div>"
+				+ "<div class='textbox'>"+event.data+"</div>"
+				+ "</div>");
+
+			// 새로운 메시지가 추가되면 스크롤을 항상 아래로 이동
+			scrollToBottom();
+		};
+
+		// 사용자가 메시지를 보낼 때 스크롤을 항상 아래로 이동
+		function sendMessage() {
+			var messageInput = $("#messageInput");
+			var message = messageInput.val();
+			socket.send(message);
+			messageInput.val("");
+
+			// 메시지를 보냈을 때도 스크롤을 항상 아래로 이동
+			scrollToBottom();
+		}
+
+		
+        
     </script>
     
     

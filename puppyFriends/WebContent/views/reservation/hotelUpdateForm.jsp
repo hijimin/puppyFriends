@@ -44,10 +44,26 @@
             width: 100%;
             height: 5%;
         }
+        .photoBar>*{
+            color: rgb(255, 222, 239);
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .photoBar>*:hover{
+            text-decoration: none;
+            color: brown;
+
+        }
+
+        .photoImg1{
+            margin: 20% 16%;
+            width: 50%;
+            height: auto;
+        }
         .photoImg{
             margin: 20% 20%;
-            width: 60%;
-            height: 70%;
+            width: 40%;
+            height: auto;
         }
         .blank1{
             left: 50%;
@@ -55,7 +71,6 @@
             height: 100%;
             position: absolute;
         }
-
         
         .text{
            float: right;
@@ -70,7 +85,12 @@
             margin-top: 145px;
             border: 3px solid rgb(255, 222, 239);
         }
-        
+        .hotel_rv_intro th{
+            width: 30%;
+        }
+        .hotel_rv_intro td{
+            width: 70%;
+        }
         
         .btn_bar{
             width: 100%;
@@ -111,11 +131,39 @@
             <div class="photo">
                 <div class="photo_pt">
                     <p>&lt;이미지 미리보기&gt;</p>
-                    <img class="photoImg" src="https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG" alt="">
+                    <div class="photoImg1">
+                        <img class="photoImg" src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" style="width:100%">
+                        <img class="photoImg" src="https://www.dailysecu.com/news/photo/202104/123449_145665_1147.png" style="width:100%">
+                        <img class="photoImg" src="https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG" style="width:100%">
+                    </div>
                 </div>
-
-                <div class="photoBar" align="center">이전 사진 , o o o , 다음 사진 넘어가게 </div>
+                    <div class="photoBar" align="center">
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    </div>
+                
             </div>
+
+            <script>
+                var slideIndex = 1;
+                showSlides(slideIndex);
+                
+                function plusSlides(n) {
+                  showSlides(slideIndex += n);
+                }
+                
+                function showSlides(n) {
+                  var i;
+                  var slides = document.getElementsByClassName("photoImg");
+                  if (n > slides.length) {slideIndex = 1}    
+                  if (n < 1) {slideIndex = slides.length}
+                  for (i = 0; i < slides.length; i++) {
+                      slides[i].style.display = "none";  
+                  }
+                  slides[slideIndex-1].style.display = "block";  
+                }
+            </script>
+            
             
             <div class="blank1" style="border-left: 2px solid rgb(255, 222, 239); height: 78%;"></div> <!-- 중간 줄임-->
             
@@ -154,7 +202,10 @@
                     </tr>
                     <tr>
                         <th>사진등록 : </th>
-                        <td><input type="file"></td>
+                        <td><input type="file">
+                            <input type="file">
+                            <input type="file">
+                        </td>
                     </tr>
                     <tr>
                         <th>금액 : </th>
@@ -165,6 +216,8 @@
 
                 <div class="btn_bar">
                     <button>등록하기// onclick 예정</button> 
+                    <button>등록하기// onclick 예정</button>
+
                 </div>
                 
                 
@@ -179,6 +232,7 @@
 
     </div>
 
+    
     
     <%@ include file="../common/topBtn.jsp" %> <br>
     <%@ include file="../common/footerbar.jsp" %>

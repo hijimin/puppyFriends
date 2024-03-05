@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ReservationInsert
+ * Servlet implementation class HotelDetailController
  */
-@WebServlet("/insert.rv")
-public class ReservationInsert extends HttpServlet {
+@WebServlet("/detail.hrv")
+public class HotelDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationInsert() {
+    public HotelDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +26,8 @@ public class ReservationInsert extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 호텔 예약 등 관리자가 예약 페이지 등록하기
-	
-	
+		request.getRequestDispatcher("views/reservation/hotelDetailView.jsp").forward(request, response);
+
 	}
 
 	/**

@@ -1,5 +1,10 @@
+<%@page import="com.kh.reservation.model.vo.Hotel"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	ArrayList<Hotel> list = (ArrayList<Hotel>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,36 +46,48 @@
     }
 
     .thum_tool{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
         border: 2px solid rgb(255, 222, 239);
         width: 100%;
         height: 80%;
         padding: 15px;
     }
 
+    .thum_tool:hover{
+            cursor: pointer;
+        }
     .thumbnail{
+        float: left;
+        flex: 1 0 21%; /* flex-grow | flex-shrink | flex-basis */
+        margin: 1%; /* Adjust as needed */
         width: 300px;
         height: 250px;
+        margin-top: 18px;
     }
-
 
     .btn_bar{
         width: 100%;
         height: 8%;
         position: relative;
     }
-    .btn_bar>button{
+    .btn_bar>.H_enroll{
         padding: 10px 15px;
         border: none;
         background-color: rgb(255, 222, 239);
         position: absolute;
         bottom: 0;
         right: 0;
-        border-radius: 20px
+        border-radius: 20px;
+        text-decoration: none;
+        color: white;
     }
     /* 페이징 바*/
     .page_wrap {
-	text-align:center;
-	font-size:0;
+        text-align:center;
+        font-size:0;
     }
     .page_nation {
         display:inline-block;
@@ -149,20 +166,25 @@
         <!-- 썸네일 -->
         <div class="list-area">
             <div class="thum_tool">
-                <div class="thumbnail" align="center";>
-                        <input type="hidden" value="#" >
+             <% for(Hotel h : list){ %>
+                <div class="thumbnail" align="center" onclick="<%= contextPath %>/detail.hrv">
+                        <input type="hidden" value="<%= h.getHotelNo() %>" >
                             <img src=" # " width="250px" height="190px"> <br> 이미지 들어가게
                             <div>
-                                호텔명 : # <br> 
-                                소개 or 사이즈 전용여부 : # <br>
+                                호텔명 : <%= h.getHotelName() %> <br> 
+                                소개 or 사이즈 전용여부 : <%= h.getHotelText() %> <br>
                             </div>
                 </div>
-        </div>
+              <% } %>
+           </div>
+         
+
+			 if = 관리자 로그인 시 등록 가능, 일반 유저는 등록하기 안 보임
             <div class="btn_bar">
-                <button>등록하기// onclick 예정/ 관리자한테만 보이게</button> 
+        	    <a href="<%= contextPath %>/enrollForm.hrv" class="H_enroll">등록하기</a> 
             </div>
         
-            <div class="content1">
+            <div id="content2_4">
                 <div class="page_nation">
                     <a class="arrow pprev" href="#"></a>
                     <a class="arrow prev" href="#"></a>
@@ -173,8 +195,9 @@
                     <a href="#">5</a>
                     <a class="arrow next" href="#"></a>
                     <a class="arrow nnext" href="#"></a>
+                 </div>
                 </div>
-            </div>
+
         </div>
     </div>
 

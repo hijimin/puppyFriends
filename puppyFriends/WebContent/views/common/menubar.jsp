@@ -231,7 +231,7 @@
             </li>
             <li class="program"><a href="#">프로그램</a>
               <ul class="reservation">
-                <li class="hotel"><a href="<%= contextPath %>/enrollForm.rv">호텔 예약</a></li>
+                <li class="hotel"><a href="<%= contextPath %>/insert.hrv">호텔 예약</a></li>
                 <li class="kindergarten"><a href="#">유치원 예약</a></li>
               </ul>
             </li>
@@ -242,7 +242,11 @@
                 </ul>
             </li>
             <li class="goods"><a href="<%= contextPath%>/list.pd?cpage=1">상품</a></li>
-            <li class="search"><a href="#">게시판</a></li>
+            <li class="search"><a href="<%= contextPath %>/noticeList.no?cpage=1">게시판</a>
+                <ul>
+                    <li><a href="">공지사항</a></li>
+                </ul>
+            </li>
 
         </ul> <br>
 

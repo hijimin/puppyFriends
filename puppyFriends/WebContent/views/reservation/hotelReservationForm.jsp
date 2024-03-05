@@ -21,7 +21,8 @@
         margin-top: 30px;
         margin-bottom: 50px;
         width: 65%;
-        height: 1000px;
+        height: 1200px;
+        position: relative;
     }
     .outer_name{
         width: 100%;
@@ -43,6 +44,11 @@
     .list-area{
         width: 100%;
         height: 90%;
+        border: 2px solid rgb(255, 222, 239);
+    }
+    .list-area-thum{
+        width: 100%;
+
     }
 
     .thum_tool{
@@ -50,28 +56,31 @@
         flex-wrap: wrap;
         justify-content: space-between;
 
-        border: 2px solid rgb(255, 222, 239);
+        /* border: 2px solid rgb(255, 222, 239); */
         width: 100%;
-        height: 80%;
+        height: auto;
         padding: 15px;
+        margin-bottom: 18px;
     }
 
     .thum_tool:hover{
             cursor: pointer;
         }
     .thumbnail{
-        float: left;
+        margin-bottom: 50px;
+        top: 0;
+        padding: 2%;
+        position: relative;
         flex: 1 0 21%; /* flex-grow | flex-shrink | flex-basis */
-        margin: 1%; /* Adjust as needed */
         width: 300px;
         height: 250px;
-        margin-top: 18px;
     }
 
     .btn_bar{
-        width: 100%;
+        width: 95%;
         height: 8%;
-        position: relative;
+        position: absolute; 
+        bottom: 0;
     }
     .btn_bar>.H_enroll{
         padding: 10px 15px;
@@ -90,6 +99,8 @@
         font-size:0;
     }
     .page_nation {
+        position: absolute; 
+        bottom: 0;
         display:inline-block;
         margin-top: 20px;
         margin-left: 37%;        
@@ -136,6 +147,7 @@
         border:1px solid #42454c;
     }
     
+   
     
 
 </style>
@@ -150,7 +162,7 @@
     
     <div class="outer">
         <div class="outer_name">
-            <p align="right">프로그램 > 호텔 예약 // 자동변경이면 좋을 듯</p> 
+            <p align="right">프로그램 > 호텔 예약 </p> 
         </div>
 
         <div class="select_tool">
@@ -165,24 +177,29 @@
     
         <!-- 썸네일 -->
         <div class="list-area">
-            <div class="thum_tool">
-             <% for(Hotel h : list){ %>
-                <div class="thumbnail" align="center" onclick="<%= contextPath %>/detail.hrv">
-                        <input type="hidden" value="<%= h.getHotelNo() %>" >
-                            <img src=" # " width="250px" height="190px"> <br> 이미지 들어가게
-                            <div>
-                                호텔명 : <%= h.getHotelName() %> <br> 
-                                소개 or 사이즈 전용여부 : <%= h.getHotelText() %> <br>
-                            </div>
+            <div class="list-area-thum">
+                <div class="thum_tool">
+                    <% for(Hotel h : list){ %>
+                        <div class="thumbnail">
+                                <input type="hidden" value="<%= h.getHotelNo() %>" >
+                                    <img src=" # " width="250px" height="190px"> <br> 이미지 들어가게
+                                    <div>
+                                        호텔명 : <%= h.getHotelName() %> <br> 
+                                        소개 or 사이즈 전용여부 : <%= h.getHotelText() %> <br>
+                                    </div>
+                        </div>
+                    <% } %>
                 </div>
-              <% } %>
-           </div>
-         
-
-			 if = 관리자 로그인 시 등록 가능, 일반 유저는 등록하기 안 보임
-            <div class="btn_bar">
-        	    <a href="<%= contextPath %>/enrollForm.hrv" class="H_enroll">등록하기</a> 
             </div>
+
+			<!-- 관리자 아이디만 등록 버튼 확인 가능하게 설정(ADMIN으로만 바꿔주면 됨)-->
+            <div class="btn_bar">
+     <!--   <% if(loginUser != null && (loginUser.getMemberId().equals("USER01"))) {%>  -->
+        	    <a href="<%= contextPath %>/enrollForm.hrv" class="H_enroll">등록하기</a>
+        <!--	 <% } %> -->
+            </div>
+            
+            <br>
         
             <div id="content2_4">
                 <div class="page_nation">
@@ -200,6 +217,16 @@
 
         </div>
     </div>
+    
+    <script>
+
+	$(function(){
+		$(".thumbnail").click(function(){
+			location.href="<%= contextPath %>/detail.hrv?hno=" + $(this).children("input").val();
+		})
+	})
+    
+    </script>
 
     
     

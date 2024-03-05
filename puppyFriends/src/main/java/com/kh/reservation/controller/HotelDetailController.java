@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.reservation.model.service.ReservationService;
+import com.kh.reservation.model.vo.Hotel;
+
 /**
  * Servlet implementation class HotelDetailController
  */
@@ -26,7 +29,19 @@ public class HotelDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int hotelNo = Integer.parseInt(request.getParameter("hno"));
+		
+		
+		ReservationService hService = new ReservationService();
+		
+		Hotel h = hService.selectHotelDetail(hotelNo);
+		
+		request.setAttribute("h", h);
+		
 		request.getRequestDispatcher("views/reservation/hotelDetailView.jsp").forward(request, response);
+		
+		
 
 	}
 

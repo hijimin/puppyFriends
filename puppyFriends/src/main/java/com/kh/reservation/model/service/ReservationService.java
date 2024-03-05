@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import static com.kh.common.JDBCTemplate.*;
 
-import com.kh.common.model.vo.PageInfo;
+//import com.kh.common.model.vo.PageInfo;
 import com.kh.reservation.model.dao.ReservationDao;
 import com.kh.reservation.model.vo.Hotel;
 
@@ -18,6 +18,16 @@ public class ReservationService {
 		
 		close(conn);
 		return list;
+	}
+
+	public Hotel selectHotelDetail(int hotelNo) {
+		Connection conn = getConnection();
+		
+		Hotel h = new ReservationDao().selectHotelDetail(conn, hotelNo);
+		
+		close(conn);
+		
+		return h;
 	}
 
 /*

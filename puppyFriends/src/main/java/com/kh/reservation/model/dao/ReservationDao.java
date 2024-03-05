@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.common.model.vo.PageInfo;
+// import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.reservation.model.vo.Hotel;
 
@@ -57,7 +57,38 @@ public class ReservationDao {
 	return list;
 	
 	}
-	
+
+	public Hotel selectHotelDetail(Connection conn, int hotelNo) {
+		Hotel h = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectHotelDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);	
+			
+			pstmt.setInt(1, hotelNo);
+			
+			rset = pstmt.executeQuery();
+		
+			if(rset.next()) {
+				h = new Hotel();
+				h.setHotelNo(rset.getInt("hotel_no"));
+				h.setReservationNo(rset.getInt("reservation_no"));
+				h.setHotelName(rset.getString("hotel_name"));
+				h.setHotelText(rset.getString("hotel_text"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return h;
+	}
 	
 	
 	/*

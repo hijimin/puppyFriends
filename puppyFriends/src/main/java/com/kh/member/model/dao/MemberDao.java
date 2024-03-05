@@ -131,16 +131,15 @@ private Properties prop = new Properties();
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				/*
+				
 				m = new Member(rset.getInt("member_no"),
 								rset.getString("member_name"),
-								rset.getString("phone1"),
-								rset.getString("phone2"),
 								rset.getString("email1"),
-								rset.getString("email2"));
-								*/
-			}
-			
+								rset.getString("email2"),
+								rset.getString("phone1"),
+								rset.getString("phone2"));
+								
+			}		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

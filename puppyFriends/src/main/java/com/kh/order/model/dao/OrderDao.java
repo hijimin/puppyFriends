@@ -23,5 +23,68 @@ public class OrderDao {
 		}
 	}
 	
+	public int orderInsert(Connection conn, Order o) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("orderInsert");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(o.getOrderUser()));
+			pstmt.setInt(2, Integer.parseInt(o.getProductNo()));
+			pstmt.setString(3, o.getOrderName());
+			pstmt.setString(4, o.getOrderAddress());
+			pstmt.setString(5, o.getOrderPhone());
+			pstmt.setString(6, o.getOrderReq());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;		
+	}
+	
+	public int paymentInsert(Connection conn, String impUid, String merchantUid, String price) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("paymentInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, impUid);
+			pstmt.setString(2, merchantUid);
+			pstmt.setInt(3, Integer.parseInt(price));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int orderUpdate(Connection conn, Order o) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("orderUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(o.getProductNo()));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 
 }

@@ -9,6 +9,10 @@
 	Product p2 = list.get(1); // 파일레벨2
 	
 	Product p = (Product)request.getAttribute("p");
+	// 배송비랑 합친가격만
+	
+	Member m = (Member)request.getAttribute("m");
+	// 유저이름, 유저이메일, 유저폰번호
 %>
 <!DOCTYPE html>
 <html>
@@ -197,13 +201,12 @@
     .list-area{
         text-align: center;
     }
-    /*
+    
     .tossimg{
-        width: 100px;
+        width: 180px;
         height: 50px;
-        background: url('resources/image/logo-toss-pay.png') no-repeat center center;
     }
-    */
+    
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -268,11 +271,18 @@
             </table>
                 
                     <div id="content1_2c">                       
-                        <span><a href="#">선택삭제</a></span>
+                        <span><a onclick="validate();">선택삭제</a></span>
                         <div id="content1_2c1">
                             <span>상품금액</span> <span><%= p.getdPrice() %>원</span>                                      
                         </div>                
                     </div>
+                    
+                    <script>
+                    	function validate(){
+                    		 alert('정말 삭제하시겠습니까?');                   		
+                    		location.href='<%= contextPath%>/delete.od'                 		
+                    	}
+                    </script>
                
                 
 
@@ -301,7 +311,7 @@
                                 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif">
                             </th>
                             <td style="padding: 10px;">
-                                <input type="text" placegolder size="15" class="radder3">
+                                <input type="text" placegolder size="15" class="radder3" value="<%= m.getMemberName()%>">
                             </td>
                         </tr>
 
@@ -318,9 +328,9 @@
                                     <option value="018">018</option>
                                 </select>
                                 -
-                                <input type="text" name="phone">
+                                <input type="text" name="phone" value="<%= m.getPhone1()%>">
                                 -
-                                <input type="text" name="phone">
+                                <input type="text" name="phone" value="<%= m.getPhone2()%>">
                             </td>
                         </tr>
                     </tbody>
@@ -333,9 +343,9 @@
                             </th>
 
                             <td style="padding: 10px;">
-                                <input type="text" id="email1" name="email1">
+                                <input type="text" id="email1" name="email1" value="<%= m.getEmail1()%>">
                                 @
-                                <input type="text" id="email2" name="email2" readonly>
+                                <input type="text" id="email2" name="email2" readonly value="<%= m.getEmail2()%>">
 
                                 <select name="email3" id="email3" onchange="input_email(this);">
                                     <option value selected="selected">이메일 선택</option>
@@ -387,7 +397,7 @@
                             <th>배송지선택</th>
                             <td>
                                 <div class="address" style="padding: 10px;">
-                                    <input type="radio" name="sameaddr">
+                                    <input type="radio" name="sameaddr0" id="sameaddr0" onclick="setSameAddress()">
                                     <label for="sameaddr0">주문자 정보와 동일</label>
                                     <input type="radio" name="smaeaddr">
                                     <label for="sameaddr1">새로운 배송지</label>
@@ -401,9 +411,22 @@
                                 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif">              
                             </th>
                             <td style="padding: 10px;">
-                                <input type="text" name="rname" placeholder size="15" class="radder3">
+                                <input type="text" id="rname" name="rname" placeholder size="15" class="radder3">
                             </td>
                         </tr>
+                        
+                        <script>
+                        function setSameAddress(){
+                        var sameAddrRadio = document.getElementById("sameaddr0");
+                        var rnameInput = document.getElementById("rname");
+ 
+	                        if (sameAddrRadio.checked) {
+	                        	rnameInput.value = '<%= m.getMemberName() %>';
+	                        	}
+                        	
+                        }
+                        
+                        </script>
 
                         <tr>
                             <th scope="row">
@@ -441,7 +464,7 @@
 			<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
 		</div>
 
-        <script>
+        <script>  
             // 우편번호 찾기 화면을 넣을 element
             var element_layer = document.getElementById('layer');
     
@@ -450,7 +473,7 @@
                 element_layer.style.display = 'none';
             }
     
-            function sample2_execDaumPostcode() {
+            function sample2_execDaumPostcode() {           	  
                 new daum.Postcode({
                     oncomplete: function(data) {
                         // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -497,7 +520,7 @@
     
                         // iframe을 넣은 element를 안보이게 한다.
                         // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
-                        element_layer.style.display = 'none';
+                        element_layer.style.display = 'none';                                        
                     },
                     width : '100%',
                     height : '100%',
@@ -536,7 +559,8 @@
                 <p>결제수단</p>
             </div>
             <div id="content4_2">
-                <a href="#" class="tossimg">토스페이</a>
+                
+                <img class="tossimg" src="resources/image/logo-toss-pay.png">
             </div>
         </div>
 
@@ -586,13 +610,15 @@
 
         <div id="content6">
             <div id="content6_1">
-                <a href="#" onclick="requestPay()" class="btn btn-dark">결제하기</a>
+                <a href="#" onclick="requestPay();" class="btn btn-dark">결제하기</a>
                 <a href="#" class="btn btn-dark">뒤로가기</a>
             </div>
         </div>
     </div>
     
     <script>
+    	
+    
         var IMP = window.IMP; 
         IMP.init("imp16540835"); 
       
@@ -604,26 +630,62 @@
         var makeMerchantUid = hours +  minutes + seconds + milliseconds;
         
 
+        
         function requestPay() {
+        	var add1 = document.getElementById("sample2_address").value; 
+        	
+        	
             IMP.request_pay({
                 pg : 'tosspay',
                 pay_method : 'card',
                 merchant_uid: makeMerchantUid, //상점에서 생성한 고유 주문번호
                 name : '주문명:결제테스트',   //필수 파라미터 입니다.
-                amount : 1004,
-                buyer_email : 'iamport@siot.do',
-                buyer_name : '구매자이름',
-                buyer_tel : '010-1234-5678',
-                buyer_addr : '서울특별시 강남구 삼성동',
+                amount : 100,
+                buyer_email : '<%= m.getEmail1() + '@' %><%= m.getEmail2()%>',
+                buyer_name : '<%= m.getMemberName()%>',
+                buyer_tel : '<%= "010" + '-' + m.getPhone1() + '-' + m.getPhone2()%>',
+                buyer_addr : add1,
                 buyer_postcode : '123-456',
-                m_redirect_url : '{결제 완료 후 리디렉션 될 URL}'
+                m_redirect_url : '{}'
             }, function (rsp) { // callback
                 if (rsp.success) {
                     console.log(rsp);
+                    test(rsp);
                 } else {
                     console.log(rsp);
                 }
             });
+        }
+        
+        function test(rsp){
+        	let buyerAddr;
+        	let buyerName;
+        	let buyerTel;
+        	let productNo = '<%= p1.getProductNo() %>';
+        	var omessage = $("#omessage").val();
+        	let iu;
+        	let mc;      	
+        	let priceStr = '<%= p1.getdPrice()%>';
+        	let price = parseInt(priceStr.replace(/,/g, ''), 10);
+        	$.ajax({
+        		url:"insert.po",
+        		data:{
+        			buyerAddr:rsp.buyer_addr,
+        			buyerName:rsp.buyer_name,
+        			buyerTel:rsp.buyer_tel,
+        			pno:productNo,
+        			omg:omessage,
+        			iu:rsp.imp_uid,
+        			mc:rsp.merchant_uid,
+        			pr:price
+        			},
+        		success:function(result){
+        			if(result > 0){
+        				console.log("결제완료");    
+        				location.href = '<%= contextPath %>/success.po'
+        			}
+        		}
+        	})
         }
     </script>
     

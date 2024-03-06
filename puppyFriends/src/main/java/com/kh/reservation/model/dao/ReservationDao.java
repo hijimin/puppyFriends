@@ -41,10 +41,14 @@ public class ReservationDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Hotel(rset.getInt("hotel_no"),
-								   rset.getString("hotel_name"),
-								   rset.getString("member_id")));
-			}
+	            list.add(new Hotel(rset.getInt("hotel_no"),
+	                           rset.getString("hotel_name"),
+	                           rset.getString("hotel_text"),
+	                           rset.getString("hotel_size"),
+	                           rset.getDate("writing_date"),
+	                           rset.getString("member_id")
+	                           ));
+	         }
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,24 +74,34 @@ public class ReservationDao {
 			pstmt = conn.prepareStatement(sql);	
 			
 			pstmt.setInt(1, hotelNo);
-			
+	
 			rset = pstmt.executeQuery();
-		
-			if(rset.next()) {
+			
+			while(rset.next()) {
 				h = new Hotel();
 				h.setHotelNo(rset.getInt("hotel_no"));
-				h.setReservationNo(rset.getInt("reservation_no"));
 				h.setHotelName(rset.getString("hotel_name"));
 				h.setHotelText(rset.getString("hotel_text"));
+				h.setHotelSize(rset.getString("hotel_size"));
+				h.setdNumber(rset.getInt("d_number"));
+				h.setWritingDate(rset.getDate("writing_date"));
+				h.setReservationDate(rset.getDate("reservation_date"));
+				h.setMemberId(rset.getString("member_id"));
+				h.setDogSize(rset.getString("dog_size"));
 			}
+				
+							
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rset);
 			close(pstmt);
+
 		}
 		
 		return h;
+		
 	}
 	
 	

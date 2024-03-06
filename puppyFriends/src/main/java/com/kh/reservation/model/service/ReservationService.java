@@ -26,7 +26,7 @@ public class ReservationService {
 		Hotel h = new ReservationDao().selectHotelDetail(conn, hotelNo);
 		
 		close(conn);
-		
+
 		return h;
 	}
 

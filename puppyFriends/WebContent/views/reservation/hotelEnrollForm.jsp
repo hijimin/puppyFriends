@@ -120,23 +120,34 @@
     <div class="outer">
 
         <div align="right" class="outer_name">
-            프로그램 &gt; 호텔 예약 &gt; 호텔 등록 &nbsp; &nbsp; // # 호텔 > 유치원 변경 가능하게? 안 하게?
+            프로그램 &gt; 호텔 예약 &gt; 호텔 등록 &nbsp; &nbsp;
         </div>
         <br><br>
         <div class="hotelName">
-            <h1 align="right" style="vertical-align: top">빈칸</h1>
+            <h1 align="right" style="vertical-align: top">등록</h1>
         </div>
-        <br>
+        
+        <form action="<%= contextPath %>/insert.hrv" id="enroll-form" method="post" enctype="enctype="multipart/form-data">
+        <input type="hidden" name="memberNo" value="<%= loginUser.getMemberNo()%>">
         
         <div class="photo_text"> <!-- 왼쪽 맵-->
             <div class="photo">
                 <div class="photo_pt">
                     <p>&lt;이미지 미리보기&gt;</p>
                     <div class="photoImg1">
-                        <img class="photoImg" src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" style="width:100%">
-                        <img class="photoImg" src="https://www.dailysecu.com/news/photo/202104/123449_145665_1147.png" style="width:100%">
-                        <img class="photoImg" src="https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG" style="width:100%">
+                        <img class="photoImg" src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" style="width:100%" onclick="chooseFile(1)">
+                        <img class="photoImg" src="https://www.dailysecu.com/news/photo/202104/123449_145665_1147.png" style="width:100%" onclick="chooseFile(2)">
+                        <img class="photoImg" src="https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG" style="width:100%" onclick="chooseFile(3)">
                     </div>
+                    
+                    <div id="file-area" style="display:none">
+		                <input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" required>
+		                <input type="file" name="file2" id="file2" onchange="loadImg(this, 2);">
+		                <input type="file" name="file3" id="file3" onchange="loadImg(this, 3);">
+         			</div>
+         			
+         			
+            
                 </div>
                     <div class="photoBar" align="center">
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

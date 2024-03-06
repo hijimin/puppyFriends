@@ -131,7 +131,7 @@
 	<div class="outer">
 
         <div align="right" class="outer_name">
-            프로그램 &gt; 호텔 예약 &gt; 호텔댕루나 &nbsp; &nbsp; // #
+            프로그램 &gt; 호텔 예약 &gt; <%= h.getHotelName() %> &nbsp; &nbsp;
         </div>
         <br><br>
         <div class="hotelName">
@@ -181,11 +181,12 @@
             
             <div class="text" align="right"> <!-- 오른쪽 맵 -->
                 <div class="period">기간 : 2024-02-01 ~ 2024-02-29 // # </div> <br><br>
-                <div>(2 / 10, 신청인원수/정원) , M</div>
+                <div>(2 / <%= h.getdNumber() %>) , M</div>
                 <div class="introduce">
                     <tr>
                         <td>
-                             여기에 소개글 올라가도록
+                        <p style="text-align: left; padding: 10px;"><%= h.getHotelText() %></p>
+                             
                         </td>
                     </tr>
                 </div>
@@ -193,18 +194,19 @@
                 
                 <div class="btn_bar">
                     if 사 등록된 사이즈와 동일하지 않을 시 자동으로 예약 버튼 막힘
-                    <button>예약하기// onclick 예정 , 예약 alert 띄운 후 동의 시 결제 페이지로 넘어감 alert 이후 결제 페이지로 넘어가게</button> 
+                    <button class="btn-open-modal" >예약하기// onclick 예정 , 예약 alert 띄운 후 동의 시 결제 페이지로 넘어감 alert 이후 결제 페이지로 넘어가게</button> 
                 </div>
 
-                 if문 사용해서 관리자 아니면 막아야 함ㄱㄱ
+                 
+				<% if(loginUser != null && loginUser.getMemberId().equals("USER01")) { %>
 
                 <div class="btn_bar1">
-                    <button>수정하기// 관리자 아니면 안 보이게</button> 
+                    <button>수정하기// 관리자로 수정하기</button> 
                 </div>
                 <div class="btn_bar1">
-                    <button>삭제하기// 관리자 아니면 안 보이게</button> 
+                    <button>삭제하기// 관리자로 수정하기</button> 
                 </div>
-                
+                <% } %>
             </div>
 
             <br><br>

@@ -168,8 +168,6 @@
         <div class="select_tool">
                 <select class="select_text">
                     <option value="x">선택안함</option>
-                    <option value="like">인기순</option>
-                    <option value="sel">조회순</option>
                     <option value="end">마감제외</option>
                 </select>
         </div>
@@ -185,7 +183,7 @@
                                     <img src=" # " width="250px" height="190px"> <br> 이미지 들어가게
                                     <div>
                                         호텔명 : <%= h.getHotelName() %> <br> 
-                                        소개 or 사이즈 전용여부 : <%= h.getHotelText() %> <br>
+                                        소개 or 사이즈 전용 : <%= h.getHotelSize() %> <br>
                                     </div>
                         </div>
                     <% } %>

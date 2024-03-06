@@ -2,20 +2,44 @@ package com.kh.cart.model.vo;
 
 public class Cart {
 	 private int cartNo;
-	 private int memberNo;
-	 private int productNo;
+	 private String memberNo;
+	 private String productNo;
 	 private int cartAmount;
-	 private int cartPrice;
+	 private String cartStatus;
+	 
+	 // 장바구니 조회용 가격
+	 private String oPrice;
+	 private String dPrice;
+	 private String titleImg;
+	 private int pno;
 	 
 	 public Cart() {}
 
-	public Cart(int cartNo, int memberNo, int productNo, int cartAmount, int cartPrice) {
+	public Cart(int cartNo, String memberNo, String productNo, int cartAmount, String cartStatus) {
 		super();
 		this.cartNo = cartNo;
 		this.memberNo = memberNo;
 		this.productNo = productNo;
 		this.cartAmount = cartAmount;
-		this.cartPrice = cartPrice;
+		this.cartStatus = cartStatus;
+	}
+	
+	
+	
+	
+	
+
+	public Cart(int cartNo, String memberNo, String productNo, int cartAmount, String oPrice, String dPrice,
+			String titleImg, int pno) {
+		super();
+		this.cartNo = cartNo;
+		this.memberNo = memberNo;
+		this.productNo = productNo;
+		this.cartAmount = cartAmount;
+		this.oPrice = oPrice;
+		this.dPrice = dPrice;
+		this.titleImg = titleImg;
+		this.pno = pno;
 	}
 
 	public int getCartNo() {
@@ -26,19 +50,19 @@ public class Cart {
 		this.cartNo = cartNo;
 	}
 
-	public int getMemberNo() {
+	public String getMemberNo() {
 		return memberNo;
 	}
 
-	public void setMemberNo(int memberNo) {
+	public void setMemberNo(String memberNo) {
 		this.memberNo = memberNo;
 	}
 
-	public int getProductNo() {
+	public String getProductNo() {
 		return productNo;
 	}
 
-	public void setProductNo(int productNo) {
+	public void setProductNo(String productNo) {
 		this.productNo = productNo;
 	}
 
@@ -50,17 +74,54 @@ public class Cart {
 		this.cartAmount = cartAmount;
 	}
 
-	public int getCartPrice() {
-		return cartPrice;
+	public String getCartStatus() {
+		return cartStatus;
 	}
 
-	public void setCartPrice(int cartPrice) {
-		this.cartPrice = cartPrice;
+	public void setCartStatus(String cartStatus) {
+		this.cartStatus = cartStatus;
+	}
+	
+	
+
+	public String getoPrice() {
+		return oPrice;
+	}
+
+	public void setoPrice(String oPrice) {
+		this.oPrice = oPrice;
+	}
+
+	public String getdPrice() {
+		return dPrice;
+	}
+
+	public void setdPrice(String dPrice) {
+		this.dPrice = dPrice;
+	}
+	
+	
+
+	public String getTitleImg() {
+		return titleImg;
+	}
+
+	public void setTitleImg(String titleImg) {
+		this.titleImg = titleImg;
+	}
+	
+
+	public int getPno() {
+		return pno;
+	}
+
+	public void setPno(int pno) {
+		this.pno = pno;
 	}
 
 	@Override
 	public String toString() {
 		return "Cart [cartNo=" + cartNo + ", memberNo=" + memberNo + ", productNo=" + productNo + ", cartAmount="
-				+ cartAmount + ", cartPrice=" + cartPrice + "]";
-	} 
+				+ cartAmount + ", cartStatus=" + cartStatus + "]";
+	}
 }

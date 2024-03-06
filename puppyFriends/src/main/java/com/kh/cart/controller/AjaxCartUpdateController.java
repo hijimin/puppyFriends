@@ -11,16 +11,16 @@ import com.kh.cart.model.service.CartService;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class CartInsertController
+ * Servlet implementation class AjaxCartUpdateController
  */
-@WebServlet("/insert.cr")
-public class CartInsertController extends HttpServlet {
+@WebServlet("/updatecart.cr")
+public class AjaxCartUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CartInsertController() {
+    public AjaxCartUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +29,11 @@ public class CartInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int productNo = Integer.parseInt(request.getParameter("pno"));
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
-		
-		int result = new CartService().insertCart(productNo, userNo);
+		int productNo = Integer.parseInt(request.getParameter("pno"));
+		int result = new CartService().updateCart(productNo, userNo);
 		
 		response.getWriter().print(result);
-		
 	}
 
 	/**

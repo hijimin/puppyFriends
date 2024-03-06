@@ -11,16 +11,16 @@ import com.kh.cart.model.service.CartService;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class CartInsertController
+ * Servlet implementation class AjaxCartCheckController
  */
-@WebServlet("/insert.cr")
-public class CartInsertController extends HttpServlet {
+@WebServlet("/cartCheck.cr")
+public class AjaxCartCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CartInsertController() {
+    public AjaxCartCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,10 +32,14 @@ public class CartInsertController extends HttpServlet {
 		int productNo = Integer.parseInt(request.getParameter("pno"));
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		
-		int result = new CartService().insertCart(productNo, userNo);
+		int count = new CartService().cartCheck(productNo, userNo);
 		
-		response.getWriter().print(result);
-		
+		if(count > 0) {
+			// 존재하는 장바구니가 있을 경우
+			response.getWriter().print("NNNNN");
+		}else {
+			response.getWriter().print("NNNNY");
+		}
 	}
 
 	/**

@@ -50,9 +50,12 @@
     #content2_1{height: 15%;}
     #content2_2{height: 85%; padding-top: 100px}
     
+    .kakaologin{margin-top: 15px;}
 </style>
 </head>
 <body>
+
+	
 	<% if(alertMsg != null) { %>
 		<script>
 			alert("<%= alertMsg %>");
@@ -89,9 +92,47 @@
                     <a href="<%= request.getContextPath() %>/enrollpage.me" style="text-decoration: none; color: gray;">회원가입</a> | 
                     <a href="" style="text-decoration: none; color: gray;">아이디 찾기</a> | 
                     <a href="" style="text-decoration: none; color: gray;">비밀번호 찾기</a>
+                    
+                    
+                    <div class="kakaologin">
+                        <a href="javascript:kakaoLogin()"><img src="resources/image/kakao_login_medium_narrow.png" style="width: 200px"></a>
+                    </div>
+                    <button>네이버 로그인</button>
+                    
+                    <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+                    <script type="text/javascript">
+                        Kakao.init('6c59f1729524aa356d516aa3c7563c63');
+                        function kakaoLogin(){
+                            Kakao.Auth.login({
+                                success: function(response){
+                                    Kakao.API.request({
+                                        url: '/v2/user/me',
+                                        success: function (response){
+                                            let id = response.id;
+                                            let nickname = response.properties.nickname;
+                                            console.log(nickname);
+                                            let email = response.kakao_account.email;
+                                            console.log(email);
+                                            alert(JSON.stringify(response))
+                                            location.href="http://localhost:8083/puppy/kakaologin";
+                                        },
+                                        fail: function(error){
+                                            alert(JSON.stringify(error))
+                                        },
+                                    })
+                                },
+                                fail: function(error){
+                                    alert(JSON.stringify(error))
+                                },
+                            })
+                        }
+                    </script>
+                    
+                    
                 </div>
             </div>
-            <div id="content3"></div>
+            <div id="content3">
+            </div>
         </div>
 
     </div>

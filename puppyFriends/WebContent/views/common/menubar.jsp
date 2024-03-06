@@ -178,7 +178,7 @@
 
         <div class="header">
             <div class="header_1">
-                <img src="로고.png" style="width: 150px; height: 150px; margin-left: 30px;">
+                <img src="resources/image/KakaoTalk_20240222_172839389.png" style="width: 200px; height: 200px; margin-left: 30px;">
             </div>
             <div class="header_2">
             	<div id="header"><h1 style="margin-top: 100px;"><a href="<%= contextPath %>" style="color: white; text-decoration: none;">puppy friend</a></h1></div>

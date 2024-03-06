@@ -12,8 +12,8 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint("/ChatingServer2")
-public class BoardChattingServer {
+@ServerEndpoint("/ChatingServer4")
+public class BoardChattingServerGangbuk {
     private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
 
     @OnOpen

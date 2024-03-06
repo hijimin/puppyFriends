@@ -148,14 +148,14 @@
     .dog_data:hover > .dog_data2{
         display: block;
         position: absolute;
-        left: 50%;
+        left: 44%;
         transform: translateX(0%);
     }
     
     .board_All:hover>.board_Detail{
     	display: block;
         position: absolute;
-        left: 70.5%;
+        left: 76%;
         transform: translateX(0%);
     
     }
@@ -250,13 +250,11 @@
                    <li class="gallery"><a href="#">갤러리</a></li>
                 </ul>
             </li>
-<<<<<<< HEAD
-            <li class="goods"><a href="<%= contextPath%>/list.pd?cpage=1">상품</a></li>
-            <li class="search"><a href="<%= contextPath %>/noticeList.no?cpage=1">게시판</a>
-                <ul>
+
+           
+                
                     <li><a href="">공지사항</a></li>
-                </ul>
-=======
+
             <li class="goods"><a href="<%= contextPath %>/list.pd">상품</a></li>
             
             
@@ -265,7 +263,6 @@
             		<li class="noticeBoard"><a href="#">공지사항</a></li>
             		<li class="chattingBoard"><a href="<%= contextPath %>/SelectChatting.ch">모임게시판</a></li>
             	</ul>
->>>>>>> menager
             </li>
             
 

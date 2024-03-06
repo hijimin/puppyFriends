@@ -11,7 +11,7 @@
           FROM CHATTING
           JOIN MEMBER ON(MEMBER_NO = CHATTING_MEMBER_NO) 
          ORDER
-            BY CHATTING_NO DESC
+            BY CHATTING_NO ASC
 		       
 	</entry>
 	
@@ -25,11 +25,11 @@
           FROM CHATTING
           JOIN MEMBER ON(MEMBER_NO = CHATTING_MEMBER_NO)
           WHERE MEMBER_ID = ? 
+          AND CHATTING_CITY = ?
 	</entry>
 	
-	
 	<entry key="">
-	
+		
 	</entry>
 	
 	

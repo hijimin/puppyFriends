@@ -4,14 +4,14 @@
     
     <% 
        Chatting chat = (Chatting)request.getAttribute("chat");
-       // 채팅방번호, 회원 아이디, 모임도시, 마지막채팅날짜, 참여여부
+       // 채팅방번호, 회원 아이디, 모임도시, 채팅날짜, 참여여부
     %>
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>강남구</title>
+<title>강동구</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
    
     <!-- jQuery library -->
@@ -143,10 +143,12 @@
     </div>
     
     <script>
-        var serverUrl = "ws://" + window.location.hostname + ":" + window.location.port + "${pageContext.request.contextPath}/ChatingServer2";
+    	console.log("되냐")
+        var serverUrl = "ws://" + window.location.hostname + ":" + window.location.port + "${pageContext.request.contextPath}/ChatingServer1";
         var webSocket = new WebSocket(serverUrl);
         
         function sendMessage() {
+        	console.log("Dd")
             var chatMessage = $("#chatMessage");
             console.log('<%= chat.getMemberId() %>')
             var message = {

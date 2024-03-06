@@ -68,38 +68,45 @@ public class ChattingDao {
 	
 	
 	
-	public ArrayList<Chatting> ChattingForm(Connection conn, String memberId){
-		ArrayList<Chatting> list = new ArrayList<Chatting>();
+	public Chatting ChattingForm(Connection conn, String memberId, String chattingCity){
+		Chatting chat = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("chattingForm");
 		
+		System.out.println(memberId);
+		System.out.println(chattingCity);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
+			pstmt.setString(2, chattingCity);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {		
-				list.add(new Chatting(rset.getInt("CHATTING_NO"),
+				chat = new Chatting(rset.getInt("CHATTING_NO"),
 									  rset.getString("CHATTING_CITY"),
 									  rset.getDate("CHATTING_DATE"),
 									  rset.getString("CHATTING_CHECK"),
 									  rset.getString("MEMBER_ID")
-									  ));
+									  );
 				
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			System.out.println(chat);
 			close(rset);
 			close(pstmt);
 		}
 		
-		return list;
+		return chat;
 		
 	}
+	
+	
+	
 	
 	
 	

@@ -37,8 +37,8 @@ public class ChatListController extends HttpServlet {
 
 		String fromId = request.getParameter("fromId");
 		String toId = request.getParameter("toId");
-		
 		ArrayList<Chat> list = new ChatService().selectChatList(fromId, toId);
+		
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list, response.getWriter());

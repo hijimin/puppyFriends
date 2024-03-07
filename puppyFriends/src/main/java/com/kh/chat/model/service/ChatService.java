@@ -39,9 +39,31 @@ public class ChatService {
 		
 	}
 	
+	public ArrayList<Chat> memberChatList(){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Chat> list = new ChatDao().memberChatList(conn);
+		
+		close(conn);
+				
+		return list;
+		
+	}
 	
-	
-	
+	/*
+	public ArrayList<Chat> memberChat(String userId){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Chat> list = new ChatDao().memberChat(conn, userId);
+		
+		close(conn);
+		
+		return list;
+		
+	}
+	*/
 	
 	
 

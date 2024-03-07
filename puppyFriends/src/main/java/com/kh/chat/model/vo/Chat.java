@@ -18,6 +18,15 @@ public class Chat {
 		this.content = content;
 		this.chatDate = chatDate;
 	}
+	
+
+	public Chat(int chatNo, String fromId, String content, String chatDate) {
+		super();
+		this.chatNo = chatNo;
+		this.fromId = fromId;
+		this.content = content;
+		this.chatDate = chatDate;
+	}
 
 	public int getChatNo() {
 		return chatNo;

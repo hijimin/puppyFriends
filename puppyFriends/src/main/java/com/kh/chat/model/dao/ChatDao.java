@@ -189,7 +189,7 @@ public class ChatDao {
 							       , rset.getString("from_id").replace(" ", "&nbsp;").replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br>")
 							       , rset.getString("to_id").replace(" ", "&nbsp;").replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br>")
 							       , rset.getString("content").replace(" ", "&nbsp;").replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br>")
-							       , rset.getString("chat_date").substring(0, 11) + " " + timetype + " " + chatDate + ":" + rset.getString("chat_date").substring(14, 16) + "");
+							       , timetype + " " + chatDate + ":" + rset.getString("chat_date").substring(14, 16) + "");
 		
 				list.add(c);
 			}
@@ -207,11 +207,100 @@ public class ChatDao {
 		
 	}
 	
+	public ArrayList<Chat> memberChatList(Connection conn){
+		
+		ArrayList<Chat> list = new ArrayList<Chat>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("memberChatList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				int chatDate = Integer.parseInt(rset.getString("chat_date").substring(11, 13));
+				String timetype = "오전";
+				if(chatDate >= 12) {
+					timetype = "오후";
+					chatDate -= 12;
+				}
+				
+				Chat c = new Chat(rset.getInt("chat_no")
+							       , rset.getString("from_id").replace(" ", "&nbsp;").replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br>")
+							       , rset.getString("content").replace(" ", "&nbsp;").replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br>")
+							       , rset.getString("chat_date").substring(0, 11) + " " + timetype + " " + chatDate + ":" + rset.getString("chat_date").substring(14, 16) + "");
+		
+				list.add(c);
+			}
+				
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
 	
+	/*
+	public ArrayList<Chat> memberChat(Connection conn, String userId){
+		
+		ArrayList<Chat> list = new ArrayList<Chat>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("memberChat");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				int chatDate = Integer.parseInt(rset.getString("chat_date").substring(11, 13));
+				String timetype = "오전";
+				if(chatDate >= 12) {
+					timetype = "오후";
+					chatDate -= 12;
+				}
+				
+				Chat c = new Chat(rset.getInt("chat_no")
+							       , rset.getString("from_id").replace(" ", "&nbsp;").replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br>")
+							       , rset.getString("to_id").replace(" ", "&nbsp;").replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br>")
+							       , rset.getString("content").replace(" ", "&nbsp;").replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br>")
+							       , rset.getString("chat_date").substring(5, 11) + " " + timetype + " " + chatDate + ":" + rset.getString("chat_date").substring(14, 16) + "");
+		
+				list.add(c);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
 	
-	
-	
-	
+		
+	}
+	*/
 	
 	
 	

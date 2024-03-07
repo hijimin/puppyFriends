@@ -2,7 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String userId = "USER01";
+	String userId = "";
+	if(session.getAttribute("loginUser") != null){
+		userId = ((Member)session.getAttribute("loginUser")).getMemberId();
+	}
 	String toId = "ADMIN";
 %> 
 <!DOCTYPE html>
@@ -17,14 +20,14 @@
         margin: 0;
         box-sizing: border-box;
         }
-        .wrap1 {
+        .wrapCh {
         padding: 10px 0;
         background-color: rgb(255, 222, 239);
         width: 350px;
-        height: 350px;        
+        height: 400px;        
         display: block; 
         position: fixed; 
-        bottom: 100px; /* 탑버튼을 화면의 가장 아래에서 몇 픽셀 떨어뜨릴 것인지 정하세요*/ 
+        bottom: 155px; /* 탑버튼을 화면의 가장 아래에서 몇 픽셀 떨어뜨릴 것인지 정하세요*/ 
         right: 30px; /* 탑버튼을 화면의 가장 오른쪽에서 몇 픽셀 떨어뜨릴 것인지 정하세요*/ 
         z-index: 999; 
         outline: none; 
@@ -45,7 +48,7 @@
         display:none;
         }
         .input{
-            height: 12%;
+            height: 11%;
             padding-right: 20px;
             border-top: 1px solid gray;
             padding-top: 10px;    
@@ -60,69 +63,75 @@
             align-items: flex-start;
             padding: 20px;
         }
-        .wrap1 .ch .icon {
+        .wrapCh .ch .icon {
         position: relative;
         overflow: hidden;
-        width: 50px;
-        height: 50px;
+        width: 50px !important;
+        height: 50px !important;
         background-color: #eee;
     }
-    .wrap1 .ch .icon p {
+    .wrapCh .ch .icon p {
         position: absolute;
         top: 15px;
         left: 50%;
         color: #aaa;
         transform: translateX(-50%);
+        font-size: 13px !important;
     }
-    .wrap1 .ch #content {
+    .wrapCh .ch #content {
         position: relative;
         display: inline-block;
-        max-width: calc(100% - 70px);
+        max-width: calc(100% - 110px);
         padding: 10px;
         margin-top: 7px;
         font-size: 13px;
         border-radius: 10px;
     }
-    .wrap1 .ch #content::before {
+    .wrapCh .ch #content::before {
         position: absolute;
         display: block;
         top: 0;
         font-size: 1.5rem;
     }
-    .wrap1 .ch1 #content {
-        margin-left: 20px;
+    .wrapCh .ch1 #content {
+        margin-left: 15px;
         background-color: #ddd;
     }
-    .wrap1 .ch1 #content::before {
+    .wrapCh .ch1 #content::before {
         left: -15px;
         content: "◀";
         color: #ddd;
     }
-    .wrap1 .ch2 {
+    .wrapCh .ch2 {
         flex-direction: row-reverse;
     }
-    .wrap1 .ch2 #content {
-        margin-right: 20px;
+    .wrapCh .ch2 #content {
+        margin-right: 15px;
         background-color: #F9EB54;
     }
-    .wrap1 .ch2 #content::before {
+    .wrapCh .ch2 #content::before {
         right: -15px;
         content: "▶";
         color: #F9EB54;
     }
-    #btn{
+    #btn1{
         display: block; 
         position: fixed; 
-        bottom: 35px; /* 탑버튼을 화면의 가장 아래에서 몇 픽셀 떨어뜨릴 것인지 정하세요*/ 
+        bottom: 90px; /* 탑버튼을 화면의 가장 아래에서 몇 픽셀 떨어뜨릴 것인지 정하세요*/ 
         right: 30px; /* 탑버튼을 화면의 가장 오른쪽에서 몇 픽셀 떨어뜨릴 것인지 정하세요*/ 
         z-index: 999; 
-        border: 1px solid rgba(0,0,0,0.25); 
+        border: 4px solid #ffdeef; 
         outline: none; 
-        background-color: white; 
-        color: rgba(0,0,0,0.7); 
+        background-color:transparent;
+        color: #ffdeef; 
         cursor: pointer; 
-        padding: 15px 20px; 
-        border-radius: 100%; 
+        padding: 7px 12px; 
+        border-radius: 100%;
+        font-size: 20px;
+        font-weight: 800; 
+    }
+    #date{
+        font-size: 10px;
     }
     </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -130,31 +139,39 @@
 
 <body>
 
-	<%@ include file="../common/menubar.jsp" %>
-    
-    <button id="btn" onclick="chatting();">톡</button>
+	
 
+   	<% if(userId.equals("")){ %>
+   	
+    <% }else{ %>
+   	 	<button id="btn1" onclick="chatting();">톡</button>
+   	<% } %>
+	
     <script>
         function chatting(){
 
-            if($(".wrap1").css("display") == "block"){
-                $(".wrap1").css("display", "none");
+            if($(".wrapCh").css("display") == "block"){
+                $(".wrapCh").css("display", "none");
             }else{
-                $(".wrap1").css("display", "block");
+                $(".wrapCh").css("display", "block");
+                scrollToBottom();
             }
 
         }
         
         function scrollToBottom() {
+        	
 
 			var chatContainer = document.querySelector('.chat');
-			chatContainer.scrollTop = chatContainer.scrollHeight;
+        	$(".chat").hover(function() {  },
+        			function() {chatContainer.scrollTop = chatContainer.scrollHeight;});
+			
 		}
         
 
     </script>
     
-    <div class="wrap1">
+    <div class="wrapCh" style="display: none;">
         <div class="chat">
         	
             <div class="ch ch1">
@@ -167,17 +184,17 @@
             </div>
             <div class="ch ch1">
                 <div class="icon" align="center"><p>a</p></div>
-                <div id="content">아유~ 너무요너무요! 요즘 어떻게 지내세요?</div>
+                <div id="content">아유~ 너무요너무요! 요즘 어떻게 지내세요?아유~ 너무요너무요! 요즘 어떻게 지내세요?아유~ 너무요너무요! 요즘 어떻게 지내세요?</div>
             </div>
             <div class="ch ch2">
                 <div class="icon" align="center"><p>a</p></div>
-                <div id="content">뭐~ 늘 똑같은 하루 하루를 보내는 중이에요.</div>
-                <span><br>plrks~!!!!!!!!!!</span>
+                <div id="content">뭐~ 늘 똑같은 하루 하루를 보내는 중이에요아유~ 너무요너무요! 요즘 어떻게 지내세요?아유~ 너무요너무요! 요즘 어떻게 지내세요?.</div>
+                <span id='date'><br>plrks~!!!!!!!!!!</span>
             </div>
 
         </div>
         <div class="input" align="right">
-            <input type="text" id="messageInput"> <button onclick="submitFunction()">전송</button>
+            <input type="text" id="messageInput" onkeyup="if(event.keyCode==13) enter();"> <button id="btn2" onclick="submitFunction();">전송</button>
         </div>
 
     </div>
@@ -185,49 +202,51 @@
     
     <script>
 	    function selectChatList(){
-	        $.ajax({
+
+	    	
+	        $.ajax({	
 	        	type:"post",
-	            url:"chatList.do",
+	            url:"/puppy/chatList.do",
 	            data:{
-	            	fromId:"USER01",
+	            	fromId:"<%= userId %>",
 	            	toId:"ADMIN"
 	            },
 	            success:function(result){
 	            	console.log(result);
 	                let value = "";
 	                for(let i=0; i<result.length; i++){
-	                	if(fromId = "USER01"){
+	                	if(result[i].fromId == "<%= userId %>"){
 	                		value += "<div class='ch ch2'>"
 	             				   + "<div class='icon' align='center'>"
 	             				   + "<p>"
-	             				   + "a"
+	             				   + result[i].fromId
 	             				   + "</p>"
 	             				   + "</div>"
 	                			   + "<div id='content'>"
-	                			   + "뭐~ 늘 똑같은 하루 하루를 보내는 중이에요."
+	                			   + result[i].content
 	                			   + "</div>"
-	                			   + "<span>" + "<br>"
-	                			   + "plrks~!!!!!!!!!!"
+	                			   + "<span id='date'>" + "<br>"
+	                			   + result[i].chatDate
 	                			   + "</span>" + "</div>";
 	                	}else{
-	                		value += "<div class='ch ch2'>"
+	                		value += "<div class='ch ch1'>"
                 				   + "<div class='icon' align='center'>"
                 				   + "<p>"
-                				   + "a"
+                				   + result[i].fromId
                 				   + "</p>"
                 				   + "</div>"
 	                			   + "<div id='content'>"
-	                			   + "뭐~ 늘 똑같은 하루 하루를 보내는 중이에요."
+	                			   + result[i].content
 	                			   + "</div>"
-	                			   + "<span>" + "<br>"
-	                			   + "plrks~!!!!!!!!!!"
+	                			   + "<span id='date'>" + "<br>"
+	                			   + result[i].chatDate 
 	                			   + "</span>" + "</div>";
             
 	                	}
 	                }
 	                   
 	                $(".chat").html(value);
-	                
+	                scrollToBottom();
 	            },
 	            error:function(){
 	                console.log("ajax 통신 실패");
@@ -255,8 +274,9 @@
 	            },
 	            success:function(result){
 	            	console.log(result);
-	                if(result == 1){
-	                    
+	                if(result > 0){
+	                	selectChatList();
+	                	scrollToBottom();
 	                }else {
 	                	
 	                }
@@ -264,55 +284,34 @@
 			});
 	
 	        $("#messageInput").val("");
-	
+	        scrollToBottom();
 		}
 
         $(document).ready(function(){
             selectChatList();
         })
 	
+        function enter(){
+            
+            submitFunction();
+            scrollToBottom();
+            $("#messageInput").focus();
 
-        /*
-        var chatContainer = document.querySelector('.chat');
-			chatContainer.scrollTop = chatContainer.scrollHeight;
-  
+        }
         
-		function scrollToBottom() {
-
-			var chatContainer = document.querySelector('.chat');
-			chatContainer.scrollTop = chatContainer.scrollHeight;
-		}
-        */
-		/*
-		// WebSocket 메시지를 받았을 때 처리
-		socket.onmessage = function(event) {
-			chatArea.html(chatArea.html()
-				+ "<div class='ch ch1'>"
-				+ "<div class='icon' align='center'>"
-				+ "<p>zzz</p>"
-				+ "</div>"
-				+ "<div class='textbox'>"+event.data+"</div>"
-				+ "</div>");
-
-			// 새로운 메시지가 추가되면 스크롤을 항상 아래로 이동
-			scrollToBottom();
-		};
-
-		// 사용자가 메시지를 보낼 때 스크롤을 항상 아래로 이동
-		function sendMessage() {
-			var messageInput = $("#messageInput");
-			var message = messageInput.val();
-			socket.send(message);
-			messageInput.val("");
-
-			// 메시지를 보냈을 때도 스크롤을 항상 아래로 이동
-			scrollToBottom();
-		}
-	*/
-		
+        $(function(){
+        	
+        	
+        		
+             selectChatList();
+            
+             setInterval(selectChatList, 300);
+        	
+            
+       })
         
-    </script>
-    
-    
+	</script>
+	
+	
 </body>
 </html>

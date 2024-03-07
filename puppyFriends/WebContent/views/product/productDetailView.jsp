@@ -162,7 +162,7 @@
                         <div>
                             <a onclick="cartTest2();" class="btn btn-sm btn-warning">장바구니</a>
                             <a href="<%= contextPath %>/order.od?pno=<%= p1.getProductNo() %>" class="btn btn-sm btn-warning">구매하기</a>
-                           	<i class="fa-solid fa-bucket" onclick="cartTest1();"></i>
+                           	<i class="fa-solid fa-bucket fa-2xl" onclick="cartTest1();"></i>
                         </div>
                     </div>
                     

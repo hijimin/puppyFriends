@@ -57,8 +57,8 @@ SELECT
 	</entry>
 	
 	<entry key="deleteCart">
-		UPDATE CART
-	   SET CART_STATUS = 'N'
+		DELETE 
+	  FROM CART
 	 WHERE MEMBER_NO = ?
 	   AND PRODUCT_NO = ?
 	</entry>

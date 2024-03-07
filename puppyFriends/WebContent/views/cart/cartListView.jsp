@@ -256,33 +256,33 @@
                     
                 </div>
                 <div id="content1_2b">
-                    <tbody>                   	
-                        <tr>
+                    <tbody>  
+                                     	
                         	<% String mprice = ""; %>
+                        	<% int totalA = 0; %>
                         	<% if(list.isEmpty()){ %>
                         		<h2 align="center">장바구니가 비어있습니다.</h2>
                         	<% }else{ %>
-                    		<% for(Cart c : list){ %>
-                    		
-                    		<% mprice = c.getdPrice(); %>            		             
+                    		<% for(Cart c : list){ %>                 	              		
+                    		<% mprice = c.getdPrice(); %>         		             
+                        <tr class="cartList">
                             <td>
                                 <input type="checkbox" name="plist" value="<%= c.getPno()%>">
                                 <label for="product"><img src="<%= contextPath %>/<%= c.getTitleImg() %>" width="100" height="100"></label>
                             </td>
                             <td><%= c.getProductNo() %></td>
-                            <td>
-                                                    
+                            <td>                                                    
 	                            <div class="count-wrap _count">
 								    <button type="button" class="minus" onclick="minusTest();">감소</button>
 								    <input type="number" class="inp" value="<%= c.getCartAmount()%>" />
-								    <button type="button" class="plus" onclick="plusTest();">증가</button>
+								    <button type="button" class="plus">증가</button> <!-- onclick="plusTest();" 지워도됨 -->
 								</div>
 								
                             </td>
                             <td>기본배송</td>
                             <td>3,000원</td>
-                            <td><%= mprice %>원</td>
-                        </tr>  
+                            <td class="mtotal"><%= mprice %>원</td>
+                        </tr>                         
                         	<% } %>   
                         <% } %>               
                     </tbody>
@@ -290,33 +290,100 @@
             </table>
             
             <script>
-            let priceStr = '<%= mprice%>';
-        	let price = parseInt(priceStr.replace(/,/g, ''), 10);
-	            	
-	        	function getTotal() {
-	                return $("#totalprice").text();
-	            }
-		
-	            	function minusTest() {
-	            	let cartAmount = $('input[class=inp]').val();
-	            		let total = getTotal();	            		
-	            		
-	                    if (cartAmount > 1) {
-	                        cartAmount--;
-	                        $('input[class=inp]').val(cartAmount);  
-	                    }
-	                }
+            $(function(){
+            	let cartList = $(".cartList");
+            	let plusList = $(".plus"); // 수량버튼 div
+            	let minusList = $(".minus"); // 버튼
+            	let inputList = $(".inp"); //인풋
+            	let mtotalList = $(".mtotal");                   	    
 
-	                function plusTest() {
-	                	let cartAmount = $('input[class=inp]').val();
-	            		let total = getTotal();	
-	            		
-	                	if(cartAmount++){
-	                    $('input[class=inp]').val(cartAmount);
-	                    $("#totalprice").text(Number(price * cartAmount));	                  		
-	                  		console.log(total);
-	                	}                  
-	                }
+                console.log(mtotalList);
+                let sumTotal = 0;
+	        	for(let i=0; i<mtotalList.length; i++){ // 장바구니에 담겨있는게 없을 수 있기에 for문을 돌림
+                    sumTotal += Number(mtotalList[i].innerText.replace("원","").replace(",",""));
+                    // console.log(mtotalList[i].innerText);
+                }
+                console.log(sumTotal);
+                $('#totalprice').text(sumTotal);
+
+                
+
+            	$(plusList).click(function(){             		
+    	        	// let cartCount = ++cartAmount; 여기에 있으면 클릭하자마자 증가가되버림
+            		let value = $(this).parent().parent().siblings('.mtotal').text();  	    
+            		let cartCount = $(this).siblings('.inp').val();
+            		let price = value.replace("원","");
+            		let pprice = price.replace(",","");
+            		let ppprice = Number(pprice);
+
+            		let originalPrice = ppprice / cartCount;
+            		
+            		
+            		//console.log(ppprice)
+            		//console.log(cartAmount)
+            		//console.log(originalPrice)
+            		
+            		let cartCountA = ++cartCount; // 항상 준비해야할 값을 다 뽑고 증가시키자! 증가하지 전위연산으로!        	
+	        		//console.log(value); // 21,700원
+	        		 $(this).parent().parent().siblings('.mtotal').text(originalPrice * cartCountA + "원");
+					let apple = originalPrice
+            		//console.log(plusList.index(this));
+            		//inputList.eq(plusList.index(this)).val();
+            		
+            		plusTest(plusList.index(this),apple); // 내가 클릭한 요소가 plusList에서 몇번째 요소인지?
+            	})
+	        		
+            	$(minusList).click(function(){                     		
+            		let value = $(this).parent().parent().siblings('.mtotal').text();
+            		let cartCount = $(this).siblings('.inp').val();
+            		
+            		let price = value.replace("원","");
+            		let pprice = price.replace(",","");
+            		let ppprice = Number(pprice);
+            		//console.log(cartAmount);
+            		
+            		let originalPrice = ppprice / cartCount;
+            		console.log(originalPrice)
+            		let cartAmount = --cartCount;
+            		
+      
+            		
+            		$(this).parent().parent().siblings('.mtotal').text(originalPrice * cartAmount + "원");
+            		
+            		
+            		minusTest(minusList.index(this));
+            		
+            	})
+            })
+	            let priceStr = '<%= mprice%>';
+	        	let price = parseInt(priceStr.replace(/,/g, ''), 10);
+		            
+		        	function getTotal() {
+		                return $("#totalprice").text();
+		            }
+			
+		            	function minusTest(index) {
+		            	let cartAmount = $('input[class=inp]').eq(index).val();
+		            		let total = getTotal();	            		
+		            		
+		                    if (cartAmount > 1) {
+		                        cartAmount--;
+		                        $('input[class=inp]').eq(index).val(cartAmount); 
+		                        $('#totalprice').text(Number(price - cartAmount));
+		                    }
+		                }
+	
+		                function plusTest(index,apple) {
+		                	let cartAmount = $('input[class=inp]').eq(index).val(); // 몇번째 인풋을 선택해올껀지?
+		            		let total = getTotal();
+                            let totalPrice = $("#totalprice").text();
+		            		
+		                	if(cartAmount++){
+		                    $('input[class=inp]').eq(index).val(cartAmount); // 증가한게 여기에
+		                    	//$("#totalprice").text(Number(price * cartAmount));	
+		                    $("#totalprice").text(Number(totalPrice)+Number(apple));
+		                	}                  
+		                }
 	            	
             </script>
             
@@ -327,7 +394,7 @@
                     <div id="content1_2c">                       
                         <span><a onclick="validate();">선택삭제</a></span>
                         <div id="content1_2c1">
-                            <span>상품금액</span> <span id="totalprice"><%= mprice %></span>                                      
+                            <span>상품금액</span> <span id="totalprice"></span>                                      
                         </div>                
                     </div>
                     

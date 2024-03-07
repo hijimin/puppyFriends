@@ -19,13 +19,11 @@
 	<entry key="chattingForm">
 		SELECT  CHATTING_NO
               , MEMBER_ID
-              , CHATTING_CITY
               , CHATTING_DATE
-              , CHATTING_CHECK
+              , CHATTING_STATUS
           FROM CHATTING
           JOIN MEMBER ON(MEMBER_NO = CHATTING_MEMBER_NO)
           WHERE MEMBER_ID = ? 
-          AND CHATTING_CITY = ?
 	</entry>
 	
 	<entry key="">

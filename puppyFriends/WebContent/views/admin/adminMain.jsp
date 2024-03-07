@@ -117,7 +117,7 @@
                     <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;호텔</a></li>
                     <br><br><br><br>
-                    <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;상품</a></li>
+                    <li><a href="<%= contextPath %>/list.pd?cpage=1">&nbsp;&nbsp;&nbsp;&nbsp;상품</a></li>
                     <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;게시판</a></li>
                 </ul>
@@ -132,8 +132,6 @@
         
     </div>
 
-</body>
-</html>
 
 </body>
 </html>

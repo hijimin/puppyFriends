@@ -22,9 +22,9 @@ public class ChattingService {
 
 
 
-	public Chatting ChattingForm(String memberId, String chattingCity){
+	public Chatting ChattingForm(String memberId){
 		Connection conn = getConnection();
-		Chatting chat = new ChattingDao().ChattingForm(conn, memberId, chattingCity);
+		Chatting chat = new ChattingDao().ChattingForm(conn, memberId);
 		
 		close(conn);
 		return chat;

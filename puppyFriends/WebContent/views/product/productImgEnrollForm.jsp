@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품추가</title>
 <style>
     .outer{
         margin: auto;
@@ -18,7 +18,7 @@
 
 		<div class="outer">
 
-        <form action="<%= contextPath %>/insert.pd" id="enroll-form" method="post" enctype="multipart/form-data">
+        <form action="<%= contextPath %>/insert.pd?cpage=1" id="enroll-form" method="post" enctype="multipart/form-data">
         	
             <table align="center">     
                 <tr>

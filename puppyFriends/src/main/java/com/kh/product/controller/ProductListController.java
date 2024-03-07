@@ -64,7 +64,7 @@ public class ProductListController extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.setAttribute("list1", list1);
-		request.getRequestDispatcher("views/product/product.jsp").forward(request, response);
+		request.getRequestDispatcher("views/product/product.jsp?cpage=1").forward(request, response);
 		
 	}
 

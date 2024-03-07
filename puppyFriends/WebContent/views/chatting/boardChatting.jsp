@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
     
     <%
-    	ArrayList<Chatting> list = (ArrayList<Chatting>)request.getAttribute("list");
+       ArrayList<Chatting> list = (ArrayList<Chatting>)request.getAttribute("list");
     %>
     
 <!DOCTYPE html>
@@ -13,8 +13,8 @@
 <meta charset="UTF-8">
 <title>지역별 채팅</title>
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-	
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+   
   <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 
@@ -34,10 +34,10 @@
 </head>
 <body>
 
-	<%@ include file="../common/menubar.jsp" %>
-	
-	
-	  <div class="outer">
+   <%@ include file="../common/menubar.jsp" %>
+   
+   
+     <div class="outer">
     
             <div class="content">
                 <table class="list-area" align="center"  style="border: 1px solid gray;">
@@ -56,7 +56,7 @@
                   
                 
                         <tbody align="center">
-                        	<% for(Chatting ch : list) { %>
+                           <% for(Chatting ch : list) { %>
                                 <tr>
                                     <td><%= ch.getChattingNo() %></td>
                                     <td><%= ch.getChattingCity() %></td>
@@ -77,11 +77,11 @@
         
         
     </div>
-	
-	
-	
-	
-	<%@ include file="../common/footerbar.jsp" %>
+   
+   
+   
+   
+   <%@ include file="../common/footerbar.jsp" %>
 
 </body>
 </html>

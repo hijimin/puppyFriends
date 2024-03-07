@@ -39,34 +39,17 @@ public class ChattingFormController extends HttpServlet {
 		String chattingCity = request.getParameter("chcity");
 		
 		
-		Chatting chat = new ChattingService().ChattingForm(memberId, chattingCity);
-		//int result = 1;
-		
+		Chatting chat = new ChattingService().ChattingForm(memberId);
+		//int result = 1;	
 
 		//if(chat == null) { // 데이터 없음
 			//result = new ChattingService().insertChat();
 		//}
 		
 		//if(result > 0) {
-			request.setAttribute("chat", chat);
-			
-			if(chattingCity.equals("강남구")) { // 강남구
-				request.setAttribute("alertMsg", "강남구 모임채팅 접속 완료");
+				request.setAttribute("chat", chat);		
 				request.getRequestDispatcher("views/chatting/boardChattingClient.jsp").forward(request, response);	
 				
-			} else if(chattingCity.equals("강동구")) { // 강동구
-				request.setAttribute("alertMsg", "강동구 모임채팅 접속 완료");
-				request.getRequestDispatcher("views/chatting/boardChattingGangdongClient.jsp").forward(request, response);
-				
-			} else if(chattingCity.equals("강서구")) { // 강서구
-				request.setAttribute("alertMsg", "강서구 모임채팅 접속 완료");
-				request.getRequestDispatcher("views/chatting/boardChattingGangseoClient.jsp").forward(request, response);
-				
-			} else { // 강북구
-				request.setAttribute("alertMsg", "강북구 모임채팅 접속 완료");
-				request.getRequestDispatcher("views/chatting/boardChattingGangbukClient.jsp").forward(request, response);
-			}
-		
 		//}	
 			
 	} // doGet

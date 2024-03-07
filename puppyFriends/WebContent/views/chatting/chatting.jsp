@@ -154,7 +154,8 @@
                 $(".wrapCh").css("display", "none");
             }else{
                 $(".wrapCh").css("display", "block");
-                scrollToBottom();
+                var chatContainer = document.querySelector('.chat');
+    			chatContainer.scrollTop = chatContainer.scrollHeight;
             }
 
         }
@@ -163,8 +164,10 @@
         	
 
 			var chatContainer = document.querySelector('.chat');
+			
         	$(".chat").hover(function() {  },
         			function() {chatContainer.scrollTop = chatContainer.scrollHeight;});
+        	
 			
 		}
         
@@ -174,23 +177,15 @@
     <div class="wrapCh" style="display: none;">
         <div class="chat">
         	
-            <div class="ch ch1">
+            <!-- <div class="ch ch1">
                 <div class="icon" align="center"><p>a</p></div>
                 <div id="content">안녕하세요. 반갑습니다.</div>
             </div>
             <div class="ch ch2">
                 <div class="icon" align="center"><p>a</p></div>
                 <div id="content"> 안녕하세요. 친절한효자손입니다. 그동안 잘 지내셨어요?</div>
-            </div>
-            <div class="ch ch1">
-                <div class="icon" align="center"><p>a</p></div>
-                <div id="content">아유~ 너무요너무요! 요즘 어떻게 지내세요?아유~ 너무요너무요! 요즘 어떻게 지내세요?아유~ 너무요너무요! 요즘 어떻게 지내세요?</div>
-            </div>
-            <div class="ch ch2">
-                <div class="icon" align="center"><p>a</p></div>
-                <div id="content">뭐~ 늘 똑같은 하루 하루를 보내는 중이에요아유~ 너무요너무요! 요즘 어떻게 지내세요?아유~ 너무요너무요! 요즘 어떻게 지내세요?.</div>
-                <span id='date'><br>plrks~!!!!!!!!!!</span>
-            </div>
+            </div> -->
+            
 
         </div>
         <div class="input" align="right">
@@ -212,7 +207,6 @@
 	            	toId:"ADMIN"
 	            },
 	            success:function(result){
-	            	console.log(result);
 	                let value = "";
 	                for(let i=0; i<result.length; i++){
 	                	if(result[i].fromId == "<%= userId %>"){
@@ -246,7 +240,8 @@
 	                }
 	                   
 	                $(".chat").html(value);
-	                scrollToBottom();
+	                var chatContainer = document.querySelector('.chat');
+	    			chatContainer.scrollTop = chatContainer.scrollHeight;
 	            },
 	            error:function(){
 	                console.log("ajax 통신 실패");
@@ -273,10 +268,9 @@
 	                content: content
 	            },
 	            success:function(result){
-	            	console.log(result);
 	                if(result > 0){
 	                	selectChatList();
-	                	scrollToBottom();
+	                	
 	                }else {
 	                	
 	                }
@@ -284,7 +278,12 @@
 			});
 	
 	        $("#messageInput").val("");
-	        scrollToBottom();
+	        $("#messageInput").focus();
+	        setTimeout(function() {
+            	var chatContainer = document.querySelector('.chat');
+    			chatContainer.scrollTop = chatContainer.scrollHeight;
+            	}, 101);	        
+	        
 		}
 
         $(document).ready(function(){
@@ -294,14 +293,15 @@
         function enter(){
             
             submitFunction();
-            scrollToBottom();
-            $("#messageInput").focus();
+            
+            setTimeout(function() {
+            	var chatContainer = document.querySelector('.chat');
+    			chatContainer.scrollTop = chatContainer.scrollHeight;
+            	}, 301);
 
         }
         
         $(function(){
-        	
-        	
         		
              selectChatList();
             

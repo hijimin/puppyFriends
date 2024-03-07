@@ -78,7 +78,11 @@
 	     )
 </entry>
 
-
+<entry key="selectAttendanceList">
+	SELECT *
+	  FROM ATTENDANCE
+	 WHERE MEMBER_NO = ?
+</entry>
 
 
 

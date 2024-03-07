@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	int month = (int)request.getAttribute("month");
+	int yes = (int)request.getAttribute("yes");
+	int no = (int)request.getAttribute("no");
+	
+	double per = (double)yes/month*100;
+	double roundedNumber = Math.round(per * 10.0) / 10.0;
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,20 +108,20 @@
                 <br>
                 <h3>출석</h3>
                 <br><br>
-                <h3>xx일</h3>
+                <h3><%= yes %>일</h3>
 
             </div>
             <div class="check">
                 <br>
                 <h3>결석</h3>
                 <br><br>
-                <h3>xx일</h3>
+                <h3><%= no %>일</h3>
             </div>
             <div class="check">
                 <br>
                 <h3>출석률</h3>
                 <br><br>
-                <h3>xx%</h3>
+                <h3><%= roundedNumber %>%</h3>
             </div>
             
         </div>

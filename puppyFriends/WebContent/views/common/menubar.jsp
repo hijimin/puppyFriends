@@ -7,6 +7,11 @@
 	
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	
+	String userNo = "1";
+	if(loginUser != null){
+		userNo = Integer.toString(((Member)session.getAttribute("loginUser")).getMemberNo());
+	}
+	
 	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
@@ -244,19 +249,12 @@
                 <li class="kindergarten"><a href="#">유치원 예약</a></li>
               </ul>
             </li>
-            <li class="dog_data"><a href="#">강아지정보</a>
+            <li class="dog_data"><a href="<%= contextPath %>/dogforMain.do?userNo=<%= userNo %>">강아지정보</a>
                 <ul class="dog_data2">
-                   <li class="attend"><a href="<%= contextPath %>/dogforMain.do">출석부</a></li>
-                   <li class="gallery"><a href="#">갤러리</a></li>
+                   <li class="attend"><a href="<%= contextPath %>/gallery.ga">출석부</a></li>
+                   <li class="gallery"><a href="<%= contextPath %>/gallery.ga">갤러리</a></li>
                 </ul>
             </li>
-<<<<<<< HEAD
-            <li class="goods"><a href="<%= contextPath%>/list.pd?cpage=1">상품</a></li>
-            <li class="search"><a href="<%= contextPath %>/noticeList.no?cpage=1">게시판</a>
-                <ul>
-                    <li><a href="">공지사항</a></li>
-                </ul>
-=======
             <li class="goods"><a href="<%= contextPath %>/list.pd">상품</a></li>
             
             
@@ -265,7 +263,6 @@
             		<li class="noticeBoard"><a href="#">공지사항</a></li>
             		<li class="chattingBoard"><a href="<%= contextPath %>/SelectChatting.ch">모임게시판</a></li>
             	</ul>
->>>>>>> menager
             </li>
             
 

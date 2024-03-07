@@ -215,7 +215,43 @@ public class DogforDao {
 		
 	}
 	
-	
+	public ArrayList<Attendance> selectAttendanceList(Connection conn, String userNo){
+		
+		ArrayList<Attendance> list = new ArrayList<Attendance>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAttendanceList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(userNo));
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				Attendance at = new Attendance(rset.getInt("attendance_no"),
+									           rset.getString("member_no"),
+									           rset.getString("attendance_date"),
+									           rset.getString("attendance_status"));
+				
+				list.add(at);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
 	
 	
 	

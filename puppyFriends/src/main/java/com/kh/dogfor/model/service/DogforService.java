@@ -85,7 +85,17 @@ import static com.kh.common.JDBCTemplate.*;
 		
 	}
 	
-	
+	public ArrayList<Attendance> selectAttendanceList(String userNo){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Attendance> list = new DogforDao().selectAttendanceList(conn, userNo);
+		
+		close(conn);
+		
+		return list;
+		
+	}
 	
 	
 	

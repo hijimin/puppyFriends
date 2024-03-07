@@ -11,7 +11,7 @@
 	<%@ include file="views/common/menubar.jsp" %>
 
 
-	
+	<%@ include file="views/chatting/chatting.jsp" %>
 	
 	<%@ include file="views/common/topBtn.jsp" %>
 	<%@ include file="views/common/footerbar.jsp" %>

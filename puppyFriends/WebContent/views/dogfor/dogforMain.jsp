@@ -83,10 +83,11 @@
 
     <%@ include file="../common/menubar.jsp" %>
 
-
+	<%@ include file="../chatting/chatting.jsp" %>
+	
 	<%@ include file="../common/topBtn.jsp" %>
 	
-	<a href="../chatting/chatting.jsp">ㄱㄱ</a>
+
     
     <div class="outer" align="center">
     

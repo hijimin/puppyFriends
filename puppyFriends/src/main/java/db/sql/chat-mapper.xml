@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="getChatListById">
+	SELECT *
+	  FROM CHAT
+	 WHERE ((FROM_ID = ? AND TO_ID = ?) OR (FROM_ID = ? AND TO_ID = ?)) AND CHAT_NO > ?
+	 ORDER
+	    BY CHAT_DATE
+</entry>
+
+<entry key="getChatListByRecent">
+	SELECT *
+	  FROM CHAT
+	 WHERE ((FROM_ID = ? AND TO_ID = ?) 
+	    OR (FROM_ID = ? AND TO_ID = ?)) 
+	   AND CHAT_NO > (SELECT MAX(CHAT_NO) - ? FROM CHAT) 
+	 ORDER
+	    BY CHAT_DATE
+</entry>
+
+
+<entry key="submit">
+	INSERT 
+	  INTO CHAT
+	 VALUES 
+	      (
+	        SEQ_CHAT.NEXTVAL
+	      , ?
+	      , ?
+	      , ?
+	      , SYSDATE
+	      )
+</entry>
+
+<entry key="selectChatList">
+	SELECT *
+	  FROM CHAT
+	 WHERE ((FROM_ID = ? AND TO_ID = ?) OR (FROM_ID = ? AND TO_ID = ?))
+	 ORDER
+	    BY CHAT_DATE
+</entry>
+
+<entry key="memberChatList">
+	SELECT CHAT_NO, FROM_ID, CONTENT, CHAT_DATE
+	FROM CHAT
+	WHERE (FROM_ID, CHAT_DATE) IN (
+	    SELECT FROM_ID, MAX(CHAT_DATE) AS MAX_DATE
+	    FROM CHAT
+	    GROUP BY FROM_ID
+	) AND FROM_ID != 'ADMIN'
+	ORDER BY CHAT_DATE DESC
+</entry>
+
+
+
+
+
+
+
+
+</properties>

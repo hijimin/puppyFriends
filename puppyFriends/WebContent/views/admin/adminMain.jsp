@@ -115,6 +115,8 @@
                     <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;수업</a></li>
                     <br><br><br><br>
+                    <li><a href="<%= contextPath %>/memberChatList.me">&nbsp;&nbsp;&nbsp;&nbsp;회원채팅</a></li>
+                    <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;호텔</a></li>
                     <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;상품</a></li>

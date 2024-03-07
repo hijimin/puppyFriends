@@ -1,6 +1,10 @@
 package com.kh.reservation.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.common.MyFileRenamePolicy;
+import com.kh.common.model.vo.Image;
+import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Hotel;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -43,19 +49,50 @@ public class HotelEnrollController extends HttpServlet {
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 	
 			Hotel h = new Hotel();
-			h.setMemberNo(multiRequest.getParameter("memberNo"));
-			h.setHotelNo(multiRequest.getParameter("hotelNo"));
-			h.setHotelName(multiRequest.getParameter("hotelName"));
-			h.setHotelText(multiRequest.getParameter("hotelTest"));
-			h.setHotelSize(multiRequest.getParameter("hotelSize"));
-			h.setdNumber(multiRequest.getParameter("dNumber"));
-			h.setReservationDate(multiRequest.getParameter("reservationDate"));
-			h.setReservationPrice(multiRequest.getParameter("ReservationPrice"));
+				h.setHotelNo(Integer.parseInt(multiRequest.getParameter("hotelNo")));			
+				h.setHotelName(multiRequest.getParameter("hotelName"));
+				h.setHotelText(multiRequest.getParameter("hotelText"));
+				h.setHotelSize(multiRequest.getParameter("hotelSize"));
+				h.setdNumber(Integer.parseInt(multiRequest.getParameter("dNumber")));
+			
+			try {
+				h.setReservationStart(new java.sql.Date(new SimpleDateFormat("yyyy.mm.dd").parse(multiRequest.getParameter("reservationStart")).getTime()));
+				h.setReservationEnd(new java.sql.Date(new SimpleDateFormat("yyyy.mm.dd").parse(multiRequest.getParameter("reservationEnd")).getTime()));
 		
-			// hotel vo 추가, mapper - insert 기재 필요 / 섬넬 인설트 컨트롤러 참고해서 적자
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+				h.setReservationPrice(Integer.parseInt(multiRequest.getParameter("reservationPrice")));
+		
+				
+			ArrayList<Image> list = new ArrayList<Image>();
+			
+			for(int i=1; i<=3; i++) {
+				String key = "file" + i;
+				
+				if(multiRequest.getOriginalFileName(key) != null) {
+					Image img = new Image();
+					img.setFileName(multiRequest.getOriginalFileName(key));
+					img.setChangeName(multiRequest.getFilesystemName(key));
+					img.setFilePath("resources/thumbnail_upfiles/");
+					
+					if(i == 1) { // 대표 이미지일 경우
+						img.setFileLevel(1);
+					}else {
+						img.setFileLevel(2);
+					}
+					list.add(img);
+				}
+				int result = new ReservationService().insertThumbnailHotel(h, list);
+				
+				if(result > 0) {
+					request.getSession().setAttribute("alertMsg", "성공적으로 작성되었습니다.");
+					response.sendRedirect(request.getContextPath() + "/detail.hrv");
+				}
+			}
+			
 		}
-	
-	
+
 	}
 
 	/**

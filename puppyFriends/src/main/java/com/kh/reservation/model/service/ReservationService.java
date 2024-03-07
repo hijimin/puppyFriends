@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import static com.kh.common.JDBCTemplate.*;
 
+import com.kh.common.model.vo.Image;
 //import com.kh.common.model.vo.PageInfo;
 import com.kh.reservation.model.dao.ReservationDao;
 import com.kh.reservation.model.vo.Hotel;
@@ -28,6 +29,22 @@ public class ReservationService {
 		close(conn);
 
 		return h;
+	}
+
+	public int insertThumbnailHotel(Hotel h, ArrayList<Image> list) {
+		Connection conn = getConnection();
+		
+		int result1 = new ReservationDao().insertThHotel(conn, h); // dao의 result 담김
+		int result2 = new ReservationDao().insertThumbnailList(conn, list);
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1 * result2;
 	}
 
 /*

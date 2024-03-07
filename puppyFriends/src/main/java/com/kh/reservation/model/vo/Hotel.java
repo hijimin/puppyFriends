@@ -13,7 +13,8 @@ public class Hotel {
    private String hotelStatus;
    
    private Date writingDate;
-   private Date reservationDate;
+   private Date reservationStart;
+   private Date reservationEnd;
    private int reservationPrice;
    
    private int memberNo;
@@ -39,7 +40,7 @@ public class Hotel {
 
    // selectHotelDetail
    
-   public Hotel(int hotelNo, String hotelName, String hotelText, String hotelSize, int dNumber, Date writingDate, Date reservationDate,
+   public Hotel(int hotelNo, String hotelName, String hotelText, String hotelSize, int dNumber, Date writingDate, Date reservationStart, Date reservationEnd,
 			String memberId, String dogSize, String hotelStatus) {
 		super();
 		this.hotelNo = hotelNo;
@@ -49,24 +50,25 @@ public class Hotel {
 		this.dNumber = dNumber;
 		this.hotelStatus = hotelStatus;
 		this.writingDate = writingDate;
-		this.reservationDate = reservationDate;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
 		this.memberId = memberId;
 		this.dogSize = dogSize;
 	}
    
       
-   
-	public Hotel(int hotelNo, String hotelName, String hotelText, String hotelSize, int dNumber, Date reservationDate,
-		int reservationPrice, int memberNo) {
+   // HotelEnrollController
+	public Hotel(int hotelNo, String hotelName, String hotelText, String hotelSize, int dNumber, Date reservationStart, Date reservationEnd,
+		int reservationPrice) {
 	super();
 	this.hotelNo = hotelNo;
 	this.hotelName = hotelName;
 	this.hotelText = hotelText;
 	this.hotelSize = hotelSize;
 	this.dNumber = dNumber;
-	this.reservationDate = reservationDate;
+	this.reservationStart = reservationStart;
+	this.reservationEnd = reservationEnd;
 	this.reservationPrice = reservationPrice;
-	this.memberNo = memberNo;
 }
 
 
@@ -118,14 +120,26 @@ public class Hotel {
 		this.writingDate = writingDate;
 	}
 
+	
+	
 
-	public Date getReservationDate() {
-		return reservationDate;
+	public Date getReservationStart() {
+		return reservationStart;
 	}
 
 
-	public void setReservationDate(Date reservationDate) {
-		this.reservationDate = reservationDate;
+	public void setReservationStart(Date reservationStart) {
+		this.reservationStart = reservationStart;
+	}
+
+
+	public Date getReservationEnd() {
+		return reservationEnd;
+	}
+
+
+	public void setReservationEnd(Date reservationEnd) {
+		this.reservationEnd = reservationEnd;
 	}
 
 

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.common.model.vo.Image;
 // import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.reservation.model.vo.Hotel;
@@ -85,7 +86,8 @@ public class ReservationDao {
 				h.setHotelSize(rset.getString("hotel_size"));
 				h.setdNumber(rset.getInt("d_number"));
 				h.setWritingDate(rset.getDate("writing_date"));
-				h.setReservationDate(rset.getDate("reservation_date"));
+				h.setReservationStart(rset.getDate("reservation_start"));
+				h.setReservationEnd(rset.getDate("reservation_end"));
 				h.setMemberId(rset.getString("member_id"));
 				h.setDogSize(rset.getString("dog_size"));
 			}
@@ -102,6 +104,64 @@ public class ReservationDao {
 		
 		return h;
 		
+	}
+
+	public int insertThHotel(Connection conn, Hotel h) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertThHotel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, h.getHotelNo());
+			pstmt.setString(2, h.getHotelName());
+			pstmt.setString(3, h.getHotelText());
+			pstmt.setString(4, h.getHotelSize());
+			pstmt.setInt(5, h.getdNumber());
+			pstmt.setDate(6, h.getReservationStart());
+			pstmt.setDate(7, h.getReservationEnd());
+			pstmt.setInt(8, h.getReservationPrice());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+
+	public int insertThumbnailList(Connection conn, ArrayList<Image> list) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertThumbnailList");
+		
+			try {
+				
+				for(Image img : list) {
+				
+				pstmt = conn.prepareStatement(sql);
+			
+				pstmt.setString(1, img.getFileName());
+				pstmt.setString(2, img.getChangeName());
+				pstmt.setString(3, img.getFilePath());
+				pstmt.setInt(4, img.getFileLevel());
+				
+				result = pstmt.executeUpdate();
+				
+			}
+			
+		} catch (SQLException e) {
+		e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	
+		return result;
 	}
 	
 	

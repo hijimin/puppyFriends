@@ -25,8 +25,8 @@
 	     , HOTEL_TEXT
 	     , HOTEL_SIZE
 	     , D_NUMBER
-	     , WRITING_DATE /* 작성일자 */
-	     , RESERVATION_DATE /* 예약일자 */
+	     , WRITING_DATE <!-- 작성일자  --> 
+	     , RESERVATION_DATE <!-- 예약일자 -->
 	     , MEMBER_ID
 	     , DOG_SIZE
 	  FROM HOTEL H
@@ -37,12 +37,50 @@
 	    AND HOTEL_STATUS = 'Y'
 	    
 	</entry>
-
 	
-
-
-
-
+	<entry key="insertThumbnailList">
+	INSERT
+	  INTO IMAGE
+	  (
+	    FILE_NO <!-- 파일번호 -->
+	  , REF_BNO <!-- 참조게시글번호 -->
+	  , IMAGE_TYPE
+	  , FILE_NAME <!-- 파일원본명 -->
+	  , CHANGE_NAME <!-- 파일수정명 -->
+	  , FILE_PATH <!-- 이미지저장경로, 호텔-2 -->
+	  , FILE_LEVEL <!-- 파일레벨 -->
+	  )
+	  VALUES
+	  (
+	    SEQ_IMAGE.NEXTVAL
+	  , SEQ_HOTEL.CURRVAL
+	  , 2
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  )
+	  
+	</entry>
+	
+	<entry key="insertThHotel">
+	INSERT
+	  INTO HOTEL
+	  (
+	    HOTEL_NO
+	  , HOTEL_NAME
+	  , HOTEL_TEXT
+	  , HOTEL_SIZE
+	  , D_NUMBER
+	  , RESERVATION_START
+	  , RESERVATION_END				
+	  , RESERVATION_PRICE
+	  )
+	  VALUES
+	  (
+	  )
+	  ;
+	</entry>
 
 
 

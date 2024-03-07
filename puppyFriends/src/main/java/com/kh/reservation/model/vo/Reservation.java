@@ -8,21 +8,24 @@ public class Reservation {
 	private int memberNo; // 회원번호
 	private int facilityNo; // 시설고유번호 1또는2  // 추후 db에서 끌어올 때 where절 써서 가져오기
 	private Date writingDate; // 작성일
-	private Date reservationDate; // 시설고유번호 1또는2 // 추후 db에서 끌어올 때 where절 써서 가져오기
+	private Date reservationStart;
+	private Date reservationEnd;
 	private int price; // 가격
 	private int paymentNo; // 결제번호
 	
+	
 	public Reservation() {}
 
-	public Reservation(int reservationNo, int memberNo, int facilityNo, Date writingDate, Date reservationDate,
-			int price, int paymentNo) {
-		
+	
+	public Reservation(int reservationNo, int memberNo, int facilityNo, Date writingDate, Date reservationStart,
+			Date reservationEnd, int price, int paymentNo) {
 		super();
 		this.reservationNo = reservationNo;
 		this.memberNo = memberNo;
 		this.facilityNo = facilityNo;
 		this.writingDate = writingDate;
-		this.reservationDate = reservationDate;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
 		this.price = price;
 		this.paymentNo = paymentNo;
 	}
@@ -59,12 +62,20 @@ public class Reservation {
 		this.writingDate = writingDate;
 	}
 
-	public Date getReservationDate() {
-		return reservationDate;
+	public Date getReservationStart() {
+		return reservationStart;
 	}
 
-	public void setReservationDate(Date reservationDate) {
-		this.reservationDate = reservationDate;
+	public void setReservationStart(Date reservationStart) {
+		this.reservationStart = reservationStart;
+	}
+
+	public Date getReservationEnd() {
+		return reservationEnd;
+	}
+
+	public void setReservationEnd(Date reservationEnd) {
+		this.reservationEnd = reservationEnd;
 	}
 
 	public int getPrice() {
@@ -86,8 +97,8 @@ public class Reservation {
 	@Override
 	public String toString() {
 		return "Reservation [reservationNo=" + reservationNo + ", memberNo=" + memberNo + ", facilityNo=" + facilityNo
-				+ ", writingDate=" + writingDate + ", reservationDate=" + reservationDate + ", price=" + price
-				+ ", paymentNo=" + paymentNo + "]";
+				+ ", writingDate=" + writingDate + ", reservationStart=" + reservationStart + ", reservationEnd="
+				+ reservationEnd + ", price=" + price + ", paymentNo=" + paymentNo + "]";
 	}
 
 	

@@ -33,9 +33,7 @@ public class GalleryEnrollFormController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<Dog> list = new DogforService().selectDog();
-		
-		System.out.println(list);
-		
+				
 		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("views/dogfor/galleryEnrollForm.jsp").forward(request, response);

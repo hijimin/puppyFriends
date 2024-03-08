@@ -44,10 +44,10 @@ public class ReservationDao {
 			
 			while(rset.next()) {
 	            list.add(new Hotel(rset.getInt("hotel_no"),
+	            			   rset.getInt("hotel_writer"),
 	                           rset.getString("hotel_name"),
 	                           rset.getString("hotel_text"),
 	                           rset.getString("hotel_size"),
-	                           rset.getDate("writing_date"),
 	                           rset.getString("member_id")
 	                           ));
 	         }
@@ -82,15 +82,14 @@ public class ReservationDao {
 			while(rset.next()) {
 				h = new Hotel();
 				h.setHotelNo(rset.getInt("hotel_no"));
+				h.setHotelWriter(rset.getInt("hotel_writer"));
 				h.setHotelName(rset.getString("hotel_name"));
 				h.setHotelText(rset.getString("hotel_text"));
 				h.setHotelSize(rset.getString("hotel_size"));
 				h.setdNumber(rset.getInt("d_number"));
-				h.setWritingDate(rset.getDate("writing_date"));
-				h.setReservationStart(rset.getDate("reservation_start"));
-				h.setReservationEnd(rset.getDate("reservation_end"));
+				h.setHotelStart(rset.getDate("hotel_start"));
+				h.setHotelEnd(rset.getDate("hotel_end"));
 				h.setMemberId(rset.getString("member_id"));
-				h.setDogSize(rset.getString("dog_size"));
 			}
 				
 							
@@ -116,7 +115,7 @@ public class ReservationDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, h.getHotelNo());
+			pstmt.setInt(1, h.getHotelWriter());
 			pstmt.setString(2, h.getHotelName());
 			pstmt.setString(3, h.getHotelText());
 			pstmt.setString(4, h.getHotelSize());

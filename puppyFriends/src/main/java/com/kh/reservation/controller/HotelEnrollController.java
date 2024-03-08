@@ -50,7 +50,8 @@ public class HotelEnrollController extends HttpServlet {
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 	
 			Hotel h = new Hotel();
-				h.setHotelNo(Integer.parseInt(multiRequest.getParameter("hotelNo")));			
+				h.setHotelNo(Integer.parseInt(multiRequest.getParameter("hotelNo")));
+				h.setHotelWriter(Integer.parseInt(multiRequest.getParameter("hotelWriter")));
 				h.setHotelName(multiRequest.getParameter("hotelName"));
 				h.setHotelText(multiRequest.getParameter("hotelText"));
 				h.setHotelSize(multiRequest.getParameter("hotelSize"));

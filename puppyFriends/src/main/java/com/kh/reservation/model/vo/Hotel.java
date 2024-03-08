@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Hotel {
 
    private int hotelNo; // 호텔 고유번호 
+   private int hotelWriter;
    private String hotelName; // 호텔명
    private String hotelText; // 호텔 설명글
    private String hotelSize; // 허용 사이즈
@@ -29,48 +30,59 @@ public class Hotel {
 
    
   // selectHotelList
-   public Hotel(int hotelNo, String hotelName, String hotelText, String hotelSize, Date writingDate, String memberId) {
+   public Hotel(int hotelNo, int hotelWriter, String hotelName, String hotelText, String hotelSize, String memberId) {
       super();
       this.hotelNo = hotelNo;
+      this.hotelWriter = hotelWriter;
       this.hotelName = hotelName;
       this.hotelText = hotelText;
       this.hotelSize = hotelSize;
-      this.writingDate = writingDate;
       this.memberId = memberId;
    }
 
    // selectHotelDetail
+  
    
-   public Hotel(int hotelNo, String hotelName, String hotelText, String hotelSize, int dNumber, Date hotelStart, Date hotelEnd, Date writingDate, Date reservationStart, Date reservationEnd,
-			String memberId, String dogSize, String hotelStatus) {
-		super();
-		this.hotelNo = hotelNo;
-		this.hotelName = hotelName;
-		this.hotelText = hotelText;
-		this.hotelSize = hotelSize;
-		this.dNumber = dNumber;
-		this.hotelStart = hotelStart; // 호텔 시작일
-		this.hotelEnd = hotelEnd; // 호텔 종료일
-		this.hotelStatus = hotelStatus;
-		this.writingDate = writingDate;
-		this.reservationStart = reservationStart;
-		this.reservationEnd = reservationEnd;
-		this.memberId = memberId;
-		this.dogSize = dogSize;
-	}
+  
+	public Hotel(int hotelNo, int hotelWriter, String hotelName, String hotelText, String hotelSize, int dNumber,
+		Date hotelStart, Date hotelEnd, String memberId) {
+	super();
+	this.hotelNo = hotelNo;
+	this.hotelWriter = hotelWriter;
+	this.hotelName = hotelName;
+	this.hotelText = hotelText;
+	this.hotelSize = hotelSize;
+	this.dNumber = dNumber;
+	this.hotelStart = hotelStart;
+	this.hotelEnd = hotelEnd;
+	this.memberId = memberId;
+}
+
+	
    
       
    // HotelEnrollController
-	public Hotel(int hotelNo, String hotelName, String hotelText, String hotelSize, int dNumber, Date reservationStart, Date reservationEnd,
-		int reservationPrice) {
+	public Hotel(int hotelNo, int hotelWriter, String hotelName, String hotelText, String hotelSize, int dNumber) {
 	super();
 	this.hotelNo = hotelNo;
+	this.hotelWriter = hotelWriter;
 	this.hotelName = hotelName;
 	this.hotelText = hotelText;
 	this.hotelSize = hotelSize;
 	this.dNumber = dNumber;
 
 }
+
+	
+	
+	public int getHotelWriter() {
+		return hotelWriter;
+	}
+
+
+	public void setHotelWriter(int hotelWriter) {
+		this.hotelWriter = hotelWriter;
+	}
 
 
 	public int getReservationPrice() {

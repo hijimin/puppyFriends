@@ -15,7 +15,7 @@ import com.kh.reservation.model.vo.Hotel;
 /**
  * Servlet implementation class HotelReservationInsert
  */
-@WebServlet("/insert.hrv")
+@WebServlet("/hotel.hrv")
 public class HotelReservationInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

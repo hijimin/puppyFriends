@@ -3,38 +3,36 @@
 <properties>
 
 	<entry key = "selectHotelList">
+	
 	SELECT 
 	       HOTEL_NO
+	     , HOTEL_WRITER
 	     , HOTEL_NAME
 	     , HOTEL_TEXT
 	     , HOTEL_SIZE
-	     , WRITING_DATE
 	     , MEMBER_ID
 	  FROM HOTEL H
-	  JOIN RESERVATION RV USING (RESERVATION_NO)
-	  JOIN MEMBER M USING (MEMBER_NO)
-	 WHERE HOTEL_STATUS = 'Y'
-	 ORDER BY WRITING_DATE DESC
+	  JOIN MEMBER M ON (HOTEL_WRITER = MEMBER_NO)
+	 WHERE HOTEL_STATUS = 'Y' 
+	 ORDER BY SYSDATE DESC
 	
 	</entry>
 	
 	<entry key="selectHotelDetail">
 	SELECT 
 	       HOTEL_NO
+         , HOTEL_WRITER
 	     , HOTEL_NAME
 	     , HOTEL_TEXT
 	     , HOTEL_SIZE
 	     , D_NUMBER
-	     , WRITING_DATE <!-- 작성일자  --> 
-	     , RESERVATION_DATE <!-- 예약일자 -->
+	     , HOTEL_START
+	     , HOTEL_END
 	     , MEMBER_ID
-	     , DOG_SIZE
 	  FROM HOTEL H
-	  JOIN RESERVATION RV USING (RESERVATION_NO)
-	  JOIN MEMBER M USING (MEMBER_NO)
-	  JOIN DOG D USING (MEMBER_NO)
-	  WHERE HOTEL_NO = ? 
-	    AND HOTEL_STATUS = 'Y'
+      JOIN MEMBER M ON (HOTEL_WRITER = MEMBER_NO)
+	 WHERE HOTEL_NO = ?
+       AND HOTEL_STATUS = 'Y'
 	    
 	</entry>
 	
@@ -43,7 +41,7 @@
 	  INTO HOTEL
 	  (
 	    HOTEL_NO
-	  , RESERVATION_NO
+	  , HOTEL_WRITER
 	  , HOTEL_NAME
 	  , HOTEL_TEXT
 	  , HOTEL_SIZE
@@ -54,7 +52,7 @@
 	  VALUES
 	  (
 	  SEQ_HOTEL.NEXTVAL
-	, SEQ_RESERVATION.CURRVAL
+	, ?
 	, ?
 	, ?
 	, ?
@@ -96,6 +94,7 @@
 	  (
         RESERVATION_NO
       , PROGRAM_NO
+      , FACILITY_NO
 	  , RESERVATION_START
 	  , RESERVATION_END
 	  , RESERVATION_PRICE
@@ -104,6 +103,7 @@
 	  (
 	  SEQ_RESERVATION.NEXTVAL
 	  , SEQ_HOTEL.CURRVAL
+	  , 2
 	  , ?
 	  , ?
 	  , ?

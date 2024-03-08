@@ -93,6 +93,7 @@
         }
         
         .btn_bar{
+        	top: 40px;
             width: 100%;
             height: 10%;
             position: relative;

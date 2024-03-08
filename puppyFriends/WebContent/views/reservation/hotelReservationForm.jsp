@@ -189,10 +189,9 @@
                     <% } %>
                 </div>
             </div>
-
-			<!-- 관리자 아이디만 등록 버튼 확인 가능하게 설정(ADMIN으로만 바꿔주면 됨)-->
+			
             <div class="btn_bar">
-     <!--   <% if(loginUser != null && (loginUser.getMemberId().equals("USER01"))) {%>  -->
+     <!--   <% if(loginUser != null && (loginUser.getMemberId().equals("ADMIN"))) {%>  -->
         	    <a href="<%= contextPath %>/enrollForm.hrv" class="H_enroll">등록하기</a>
         <!--	 <% } %> -->
             </div>

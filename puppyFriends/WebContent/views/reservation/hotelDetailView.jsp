@@ -198,7 +198,7 @@
                 </div>
 
                  
-				<% if(loginUser != null && loginUser.getMemberId().equals("USER01")) { %>
+				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")) { %>
 
                 <div class="btn_bar1">
                     <button>수정하기// 관리자로 수정하기</button> 

@@ -110,6 +110,7 @@
         height: 55px;
     }
 </style>
+<script src="https://kit.fontawesome.com/5de30c093c.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -159,11 +160,84 @@
                     <div class="cart">
 
                         <div>
-                            <a href="#" class="btn btn-sm btn-warning">장바구니</a>
+                            <a onclick="cartTest2();" class="btn btn-sm btn-warning">장바구니</a>
                             <a href="<%= contextPath %>/order.od?pno=<%= p1.getProductNo() %>" class="btn btn-sm btn-warning">구매하기</a>
+                           	<i class="fa-solid fa-bucket fa-2xl" onclick="cartTest1();"></i>
                         </div>
-
                     </div>
+                    
+                    <script>
+                    	function cartTest2(){
+                    		console.log("되냐?");
+                    		// 중복체크하고
+                    		// 상품명이 중복이면 업데이트 컨트롤러타게
+                    		// 중복이 아니면 isnert함수호출 
+                    		
+                    		$.ajax({
+                    			url:"cartCheck.cr",
+                    			data:{
+                    				pno:<%= p1.getProductNo()%>
+                    			},
+                    			type:"post",
+                    			success:function(count){                   			
+                    				if(count == "NNNNN"){
+                    					// 존재하는 장바구니가 있으니 update
+                    					updateCart();
+                    					console.log(count);
+                    				}else{
+                    					// 존재하는 장바구니가 없으면 insert
+                    					cartTest();
+                    					console.log(count);
+                    				}
+                    			}, error:function(){
+                    				console.log("ajax 통신 실패!");
+                    			}
+                    		});
+                    	}
+                    	
+                    	function updateCart(){
+                    		$.ajax({
+                    			url:"updatecart.cr",
+                    			data:{
+                    				pno:<%= p1.getProductNo()%>
+                    			},
+                    			type:"post",
+                    			success:function(result){
+                    				if(result > 0){
+                    					alert('장바구니 추가 완료!');
+                    				}
+                    			}, error:function(){
+                    				console.log("ajax 통신 실패!");
+                    			}
+                    		});
+                    	}
+                    
+                    
+                    	function cartTest(){
+                    		$.ajax({
+                    			url:"insert.cr",
+                    			data:{
+                    				pno:<%= p1.getProductNo()%>
+                    				// 여기서 로그인 유저 뽑아도 되는데 session영역에 있기때문에 컨트롤러가서 뽑을꺼임
+                    			},
+                    			type:"post",
+                    			success:function(result){
+                    				if(result>0){
+                    				alert('장바구니 추가 완료!');                    				
+                    				}           			
+                    			}, error:function(){
+                    				console.log("장바구니 추가 ajax 통신 실패!");
+                    			}                  			
+                    		});
+                    	}        
+                    	
+                    	
+                    	function cartTest1(){
+                    		location.href='<%= contextPath %>/cartList.cr?pno=<%= p1.getProductNo()%>';
+                    	}
+                    </script>
+                    
+          
 
 
 

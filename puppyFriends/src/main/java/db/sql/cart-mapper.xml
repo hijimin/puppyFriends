@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="insertCart">
+	INSERT INTO CART
+	  (
+	    CART_NO
+	  , MEMBER_NO
+	  , PRODUCT_NO
+	  , CART_AMOUNT  
+	  , CART_STATUS
+	  )
+	  VALUES
+	  (
+	    SEQ_CART.NEXTVAL
+	  , ?
+	  , ?
+	  , 1
+	  , 'Y'
+	  )
+	</entry>
+	
+	<entry key="cartCheck">
+		SELECT 
+	    COUNT(*) "COUNT"
+	FROM CART
+	WHERE MEMBER_NO = ?
+	  AND PRODUCT_NO = ?
+	</entry>
+	
+	<entry key="updateCart">
+	UPDATE CART
+   SET CART_AMOUNT = CART_AMOUNT + 1
+ WHERE MEMBER_NO = ?
+   AND PRODUCT_NO = ?
+	</entry>
+	
+	<entry key="selectCart">
+SELECT
+       CART_NO
+     , MEMBER_NAME
+     , PRODUCT_NAME     
+     , CART_AMOUNT
+     , TO_CHAR(PRODUCT_PRICE - (PRODUCT_PRICE * PRODUCT_DISCOUNT / 100), '999,999,999') "OPRICE"
+     , TO_CHAR((PRODUCT_PRICE - (PRODUCT_PRICE * PRODUCT_DISCOUNT / 100))* CART_AMOUNT, '999,999,999') "DPRICE"
+     , FILE_PATH || CHANGE_NAME "TITLEIMG"
+     , PRODUCT_NO
+ FROM CART
+ JOIN MEMBER USING(MEMBER_NO)
+ JOIN PRODUCT USING(PRODUCT_NO)
+ JOIN IMAGE ON (PRODUCT_NO = REF_BNO)
+ WHERE MEMBER_NO = ?
+   AND IMAGE_TYPE = 1
+   AND FILE_LEVEL = 1
+   AND CART_STATUS = 'Y'
+	</entry>
+	
+	<entry key="deleteCart">
+		DELETE 
+	  FROM CART
+	 WHERE MEMBER_NO = ?
+	   AND PRODUCT_NO = ?
+	</entry>
+
+
+
+</properties>

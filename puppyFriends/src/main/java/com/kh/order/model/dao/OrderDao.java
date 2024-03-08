@@ -43,7 +43,7 @@ public class OrderDao {
 		} finally {
 			close(pstmt);
 		}
-		return result;		
+		return result;			
 	}
 	
 	public int paymentInsert(Connection conn, String impUid, String merchantUid, String price) {

@@ -56,10 +56,5 @@ INSERT
    SET PAYMENT_NO = SEQ_TOSS_PAYMENT.CURRVAL
  WHERE PRODUCT_NO = ?	
 	</entry>
-
-
-
-
-
-
+	
 </properties>

@@ -1,15 +1,13 @@
-<%@page import="com.kh.order.model.vo.Order"%>
+<%@page import="com.kh.cart.model.vo.Cart"%>
 <%@page import="com.kh.product.model.vo.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
-	Product p1 = list.get(0); // 파일레벨1
-	Product p2 = list.get(1); // 파일레벨2
-	
-	Product p = (Product)request.getAttribute("p");
-	// 배송비랑 합친가격만
+	ArrayList<Cart> list = (ArrayList<Cart>)request.getAttribute("list");
+	request.getSession().setAttribute("list1", list);
+	// 카트번호, 유저이름, 상품이름, 장바구니담은수량, 원가, 장바구니수량합계, 이미지경로, 상품번호
+	int productCount = list.size();
 	
 	Member m = (Member)request.getAttribute("m");
 	// 유저이름, 유저이메일, 유저폰번호
@@ -18,8 +16,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <style>
     div{
@@ -134,7 +130,19 @@
     .ec-base-table thead th{
         border-bottom: 1px solid #d7d5d5;
     }
+    
+    /* .count-wrap {position: relative;padding: 0 38px;border: 1px solid #ddd;overflow: hidden;width: 60px;}
+	.count-wrap > button {border: 0;background: #ddd;color: #000;width: 38px;height: 38px;position: absolute;top: 0;font-size: 12px;} */
 
+	.count-wrap .inp {border: 0;height: 38px;text-align: center;display: block;width: 100%;}
+    .count-wrap > button.minus {left: 0;}
+	.count-wrap > button.plus {right: 0;}
+
+    input::-webkit-inner-spin-button {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    }
 
 
 
@@ -227,10 +235,10 @@
     <title>Sample Payment</title>
 </head>
 <body>
+
+	<%@ include file="../common/menubar.jsp"%>
 	
-	<%@ include file="../common/menubar.jsp" %>
-	
-	<div id="content">
+		<div id="content">
         <div id="content1">
             <div id="content1_1">
                 <p>상품주문내역</p>
@@ -251,37 +259,177 @@
                     
                 </div>
                 <div id="content1_2b">
-                    <tbody>                
-                        <tr>
+                    <tbody>  
+                                     	
+                        	<% String mprice = ""; %>
+                        	<% int totalA = 0; %>
+                        	<% if(list.isEmpty()){ %>
+                        		<h2 align="center">장바구니가 비어있습니다.</h2>
+                        	<% }else{ %>
+                    		<% for(Cart c : list){ %>                 	              		
+                    		<% mprice = c.getdPrice(); %>         		             
+                        <tr class="cartList">
                             <td>
-                                <input type="checkbox" name="plist" value="상품번호">
-                                <label for="product"><img src="<%= contextPath %>/<%= p1.getTitleImg()%>" width="100" height="100"></label>
+                                <input type="checkbox" name="plist" value="<%= c.getPno()%>">
+                                <label for="product"><img src="<%= contextPath %>/<%= c.getTitleImg() %>" width="100" height="100"></label>
                             </td>
-                            <td><%= p1.getProductName() %></td>
-                            <td>1</td>
+                            <td><%= c.getProductNo() %></td>
+                            <td>                                                    
+	                            <div class="count-wrap _count">
+								    <button type="button" class="minus" onclick="minusTest();">감소</button>
+								    <input type="number" class="inp" value="<%= c.getCartAmount()%>" />
+								    <button type="button" class="plus">증가</button> <!-- onclick="plusTest();" 지워도됨 -->
+								</div>
+								
+                            </td>
                             <td>기본배송</td>
                             <td>3,000원</td>
-                            <td><%= p1.getdPrice() %>원</td>
-                        </tr>                    
+                            <td class="mtotal"><%= mprice %>원</td>
+                        </tr>                         
+                        	<% } %>   
+                        <% } %>               
                     </tbody>
                 </div>
-                
-                
-                
             </table>
+            
+            <script>
+         
+            $(function(){
+            
+            	let cartList = $(".cartList");
+            	let plusList = $(".plus"); // 수량버튼 div
+            	let minusList = $(".minus"); // 버튼
+            	let inputList = $(".inp"); //인풋
+            	let mtotalList = $(".mtotal");                   	    
+
+                console.log(mtotalList);
+                let sumTotal = 0;
+	        	for(let i=0; i<mtotalList.length; i++){ // 장바구니에 담겨있는게 없을 수 있기에 for문을 돌림
+                    sumTotal += Number(mtotalList[i].innerText.replace("원","").replace(",",""));
+                    // console.log(mtotalList[i].innerText);
+                }
+                console.log(sumTotal);
+                $('#totalprice').text(sumTotal);
+
+                
+
+            	$(plusList).click(function(){             		
+    	        	// let cartCount = ++cartAmount; 여기에 있으면 클릭하자마자 증가가되버림
+            		let value = $(this).parent().parent().siblings('.mtotal').text();  	    
+            		let cartCount = $(this).siblings('.inp').val();
+            		let price = value.replace("원","");
+            		let pprice = price.replace(",","");
+            		let ppprice = Number(pprice);
+
+            		let originalPrice = ppprice / cartCount;
+            		
+            		
+            		//console.log(ppprice)
+            		//console.log(cartAmount)
+            		//console.log(originalPrice)
+            		
+            		let cartCountA = ++cartCount; // 항상 준비해야할 값을 다 뽑고 증가시키자! 증가하지 전위연산으로!        	
+	        		//console.log(value); // 21,700원
+	        		 $(this).parent().parent().siblings('.mtotal').text(originalPrice * cartCountA + "원");
+					let apple = originalPrice
+            		//console.log(plusList.index(this));
+            		//inputList.eq(plusList.index(this)).val();
+            		
+            		plusTest(plusList.index(this),apple); // 내가 클릭한 요소가 plusList에서 몇번째 요소인지?
+            	})
+	        		
+            	$(minusList).click(function(){                     		
+            		let value = $(this).parent().parent().siblings('.mtotal').text();
+            		let cartCount = $(this).siblings('.inp').val();
+            		
+            		let price = value.replace("원","");
+            		let pprice = price.replace(",","");
+            		let ppprice = Number(pprice);
+            		//console.log(cartAmount);
+            		
+            		let originalPrice = ppprice / cartCount;
+            		console.log(originalPrice)
+            		let cartAmount = --cartCount;
+            		
+      
+            		
+            		$(this).parent().parent().siblings('.mtotal').text(originalPrice * cartAmount + "원");
+            		
+            		
+            		minusTest(minusList.index(this));
+            		
+            	})
+            })
+	            let priceStr = '<%= mprice%>';
+	        	let price = parseInt(priceStr.replace(/,/g, ''), 10);
+		            
+		        	function getTotal() {
+		                return $("#totalprice").text();
+		            }
+			
+		            	function minusTest(index) {
+		            	let cartAmount = $('input[class=inp]').eq(index).val();
+		            		let total = getTotal();	            		
+		            		
+		                    if (cartAmount > 1) {
+		                        cartAmount--;
+		                        $('input[class=inp]').eq(index).val(cartAmount); 
+		                        $('#totalprice').text(Number(price - cartAmount));
+		                    }
+		                }
+	
+		                function plusTest(index,apple) {
+		                	let cartAmount = $('input[class=inp]').eq(index).val(); // 몇번째 인풋을 선택해올껀지?
+		            		let total = getTotal();
+                            let totalPrice = $("#totalprice").text();
+		            		
+		                	if(cartAmount++){
+		                    $('input[class=inp]').eq(index).val(cartAmount); // 증가한게 여기에
+		                    	//$("#totalprice").text(Number(price * cartAmount));	
+		                    $("#totalprice").text(Number(totalPrice)+Number(apple));
+		                	}                  
+		                }
+	            	
+            </script>
+            
+            
+           
+            
                 
                     <div id="content1_2c">                       
                         <span><a onclick="validate();">선택삭제</a></span>
                         <div id="content1_2c1">
-                            <span>상품금액</span> <span><%= p.getdPrice() %>원</span>                                      
+                            <span>상품금액</span> <span id="totalprice"></span>                                      
                         </div>                
                     </div>
                     
                     <script>
-                    	function validate(){
-                    		 alert('정말 삭제하시겠습니까?');                   		
-                    		location.href='<%= contextPath%>/delete.od'                 		
-                    	}
+                    function validate(){               	
+                    	if ($('input[name=plist]:checked').length > 0) {
+                            var selectedValue = $('input[name=plist]:checked').val();
+                            
+                            checkdelete(selectedValue);
+                        } 
+  	                         
+                    }
+                   	function checkdelete(pno){
+                   		
+                   		$.ajax({
+                   			url:"deletecart.cr",
+                   			data:{
+                   				pno
+                   			},
+                   			type:"post",
+                   			success:function(){
+                   				alert('삭제 완료!')
+                   				 location.reload();
+                   			}, error:function(){
+                   				console.log('ajax 통신 실패!');
+                   			}
+                   		});
+                   		
+                   		
+                   	}
                     </script>
                
                 
@@ -617,7 +765,8 @@
     </div>
     
     <script>
-    	
+    	let count = 0;
+    	let proCount = <%= productCount %>;
     
         var IMP = window.IMP; 
         IMP.init("imp16540835"); 
@@ -631,10 +780,12 @@
         
 
         
-        function requestPay() {
+        function requestPay() {	
         	var add1 = document.getElementById("sample2_address").value; 
-        	let priceStr = '<%= p.getdPrice()%>';
-        	let price = parseInt(priceStr.replace(/,/g, ''), 10);
+        	let amount = $('#totalprice').text();
+        	let price = Number(amount);
+        	//let priceStr = totalPrice;
+        	//let price = parseInt(priceStr.replace(/,/g, ''), 10);
         	
             IMP.request_pay({
                 pg : 'tosspay',
@@ -650,49 +801,48 @@
                 m_redirect_url : '{}'
             }, function (rsp) { // callback
                 if (rsp.success) {
-                    console.log(rsp);
-                    test(rsp);
+                    let userName = rsp.buyer_name;  
+	                    //test(rsp);
+               
                 } else {
                     console.log(rsp);
                 }
+                
             });
         }
         
         function test(rsp){
+        	//console.log(rsp)
         	let buyerAddr;
         	let buyerName;
         	let buyerTel;
-        	let productNo = '<%= p1.getProductNo() %>';
+        	
+        	let productNo = 0;       	
         	var omessage = $("#omessage").val();
         	let iu;
         	let mc;      	
-        	let priceStr = '<%= p1.getdPrice()%>';
+        	let priceStr = '100';
         	let price = parseInt(priceStr.replace(/,/g, ''), 10);
         	$.ajax({
-        		url:"insert.po",
+        		url:"manyInsert.co",
         		data:{
         			buyerAddr:rsp.buyer_addr,
         			buyerName:rsp.buyer_name,
         			buyerTel:rsp.buyer_tel,
-        			pno:productNo,
+        			cnt:count,
         			omg:omessage,
         			iu:rsp.imp_uid,
         			mc:rsp.merchant_uid,
         			pr:price
         			},
         		success:function(result){
-        			if(result > 0){
-        				console.log("결제완료");    
-        				location.href = '<%= contextPath %>/success.po'
-        			}
+        			// 성공
         		}
         	})
         }
     </script>
-    
-
-
-	<%@ include file="../common/footerbar.jsp" %>
+	
+	<%@ include file="../common/footerbar.jsp"%>
 
 </body>
 </html>

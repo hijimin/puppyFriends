@@ -96,5 +96,28 @@ public class ProductService {
 		return p;
 	}
 	
+	public ArrayList<Product> selectGoodList(){
+		Connection conn = getConnection();
+		ArrayList<Product> list = new ProductDao().selectGoodList(conn);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Product> selectRecentList(){
+		Connection conn = getConnection();
+		ArrayList<Product> list = new ProductDao().selectRecentList(conn);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Product> selectCountList(){
+		Connection conn = getConnection();
+		ArrayList<Product> list = new ProductDao().selectCountList(conn);
+		close(conn);
+		return list;
+	}
+	
+	
+	
 
 }

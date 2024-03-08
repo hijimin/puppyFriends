@@ -187,7 +187,6 @@
                     </thead>
                   
                         <tbody align="center">
-                            
                             <% for(Member m : list) {  %>
                                 <tr>
                                     <th><input type="checkbox" value="Y" name="deleteMember" onclick="checkList();"></th>
@@ -218,7 +217,8 @@
 						})
 					})
 				</script>
-
+				
+			
                 <br><br>
                 
                 <div class="paging-area" align="center">

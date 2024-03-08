@@ -1,6 +1,9 @@
-package com.kh.member.controller;
+package com.kh.admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,16 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MoveToMypageController
+ * Servlet implementation class AdminDeleteMemberController
  */
-@WebServlet("/mypage")
-public class MoveToMypageController extends HttpServlet {
+@WebServlet("/AdminDeleteMember.ad")
+public class AdminDeleteMemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MoveToMypageController() {
+    public AdminDeleteMemberController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,9 +30,13 @@ public class MoveToMypageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("views/member/mypage.jsp").forward(request, response);
-
-	}
+		request.setCharacterEncoding("UTF-8");
+       
+		
+		
+    }
+		
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

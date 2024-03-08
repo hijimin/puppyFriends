@@ -15,7 +15,8 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/ChatingServer")
 public class BoardChattingServer {
     private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
-
+   
+    
     @OnOpen
     public void onOpen(Session session) {
         clients.add(session);
@@ -29,7 +30,7 @@ public class BoardChattingServer {
         System.out.println("메시지 전송: " + session.getId() + ": " + message);
         synchronized (clients) {
             for (Session client : clients) {      
-                    client.getBasicRemote().sendText(message);
+                    client.getBasicRemote().sendText(message);       
             }
         }
     }
@@ -46,4 +47,3 @@ public class BoardChattingServer {
         e.printStackTrace();
     }
 }
-

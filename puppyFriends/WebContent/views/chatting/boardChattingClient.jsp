@@ -15,23 +15,24 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <style>
     .chat-window {
-        border: 1px solid black;
-        width: 800px;
+        width: 806px;
         height: 700px;
         overflow: hidden;
         padding: 10px;     
         padding-bottom:40px;
         padding-left:20px;
         padding-right:20px;    
-        border-radius: 10px;
         border:2px solid rgb(255, 222, 239);
+        border-radius: 10px;
         border-bottom-left-radius:0%;
         border-bottom-right-radius:0%;
         background-color: rgb(255, 222, 239);
+        padding-top: 0%;
     }
+
     
     .chat-message {
- 			line-height: 30px;
+          line-height: 30px;
             display: block;
             float: left;
             border: none;
@@ -53,7 +54,7 @@
     }
     
     .otch{
-    	text-align: left;
+       text-align: left;
         margin-left: auto;
     }
     
@@ -64,8 +65,9 @@
         padding: 8px;
         border-radius: 10px;
         display: inline-block;
+        text-align: left;  
         max-width: 400px;
-        text-align: left;        
+        word-wrap: break-word;         
     }
     
     .others {
@@ -81,7 +83,7 @@
         border-radius: 10px;
         display: inline-block;
         max-width: 400px;
-        
+        word-wrap: break-word;   
     }
     
     .message-time {
@@ -100,7 +102,7 @@
             padding-bottom: 0%;
             background-color: rgb(255, 222, 239);
             margin-left: 1px;
-            color:white;     
+            color:rgb(255, 118, 189);     
             border-bottom-right-radius: 10px;
             border-right: 2px solid rgb(255, 222, 239);
             border-bottom: 2px solid rgb(255, 222, 239);
@@ -112,38 +114,51 @@
            display:none;
         }
 
-		.chatting-send{
-            margin-left: 70px;
-        }
-		
+        .chatting-send{
+                margin-left: 60px;
+                margin-top: 90px;
+            }
+      
         #chatMessage{
             border:1px solid rgb(255, 222, 239);
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
             
         }
-    	
-    	#chatMessage:focus{
-            outline-color: rgb(255, 222, 239);   
+       
+       #chatMessage:focus{
+            outline-color: rgb(255, 118, 189);  
         }
+        
+        h1{
+            color: white;
+        }
+
+        hr{
+             background-color: rgb(255, 118, 189); 
+        }
+
+       
         
     
 </style>
 </head>
 <body>
 
-	<%@ include file="../common/menubar.jsp" %>
+   <%@ include file="../common/menubar.jsp" %>
 
 
     <div class="chatting-send">
-        <div id="chattingMsg" class="col-md-6 offset-md-3">
-            <div class="chat-window" id="chatWindow"></div>
+        <div id="chattingMsg" class="col-md-6 offset-md-3">     
+            <div class="chat-window" id="chatWindow" align="center"></div>
             <div class="text-send d-flex"> 
                 <textarea type="text" id="chatMessage" rows="1" cols="100" onkeyup="if(event.keyCode==13) sendMessage();"></textarea>
                 <button class="send-btn" onclick="sendMessage()">전송</button>
             </div>
         </div>
     </div>
+    
+    
 
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
@@ -179,12 +194,19 @@
             if (message.sender == "<%= chat.getMemberId() %>") {
                 chatWindow.append("<br>" + "<div class='mych'>" +  "My" + "<br>" + "</div>" + "<div class='my'><span class='message-time'>" + currentTime + "</span><div class='myChat'>" + messageContent + "</div></div>");
             } else {
-                chatWindow.append( "<br>" + "<div class='otch'>" + "<%=chat.getMemberId()  %>" + "</div>" + "<div class='others'><div class='othersChat'>" + messageContent + "</div><span class='message-time'>" + currentTime + "</span></div>");
+                chatWindow.append( "<br>" + "<div class='otch'>" + message.sender + "</div>" + "<div class='others'><div class='othersChat'>" + messageContent + "</div><span class='message-time'>" + currentTime + "</span></div>");
             }
             
             chatWindow.scrollTop(chatWindow.prop("scrollHeight"));
         };
     });
+
+    // .chatWindow:scroll{
+    //        display:none;
+    //     }
+
+    
+
 </script>
 
 

@@ -15,6 +15,7 @@
 			                , MEMBER_PHONE
 			              FROM MEMBER
 			              LEFT JOIN DOG USING(MEMBER_NO)
+			              WHERE STATUS = 'Y'
 			              ORDER 
 			                 BY MEMBER_NO DESC) A)
 			   WHERE RNUM BETWEEN ? AND ?

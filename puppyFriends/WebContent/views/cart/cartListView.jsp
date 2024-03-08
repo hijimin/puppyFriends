@@ -5,7 +5,7 @@
     pageEncoding="UTF-8"%>
 <%
 	ArrayList<Cart> list = (ArrayList<Cart>)request.getAttribute("list");
-	request.getSession().setAttribute("list1", list);
+
 	// 카트번호, 유저이름, 상품이름, 장바구니담은수량, 원가, 장바구니수량합계, 이미지경로, 상품번호
 	int productCount = list.size();
 	
@@ -764,10 +764,7 @@
         </div>
     </div>
     
-    <script>
-    	let count = 0;
-    	let proCount = <%= productCount %>;
-    
+    <script>   
         var IMP = window.IMP; 
         IMP.init("imp16540835"); 
       
@@ -777,8 +774,6 @@
         var seconds = today.getSeconds();  // 초
         var milliseconds = today.getMilliseconds();
         var makeMerchantUid = hours +  minutes + seconds + milliseconds;
-        
-
         
         function requestPay() {	
         	var add1 = document.getElementById("sample2_address").value; 
@@ -801,9 +796,7 @@
                 m_redirect_url : '{}'
             }, function (rsp) { // callback
                 if (rsp.success) {
-                    let userName = rsp.buyer_name;  
-	                    //test(rsp);
-               
+	                    test(rsp);             
                 } else {
                     console.log(rsp);
                 }
@@ -816,29 +809,38 @@
         	let buyerAddr;
         	let buyerName;
         	let buyerTel;
+        	let list = '<%= list %>';
+        	let MList;
         	
-        	let productNo = 0;       	
         	var omessage = $("#omessage").val();
         	let iu;
         	let mc;      	
         	let priceStr = '100';
         	let price = parseInt(priceStr.replace(/,/g, ''), 10);
-        	$.ajax({
-        		url:"manyInsert.co",
-        		data:{
-        			buyerAddr:rsp.buyer_addr,
-        			buyerName:rsp.buyer_name,
-        			buyerTel:rsp.buyer_tel,
-        			cnt:count,
-        			omg:omessage,
-        			iu:rsp.imp_uid,
-        			mc:rsp.merchant_uid,
-        			pr:price
-        			},
-        		success:function(result){
-        			// 성공
-        		}
-        	})
+        	
+        	if(list.size == 1){
+        		$.ajax({});
+        	}else{   		
+        		for (let i = 0; i < list.length; i++) {
+                    MList.push(list[i].pno);
+                }
+	        	$.ajax({
+	        		url:"manyInsert.co",
+	        		data:{
+	        			buyerAddr:rsp.buyer_addr,
+	        			buyerName:rsp.buyer_name,
+	        			buyerTel:rsp.buyer_tel,
+	        			omg:omessage,
+	        			iu:rsp.imp_uid,
+	        			mc:rsp.merchant_uid,
+	        			pr:price,
+	        			pno:MList
+	        			},
+	        		success:function(result){
+	        			// 성공
+	        		}
+	        	})       		
+        	}
         }
     </script>
 	

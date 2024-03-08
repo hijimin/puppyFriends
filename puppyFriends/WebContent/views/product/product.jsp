@@ -16,6 +16,7 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -98,6 +99,7 @@ body {
 #content2_2 a {
 	text-decoration: none;
 	font-size: 15px;
+	color: black;
 }
 
 #content2_2>div {
@@ -340,31 +342,160 @@ body {
 
 			<div id="content2_2">
 				<div align="right" style="width: 90%; margin-bottom: 5px;">
-					<a href="">인기순|</a><a href="">최신순|</a><a href="">조회순</a>
+					<a href="#" onclick="orderSelect();">인기순|</a><a href="#" onclick="recentSelect();">최신순|</a><a href="#" onclick="countSelect();">조회순</a>
 				</div>
 			</div>
+			
+			<script>
+			
+			function orderSelect(){			
+				$.ajax({
+					url:"goodAjax.pd",				
+					success:function(result){
+						
+						$('#content2_3').html("");
+						
+						let value = "";
+						
+						for(let i=0; i<result.length; i++){
+							let rv = result[i];
+
+							
+							let titleImg = rv.titleImg;
+							console.log(titleImg);
+							let productName = rv.productName;
+							let productDesc = rv.productDesc;
+							let productNo = rv.productNo;
+							
+							value +=								
+								"<div class='content2_3c'>"
+								+ "<img id='img1' src='<%=contextPath%>/" + titleImg + "' alt='Slide 4' width='100%' height='300'>"
+								+ "<input type='hidden' id='pdno' name='pno' value='productNo'>"
+							+ "<div style='margin: 0; border: 0px;'>" + productName + "</div>"
+							+ "<div class='name_sub'>" + productDesc + "</div>"
+							+ "<div class='priceGroup'>" 
+								+ "<div class='custom_pro' d-price='29900' d-custom='23900'>" + rv.discount + '%'+ "</div>"
+								+ "<div class='prs prsLine'>" + rv.price + '원' + "</div>"
+								+ "<div class='prs prsBold'>" + rv.dPrice + '원' + "</div>"
+							+ "</div>"
+						+ "</div>"	
+						}
+					$('#content2_3').html(value);
+					}, error:function(){
+						console.log("ajax 통신실패!");
+					}
+				});
+			}
+			
+			function recentSelect(){
+				$.ajax({
+					url:"recentAjax.pd",
+					success:function(result){
+						
+					$('#content2_3').html("");
+						
+						let value = "";
+						
+						for(let i=0; i<result.length; i++){
+							
+							let rv = result[i];
+
+							
+							let titleImg = rv.titleImg;
+							console.log(titleImg);
+							let productName = rv.productName;
+							let productDesc = rv.productDesc;
+							let productNo = rv.productNo;
+							
+							value +=								
+								"<div class='content2_3c'>"
+								+ "<img id='img1' src='<%=contextPath%>/" + titleImg + "' alt='Slide 4' width='100%' height='300'>"
+								+ "<input type='hidden' id='pdno' name='pno' value='productNo'>"
+							+ "<div style='margin: 0; border: 0px;'>" + productName + "</div>"
+							+ "<div class='name_sub'>" + productDesc + "</div>"
+							+ "<div class='priceGroup'>" 
+								+ "<div class='custom_pro' d-price='29900' d-custom='23900'>" + rv.discount + '%'+ "</div>"
+								+ "<div class='prs prsLine'>" + rv.price + '원' + "</div>"
+								+ "<div class='prs prsBold'>" + rv.dPrice + '원' + "</div>"
+							+ "</div>"
+						+ "</div>"							
+						}
+						$('#content2_3').html(value);
+						
+					}, error:function(){
+						console.log("ajax 통신 실패!!");
+					}
+				});
+			}
+			
+			function countSelect(){
+				$.ajax({
+					url:"countAjax.pd",
+					success:function(result){
+						
+					$('#content2_3').html("");
+						
+						let value = "";
+						
+						for(let i=0; i<result.length; i++){
+							
+							let rv = result[i];
+
+							
+							let titleImg = rv.titleImg;
+							console.log(titleImg);
+							let productName = rv.productName;
+							let productDesc = rv.productDesc;
+							let productNo = rv.productNo;
+							
+							value +=								
+								"<div class='content2_3c'>"
+								+ "<img id='img1' src='<%=contextPath%>/" + titleImg + "' alt='Slide 4' width='100%' height='300'>"
+								+ "<input type='hidden' id='pdno' name='pno' value='productNo'>"
+							+ "<div style='margin: 0; border: 0px;'>" + productName + "</div>"
+							+ "<div class='name_sub'>" + productDesc + "</div>"
+							+ "<div class='priceGroup'>" 
+								+ "<div class='custom_pro' d-price='29900' d-custom='23900'>" + rv.discount + '%'+ "</div>"
+								+ "<div class='prs prsLine'>" + rv.price + '원' + "</div>"
+								+ "<div class='prs prsBold'>" + rv.dPrice + '원' + "</div>"
+							+ "</div>"
+						+ "</div>"							
+						}
+						$('#content2_3').html(value);
+						
+					}, error:function(){
+						console.log("ajax 통신 실패!");
+					}
+				});
+				
+			}
+			
+			</script>
+			
+			
 
 			<!-- 상품 전체목록 -->
 			<div id="content2_3">
 
-				<%
-				for (Product p : list1) {
-				%>
-				<div class="content2_3c">
-					<img id="img1" src="<%=contextPath%>/<%=p.getTitleImg()%>"
-						alt="Slide 4" width="100%" height="300"> <input
-						type="hidden" id="pdno" name="pno" value="<%=p.getProductNo()%>">
+				
+				 <%
+				 for (Product p : list1) {
+				 %>
+				 <div class="content2_3c">
+				 	<img id="img1" src="<%=contextPath%>/<%=p.getTitleImg()%>"
+				 		alt="Slide 4" width="100%" height="300"> <input
+				 		type="hidden" id="pdno" name="pno" value="<%=p.getProductNo()%>">
 					<div style="margin: 0; border: 0px;"><%=p.getProductName()%></div>
-					<div class="name_sub"><%=p.getProductDesc()%></div>
-					<div class="priceGroup">
-						<div class="custom_pro" d-price="29900" d-custom="23900"><%=p.getDiscount() + "%"%></div>
-						<div class="prs prsLine"><%=p.getPrice() + "원"%></div>
-						<div class="prs prsBold"><%=p.getdPrice() + "원"%></div>
-					</div>
-				</div>
-				<%
-				}
-				%>
+				 	<div class="name_sub"><%=p.getProductDesc()%></div>
+				 	<div class="priceGroup">
+				 		<div class="custom_pro" d-price="29900" d-custom="23900"><%=p.getDiscount() + "%"%></div>
+				 		<div class="prs prsLine"><%=p.getPrice() + "원"%></div>
+				 		<div class="prs prsBold"><%=p.getdPrice() + "원"%></div>
+				 	</div>
+				 </div>
+				 <%
+				 }
+				 %>
 
 			</div>
 

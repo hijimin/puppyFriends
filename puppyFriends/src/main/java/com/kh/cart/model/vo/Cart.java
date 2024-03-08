@@ -122,6 +122,9 @@ public class Cart {
 	@Override
 	public String toString() {
 		return "Cart [cartNo=" + cartNo + ", memberNo=" + memberNo + ", productNo=" + productNo + ", cartAmount="
-				+ cartAmount + ", cartStatus=" + cartStatus + "]";
+				+ cartAmount + ", cartStatus=" + cartStatus + ", oPrice=" + oPrice + ", dPrice=" + dPrice
+				+ ", titleImg=" + titleImg + ", pno=" + pno + "]";
 	}
+
+	
 }

@@ -245,8 +245,97 @@ public class ProductDao {
 			close(rset);
 			close(pstmt);
 		}
-		return p;
+		return p;		
+	}
+	
+	public ArrayList<Product> selectGoodList(Connection conn){
+		ArrayList<Product> list = new ArrayList<Product>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		
+		String sql = prop.getProperty("selectGoodList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Product(rset.getInt("product_no"),
+						rset.getString("product_name"),
+						rset.getString("product_desc"),
+						rset.getString("price"),
+						rset.getInt("product_discount"),
+						rset.getString("titleimg"),
+						rset.getString("dprice")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public ArrayList<Product> selectRecentList(Connection conn){
+		ArrayList<Product> list = new ArrayList<Product>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRecentList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Product(rset.getInt("product_no"),
+						rset.getString("product_name"),
+						rset.getString("product_desc"),
+						rset.getString("price"),
+						rset.getInt("product_discount"),
+						rset.getString("titleimg"),
+						rset.getString("dprice")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public ArrayList<Product> selectCountList(Connection conn){
+		ArrayList<Product> list = new ArrayList<Product>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCountList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Product(rset.getInt("product_no"),
+						rset.getString("product_name"),
+						rset.getString("product_desc"),
+						rset.getString("price"),
+						rset.getInt("product_discount"),
+						rset.getString("titleimg"),
+						rset.getString("dprice")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 	
 

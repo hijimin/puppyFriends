@@ -38,6 +38,33 @@
 	    
 	</entry>
 	
+	<entry key="insertThHotel">
+	INSERT
+	  INTO HOTEL
+	  (
+	    HOTEL_NO
+	  , RESERVATION_NO
+	  , HOTEL_NAME
+	  , HOTEL_TEXT
+	  , HOTEL_SIZE
+	  , D_NUMBER
+	  , HOTEL_START
+	  , HOTEL_END
+	  )
+	  VALUES
+	  (
+	  SEQ_HOTEL.NEXTVAL
+	, SEQ_RESERVATION.CURRVAL
+	, ?
+	, ?
+	, ?
+	, ?
+	, ?
+	, ?
+	)
+	  
+	</entry>
+	
 	<entry key="insertThumbnailList">
 	INSERT
 	  INTO IMAGE
@@ -63,24 +90,28 @@
 	  
 	</entry>
 	
-	<entry key="insertThHotel">
+	<entry key="inserThReservation">
 	INSERT
-	  INTO HOTEL
+	  INTO RESERVATION
 	  (
-	    HOTEL_NO
-	  , HOTEL_NAME
-	  , HOTEL_TEXT
-	  , HOTEL_SIZE
-	  , D_NUMBER
+        RESERVATION_NO
+      , PROGRAM_NO
 	  , RESERVATION_START
-	  , RESERVATION_END				
+	  , RESERVATION_END
 	  , RESERVATION_PRICE
 	  )
 	  VALUES
 	  (
+	  SEQ_RESERVATION.NEXTVAL
+	  , SEQ_HOTEL.CURRVAL
+	  , ?
+	  , ?
+	  , ?
 	  )
-	  ;
+	  
 	</entry>
+
+
 
 
 

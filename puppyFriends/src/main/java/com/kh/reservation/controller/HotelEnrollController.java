@@ -17,6 +17,7 @@ import com.kh.common.MyFileRenamePolicy;
 import com.kh.common.model.vo.Image;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Hotel;
+import com.kh.reservation.model.vo.Reservation;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -55,14 +56,23 @@ public class HotelEnrollController extends HttpServlet {
 				h.setHotelSize(multiRequest.getParameter("hotelSize"));
 				h.setdNumber(Integer.parseInt(multiRequest.getParameter("dNumber")));
 			
+				try {
+					h.setHotelStart(new java.sql.Date(new SimpleDateFormat("yyyy.mm.dd").parse(multiRequest.getParameter("hotelStart")).getTime()));
+					h.setHotelEnd(new java.sql.Date(new SimpleDateFormat("yyyy.mm.dd").parse(multiRequest.getParameter("hotelEnd")).getTime()));
+			
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				
+			Reservation rv = new Reservation();
 			try {
-				h.setReservationStart(new java.sql.Date(new SimpleDateFormat("yyyy.mm.dd").parse(multiRequest.getParameter("reservationStart")).getTime()));
-				h.setReservationEnd(new java.sql.Date(new SimpleDateFormat("yyyy.mm.dd").parse(multiRequest.getParameter("reservationEnd")).getTime()));
+				rv.setReservationStart(new java.sql.Date(new SimpleDateFormat("yyyy.mm.dd").parse(multiRequest.getParameter("reservationStart")).getTime()));
+				rv.setReservationEnd(new java.sql.Date(new SimpleDateFormat("yyyy.mm.dd").parse(multiRequest.getParameter("reservationEnd")).getTime()));
 		
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-				h.setReservationPrice(Integer.parseInt(multiRequest.getParameter("reservationPrice")));
+				rv.setReservationPrice(Integer.parseInt(multiRequest.getParameter("reservationPrice")));
 		
 				
 			ArrayList<Image> list = new ArrayList<Image>();
@@ -83,7 +93,7 @@ public class HotelEnrollController extends HttpServlet {
 					}
 					list.add(img);
 				}
-				int result = new ReservationService().insertThumbnailHotel(h, list);
+				int result = new ReservationService().insertThumbnailHotel(h, list, rv);
 				
 				if(result > 0) {
 					request.getSession().setAttribute("alertMsg", "성공적으로 작성되었습니다.");

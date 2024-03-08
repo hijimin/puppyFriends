@@ -15,6 +15,7 @@ import com.kh.common.model.vo.Image;
 // import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.reservation.model.vo.Hotel;
+import com.kh.reservation.model.vo.Reservation;
 
 public class ReservationDao {
 	private Properties prop = new Properties();
@@ -120,9 +121,8 @@ public class ReservationDao {
 			pstmt.setString(3, h.getHotelText());
 			pstmt.setString(4, h.getHotelSize());
 			pstmt.setInt(5, h.getdNumber());
-			pstmt.setDate(6, h.getReservationStart());
-			pstmt.setDate(7, h.getReservationEnd());
-			pstmt.setInt(8, h.getReservationPrice());
+			pstmt.setDate(6, h.getHotelStart());
+			pstmt.setDate(7, h.getHotelEnd());
 			
 			result = pstmt.executeUpdate();
 			
@@ -161,6 +161,30 @@ public class ReservationDao {
 			close(pstmt);
 		}
 	
+		return result;
+	}
+
+	public int inserThReservation(Connection conn, Reservation rv) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("inserThReservation");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setDate(1, rv.getReservationStart());
+			pstmt.setDate(2, rv.getReservationEnd());
+			pstmt.setInt(3, rv.getReservationPrice());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 	

@@ -182,7 +182,7 @@
             <div class="text" align="right"> <!-- 오른쪽 맵 -->
 
                 <div class="hotel_rv">
-                <table class="hotel_rv_intro" border=1 align="center">
+                <table class="hotel_rv_intro" border=1>
                     <tr>
                         <th>호텔명 : </th>
                         <td><input type="text" class="title" required placeholder="호텔명을 입력해 주세요."></td>

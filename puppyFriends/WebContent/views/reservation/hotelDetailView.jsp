@@ -180,8 +180,8 @@
             <div class="blank1" style="border-left: 2px solid rgb(255, 222, 239); height: 78%;"></div> <!-- 중간 줄임-->
             
             <div class="text" align="right"> <!-- 오른쪽 맵 -->
-                <div class="period">기간 : 2024-02-01 ~ 2024-02-29 // # </div> <br><br>
-                <div>(2 / <%= h.getdNumber() %>) , M</div>
+                <div class="period">기간 : <%= h.getHotelStart() %> ~ <%= h.getHotelEnd() %> </div> <br><br>
+                <div>(2 / <%= h.getdNumber() %>) , <%= h.getHotelSize() %> </div>
                 <div class="introduce">
                     <tr>
                         <td>

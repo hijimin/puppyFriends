@@ -6,29 +6,51 @@ public class Reservation {
 	
 	private int reservationNo; // 예약번호
 	private int memberNo; // 회원번호
+	private int programNo; // HOTEL_NO 또는 CLASS_NO
 	private int facilityNo; // 시설고유번호 1또는2  // 추후 db에서 끌어올 때 where절 써서 가져오기
 	private Date writingDate; // 작성일
 	private Date reservationStart;
 	private Date reservationEnd;
-	private int price; // 가격
+	private int reservationPrice; // 가격
 	private int paymentNo; // 결제번호
 	
 	
 	public Reservation() {}
 
 	
-	public Reservation(int reservationNo, int memberNo, int facilityNo, Date writingDate, Date reservationStart,
-			Date reservationEnd, int price, int paymentNo) {
+	public Reservation(int reservationNo, int memberNo, int programNo, int facilityNo, Date writingDate, Date reservationStart,
+			Date reservationEnd, int reservationPrice, int paymentNo) {
 		super();
 		this.reservationNo = reservationNo;
 		this.memberNo = memberNo;
+		this.programNo = programNo;
 		this.facilityNo = facilityNo;
 		this.writingDate = writingDate;
 		this.reservationStart = reservationStart;
 		this.reservationEnd = reservationEnd;
-		this.price = price;
+		this.reservationPrice = reservationPrice;
 		this.paymentNo = paymentNo;
 	}
+	
+	
+	  // HotelEnrollController
+	public Reservation(Date reservationStart, Date reservationEnd, int reservationPrice) {
+		super();
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.reservationPrice = reservationPrice;
+	}
+
+
+	public int getProgramNo() {
+		return programNo;
+	}
+
+
+	public void setProgramNo(int programNo) {
+		this.programNo = programNo;
+	}
+
 
 	public int getReservationNo() {
 		return reservationNo;
@@ -78,12 +100,12 @@ public class Reservation {
 		this.reservationEnd = reservationEnd;
 	}
 
-	public int getPrice() {
-		return price;
+	public int getReservationPrice() {
+		return reservationPrice;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setReservationPrice(int reservationPrice) {
+		this.reservationPrice = reservationPrice;
 	}
 
 	public int getPaymentNo() {
@@ -96,9 +118,9 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return "Reservation [reservationNo=" + reservationNo + ", memberNo=" + memberNo + ", facilityNo=" + facilityNo
-				+ ", writingDate=" + writingDate + ", reservationStart=" + reservationStart + ", reservationEnd="
-				+ reservationEnd + ", price=" + price + ", paymentNo=" + paymentNo + "]";
+		return "Reservation [reservationNo=" + reservationNo + ", memberNo=" + memberNo + ", programNo=" + programNo + 
+				"facilityNo=" + facilityNo + ", writingDate=" + writingDate + ", reservationStart=" + reservationStart + ", reservationEnd="
+				+ reservationEnd + ", reservationPrice=" + reservationPrice + ", paymentNo=" + paymentNo + "]";
 	}
 
 	

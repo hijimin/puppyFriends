@@ -5,11 +5,12 @@ import java.sql.Date;
 public class Hotel {
 
    private int hotelNo; // 호텔 고유번호 
-   private int reservationNo; // 예약번호
    private String hotelName; // 호텔명
    private String hotelText; // 호텔 설명글
    private String hotelSize; // 허용 사이즈
    private int dNumber; // 수용 마리 수
+   private Date hotelStart; // 호텔 시작일
+   private Date hotelEnd; // 호텔 종료일
    private String hotelStatus;
    
    private Date writingDate;
@@ -40,7 +41,7 @@ public class Hotel {
 
    // selectHotelDetail
    
-   public Hotel(int hotelNo, String hotelName, String hotelText, String hotelSize, int dNumber, Date writingDate, Date reservationStart, Date reservationEnd,
+   public Hotel(int hotelNo, String hotelName, String hotelText, String hotelSize, int dNumber, Date hotelStart, Date hotelEnd, Date writingDate, Date reservationStart, Date reservationEnd,
 			String memberId, String dogSize, String hotelStatus) {
 		super();
 		this.hotelNo = hotelNo;
@@ -48,6 +49,8 @@ public class Hotel {
 		this.hotelText = hotelText;
 		this.hotelSize = hotelSize;
 		this.dNumber = dNumber;
+		this.hotelStart = hotelStart; // 호텔 시작일
+		this.hotelEnd = hotelEnd; // 호텔 종료일
 		this.hotelStatus = hotelStatus;
 		this.writingDate = writingDate;
 		this.reservationStart = reservationStart;
@@ -66,9 +69,7 @@ public class Hotel {
 	this.hotelText = hotelText;
 	this.hotelSize = hotelSize;
 	this.dNumber = dNumber;
-	this.reservationStart = reservationStart;
-	this.reservationEnd = reservationEnd;
-	this.reservationPrice = reservationPrice;
+
 }
 
 
@@ -120,8 +121,25 @@ public class Hotel {
 		this.writingDate = writingDate;
 	}
 
-	
-	
+	public Date getHotelStart() {
+		return hotelStart;
+	}
+
+
+	public void setHotelStart(Date hotelStart) {
+		this.hotelStart = hotelStart;
+	}
+
+
+	public Date getHotelEnd() {
+		return hotelEnd;
+	}
+
+
+	public void setHotelEnd(Date hotelEnd) {
+		this.hotelEnd = hotelEnd;
+	}
+
 
 	public Date getReservationStart() {
 		return reservationStart;
@@ -161,14 +179,6 @@ public class Hotel {
       this.hotelNo = hotelNo;
    }
 
-   public int getReservationNo() {
-      return reservationNo;
-   }
-
-   public void setReservationNo(int reservationNo) {
-      this.reservationNo = reservationNo;
-   }
-
    public String getHotelName() {
       return hotelName;
    }
@@ -204,13 +214,12 @@ public class Hotel {
 
 @Override
 public String toString() {
-	return "Hotel [hotelNo=" + hotelNo + ", reservationNo=" + reservationNo + ", hotelName=" + hotelName
-			+ ", hotelText=" + hotelText + ", hotelSize=" + hotelSize + ", dNumber=" + dNumber + ", hotelStatus="
+	return "Hotel [hotelNo=" + hotelNo + ", hotelName=" + hotelName
+			+ ", hotelText=" + hotelText + ", hotelSize=" + hotelSize + ", dNumber=" + dNumber + ", hotelStart" + hotelStart + ", hotelEnd" + hotelEnd + ", hotelStatus="
 			+ hotelStatus + "]";
 }
-   													
 
-   
+
 
 
    

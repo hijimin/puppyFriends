@@ -34,16 +34,25 @@ public class MemberInsertController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
+		String memberPwd = "";
+		String memberPhone = "";
+		
 		// 회원 정보 추가용 키:벨류
 		String memberId = request.getParameter("memberId");
-		String memberPwd = request.getParameter("memberPwd");
+		if(request.getParameter("memberPwd") != null) {
+			memberPwd = request.getParameter("memberPwd");			
+		}
 		String memberName = request.getParameter("memberName");
 		String memberEmail = request.getParameter("memberEmail");
-		String memberPhone = request.getParameter("memberPhone");
+		if(request.getParameter("memberPhone") != null) {
+			memberPhone = request.getParameter("memberPhone");
+		}
 		
+	
 		// 반려견 정보 추가용 키:벨류
 		String dogName = request.getParameter("dogName");
 		String dogValue = request.getParameter("dogValue");
+		String dogSize = request.getParameter("dogSize");
 		int dogAge = Integer.parseInt(request.getParameter("dogAge"));
 		String gender = request.getParameter("gender");
 		String vaccine = request.getParameter("vaccine");
@@ -56,27 +65,32 @@ public class MemberInsertController extends HttpServlet {
 		m.setMemberName(memberName);
 		m.setMemberEmail(memberEmail);
 		m.setMemberPhone(memberPhone);
+				
+		
 		
 		// 이름, 종, 나이, 성별, 접종, 특이사항 정보 가진 반려견
 		Dog d = new Dog();
 		d.setDogName(dogName);
 		d.setDogValue(dogValue);
+		d.setDogSize(dogSize);
 		d.setDogAge(dogAge);
 		d.setDogGender(gender);
 		d.setDogVaccine(vaccine);
 		d.setDogSignificant(dogSignificant);
 		
 		
-		int result = new MemberService().insertMember(m, d);
+	
+			int result = new MemberService().insertMember(m, d);
+			
+			if(result>0) { // 성공
+				HttpSession session = request.getSession();
+				session.setAttribute("alertMsg", "성공적으로 회원가입 되었습니다");
+				
+				response.sendRedirect(request.getContextPath());				
+			}
 		
-		if(result>0) { // 성공
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "성공적으로 회원가입 되었습니다");
-			
-			response.sendRedirect(request.getContextPath());			
-			
-			
-		}
+		
+		
 		
 		
 		

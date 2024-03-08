@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	
 	<% if(alertMsg != null) { %>
 		<script>
@@ -108,13 +108,14 @@
                                     Kakao.API.request({
                                         url: '/v2/user/me',
                                         success: function (response){
-                                            let id = response.id;
-                                            let nickname = response.properties.nickname;
-                                            console.log(nickname);
-                                            let email = response.kakao_account.email;
-                                            console.log(email);
-                                            alert(JSON.stringify(response))
-                                            location.href="http://localhost:8083/puppy/kakaologin";
+                                        	
+                                          let id = response.id
+                                      	  let nickname = response.properties.nickname
+                                      	  let email = response.kakao_account.email
+                                        	
+                                          alert(JSON.stringify(response))
+                                          location.href="<%= request.getContextPath()%>/kakaologin?id=" + id + "&nickname=" + nickname + "&email=" + email;
+                                                                                
                                         },
                                         fail: function(error){
                                             alert(JSON.stringify(error))

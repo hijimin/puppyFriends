@@ -6,21 +6,23 @@ public class Dog {
 	private int memberNo;
 	private String dogName;
 	private String dogValue;
+	private String dogSize;
 	private int dogAge;
 	private String dogGender;
 	private String dogVaccine;
 	private String dogSignificant;
 	
+	
 	public Dog() {}
-	
-	
-	public Dog(int dogNo, int memberNo, String dogName, String dogValue, int dogAge, String dogGender,
+
+	public Dog(int dogNo, int memberNo, String dogName, String dogValue, String dogSize, int dogAge, String dogGender,
 			String dogVaccine, String dogSignificant) {
 		super();
 		this.dogNo = dogNo;
 		this.memberNo = memberNo;
 		this.dogName = dogName;
 		this.dogValue = dogValue;
+		this.dogSize = dogSize;
 		this.dogAge = dogAge;
 		this.dogGender = dogGender;
 		this.dogVaccine = dogVaccine;
@@ -68,11 +70,17 @@ public class Dog {
 		return dogValue;
 	}
 
-
 	public void setDogValue(String dogValue) {
 		this.dogValue = dogValue;
 	}
 
+	public String getDogSize() {
+		return dogSize;
+	}
+
+	public void setDogSize(String dogSize) {
+		this.dogSize = dogSize;
+	}
 
 	public int getDogAge() {
 		return dogAge;
@@ -116,9 +124,9 @@ public class Dog {
 
 	@Override
 	public String toString() {
-		return "Dog [dogNo=" + dogNo + ", memberNo=" + memberNo + ", dogName=" + dogName + ", dogValue=" + dogValue
-				+ ", dogAge=" + dogAge + ", dogGender=" + dogGender + ", dogVaccine=" + dogVaccine + ", dogSignificant="
-				+ dogSignificant + "]";
+		return "Dog [dogNo=" + dogNo + ", memberNo=" + memberNo + ", dogName=" + dogName + ", dogValue=" + dogValue 
+				+ ", dogSize=" + dogSize + ", dogAge=" + dogAge + ", dogGender=" + dogGender 
+				+ ", dogVaccine=" + dogVaccine + ", dogSignificant=" + dogSignificant + "]";
 	}
 	
 	

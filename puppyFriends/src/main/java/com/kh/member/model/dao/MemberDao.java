@@ -63,6 +63,39 @@ private Properties prop = new Properties();
 		
 	}
 	
+	public Member kakaoLoginMember(Connection conn, String memberId, String memberName, String memberEmail) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("kakaoLoginMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getInt("member_no"),
+							   rset.getString("member_id"),
+							   rset.getString("member_name"),
+							   rset.getString("member_email"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+	
+	
+	
+	
 	public int insertMember(Connection conn, Member m) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -88,6 +121,7 @@ private Properties prop = new Properties();
 		return result;
 	}
 	
+	
 	public int insertDog(Connection conn, Dog d) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -99,10 +133,11 @@ private Properties prop = new Properties();
 			
 			pstmt.setString(1, d.getDogName());
 			pstmt.setString(2, d.getDogValue());
-			pstmt.setInt(3, d.getDogAge());
-			pstmt.setString(4, d.getDogGender());
-			pstmt.setString(5, d.getDogVaccine());
-			pstmt.setString(6, d.getDogSignificant());
+			pstmt.setString(3, d.getDogSize());
+			pstmt.setInt(4, d.getDogAge());
+			pstmt.setString(5, d.getDogGender());
+			pstmt.setString(6, d.getDogVaccine());
+			pstmt.setString(7, d.getDogSignificant());
 			
 			result = pstmt.executeUpdate();
 			
@@ -114,6 +149,34 @@ private Properties prop = new Properties();
 		}
 		
 		return result;
+	}
+	
+	
+	public int idCheck(Connection conn, String checkId) {
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("idCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, checkId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
+			
 	}
 	
 	public Member selectOrderMember(Connection conn, int userNo) {

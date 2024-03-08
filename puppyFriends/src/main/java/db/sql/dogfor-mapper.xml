@@ -79,9 +79,13 @@
 </entry>
 
 <entry key="selectAttendanceList">
-	SELECT *
-	  FROM ATTENDANCE
-	 WHERE MEMBER_NO = ?
+	SELECT 
+		   ATTENDANCE_NO
+		 , MEMBER_NO
+		 , TO_CHAR(ATTENDANCE_DATE, 'YYYY-MM-DD') AS "DATE"
+         , ATTENDANCE_STATUS
+ 	  FROM ATTENDANCE
+ 	 WHERE MEMBER_NO = ? 
 </entry>
 
 

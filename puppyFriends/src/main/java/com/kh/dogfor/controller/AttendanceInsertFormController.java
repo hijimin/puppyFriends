@@ -1,6 +1,8 @@
 package com.kh.dogfor.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,10 +41,19 @@ public class AttendanceInsertFormController extends HttpServlet {
 		at.setDate(date);
 		at.setStatus(status);
 		
+		Calendar cal = Calendar.getInstance();
+		
+		// 시스템 오늘날짜
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH)+1;
+		
+		
+		
+		
 		int result = new DogforService().insertAttendance(at);
 		
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/attendance.at");
+			response.sendRedirect(request.getContextPath() + "/attendance.at?userNo="+userNo+"&year="+year+"&month="+month);
 		}
 		
 		

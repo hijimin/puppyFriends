@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.kh.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,6 +15,15 @@
 	}
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");
+	
+	SimpleDateFormat year1 = new SimpleDateFormat("yyyy");
+	SimpleDateFormat month1 = new SimpleDateFormat("MM");
+	
+	Date d = new Date();
+	
+	String nowYear = year1.format(d);       
+	int nowMonth = Integer.parseInt(month1.format(d));  
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -249,10 +260,12 @@
                 <li class="kindergarten"><a href="#">유치원 예약</a></li>
               </ul>
             </li>
-            <li class="dog_data"><a href="<%= contextPath %>/dogforMain.do?userNo=<%= userNo %>">강아지정보</a>
+            <li class="dog_data"><a href="<%= contextPath %>/dogforMain.do?userNo=<%= userNo %>&year=<%= nowYear %>&month=<%= nowMonth %>">강아지정보</a>
                 <ul class="dog_data2">
-                   <li class="attend"><a href="<%= contextPath %>/gallery.ga">출석부</a></li>
-                   <li class="gallery"><a href="<%= contextPath %>/gallery.ga">갤러리</a></li>
+                	<% if(loginUser != null){ %>
+                   <li class="attend"><a href="<%= contextPath %>/attendance.at?userNo=<%= userNo %>&year=<%= nowYear %>&month=<%= nowMonth %>">출석부</a></li>
+                   <% } %>
+                   <li class="gallery"><a href="<%= contextPath %>/gallery.ga?cpage=1">갤러리</a></li>
                 </ul>
             </li>
             <li class="goods"><a href="<%= contextPath %>/list.pd">상품</a></li>

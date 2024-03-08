@@ -1,12 +1,24 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	int month = (int)request.getAttribute("month");
+
 	int yes = (int)request.getAttribute("yes");
 	int no = (int)request.getAttribute("no");
 	
-	double per = (double)yes/month*100;
-	double roundedNumber = Math.round(per * 10.0) / 10.0;
+	double per = (double)request.getAttribute("per");
+	
+	/*
+	SimpleDateFormat year = new SimpleDateFormat("yyyy");
+	SimpleDateFormat month1 = new SimpleDateFormat("MM");
+	
+	Date d = new Date();
+	
+	String nowYear = year.format(d);       
+	int nowMonth = Integer.parseInt(month1.format(d)); 
+	*/
+	
 %>    
 <!DOCTYPE html>
 <html>
@@ -121,13 +133,15 @@
                 <br>
                 <h3>출석률</h3>
                 <br><br>
-                <h3><%= roundedNumber %>%</h3>
+                <h3><%= per %>%</h3>
             </div>
             
         </div>
 
         <div class="content2">
-            <a href="<%= contextPath %>/attendance.at" class="btn btn-lg" style="background-color: rgb(255, 222, 239); color: white;">출석부로</a>
+        	
+            <a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%= nowYear %>&month=<%= nowMonth %>" class="btn btn-lg" style="background-color: rgb(255, 222, 239); color: white;">출석부로</a>
+            
         </div>
 		<% } %>
         <div class="content3" align="center">

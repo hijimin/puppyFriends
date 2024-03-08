@@ -1,3 +1,5 @@
+<%@page import="com.kh.dogfor.model.vo.Attendance"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -30,6 +32,11 @@
 	month = cal.get(Calendar.MONTH)+1;
 	
 	int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
+	
+	ArrayList<Attendance> list = (ArrayList<Attendance>)request.getAttribute("list");
+	
+	double per = (double)request.getAttribute("per");
+	
 %>    
 <!DOCTYPE html>
 <html>
@@ -154,8 +161,22 @@ a:active, a:hover {
 #enroll{
 	width: 1440px;
 }
+#no{
+	color: red;
+	font-size: 20px;
+	font-weight: 700;
+}
+#yes{
+	color: blue;
+	font-size: 20px;
+	font-weight: 700;
+}
+#goToday{
+	color: black;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 </head>
 <body>
 
@@ -168,9 +189,20 @@ a:active, a:hover {
 	<div class="outer1">
 		<div class="calendar">
 			<div class="title">
-				<a href="<%= contextPath %>/attendance.at?year=<%=year%>&month=<%=month-1%>"><</a>
-				<label><%=year%>년 <%=month%>월</label>
-				<a href="<%= contextPath %>/attendance.at?year=<%=year%>&month=<%=month+1%>">></a>
+				<% if(month == 1){ %>
+					<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year-1%>&month=<%=12%>" onclick="next();"><</a>
+				<% }else{ %>
+					<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=month-1%>" onclick="next();"><</a>
+				<% } %>
+				
+				<label id="yymm"><%=year%>년 <%=month%>월</label>
+				
+				<% if(month == 12){ %>
+					<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year+1%>&month=<%=1%>" onclick="next();">></a>
+				<% }else{ %>
+					<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=month+1%>" onclick="next();">></a>
+				<% } %>
+			
 			</div>
 			
 			<table>
@@ -223,7 +255,7 @@ a:active, a:hover {
 			</table>
 		
 			<div class="footer">
-				<a href="<%= contextPath %>/attendance.at">오늘날짜로</a>
+				<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=tm%>" id="goToday">오늘날짜로</a>
 			</div>
 
 			
@@ -235,7 +267,7 @@ a:active, a:hover {
 
 			<div id="gauge">
 				<div id="gauge2">
-					xx%
+					<%= per %>%
 				</div>
 			</div>
 
@@ -252,6 +284,7 @@ a:active, a:hover {
 
 	<%@ include file="../common/footerbar.jsp" %>
 
+
 	<script>
 
 		function findElementByText(text) {
@@ -266,20 +299,34 @@ a:active, a:hover {
 			return jSpot;
 		}
 
-		$(function(){
-			let a = findElementByText("2");
-			let a1 = findElementByText("3");
-
-			console.log(a.html() + "<br> 지각");
-
-			a.html(a.html() + "<br><br> 결석");
-			a1.html(a1.html() + "<br><br> 결석");
-		});
-
+		$("#gauge2").css("height", "<%= per %>%")
+		
 
 	</script>
-
 	
+	<% for(Attendance at : list){ %>
+	
+		<% if(at.getStatus().equals("Y")){ %>
+			
+			<script type="text/javascript">
+			
+			findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html(findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html() + "<br><br> <div id='yes'>출석</div>");
+			
+			</script>
+			
+	
+		<% }else{ %>
+		
+			<script type="text/javascript">
+			
+			
+			findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html(findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html() + "<br><br> <div id='no'>결석</div>");
+			
+			</script>
+			
+		<% } %>
+
+	<% } %>
 
 </body>
 </html>

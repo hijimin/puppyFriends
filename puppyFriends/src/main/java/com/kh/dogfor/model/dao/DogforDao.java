@@ -235,7 +235,7 @@ public class DogforDao {
 				
 				Attendance at = new Attendance(rset.getInt("attendance_no"),
 									           rset.getString("member_no"),
-									           rset.getString("attendance_date"),
+									           rset.getString("date"),
 									           rset.getString("attendance_status"));
 				
 				list.add(at);

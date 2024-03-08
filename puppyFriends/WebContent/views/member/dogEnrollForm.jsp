@@ -3,10 +3,11 @@
 
 <% 
 	String memberId = (String)request.getAttribute("memberId");
-	String memberPwd = (String)request.getAttribute("memberPwd");
+	String memberPwd = (String)request.getAttribute("memberPwd");		
 	String memberName = (String)request.getAttribute("memberName");
 	String memberEmail = (String)request.getAttribute("memberEmail");
 	String memberPhone = (String)request.getAttribute("memberPhone");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -56,7 +57,7 @@
         
     }
 
-    .enroll-dog-info>div{
+    .dog_gender, .dog_vacine{
         float: left;
         height: 40px;
         width: 50%;
@@ -64,10 +65,21 @@
         padding-top: 8px;
     }
 
+    .dog_size{
+        float:left;
+        height: 40px;
+        width: 33%;
+        text-align: center;
+        padding-top: 8px;
+    }
+
+
     
 </style>
 </head>
 <body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 	 <div class="enroll-form-wrap">
         <div class="enroll-form">
             <div class="enroll-form-header">
@@ -83,10 +95,15 @@
 					<form action="<%= request.getContextPath()%>/insert.me">
 						
 						<input type="hidden" name="memberId" value="<%= memberId %>">
-	                    <input type="hidden" name="memberPwd" value="<%= memberPwd %>">
+						<% if(memberPwd != null) { %>
+	                    	<input type="hidden" name="memberPwd" value="<%= memberPwd %>">
+	                    	
+	                    <% } %>
 	                    <input type="hidden" name="memberName" value="<%= memberName %>">
 	                    <input type="hidden" name="memberEmail" value="<%= memberEmail %>">
-	                    <input type="hidden" name="memberPhone" value="<%= memberPhone %>">
+	                    <% if(memberPhone != null) { %>
+	                    	<input type="hidden" name="memberPhone" value="<%= memberPhone %>">
+	                    <% } %>
                     
 	                    <div class="enroll-member-idpwd" align="center">
 	                        <input type="text" name="dogName" placeholder="반려견 이름 *" required style="width: 250px; height: 25px;"><br>
@@ -98,19 +115,32 @@
 	                    
 	                    <div class="enroll-dog-info">
 	                        <h4 style="margin: 0;">반려견 성별 *</h4>
-	                        <div class="dog_gender1" >
+	                        <div class="dog_gender" >
                                 <input type="radio" id="genderM" name="gender" value="M">남
                             </div>
-	                        <div class="dog_gender2">
+	                        <div class="dog_gender">
                                 <input type="radio" id="genderF" name="gender" value="F">여
                             </div>
+
 	                        <h4 style="margin: 0;">필수예방접종여부 *</h4>
-	                        <div class="dog_vacine1">
+	                        <div class="dog_vacine">
                                 <input type="radio" id="vacineO" name="vaccine" value="Y">O
                             </div>
-	                        <div class="dog_vacine2">
+	                        <div class="dog_vacine">
                                 <input type="radio" id="vacineX" name="vaccine" value="N">X
                             </div>
+
+                            <h4 style="margin: 0;">반려견 크기 *</h4>
+                            <div class="dog_size">
+                                <input type="radio" id="sizeS" name="dogSize" value="S">소형견
+                            </div>
+                            <div class="dog_size">
+                                <input type="radio" id="sizeM" name="dogSize" value="M">중형견
+                            </div>
+                            <div class="dog_size">
+                                <input type="radio" id="siezL" name="dogSize" value="L">대형견
+                            </div>
+
 	                        <h4 style="margin: 0;">반려견 특이사항</h4>
 	                        <textarea name="dogSignificant" id="" cols="34" rows="10" style="resize: none;"></textarea>
 	                    </div>

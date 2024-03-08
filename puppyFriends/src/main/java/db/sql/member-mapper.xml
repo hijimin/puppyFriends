@@ -2,8 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="loginMember">
-		SELECT
-		MEMBER_NO
+   SELECT
+		  MEMBER_NO
 		, MEMBER_ID
 		, MEMBER_PWD
 		, MEMBER_NAME
@@ -12,6 +12,13 @@
 		FROM MEMBER
 		WHERE MEMBER_ID = ?
 		AND MEMBER_PWD = ?
+	</entry>
+	
+	<entry key="idCheck">
+		SELECT
+		       COUNT(*) "COUNT"
+		  FROM MEMBER
+		 WHERE MEMBER_ID = ?
 	</entry>
 
 	<entry key="insertMember">
@@ -44,6 +51,7 @@
 		   , MEMBER_NO
 		   , DOG_NAME
 		   , DOG_VALUE
+		   , DOG_SIZE
 		   , DOG_AGE
 		   , DOG_GENDER
 		   , DOG_VACCINE
@@ -59,11 +67,12 @@
 		   , ?
 		   , ?
 		   , ?
+		   , ?
 		   )
 	</entry>
 	
 	<entry key="selectOrderMember">
-			SELECT
+	SELECT
 	       MEMBER_NO
 	     , MEMBER_NAME
 	     , SUBSTR(MEMBER_EMAIL, 1, INSTR(MEMBER_EMAIL, '@') - 1) "EMAIL1"
@@ -73,4 +82,17 @@
 	  FROM MEMBER
 	 WHERE MEMBER_NO = ?	
 	</entry>
+	
+	<entry key="kakaoLoginMember">
+		SELECT 
+			   MEMBER_NO
+			 , MEMBER_ID
+			 , MEMBER_NAME
+			 , MEMBER_EMAIL
+		  FROM MEMBER
+		 WHERE MEMBER_ID = ?
+		   AND STATUS = 'Y'
+	</entry>
+	
+	
 </properties>

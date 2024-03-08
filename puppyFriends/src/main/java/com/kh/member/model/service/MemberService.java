@@ -20,6 +20,31 @@ public class MemberService {
 		return loginUser;
 	}
 	
+	public int idCheck(String checkId) {
+		Connection conn = getConnection();
+		
+		int count = new MemberDao().idCheck(conn, checkId);
+		
+		close(conn);
+		
+		return count;
+		
+		
+	}
+	
+	public Member kakaoLoginMember(String memberId, String memberName, String memberEmail) {
+		Connection conn = getConnection();
+		
+		Member m = new MemberDao().kakaoLoginMember(conn, memberId, memberName, memberEmail);
+		
+		close(conn);
+		
+		return m;
+	}
+	
+	
+	
+	
 	public int insertMember(Member m, Dog d) {
 		Connection conn = getConnection();
 		int result = new MemberDao().insertMember(conn, m);
@@ -36,6 +61,8 @@ public class MemberService {
 		return result * result2;
 				
 	}
+	
+	
 	
 	public Member selectOrderMember(int userNo) {
 		Connection conn = getConnection();

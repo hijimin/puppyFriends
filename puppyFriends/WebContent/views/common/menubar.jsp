@@ -5,9 +5,10 @@
 <%
 	String contextPath = request.getContextPath(); //  "/Test"
 	
-	Member loginUser = (Member)session.getAttribute("loginUser");
+	Member loginUser = (Member)session.getAttribute("loginUser"); // 일반 로그인 유저
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -200,31 +201,34 @@
 
                     <!-- case1. 로그인 전 -->
                     <% if(loginUser == null) {%>
-                    <form action="<%= contextPath %>/loginform.me" method="post">
+	                    <form action="<%= contextPath %>/loginform.me" method="post">
+	            
+	                        <table align="center">
+	                            
+	                            <tr>
+	                                <th colspan="2">
+	                                    <button type="submit">로그인</button>
+	                                    <button onclick="location.href='<%= contextPath %>/enrollpage.me'" type="button">회원가입</button>
+	                                </th>
+	                            </tr>
+	                        </table>
+	            
+	                    </form>
+                	<% }else {  %>
             
-                        <table align="center">
-                            
-                            <tr>
-                                <th colspan="2">
-                                    <button type="submit">로그인</button>
-                                    <button onclick="location.href='<%= contextPath %>/enrollpage.me'" type="button">회원가입</button>
-                                </th>
-                            </tr>
-                        </table>
-            
-                    </form>
-                	<% }else { %>
-            
-                    <!-- case2. 로그인 후 -->
-                    <div>
-            
-                        <b><%= loginUser.getMemberName() %>님</b>의 방문을 환영합니다 <br><br>
-                        <div align="center">
-                            <a href="<%= contextPath %>/mypage">마이페이지</a>
-                            <a href="<%= contextPath %>/logout">로그아웃</a>
-                        </div>
-            
-                    </div>
+	                    <!-- case2. 로그인 후 -->
+						
+	                    <div>
+	            		
+	                        <b><%= loginUser.getMemberName() %>님</b>의 방문을 환영합니다 <br><br>
+	                        <div align="center">
+	                            <a href="<%= contextPath %>/mypage">마이페이지</a>
+	                            <a href="<%= contextPath %>/logout">로그아웃</a>
+	                        </div>
+	            
+	                    </div>
+	                    
+	                    
             		<% } %>
             
                 </div>
@@ -250,13 +254,13 @@
                    <li class="gallery"><a href="#">갤러리</a></li>
                 </ul>
             </li>
-<<<<<<< HEAD
+
             <li class="goods"><a href="<%= contextPath%>/list.pd?cpage=1">상품</a></li>
             <li class="search"><a href="<%= contextPath %>/noticeList.no?cpage=1">게시판</a>
                 <ul>
                     <li><a href="">공지사항</a></li>
                 </ul>
-=======
+
             <li class="goods"><a href="<%= contextPath %>/list.pd">상품</a></li>
             
             
@@ -265,7 +269,7 @@
             		<li class="noticeBoard"><a href="#">공지사항</a></li>
             		<li class="chattingBoard"><a href="<%= contextPath %>/SelectChatting.ch">모임게시판</a></li>
             	</ul>
->>>>>>> menager
+
             </li>
             
 

@@ -17,8 +17,9 @@ public class Member {
 	private String dogName;
 	private int count;
 	
-	// 회원 조회용 추가2
 	
+	
+	// 회원 조회용 추가2
 	private String email1;
 	private String email2;
 	private String phone1;
@@ -66,12 +67,23 @@ public class Member {
 		this.phone1 = phone1;
 		this.phone2 = phone2;
 	}
+	
+	
+	// kakao 로그인용 
+	public Member(int memberNo, String memberId, String memberName, String memberEmail) {
+		super();
+		this.memberNo = memberNo;
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.memberEmail = memberEmail;
+	}
+	
+	
 
 	public int getCount() {
 		return count;
 	}
 	
-
 
 	public void setCount(int count) {
 		this.count = count;

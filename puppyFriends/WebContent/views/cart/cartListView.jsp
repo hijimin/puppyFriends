@@ -1,10 +1,11 @@
+<%@page import="com.google.gson.Gson"%>
 <%@page import="com.kh.cart.model.vo.Cart"%>
 <%@page import="com.kh.product.model.vo.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<Cart> list = (ArrayList<Cart>)request.getAttribute("list");
+	ArrayList<Cart> list = (ArrayList<Cart>)request.getAttribute("list");	
 
 	// 카트번호, 유저이름, 상품이름, 장바구니담은수량, 원가, 장바구니수량합계, 이미지경로, 상품번호
 	int productCount = list.size();
@@ -809,23 +810,32 @@
         	let buyerAddr;
         	let buyerName;
         	let buyerTel;
-        	let list = '<%= list %>';
-        	let MList;
+        	var MList=0;
+        	
         	
         	var omessage = $("#omessage").val();
         	let iu;
         	let mc;      	
         	let priceStr = '100';
         	let price = parseInt(priceStr.replace(/,/g, ''), 10);
+        	      	         
+        		<%	
+        			ArrayList<Integer> pnoList = new ArrayList<>();
+        			int pno = 0;
+        			for(Cart c :list){
+        				pno = c.getPno();
+        				pnoList.add(pno);
+        			}
+        			
+        			String pnoArrayJSON = new Gson().toJson(pnoList);
+        		%>
+        		
+        		var uniquePnoArray = JSON.parse('<%= pnoArrayJSON %>');
         	
-        	if(list.size == 1){
-        		$.ajax({});
-        	}else{   		
-        		for (let i = 0; i < list.length; i++) {
-                    MList.push(list[i].pno);
-                }
+        		console.log(uniquePnoArray);
 	        	$.ajax({
 	        		url:"manyInsert.co",
+	        		traditional : true,
 	        		data:{
 	        			buyerAddr:rsp.buyer_addr,
 	        			buyerName:rsp.buyer_name,
@@ -834,13 +844,15 @@
 	        			iu:rsp.imp_uid,
 	        			mc:rsp.merchant_uid,
 	        			pr:price,
-	        			pno:MList
+	        			pno:uniquePnoArray
 	        			},
 	        		success:function(result){
 	        			// 성공
+	        		}, error:function(){
+	        			console.log("ajax 통신 실패!");
 	        		}
 	        	})       		
-        	}
+        	
         }
     </script>
 	

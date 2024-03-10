@@ -38,10 +38,12 @@ public class CorderInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		
-		ArrayList<Integer> list = new ArrayList<Integer>(Integer.parseInt(request.getParameter("MList")));
+		String[] list = request.getParameterValues("pno");
 		
 		System.out.println(list);
-	
+		for(int i=0; i<list.length; i++) {
+			System.out.println(list[i]);
+		}
 		//int result = new CorderService().cOrderInsert(list);
 		
 //		response.setContentType("application/json; charset=utf-8");

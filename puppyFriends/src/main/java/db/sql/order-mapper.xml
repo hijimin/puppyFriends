@@ -50,10 +50,19 @@ INSERT
   )
 	</entry>
 	
-	<entry key="orderUpdate">
+	<entry key="orderUpdate1">
 	UPDATE
        P_ORDER
    SET PAYMENT_NO = SEQ_TOSS_PAYMENT.CURRVAL
+ WHERE PRODUCT_NO = ?	
+	</entry>
+	
+	<entry key="orderUpdate2">
+	UPDATE
+       P_ORDER
+   SET PAYMENT_NO = (select * from(select toss_payment_no from toss_payment
+order by toss_payment_no desc)
+where rownum = 1)
  WHERE PRODUCT_NO = ?	
 	</entry>
 	

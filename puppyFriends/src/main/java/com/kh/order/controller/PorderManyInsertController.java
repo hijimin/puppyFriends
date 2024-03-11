@@ -1,8 +1,6 @@
-package com.kh.corder.controller;
+package com.kh.order.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,24 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.kh.cart.model.service.CartService;
-import com.kh.cart.model.vo.Cart;
-import com.kh.corder.model.service.CorderService;
 import com.kh.member.model.vo.Member;
 import com.kh.order.model.service.OrderService;
 import com.kh.order.model.vo.Order;
 
 /**
- * Servlet implementation class CorderInsertController
+ * Servlet implementation class PorderManyInsertController
  */
-@WebServlet("/manyInsert.co")
-public class CorderInsertController extends HttpServlet {
+@WebServlet("/manyInsert.po")
+public class PorderManyInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CorderInsertController() {
+    public PorderManyInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,17 +32,48 @@ public class CorderInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
-		
+		String productNo = "";	
+		int result = 0;
 		String[] list = request.getParameterValues("pno");
+		int many = 998;
 		
 		System.out.println(list);
 		for(int i=0; i<list.length; i++) {
-			System.out.println(list[i]);
-		}
-		//int result = new CorderService().cOrderInsert(list);
+			if(i == 0) {
+				productNo = list[i];
+				many = 999;
+			}else {
+				many = 998;
+			}
+			System.out.println(list[i]);// [2,3]
 		
-//		response.setContentType("application/json; charset=utf-8");
-//		new Gson().toJson(result, response.getWriter());
+		
+		String buyerAddr = request.getParameter("buyerAddr");
+		String buyerName = request.getParameter("buyerName");
+		String buyerTel = request.getParameter("buyerTel");
+		String omg = request.getParameter("omg");
+		
+		String impUid = request.getParameter("iu");
+		String merchantUid = request.getParameter("mc");
+		String price = request.getParameter("pr");
+		
+		Order o = new Order();
+		o.setOrderUser(String.valueOf(userNo));
+		o.setProductNo(String.valueOf(productNo));
+		o.setOrderName(buyerName);
+		o.setOrderAddress(buyerAddr);
+		o.setOrderPhone(buyerTel);
+		o.setOrderReq(omg);
+		
+		
+		result = new OrderService().orderInsert(o, impUid, merchantUid, price, many);
+		
+		
+		
+		}
+		
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(result, response.getWriter());
 	}
 
 	/**

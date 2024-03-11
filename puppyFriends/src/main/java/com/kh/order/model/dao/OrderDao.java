@@ -70,7 +70,26 @@ public class OrderDao {
 	public int orderUpdate(Connection conn, Order o) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("orderUpdate");
+		String sql = prop.getProperty("orderUpdate1");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(o.getProductNo()));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int orderUpdate1(Connection conn, Order o) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("orderUpdate2");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

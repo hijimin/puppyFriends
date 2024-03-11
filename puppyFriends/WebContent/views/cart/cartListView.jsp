@@ -284,7 +284,7 @@
 								
                             </td>
                             <td>기본배송</td>
-                            <td>3,000원</td>
+                            <td>-</td>
                             <td class="mtotal"><%= mprice %>원</td>
                         </tr>                         
                         	<% } %>   
@@ -806,18 +806,14 @@
         }
         
         function test(rsp){
-        	//console.log(rsp)
         	let buyerAddr;
         	let buyerName;
-        	let buyerTel;
-        	var MList=0;
-        	
-        	
-        	var omessage = $("#omessage").val();
+        	let buyerTel;      		
+        	var omessage = $("#omessage").val();  
         	let iu;
         	let mc;      	
-        	let priceStr = '100';
-        	let price = parseInt(priceStr.replace(/,/g, ''), 10);
+        	let amount = $('#totalprice').text();
+        	let price = Number(amount);
         	      	         
         		<%	
         			ArrayList<Integer> pnoList = new ArrayList<>();
@@ -832,22 +828,25 @@
         		
         		var uniquePnoArray = JSON.parse('<%= pnoArrayJSON %>');
         	
-        		console.log(uniquePnoArray);
+        		// console.log(uniquePnoArray); // [2,3]
 	        	$.ajax({
-	        		url:"manyInsert.co",
+	        		url:"manyInsert.po",
 	        		traditional : true,
 	        		data:{
 	        			buyerAddr:rsp.buyer_addr,
 	        			buyerName:rsp.buyer_name,
 	        			buyerTel:rsp.buyer_tel,
+	        			pno:uniquePnoArray,
 	        			omg:omessage,
 	        			iu:rsp.imp_uid,
 	        			mc:rsp.merchant_uid,
 	        			pr:price,
-	        			pno:uniquePnoArray
 	        			},
 	        		success:function(result){
-	        			// 성공
+	        			if(result > 0){
+	        				console.log("결제완료");    
+	        				location.href = '<%= contextPath %>/success.po'
+	        			}
 	        		}, error:function(){
 	        			console.log("ajax 통신 실패!");
 	        		}

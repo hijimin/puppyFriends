@@ -62,9 +62,37 @@
 				<a href="<%= contextPath %>/galleryEnrollForm.ga">사진등록</a>
 				<% } %>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="text" placeholder="강아지 이름을 입력해주세요">
-				<button>검색</button>
+				<input type="text" id="search" placeholder="강아지 이름을 입력해주세요" onkeyup="if(event.keyCode==13) search();">
+				<button onclick="search();">검색</button>
 			</div>
+
+			<script>
+				function search(){
+					$.ajax({
+						url:"search.ga",
+						data:{
+							name: $("#search").val(),
+						},
+						success:function(result){
+							let value = "";
+							for(let i=0; i<result.length; i++){
+								value += "<div class='img' align='center'>" +
+							            "<div class='img-1'>" +
+							            "<img src='" + result[i].filePath + "' style='width: 100%; height: 100%;'>" +
+							            "</div>" +
+							            "<div class='img-2'>" +
+							            "<br>" + result[i].dogNo +
+							            "</div>" +
+							            "</div>";
+							}
+							
+							$("#img-area").html(value);
+						}
+
+
+					})
+				}
+			</script>
 
 			<div id="img-area" >
 				<% for(Image i : list){ %>
@@ -92,8 +120,48 @@
             <% } %>
 			</div>
 
-
 		</div>
+		
+				<!-- Button to Open the Modal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+		  Open modal
+		</button>
+		
+		<script>
+			$(function(){
+				
+				$("#img-area .img")
+				
+				
+			})
+		</script>
+		
+		<!-- The Modal -->
+		<div class="modal" id="myModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">Modal Heading</h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body">
+		        Modal body..
+		      </div>
+		
+		      <!-- Modal footer -->
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		      </div>
+		
+		    </div>
+		  </div>
+		</div>
+		
+		
 
 
 

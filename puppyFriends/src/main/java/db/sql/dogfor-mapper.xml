@@ -88,7 +88,15 @@
  	 WHERE MEMBER_NO = ? 
 </entry>
 
-
+<entry key="searchDog">
+	SELECT 
+	       FILE_PATH || CHANGE_NAME AS "FILE_PATH" 
+	     , CONTENT
+	     , DOG_NAME
+	  FROM IMAGE
+	  JOIN DOG USING (DOG_NO)
+	 WHERE DOG_NAME LIKE '%'||?||'%'
+</entry>
 
 
 

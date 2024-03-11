@@ -97,7 +97,17 @@ import static com.kh.common.JDBCTemplate.*;
 		
 	}
 	
-	
+	public ArrayList<Image> searchDog(String name){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Image> list = new DogforDao().searchDog(conn, name);
+		
+		close(conn);
+		
+		return list;
+		
+	}
 	
 	
 	

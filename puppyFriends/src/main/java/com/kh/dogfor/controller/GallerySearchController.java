@@ -9,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.kh.common.model.vo.Image;
 import com.kh.dogfor.model.service.DogforService;
 import com.kh.member.model.vo.Dog;
 
 /**
- * Servlet implementation class GalleryEnrollFormController
+ * Servlet implementation class GallerySearchController
  */
-@WebServlet("/galleryEnrollForm.ga")
-public class GalleryEnrollFormController extends HttpServlet {
+@WebServlet("/search.ga")
+public class GallerySearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryEnrollFormController() {
+    public GallerySearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,14 +33,14 @@ public class GalleryEnrollFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<Dog> list = new DogforService().selectDog();
-		
-		request.setAttribute("list", list);
-		
-		request.getRequestDispatcher("views/dogfor/galleryEnrollForm.jsp").forward(request, response);
-		
 
+		String name = request.getParameter("name");
+		
+		ArrayList<Image> list = new DogforService().searchDog(name);
+				
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
+		
 	}
 
 	/**

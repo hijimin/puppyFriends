@@ -189,7 +189,7 @@
                         <tbody align="center">
                             <% for(Member m : list) {  %>
                                 <tr>
-                                    <th><input type="checkbox" value="Y" name="deleteMember" onclick="checkList();"></th>
+                                    <th><input type="checkbox" value="<%= m.getMemberId() %>" name="deleteMember" onclick="checkList();"></th>
                                     <td id="detailInfo"><%= m.getMemberNo() %></td>
                                     <td><%= m.getMemberId() %></td>
                                     <td><%= m.getMemberName() %></td>

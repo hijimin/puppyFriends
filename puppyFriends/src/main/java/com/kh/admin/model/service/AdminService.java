@@ -40,19 +40,20 @@ public class AdminService {
 		
 	}
 	
-	public int adminDeleteMember(int memberNo) {
-		Connection conn = getConnection();
-		int result = new AdminDao().adminDeleteMember(conn, memberNo);
-		
-		if(result > 0) {
-			commit(conn);
-		} else {
-		    rollback(conn);
-		}
-		
-		close(conn);
-		return result;
-		
-	}
+	
+	public int[] adminDeleteMember(int[] adminDeleteMember) {
+	    Connection conn = getConnection();
+	    int[] result = new AdminDao().adminDeleteMember(conn, adminDeleteMember);
+
+	    if (result != null) {
+	        commit(conn);
+	    } else {
+	        rollback(conn);
+	    }
+	    close(conn);
+	    return result;
+	} // adminDeleteMember
+	
+	
 
 } // class

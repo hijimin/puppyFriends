@@ -38,7 +38,6 @@ public class Member {
 		this.dogName = dogName;
 		this.memberEmail = memberEmail;
 		this.memberPhone = memberPhone;
-		
 	}
 	
 	

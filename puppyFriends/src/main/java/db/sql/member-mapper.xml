@@ -12,6 +12,7 @@
 		FROM MEMBER
 		WHERE MEMBER_ID = ?
 		AND MEMBER_PWD = ?
+		AND STATUS = 'Y'
 	</entry>
 
 	<entry key="insertMember">

@@ -187,9 +187,10 @@
                     </thead>
                   
                         <tbody align="center">
+                            <form action="adminDelete.me" method="post">
                             <% for(Member m : list) {  %>
                                 <tr>
-                                    <th><input type="checkbox" value="<%= m.getMemberId() %>" name="deleteMember" onclick="checkList();"></th>
+                                    <th><input type="checkbox" value="<%= m.getMemberNo() %>" name="deleteMember"></th>
                                     <td id="detailInfo"><%= m.getMemberNo() %></td>
                                     <td><%= m.getMemberId() %></td>
                                     <td><%= m.getMemberName() %></td>
@@ -198,10 +199,10 @@
                                     <td><%= m.getMemberEmail() %></td>
                                     <td><%= m.getMemberPhone() %></td>
                                 </tr>
-                        <% } %>
+                        	<% } %>
                         
-                            <button type="submit" id="deleteBtn" onclick="sendMember();">강제추방</button>
-
+                            <button type="submit" id="deleteBtn">강제추방</button>
+							</form>
                         </tbody>
                         
                        

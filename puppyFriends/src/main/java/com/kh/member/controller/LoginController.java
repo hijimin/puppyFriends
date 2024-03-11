@@ -36,12 +36,14 @@ public class LoginController extends HttpServlet {
 
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
+
 		
 		
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
 		
 		
 		HttpSession session = request.getSession();
+		
 		
 		if(loginUser == null) {
 	         session.setAttribute("alertMsg", "아이디 또는 비밀번호가 다릅니다");
@@ -54,7 +56,7 @@ public class LoginController extends HttpServlet {
 	         } else if(loginUser != null){
 	            session.setAttribute("loginUser", loginUser);
 	            response.sendRedirect(request.getContextPath());      
-	         }
+	         } 
 	         
 	      }
 		

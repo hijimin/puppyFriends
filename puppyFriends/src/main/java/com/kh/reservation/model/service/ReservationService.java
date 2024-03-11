@@ -46,7 +46,7 @@ public class ReservationService {
 			rollback(conn);
 		}
 		close(conn);
-		
+
 		return result1 * result2 * result3;
 	}
 

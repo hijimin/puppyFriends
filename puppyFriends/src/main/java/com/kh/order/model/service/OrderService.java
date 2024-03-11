@@ -69,5 +69,12 @@ public class OrderService {
 		return result1 * result2 * result3;
 	}
 	
+	public int updateOrderCount(int userNo, int orderCount) {
+		Connection conn = getConnection();
+		int result = new OrderDao().updateOrderCount(conn, userNo, orderCount);
+		close(conn);
+		return result;
+	}
+	
 
 }

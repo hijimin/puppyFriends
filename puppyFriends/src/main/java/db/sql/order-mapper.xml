@@ -66,4 +66,9 @@ where rownum = 1)
  WHERE PRODUCT_NO = ?	
 	</entry>
 	
+	<entry key="updateOrderCount">
+	UPDATE CART
+	   SET CART_AMOUNT = ?
+	</entry>
+	
 </properties>

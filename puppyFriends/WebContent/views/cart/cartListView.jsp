@@ -325,18 +325,30 @@
             		let originalPrice = ppprice / cartCount;
             		
             		
+            		
             		//console.log(ppprice)
             		//console.log(cartAmount)
             		//console.log(originalPrice)
             		
             		let cartCountA = ++cartCount; // 항상 준비해야할 값을 다 뽑고 증가시키자! 증가하지 전위연산으로!        	
-	        		//console.log(value); // 21,700원
 	        		 $(this).parent().parent().siblings('.mtotal').text(originalPrice * cartCountA + "원");
 					let apple = originalPrice
             		//console.log(plusList.index(this));
             		//inputList.eq(plusList.index(this)).val();
             		
             		plusTest(plusList.index(this),apple); // 내가 클릭한 요소가 plusList에서 몇번째 요소인지?
+            				
+					$.ajax({
+            			url:"ocount.po",
+            			data:{
+            				count:cartCount          				
+            			},
+            			success:function(result){
+            				location.reload();
+            			}, error:function(){
+            				console.log("ajax 통신 실패!");
+            			}	
+            		});	
             	})
 	        		
             	$(minusList).click(function(){                     		
@@ -389,9 +401,14 @@
 		                    	//$("#totalprice").text(Number(price * cartAmount));	
 		                    $("#totalprice").text(Number(totalPrice)+Number(apple));
 		                	}                  
-		                }
-	            	
+		                }            	
             </script>
+            
+            <script>
+            
+            
+            </script>
+            
             
             
            

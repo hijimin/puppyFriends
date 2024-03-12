@@ -181,7 +181,7 @@
             
             <div class="text" align="right"> <!-- 오른쪽 맵 -->
                 <div class="period">기간 : <%= h.getHotelStart() %> ~ <%= h.getHotelEnd() %> </div> <br><br>
-                <div>(2 / <%= h.getdNumber() %>) , <%= h.getHotelSize() %> </div>
+                <div>(2-결제완료count 필요 / <%= h.getdNumber() %>) , <%= h.getHotelSize() %> </div>
                 <div class="introduce">
                     <tr>
                         <td>

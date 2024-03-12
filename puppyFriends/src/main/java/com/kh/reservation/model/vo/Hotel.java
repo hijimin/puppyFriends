@@ -24,7 +24,18 @@ public class Hotel {
   
    private String dogSize;
 
-   
+	private int fileNo;
+	private int refBoardNo;
+	private int imageType;
+	private String filePath;
+	private int fileLevel;
+	private String fileName;
+	private String changeName;
+	private Date imageUpdate;
+	private String dogNo;
+	private String content; 
+	private String titleImg;
+
    
    public Hotel() {}
 
@@ -42,8 +53,6 @@ public class Hotel {
 
    // selectHotelDetail
   
-   
-  
 	public Hotel(int hotelNo, int hotelWriter, String hotelName, String hotelText, String hotelSize, int dNumber,
 		Date hotelStart, Date hotelEnd, String memberId) {
 	super();
@@ -58,8 +67,6 @@ public class Hotel {
 	this.memberId = memberId;
 }
 
-	
-   
       
    // HotelEnrollController
 	public Hotel(int hotelNo, int hotelWriter, String hotelName, String hotelText, String hotelSize, int dNumber) {
@@ -75,6 +82,116 @@ public class Hotel {
 
 	
 	
+	public int getFileNo() {
+		return fileNo;
+	}
+
+
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
+	}
+
+
+	public int getRefBoardNo() {
+		return refBoardNo;
+	}
+
+
+	public void setRefBoardNo(int refBoardNo) {
+		this.refBoardNo = refBoardNo;
+	}
+
+
+	public int getImageType() {
+		return imageType;
+	}
+
+
+	public void setImageType(int imageType) {
+		this.imageType = imageType;
+	}
+
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+
+	public int getFileLevel() {
+		return fileLevel;
+	}
+
+
+	public void setFileLevel(int fileLevel) {
+		this.fileLevel = fileLevel;
+	}
+
+
+	public String getFileName() {
+		return fileName;
+	}
+
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+
+	public Date getImageUpdate() {
+		return imageUpdate;
+	}
+
+
+	public void setImageUpdate(Date imageUpdate) {
+		this.imageUpdate = imageUpdate;
+	}
+
+
+	public String getDogNo() {
+		return dogNo;
+	}
+
+
+	public void setDogNo(String dogNo) {
+		this.dogNo = dogNo;
+	}
+
+
+	public String getContent() {
+		return content;
+	}
+
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
+	public String getTitleImg() {
+		return titleImg;
+	}
+
+
+	public void setTitleImg(String titleImg) {
+		this.titleImg = titleImg;
+	}
+
+
 	public int getHotelWriter() {
 		return hotelWriter;
 	}

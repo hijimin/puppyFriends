@@ -162,7 +162,7 @@
     
     <div class="outer">
         <div class="outer_name">
-            <p align="right">프로그램 > 호텔 예약 </p> 
+            <p align="right">프로그램 &gt; 호텔 예약 </p> 
         </div>
 
         <div class="select_tool">
@@ -180,7 +180,7 @@
                     <% for(Hotel h : list){ %>
                         <div class="thumbnail">
                                 <input type="hidden" value="<%= h.getHotelNo() %>" >
-                                    <img src=" # " width="250px" height="190px"> <br> 이미지 들어가게
+                                    <img src="<%= contextPath %> " width="250px" height="190px"> <br> 이미지 들어가게
                                     <div>
                                         호텔명 : <%= h.getHotelName() %> <br> 
                                         소개 or 사이즈 전용 : <%= h.getHotelSize() %> <br>

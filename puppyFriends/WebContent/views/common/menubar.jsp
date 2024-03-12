@@ -255,10 +255,6 @@
                 </ul>
             </li>
 
-           
-                
-                    <li><a href="">공지사항</a></li>
-
             <li class="goods"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a></li>
             
             

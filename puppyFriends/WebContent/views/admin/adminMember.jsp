@@ -207,8 +207,7 @@
                        
                     
                 </table>
-                
-                
+                                
 
 				<script>
 					$(function(){
@@ -217,18 +216,24 @@
 						})
 					})
 					
-					
-					    function deleteConfirm() {
-					        var result = confirm("해당 회원을 삭제 하시겠습니까?");
-						        
-						       if(result){
-						            document.getElementById("deleteForm").submit();
-						            alert("삭제 완료되었습니다!");
-						        } else {							        	
-						        	alert("취소 되었습니다.");
-						        }
-							     
-						}
+				    function deleteConfirm() {
+						
+				        var check = $("input[type=checkbox]").is(":checked") == true;
+						  if(!check){ // 아무것도 체크안함
+					        	alert("체크박스를 선택 후 추방버튼을 눌러주세요");
+					        	return;
+					        }       
+						  
+				        var result = confirm("해당 회원을 삭제 하시겠습니까?");
+					       if(result){
+					            document.getElementById("deleteForm").submit();
+					            alert("삭제 완료되었습니다!");
+					        } else {							        	
+					        	alert("취소 되었습니다.");
+					        }
+				        
+						     
+					}
 					
 				</script>
 				

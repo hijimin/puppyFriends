@@ -34,18 +34,28 @@ public class Dog {
 		this.dogNo = dogNo;
 		this.dogName = dogName;
 	}
-
+	
+	public Dog(int dogNo, int memberNo, String dogName, String dogValue, int dogAge, String dogGender,
+			String dogVaccine, String dogSignificant) {
+		super();
+		this.dogNo = dogNo;
+		this.memberNo = memberNo;
+		this.dogName = dogName;
+		this.dogValue = dogValue;
+		this.dogAge = dogAge;
+		this.dogGender = dogGender;
+		this.dogVaccine = dogVaccine;
+		this.dogSignificant = dogSignificant;
+	}
 
 	public int getDogNo() {
 		return dogNo;
 	}
-
-
+	
 	public void setDogNo(int dogNo) {
 		this.dogNo = dogNo;
 	}
-
-
+	
 	public int getMemberNo() {
 		return memberNo;
 	}

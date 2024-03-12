@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
     
     <%
-    	ArrayList<Chatting> list = (ArrayList<Chatting>)request.getAttribute("list");
+       ArrayList<Chatting> list = (ArrayList<Chatting>)request.getAttribute("list");
     %>
     
 <!DOCTYPE html>
@@ -13,8 +13,8 @@
 <meta charset="UTF-8">
 <title>지역별 채팅</title>
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-	
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+   
   <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 
@@ -34,15 +34,15 @@
 </head>
 <body>
 
-	<%@ include file="../common/menubar.jsp" %>
-	
-	
-	  <div class="outer">
+   <%@ include file="../common/menubar.jsp" %>
+   
+   
+     <div class="outer">
     
             <div class="content">
                 <table class="list-area" align="center"  style="border: 1px solid gray;">
                     <br>
-                    <h1>만남게시판</h1>
+                    <h1>PuppyFriendsTalk</h1>
                     <br><br>
                     <thead align="center">
                         <tr>
@@ -54,26 +54,20 @@
                         
                     </thead>
                   
-                  <% for(Chatting ch : list) { %>
+                
                         <tbody align="center">
+                           <% for(Chatting ch : list) { %>
                                 <tr>
-                                    <td id="detailInfo"><%= ch.getChattingNo() %></td>
+                                    <td><%= ch.getChattingNo() %></td>
                                     <td><%= ch.getChattingCity() %></td>
                                     <td><%= ch.getChattingDate() %></td>  
-                                    <td><a href="<%= contextPath %>/chatForm.ch" class="btn bnt-sm btn-secondary">입장</a></td>                                
+                                    <td><a href="<%= contextPath %>/chatForm.ch?chcity=<%= ch.getChattingCity() %>" class="btn bnt-sm btn-secondary">입장</a></td>                                   
                                 </tr>
-
+                              <% } %>
                         </tbody>
-                     <% } %>   
+                     
                 </table>
                 
-				<script>
-					$(function(){
-						$(".list-area>tbody>tr>#detailInfo").click(function(){
-							location.href='<%= contextPath %>/adminDog.me?mno=' + $(this).text();
-						})
-					})
-				</script>
 
                 <br><br>
                 
@@ -83,11 +77,11 @@
         
         
     </div>
-	
-	
-	
-	
-	<%@ include file="../common/footerbar.jsp" %>
+   
+   
+   
+   
+   <%@ include file="../common/footerbar.jsp" %>
 
 </body>
 </html>

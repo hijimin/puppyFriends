@@ -270,7 +270,6 @@ a:active, a:hover {
 			let a = findElementByText("2");
 			let a1 = findElementByText("3");
 
-			console.log(a.html() + "<br> 지각");
 
 			a.html(a.html() + "<br><br> 결석");
 			a1.html(a1.html() + "<br><br> 결석");

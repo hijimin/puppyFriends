@@ -500,11 +500,15 @@ body {
 			</div>
 
 			<!-- 상품상세조회 script -->
-			<script>              	
+			<script>
+                	// function pdtest(){
+                	// 	// location.href ="<%=contextPath%>/detail.pd?pno="+$(".content2_3c input").val();
+                	// }
+                	
                 	$(function(){               		
                 		$(".content2_3c").click(function(){
-                			location.href ='<%=contextPath%>/detail.pd?pno=' + $(this).children('input').val();
-									});
+                			location.href ='"<%=contextPath%>/detail.pd?pno=" + $(this).children(input).val()';
+									})
 				})
 			</script>
 

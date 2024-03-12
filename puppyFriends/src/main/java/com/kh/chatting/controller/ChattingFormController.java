@@ -36,15 +36,23 @@ public class ChattingFormController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
-		ArrayList<Chatting> list = new ChattingService().ChattingForm(memberId);
+		String chattingCity = request.getParameter("chcity");
 		
 		
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/chatting/boardChattingClient.jsp").forward(request, response);
+		Chatting chat = new ChattingService().ChattingForm(memberId);
+		//int result = 1;	
+
+		//if(chat == null) { // 데이터 없음
+			//result = new ChattingService().insertChat();
+		//}
 		
-		
-		
-	}
+		//if(result > 0) {
+				request.setAttribute("chat", chat);		
+				request.getRequestDispatcher("views/chatting/boardChattingClient.jsp").forward(request, response);	
+				
+		//}	
+			
+	} // doGet
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

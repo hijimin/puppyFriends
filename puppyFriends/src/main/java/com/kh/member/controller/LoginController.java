@@ -36,6 +36,7 @@ public class LoginController extends HttpServlet {
 
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
+
 		
 		
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
@@ -43,20 +44,21 @@ public class LoginController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
+		
 		if(loginUser == null) {
-			session.setAttribute("alertMsg", "아이디 또는 비밀번호가 다릅니다");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/login.jsp");
-			view.forward(request, response);
-		} else {
-			if(loginUser.getMemberId().equals("ADMIN")) {
-				session.setAttribute("loginUser", loginUser);
-				response.sendRedirect(request.getContextPath() + "/views/admin/adminMain.jsp");
-			} else if(loginUser != null){
-				session.setAttribute("loginUser", loginUser);
-				response.sendRedirect(request.getContextPath());		
-			}
-			
-		}
+	         session.setAttribute("alertMsg", "아이디 또는 비밀번호가 다릅니다");
+	         RequestDispatcher view = request.getRequestDispatcher("views/common/login.jsp");
+	         view.forward(request, response);
+	      } else {
+	         if(loginUser.getMemberId().equals("ADMIN")) {
+	            session.setAttribute("loginUser", loginUser);
+	            response.sendRedirect(request.getContextPath() + "/views/admin/adminMain.jsp");
+	         } else if(loginUser != null){
+	            session.setAttribute("loginUser", loginUser);
+	            response.sendRedirect(request.getContextPath());      
+	         } 
+	         
+	      }
 		
 		
 		// if(loginUser == null) {

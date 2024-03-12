@@ -154,13 +154,13 @@
                 <ul style="list-style-type: none;">
                     <li><a href="">&nbsp;공지사항</a></li>
                     <br><br><br><br>
-                    <li><a href="adminMember.jsp">&nbsp;&nbsp;&nbsp;&nbsp;회원</a></li>
+                    <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;회원</a></li>
                     <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;수업</a></li>
                     <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;호텔</a></li>
                     <br><br><br><br>
-                    <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;상품</a></li>
+                    <li><a href="<%= contextPath %>/list.pd?cpage=1">&nbsp;&nbsp;&nbsp;&nbsp;상품</a></li>
                     <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;게시판</a></li>
                 </ul>
@@ -187,10 +187,10 @@
                     </thead>
                   
                         <tbody align="center">
-                            
+                            <form id="deleteForm" action="adminDelete.me" method="post"  onsubmit="return confirmDelete()">
                             <% for(Member m : list) {  %>
                                 <tr>
-                                    <th><input type="checkbox" value="Y" name="deleteMember" onclick="checkList();"></th>
+                                    <th><input type="checkbox" value="<%= m.getMemberNo() %>" name="deleteMember"></th>
                                     <td id="detailInfo"><%= m.getMemberNo() %></td>
                                     <td><%= m.getMemberId() %></td>
                                     <td><%= m.getMemberName() %></td>
@@ -199,10 +199,9 @@
                                     <td><%= m.getMemberEmail() %></td>
                                     <td><%= m.getMemberPhone() %></td>
                                 </tr>
-                        <% } %>
-                        
-                            <button type="submit" id="deleteBtn" onclick="sendMember();">강제추방</button>
-
+                        	<% } %>
+							</form>
+                            <button type="submit" id="deleteBtn" onclick="deleteConfirm()">강제추방</button>
                         </tbody>
                         
                        
@@ -217,8 +216,23 @@
 							location.href='<%= contextPath %>/adminDog.me?mno=' + $(this).text();
 						})
 					})
+					
+					
+					    function deleteConfirm() {
+					        var result = confirm("해당 회원을 삭제 하시겠습니까?");
+						        
+						       if(result){
+						            document.getElementById("deleteForm").submit();
+						            alert("삭제 완료되었습니다!");
+						        } else {							        	
+						        	alert("취소 되었습니다.");
+						        }
+							     
+						}
+					
 				</script>
-
+				
+			
                 <br><br>
                 
                 <div class="paging-area" align="center">

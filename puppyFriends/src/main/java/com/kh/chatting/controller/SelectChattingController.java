@@ -34,8 +34,6 @@ public class SelectChattingController extends HttpServlet {
 		
 		ArrayList<Chatting> list = new ChattingService().selectChatting();
 		
-		
-		
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/chatting/boardChatting.jsp").forward(request, response);
 		

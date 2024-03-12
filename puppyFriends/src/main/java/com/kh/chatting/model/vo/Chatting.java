@@ -10,6 +10,7 @@ public class Chatting {
 	private Date chattingDate; 
 	private String chattingCheck; 
 	private String memberId;
+	private int chattingCount;
 	
 	public Chatting() {}
 
@@ -26,10 +27,9 @@ public class Chatting {
 	
 	
 	
-	public Chatting(int chattingNo, String chattingCity, Date chattingDate, String chattingCheck, String memberId) {
+	public Chatting(int chattingNo, Date chattingDate, String chattingCheck, String memberId) {
 		super();
 		this.chattingNo = chattingNo;
-		this.chattingCity = chattingCity;
 		this.chattingDate = chattingDate;
 		this.chattingCheck = chattingCheck;
 		this.memberId = memberId;
@@ -47,6 +47,23 @@ public class Chatting {
 		this.chattingDate = chattingDate;
 		this.chattingCheck = chattingCheck;
 	}
+	
+	public Chatting(String chattingCity, Date chattingDate, String chattingCheck, int chattingCount) {
+		super();
+		this.chattingCity = chattingCity;
+		this.chattingDate = chattingDate;
+		this.chattingCheck = chattingCheck;
+		this.chattingCount = chattingCount;
+	}
+	
+	public int getChattingCount() {
+		return chattingCount;
+	}
+
+	public void setChattingCount(int chattingCount) {
+		this.chattingCount = chattingCount;
+	}
+
 
 	public int getChattingNo() {
 		return chattingNo;
@@ -100,9 +117,10 @@ public class Chatting {
 	public String toString() {
 		return "Chatting [chattingNo=" + chattingNo + ", chattingMemberNo=" + chattingMemberNo + ", chattingCity="
 				+ chattingCity + ", chattingDate=" + chattingDate + ", chattingCheck=" + chattingCheck + ", memberId="
-				+ memberId + "]";
+				+ memberId + ", chattingCount=" + chattingCount + "]";
 	}
 
+	
 	
 	
 	

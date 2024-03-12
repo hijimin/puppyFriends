@@ -22,15 +22,18 @@ public class ChattingService {
 
 
 
-	public ArrayList<Chatting> ChattingForm(String memberId){
+	public Chatting ChattingForm(String memberId){
 		Connection conn = getConnection();
-		ArrayList<Chatting> list = new ChattingDao().ChattingForm(conn, memberId);
+		Chatting chat = new ChattingDao().ChattingForm(conn, memberId);
 		
 		close(conn);
-		return list;
+		return chat;
 		
 	} // ChattingForm
-
+	
+	
+	
+	
 
 
 }

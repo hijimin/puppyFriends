@@ -97,13 +97,18 @@
             margin-left: 170px;
         }
         
+        .headerbar>h1>a{
+        	text-decoration: none;
+        	color:white;
+        }
+        
     </style>
 </head>
 <body>
 
    <div class="outer">
         <div class="headerbar">
-                <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 760px;">PuppyFriends Manager</h1>
+                <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 760px;"><a href="<%= contextPath %>">PuppyFriends Manager</a></h1>
         </div>
     
         <div class="mid">
@@ -119,7 +124,7 @@
                     <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;호텔</a></li>
                     <br><br><br><br>
-                    <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;상품</a></li>
+                    <li><a href="<%= contextPath %>/list.pd?cpage=1">&nbsp;&nbsp;&nbsp;&nbsp;상품</a></li>
                     <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;게시판</a></li>
                 </ul>
@@ -134,8 +139,6 @@
         
     </div>
 
-</body>
-</html>
 
 </body>
 </html>

@@ -93,7 +93,6 @@ public class AdminDao {
 									));
 			}
 			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally{
@@ -142,26 +141,34 @@ public class AdminDao {
 		
 	} // adminDogInfo()
 	
-	public int adminDeleteMember(Connection conn, int memberNo) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("adminDeleteMember");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, memberNo);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-		
-	}
+	public int[] adminDeleteMember(Connection conn, int[] adminDeleteMember) {
+        int[] result = null;
+        PreparedStatement pstmt = null;
+        String sql = prop.getProperty("adminDeleteMember");
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            for (int i = 0; i < adminDeleteMember.length; i++) {
+                pstmt.setInt(1, adminDeleteMember[i]);
+                pstmt.executeUpdate();
+            }
+            
+            result = adminDeleteMember;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        return result;
+        
+    } // adminDeleteMember
 	
 }

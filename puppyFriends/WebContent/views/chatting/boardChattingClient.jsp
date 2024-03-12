@@ -1,185 +1,217 @@
 <%@page import="com.kh.chatting.model.vo.Chatting"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <% 
-       ArrayList<Chatting> list = (ArrayList<Chatting>)request.getAttribute("list");
-       // 채팅방번호, 회원 아이디, 모임도시, 채팅날짜, 참여여부
-    %>
-    
+<% 
+   Chatting chat = (Chatting)request.getAttribute("chat");
+   // 채팅방번호, 회원 아이디, 모임도시, 마지막채팅날짜, 참여여부
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>강남구</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-   
-    <!-- jQuery library -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+<title>PuppyFriendsFamily</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<style>
+    .chat-window {
+        width: 806px;
+        height: 700px;
+        overflow: hidden;
+        padding: 10px;     
+        padding-bottom:40px;
+        padding-left:20px;
+        padding-right:20px;    
+        border:2px solid rgb(255, 222, 239);
+        border-radius: 10px;
+        border-bottom-left-radius:0%;
+        border-bottom-right-radius:0%;
+        background-color: rgb(255, 222, 239);
+        padding-top: 0%;
+    }
 
-    <!-- Popper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     
-    <style>
-        .chat-window {
-            border: 1px solid black;
-            width: 400px;
-            height: 300px;
-            overflow-y: scroll;
-            padding: 10px;            
-        }
-        
-        .chat-message {
-            padding: 5px 10px;
-            margin-bottom: 5px;
-            border-radius: 10px;
-        }
-        
-        .my {
-            text-align: right;
-            margin-left: auto; /* 자신의 채팅을 오른쪽으로 이동 */
-            padding-right:35px;
-        }
-        
-        .myChat{
-        	background-color: rgb(255, 222, 239);
-            margin-left: auto; 
-            margin-right:61px;
-            width:300px;
-            padding-left:10px;
-        	padding-right:10px;
-        	padding-top: 3px;
-        	padding-bottom:3px;      
-            margin-top:5px;
-            text-align: right;
-            width: fit-content; /* 텍스트 길이에 맞게 자동으로 늘어나도록 설정 */
-            max-width: 400px;
-       	    white-space: pre-wrap; /* 줄바꿈 유지 */
-            word-wrap: break-word; /* 긴 단어 자동 줄바꿈 */
-        }
-        
-        
-        .others {
-            text-align: left;
-            margin-right: auto; /* 다른 사용자의 채팅을 왼쪽으로 이동 */
-            padding-left:25px;
-        }
-        
-        .othersChat{
-            margin-right: auto; 
-            margin-left:80px;
-        	background-color: #d4edda;
-        	color: #495057;
-        	padding-left:10px;
-        	padding-right:10px;
-        	padding-top: 3px;
-        	padding-bottom: 3px;
-        	width:300px;
-        	margin-top:5px;
-        	width: fit-content; /* 텍스트 길이에 맞게 자동으로 늘어나도록 설정 */
-        	max-width: 400px;
-        	white-space: pre-wrap; /* 줄바꿈 유지 */
-        	word-wrap: break-word; /* 긴 단어 자동 줄바꿈 */
-        }
-        
-        .chatting-area{
-            margin-left: 500px;
-        }
-        
-        .chatMessage{
-        	margin-left:1000px;
-        }
-       
-        .chat-window{
-            padding: 0%;
-            width: 800px;
-            height: 700px;
-            padding-bottom: 30px;
-            padding-top:20px;
-        }
-        
-        
-        .chatWindow:scroll{
-        	display:none;
-        }
-        
-        .send-btn{
-        	line-height: 30px;
+    .chat-message {
+          line-height: 30px;
+            display: block;
+            float: left;
+            border: none;
+            padding-bottom: 0%;
+            background-color: rgb(255, 222, 239);
+            margin-left: 1px;     
+    }
+    
+    .my {
+        text-align: right;
+        margin-right:35px;
+        margin-left: auto; /* 자신의 채팅을 오른쪽으로 이동 */
+    }
+    
+    .mych {
+        text-align: right;
+        margin-right:20px;
+        margin-left: auto; /* 자신의 채팅을 오른쪽으로 이동 */
+    }
+    
+    .otch{
+       text-align: left;
+        margin-left: auto;
+    }
+    
+    .myChat {
+        background-color: yellow;
+        margin-left: auto;
+        margin-right: 15px;
+        padding: 8px;
+        border-radius: 10px;
+        display: inline-block;
+        text-align: left;  
+        max-width: 400px;
+        word-wrap: break-word;         
+    }
+    
+    .others {
+        text-align: left;
+        margin-right: auto; /* 다른 사용자의 채팅을 왼쪽으로 이동 */
+    }
+    
+    .othersChat {
+        background-color: #EDEDED;
+        margin-right: auto;
+        margin-left: 60px;
+        padding: 8px;
+        border-radius: 10px;
+        display: inline-block;
+        max-width: 400px;
+        word-wrap: break-word;   
+    }
+    
+    .message-time {
+        display: inline-block;
+        font-size: 12px;
+        color: #888888;
+        margin-right: 6px; /* 시간과 채팅 메시지 사이의 간격 조정 */
+        margin-left: 6px;
+    }
+    
+     .send-btn{
+            line-height: 30px;
             display: block;
             float: left;
             border: none;
             padding-bottom: 0%;
             background-color: rgb(255, 222, 239);
             margin-left: 1px;
+            color:rgb(255, 118, 189);     
+            border-bottom-right-radius: 10px;
+            border-right: 2px solid rgb(255, 222, 239);
+            border-bottom: 2px solid rgb(255, 222, 239);
+            border-left: 1px solid rgb(255, 222, 239);
+            border-top: none;
         }
 
+        .chatWindow:scroll{
+           display:none;
+        }
+
+        .chatting-send{
+                margin-left: 60px;
+                margin-top: 90px;
+            }
+      
         #chatMessage{
-            display: block;
-            float: left;
-            border: 1px solid gray;
-            border-right: none;
+            border:1px solid rgb(255, 222, 239);
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            
         }
-
-
-
-    </style>
-    
-    <script>
-        var serverUrl = "ws://" + window.location.hostname + ":" + window.location.port + "${pageContext.request.contextPath}/ChatingServer1";
-        var webSocket = new WebSocket(serverUrl);
-        
-        <% for(Chatting chu : list) { %>
-        $(function() {
-                  webSocket.onmessage = function(event) {
-                var message = JSON.parse(event.data);
-                var chatWindow = $("#chatWindow");
-                var messageContent = message.content;
-                
-                if (message.sender == "<%= list.get(0).getMemberId() %>") {
-                    chatWindow.append("<br>" +"<div class='my'>" + "My" + "<br>" + "</div>" + "<div class='myChat'>" + messageContent + "</div>");
-                } else {
-                    chatWindow.append("<br>" + "<div class='others'>" + message.sender + "<br>" + "</div>" + "<div class='othersChat'>" + messageContent +"</div>");
-                }
-                
-                chatWindow.scrollTop(chatWindow.prop("scrollHeight"));
-            };
-        });
-        
        
-        function sendMessage() {
-            var chatMessage = $("#chatMessage");
-            console.log('<%= chu.getMemberId() %>')
-            var message = {
-                sender: "<%= chu.getMemberId() %>",
-                content: chatMessage.val()
-                
-            };
-        
-            webSocket.send(JSON.stringify(message));
-            chatMessage.val("");
-            chatMessage.focus();
+       #chatMessage:focus{
+            outline-color: rgb(255, 118, 189);  
         }
-      <% } %>
-    </script>
+        
+        h1{
+            color: white;
+        }
+
+        hr{
+             background-color: rgb(255, 118, 189); 
+        }
+
+       
+        
+    
+</style>
 </head>
 <body>
 
    <%@ include file="../common/menubar.jsp" %>
 
-	<div class="chatting-area">
-	    <div id="chatWindow" class="chat-window"></div>
-	    <br>
-	   <div class="text-send"> 
-	    <textarea type="text" id="chatMessage" rows="1" cols="100"  onkeyup="if(event.keyCode==13) sendMessage();"></textarea>
-	    <button class="send-btn" onclick="sendMessage()">전송</button>
-   	  </div>
+
+    <div class="chatting-send">
+        <div id="chattingMsg" class="col-md-6 offset-md-3">     
+            <div class="chat-window" id="chatWindow" align="center"></div>
+            <div class="text-send d-flex"> 
+                <textarea type="text" id="chatMessage" rows="1" cols="100" onkeyup="if(event.keyCode==13) sendMessage();"></textarea>
+                <button class="send-btn" onclick="sendMessage()">전송</button>
+            </div>
+        </div>
     </div>
     
+    
 
-    <br><br><br><br><br><br><br><br><br><br>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+<script>
+    var serverUrl = "ws://" + window.location.hostname + ":" + window.location.port + "${pageContext.request.contextPath}/ChatingServer";
+    var webSocket = new WebSocket(serverUrl);
+    
+    function sendMessage() {
+        var chatMessage = $("#chatMessage").val().trim(); 
+        if (chatMessage !== "") {
+            var message = {
+                sender: "<%= chat.getMemberId() %>",
+                content: chatMessage
+            };
+
+            webSocket.send(JSON.stringify(message));
+            $("#chatMessage").val(""); 
+            $("#chatMessage").focus();
+        }
+    }
+    
+    $(function() {
+        webSocket.onmessage = function(event) {
+            var message = JSON.parse(event.data);
+            var chatWindow = $("#chatWindow");
+            var messageContent = message.content;
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var currentTime = hours < 12 ? "오전" : "오후";
+            hours = hours % 12; 
+            hours = hours ? hours : 12;
+            var currentTime =  currentTime + " " + hours + ":" + (minutes < 10 ? '0' : '') + minutes;
+            
+            if (message.sender == "<%= chat.getMemberId() %>") {
+                chatWindow.append("<br>" + "<div class='mych'>" +  "My" + "<br>" + "</div>" + "<div class='my'><span class='message-time'>" + currentTime + "</span><div class='myChat'>" + messageContent + "</div></div>");
+            } else {
+                chatWindow.append( "<br>" + "<div class='otch'>" + message.sender + "</div>" + "<div class='others'><div class='othersChat'>" + messageContent + "</div><span class='message-time'>" + currentTime + "</span></div>");
+            }
+            
+            chatWindow.scrollTop(chatWindow.prop("scrollHeight"));
+        };
+    });
+
+    // .chatWindow:scroll{
+    //        display:none;
+    //     }
+
+    
+
+</script>
+
+
+<br><br><br><br><br><br>
 </body>
 </html>

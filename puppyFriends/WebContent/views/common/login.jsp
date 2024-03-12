@@ -3,6 +3,9 @@
     
 <%
 	String alertMsg = (String)session.getAttribute("alertMsg");
+
+	String status = (String)session.getAttribute("status");
+
 %>
 <!DOCTYPE html>
 <html>

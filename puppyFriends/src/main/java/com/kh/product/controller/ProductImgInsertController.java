@@ -71,8 +71,8 @@ public class ProductImgInsertController extends HttpServlet {
 			int result = new ProductService().insertPdBoard(p, list);
 			
 			if(result > 0) {
-				response.sendRedirect(request.getContextPath());
-			}
+				response.sendRedirect(request.getContextPath() + "/list.pd?cpage=1");
+			} 
 			
 		}
 	}

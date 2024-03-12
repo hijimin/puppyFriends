@@ -39,6 +39,7 @@ private Properties prop = new Properties();
 			
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userPwd);
+
 			
 			rset = pstmt.executeQuery();
 			

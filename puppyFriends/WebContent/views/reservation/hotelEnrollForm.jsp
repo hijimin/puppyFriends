@@ -59,7 +59,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       }
 
       .photoImg1 {
-        border: 2px solid rgb(255, 222, 239);
+        /* border: 2px solid rgb(255, 222, 239); */
         margin: 20% 16%;
         width: 50%;
         height: 300px;
@@ -70,11 +70,13 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         height: auto;
       }
       .photoImg_input {
+        transition: transform 0.3s ease-in-out;
         border: 2px solid rgb(255, 222, 239);
         width: 40px;
         height: 40px;
         display: inline-block;
       }
+      .photoImg_input:hover {transform: scale(1.1);}
 
       .blank1 {
         left: 50%;
@@ -148,14 +150,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <div class="photo">
           <div class="photo_pt">
             <p>&lt;이미지 미리보기&gt;</p>
-             
-  
-
-              
+                           
             <div class="photoImg1">
-              <img class="photoImg" id="titleImg" style="width: 100%" src="#"/>
-              <img class="photoImg" style="width: 100%" src="#" />
-              <img class="photoImg" style="width: 100%" src="#" />
+              <img class="photoImg" id="previewTitleImg" style="width: 100%" src="#"/>
+              <img class="photoImg" id="previewContentImg1" style="width: 100%" src="#" />
+              <img class="photoImg" id="previewContentImg2" style="width: 100%" src="#" />
             </div>
             
             
@@ -321,6 +320,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           </div>
           
           <script>
+          // 금액 : 1,000 표시되게 하는
 			function formatInput(inputElement) {
 			  // 숫자 이외의 문자를 제거
 			  let value = inputElement.value.replace(/\D/g, '');
@@ -349,26 +349,33 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   switch (num) {
                     case 1:
                       $("#titleImg").attr("src", e.target.result);
+                      $("#previewTitleImg").attr("src", e.target.result); // 미리보기 이미지 업데이트
                       break;
                     case 2:
                       $("#contentImg1").attr("src", e.target.result);
+                      $("#previewContentImg1").attr("src", e.target.result);
+                      
                       break;
                     case 3:
                       $("#contentImg2").attr("src", e.target.result);
+                      $("#previewContentImg2").attr("src", e.target.result);
                       break;
                   }
-                };
+                }
               } else {
                 // 선택 파일 취소 시 미리보기도 취소
                 switch (num) {
                   case 1:
                     $("#titleImg").attr("src", null);
+                    $("#previewTitleImg").attr("src", null);
                     break;
                   case 2:
                     $("#contentImg1").attr("src", null);
+                    $("#previewContentImg1").attr("src", null);
                     break;
                   case 3:
                     $("#contentImg2").attr("src", null);
+                    $("#previewContentImg2").attr("src", null);
                     break;
                 }
               }

@@ -12,7 +12,7 @@ public class OrderService {
 	public int orderInsert(Order o, String impUid, String merchantUid, String price) {
 		Connection conn = getConnection();
 		// insert order
-		int result1 = new OrderDao().orderInsert(conn, o);
+		int result1 = new OrderDao().orderInsert2(conn, o);
 		
 		int result2 = 1;
 		int result3 = 1;
@@ -24,7 +24,7 @@ public class OrderService {
 			
 			if(result2 > 0) {
 				// update order
-				result3 = new OrderDao().orderUpdate(conn,o);
+				result3 = new OrderDao().orderUpdate(conn,o, 999);
 				if(result1 > 0 && result2 > 0 && result3 > 0) {
 					commit(conn);
 				}else {
@@ -51,14 +51,14 @@ public class OrderService {
 		
 		if(result2 > 0 && many == 999) {
 			// update order
-			result3 = new OrderDao().orderUpdate(conn,o);
+			result3 = new OrderDao().orderUpdate(conn,o, many);
 			if(result1 > 0 && result2 > 0 && result3 > 0) {
 				commit(conn);
 			}else {
 				rollback(conn);
 			}
 		}else { // 첫번째아닌상품들
-			result3 = new OrderDao().orderUpdate1(conn,o);
+			result3 = new OrderDao().orderUpdate(conn,o, many);
 			if(result1 > 0 && result2 > 0 && result3 > 0) {
 				commit(conn);
 			}else {
@@ -69,9 +69,16 @@ public class OrderService {
 		return result1 * result2 * result3;
 	}
 	
-	public int updateOrderCount(int userNo, int orderCount) {
+	public int updateOrderCount(int userNo, int productNo) {
 		Connection conn = getConnection();
-		int result = new OrderDao().updateOrderCount(conn, userNo, orderCount);
+		int result = new OrderDao().updateOrderCount(conn, userNo, productNo);
+		close(conn);
+		return result;
+	}
+	
+	public int updateOrderCountMinus(int userNo, int productNo) {
+		Connection conn = getConnection();
+		int result = new OrderDao().updateOrderCountMinus(conn, userNo, productNo);
 		close(conn);
 		return result;
 	}

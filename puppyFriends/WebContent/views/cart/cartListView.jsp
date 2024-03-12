@@ -261,25 +261,26 @@
                 </div>
                 <div id="content1_2b">
                     <tbody>  
-                                     	
+                            <% int pppno = 0; %>        		
                         	<% String mprice = ""; %>
-                        	<% int totalA = 0; %>
+                        	<% String pName = ""; %>
                         	<% if(list.isEmpty()){ %>
                         		<h2 align="center">장바구니가 비어있습니다.</h2>
                         	<% }else{ %>
-                    		<% for(Cart c : list){ %>                 	              		
-                    		<% mprice = c.getdPrice(); %>         		             
+                    		<% for(Cart c : list){ %>                		              	              		
+                    		<% mprice = c.getdPrice(); %> 
+                    		<% pName = c.getProductNo(); %>        		             
                         <tr class="cartList">
                             <td>
                                 <input type="checkbox" name="plist" value="<%= c.getPno()%>">
                                 <label for="product"><img src="<%= contextPath %>/<%= c.getTitleImg() %>" width="100" height="100"></label>
                             </td>
-                            <td><%= c.getProductNo() %></td>
+                            <td><%= pName %></td>
                             <td>                                                    
 	                            <div class="count-wrap _count">
-								    <button type="button" class="minus" onclick="minusTest();">감소</button>
+								    <button type="button" class="minus" data-product-no="<%= c.getPno() %>" onclick="minusTest();">감소</button>
 								    <input type="number" class="inp" value="<%= c.getCartAmount()%>" />
-								    <button type="button" class="plus">증가</button> <!-- onclick="plusTest();" 지워도됨 -->
+								    <button type="button" class="plus" data-product-no="<%= c.getPno() %>">증가</button> <!-- onclick="plusTest();" 지워도됨 -->
 								</div>
 								
                             </td>
@@ -314,7 +315,9 @@
 
                 
 
-            	$(plusList).click(function(){             		
+            	$(plusList).click(function(){               		
+            		let productNum = $(this).data('product-no');
+            		console.log(productNum)
     	        	// let cartCount = ++cartAmount; 여기에 있으면 클릭하자마자 증가가되버림
             		let value = $(this).parent().parent().siblings('.mtotal').text();  	    
             		let cartCount = $(this).siblings('.inp').val();
@@ -323,8 +326,6 @@
             		let ppprice = Number(pprice);
 
             		let originalPrice = ppprice / cartCount;
-            		
-            		
             		
             		//console.log(ppprice)
             		//console.log(cartAmount)
@@ -337,21 +338,26 @@
             		//inputList.eq(plusList.index(this)).val();
             		
             		plusTest(plusList.index(this),apple); // 내가 클릭한 요소가 plusList에서 몇번째 요소인지?
-            				
+            								          				
 					$.ajax({
             			url:"ocount.po",
             			data:{
-            				count:cartCount          				
+            				count:cartCount,
+            				pno:productNum
             			},
             			success:function(result){
-            				location.reload();
+            				if(result > 0){
+            				location.reload();            					
+            				}
             			}, error:function(){
             				console.log("ajax 통신 실패!");
             			}	
             		});	
             	})
 	        		
-            	$(minusList).click(function(){                     		
+            	$(minusList).click(function(){
+            		let productNum = $(this).data('product-no');
+            		console.log(productNum)
             		let value = $(this).parent().parent().siblings('.mtotal').text();
             		let cartCount = $(this).siblings('.inp').val();
             		
@@ -361,7 +367,7 @@
             		//console.log(cartAmount);
             		
             		let originalPrice = ppprice / cartCount;
-            		console.log(originalPrice)
+            		//console.log(originalPrice)
             		let cartAmount = --cartCount;
             		
       
@@ -369,7 +375,22 @@
             		$(this).parent().parent().siblings('.mtotal').text(originalPrice * cartAmount + "원");
             		
             		
-            		minusTest(minusList.index(this));
+            		minusTest(minusList.index(this)); 
+            		
+            		$.ajax({
+            			url:"ocountMinus.po",
+            			data:{
+            				count:cartCount,
+            				pno:productNum
+            			},
+            			success:function(result){
+            				if(result > 0){
+            				location.reload();            					
+            				}
+            			}, error:function(){
+            				console.log("ajax 통신 실패!");
+            			}	
+            		});	
             		
             	})
             })
@@ -409,11 +430,6 @@
             
             </script>
             
-            
-            
-           
-            
-                
                     <div id="content1_2c">                       
                         <span><a onclick="validate();">선택삭제</a></span>
                         <div id="content1_2c1">
@@ -444,14 +460,10 @@
                    			}, error:function(){
                    				console.log('ajax 통신 실패!');
                    			}
-                   		});
-                   		
-                   		
+                   		});  		
                    	}
                     </script>
                
-                
-
             </div>
         </div>
      
@@ -588,8 +600,7 @@
  
 	                        if (sameAddrRadio.checked) {
 	                        	rnameInput.value = '<%= m.getMemberName() %>';
-	                        	}
-                        	
+	                        	}                     	
                         }
                         
                         </script>
@@ -843,7 +854,20 @@
         			String pnoArrayJSON = new Gson().toJson(pnoList);
         		%>
         		
+        		<%
+        			ArrayList<Integer> cartCountList = new ArrayList<>();
+        			int cartCountNum = 0;
+        			for(Cart c :list){
+        				cartCountNum = c.getCartAmount();
+        				cartCountList.add(cartCountNum);
+        			}
+        		
+        			String cartArrayJSON = new Gson().toJson(cartCountList);
+        		
+        		%>
+        		
         		var uniquePnoArray = JSON.parse('<%= pnoArrayJSON %>');
+        		var uniqueCartArray = JSON.parse('<%= cartArrayJSON %>');
         	
         		// console.log(uniquePnoArray); // [2,3]
 	        	$.ajax({
@@ -858,6 +882,7 @@
 	        			iu:rsp.imp_uid,
 	        			mc:rsp.merchant_uid,
 	        			pr:price,
+	        			count:uniqueCartArray
 	        			},
 	        		success:function(result){
 	        			if(result > 0){

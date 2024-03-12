@@ -11,16 +11,16 @@ import com.kh.member.model.vo.Member;
 import com.kh.order.model.service.OrderService;
 
 /**
- * Servlet implementation class PorderCountUpdateController
+ * Servlet implementation class PorderCountMinusUpdateController
  */
-@WebServlet("/ocount.po")
-public class PorderCountUpdateController extends HttpServlet {
+@WebServlet("/ocountMinus.po")
+public class PorderCountMinusUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PorderCountUpdateController() {
+    public PorderCountMinusUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,10 +30,9 @@ public class PorderCountUpdateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
-		//int orderCount = Integer.parseInt(request.getParameter("count"));
 		int productNo = Integer.parseInt(request.getParameter("pno"));
 		
-		int result = new OrderService().updateOrderCount(userNo, productNo);
+		int result = new OrderService().updateOrderCountMinus(userNo, productNo);
 		
 		response.getWriter().print(result);
 	}

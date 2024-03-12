@@ -32,21 +32,25 @@ public class PorderManyInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
+		
+		int cartCount = 0;
+		String[] cartList = request.getParameterValues("count");
+		
 		String productNo = "";	
 		int result = 0;
 		String[] list = request.getParameterValues("pno");
 		int many = 998;
 		
-		System.out.println(list);
-		for(int i=0; i<list.length; i++) {
+		for(int i=0; i<list.length; i++) {	
 			if(i == 0) {
 				productNo = list[i];
+				cartCount = Integer.parseInt(cartList[i]);
 				many = 999;
 			}else {
+				productNo = list[i];
+				cartCount = Integer.parseInt(cartList[i]);
 				many = 998;
-			}
-			System.out.println(list[i]);// [2,3]
-		
+			}	
 		
 		String buyerAddr = request.getParameter("buyerAddr");
 		String buyerName = request.getParameter("buyerName");
@@ -64,13 +68,12 @@ public class PorderManyInsertController extends HttpServlet {
 		o.setOrderAddress(buyerAddr);
 		o.setOrderPhone(buyerTel);
 		o.setOrderReq(omg);
+		o.setOrderCount(cartCount);
 		
 		
 		result = new OrderService().orderInsert(o, impUid, merchantUid, price, many);
-		
-		
-		
 		}
+		
 		
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(result, response.getWriter());

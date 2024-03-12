@@ -2,6 +2,32 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
+	<entry key="orderInsert2">
+	INSERT
+  INTO P_ORDER
+  (
+    ORDER_NO
+  , MEMBER_NO
+  , PRODUCT_NO
+  , ORDER_NAME
+  , ORDER_ADDRESS
+  , ORDER_PHONE
+  , ORDER_REQ
+  , ORDER_DELIVERY
+  )
+  VALUES
+  (
+    SEQ_ORDER.NEXTVAL
+  , ? 
+  , ? 
+  , ? 
+  , ? 
+  , ? 
+  , ? 
+  , 3000 
+  )	
+	</entry>
+
 	<entry key="orderInsert">
 	INSERT
   INTO P_ORDER
@@ -13,7 +39,8 @@
   , ORDER_ADDRESS
   , ORDER_PHONE
   , ORDER_REQ
-  , ORDER_DELIVERY  
+  , ORDER_DELIVERY
+  , ORDER_COUNT 
   )
   VALUES
   (
@@ -24,7 +51,8 @@
   , ? 
   , ? 
   , ? 
-  , 3000  
+  , 3000 
+  , ? 
   )	
 	</entry>
 
@@ -54,7 +82,7 @@ INSERT
 	UPDATE
        P_ORDER
    SET PAYMENT_NO = SEQ_TOSS_PAYMENT.CURRVAL
- WHERE PRODUCT_NO = ?	
+ WHERE PAYMENT_NO IS NULL
 	</entry>
 	
 	<entry key="orderUpdate2">
@@ -63,12 +91,21 @@ INSERT
    SET PAYMENT_NO = (select * from(select toss_payment_no from toss_payment
 order by toss_payment_no desc)
 where rownum = 1)
- WHERE PRODUCT_NO = ?	
+ WHERE PAYMENT_NO IS NULL
 	</entry>
 	
 	<entry key="updateOrderCount">
 	UPDATE CART
-	   SET CART_AMOUNT = ?
+	   SET CART_AMOUNT = CART_AMOUNT + 1
+	 WHERE PRODUCT_NO = ?
+	   AND MEMBER_NO = ?
+	</entry>
+	
+	<entry key="updateOrderCountMinus">
+	UPDATE CART
+	   SET CART_AMOUNT = CART_AMOUNT - 1
+	 WHERE PRODUCT_NO = ?
+	   AND MEMBER_NO = ?
 	</entry>
 	
 </properties>

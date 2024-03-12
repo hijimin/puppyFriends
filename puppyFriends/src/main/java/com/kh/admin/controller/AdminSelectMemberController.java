@@ -64,7 +64,7 @@ public class AdminSelectMemberController extends HttpServlet {
 		
 		AdminPageInfo pi = new AdminPageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 	
-		
+		String username = request.getParameter("userName");
 		ArrayList<Member> list = new AdminService().adminSelectMember(pi);
 		
 		request.setAttribute("pi", pi);

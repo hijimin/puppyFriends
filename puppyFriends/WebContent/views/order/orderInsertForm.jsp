@@ -649,10 +649,8 @@
                 m_redirect_url : '{}'
             }, function (rsp) { // callback
                 if (rsp.success) {
-                    console.log(rsp);
                     test(rsp);
                 } else {
-                    console.log(rsp);
                 }
             });
         }
@@ -680,8 +678,7 @@
         			pr:price
         			},
         		success:function(result){
-        			if(result > 0){
-        				console.log("결제완료");    
+        			if(result > 0){ 
         				location.href = '<%= contextPath %>/success.po'
         			}
         		}

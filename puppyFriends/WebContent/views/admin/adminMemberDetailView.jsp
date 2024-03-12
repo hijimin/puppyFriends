@@ -156,13 +156,13 @@
                 <ul style="list-style-type: none;">
                     <li><a href="">&nbsp;공지사항</a></li>
                     <br><br><br>
-                    <li><a href="views/admin/adminMain.jsp">&nbsp;&nbsp;&nbsp;&nbsp;회원</a></li>
+                    <li><a href="<%= contextPath %>//adminSelectMember.me?cpage=1">&nbsp;&nbsp;&nbsp;&nbsp;회원</a></li>
                     <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;수업</a></li>
                     <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;호텔</a></li>
                     <br><br><br><br>
-                    <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;상품</a></li>
+                    <li><a href="<%= contextPath %>/list.pd?cpage=1">&nbsp;&nbsp;&nbsp;&nbsp;상품</a></li>
                     <br><br><br><br>
                     <li><a href="">&nbsp;&nbsp;&nbsp;게시판</a></li>
                 </ul>

@@ -372,13 +372,10 @@ body {
 			<script>
                 	// function pdtest(){
                 	// 	// location.href ="<%=contextPath%>/detail.pd?pno="+$(".content2_3c input").val();
-                	// 	console.log($(this).children("input").val());
                 	// }
                 	
                 	$(function(){               		
                 		$(".content2_3c").click(function(){
-                			console.log($(this).children("input").val());
-                			// console.log($("#pdno").val());
                 			location.href ='"<%=contextPath%>/detail.pd?pno=" + $(this).children(input).val()';
 									})
 				})

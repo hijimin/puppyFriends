@@ -49,9 +49,7 @@ public class AdminDeleteMeberController extends HttpServlet {
 	    if (result != null){	
 	    	HttpSession session = request.getSession();
 	    	response.sendRedirect(request.getContextPath() + "/adminSelectMember.me?cpage=1");	
-	    } else {
-	    	
-	    }
+	    } 
 		
 		/*
 		System.out.println("deleteMemberStrings 배열의 값:");

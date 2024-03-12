@@ -167,15 +167,17 @@
     var webSocket = new WebSocket(serverUrl);
     
     function sendMessage() {
-        var chatMessage = $("#chatMessage");
-        var message = {
-            sender: "<%= chat.getMemberId() %>",
-            content: chatMessage.val()
-        };
-    
-        webSocket.send(JSON.stringify(message));
-        chatMessage.val("");
-        chatMessage.focus();
+        var chatMessage = $("#chatMessage").val().trim(); 
+        if (chatMessage !== "") {
+            var message = {
+                sender: "<%= chat.getMemberId() %>",
+                content: chatMessage
+            };
+
+            webSocket.send(JSON.stringify(message));
+            $("#chatMessage").val(""); 
+            $("#chatMessage").focus();
+        }
     }
     
     $(function() {

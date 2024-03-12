@@ -33,6 +33,8 @@ public class PorderManyInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		
+		// List의 length 사이즈는 같다
+		// 굳이 반복문 안돌아도 바로 값을 꺼낼 수 있음
 		int cartCount = 0;
 		String[] cartList = request.getParameterValues("count");
 		
@@ -42,7 +44,7 @@ public class PorderManyInsertController extends HttpServlet {
 		int many = 998;
 		
 		for(int i=0; i<list.length; i++) {	
-			if(i == 0) {
+			if(i == 0) { // 첫번째 상품일때
 				productNo = list[i];
 				cartCount = Integer.parseInt(cartList[i]);
 				many = 999;

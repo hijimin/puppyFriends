@@ -96,9 +96,9 @@ public class OrderDao {
 		PreparedStatement pstmt = null;
 		String sql = "";
 		if(many == 999) {
-			sql = prop.getProperty("orderUpdate1");
+			sql = prop.getProperty("orderUpdate1"); // 첫번째 상품이면 여기를 탐
 		}else {
-			sql = prop.getProperty("orderUpdate2");
+			sql = prop.getProperty("orderUpdate2"); // 두번째 상품이면 여기를 탐
 		}
 		
 		try {

@@ -57,25 +57,25 @@
 	</entry>
 
 	<entry key="paymentInsert">
-INSERT
-  INTO TOSS_PAYMENT
-  (
-    TOSS_PAYMENT_NO
-  , TOSS_PAYMENT_ONO
-  , CARD_NAME
-  , IMP_UID
-  , MERCHANT_UID
-  , PAY_AMOUNT
-  )
-  VALUES
-  (
-    SEQ_TOSS_PAYMENT.NEXTVAL
-  , SEQ_ORDER.CURRVAL
-  , '카드'
-  , ? 
-  , ? 
-  , ? 
-  )
+	INSERT
+	  INTO TOSS_PAYMENT
+	  (
+	    TOSS_PAYMENT_NO
+	  , TOSS_PAYMENT_ONO
+	  , CARD_NAME
+	  , IMP_UID
+	  , MERCHANT_UID
+	  , PAY_AMOUNT
+	  )
+	  VALUES
+	  (
+	    SEQ_TOSS_PAYMENT.NEXTVAL
+	  , SEQ_ORDER.CURRVAL
+	  , '카드'
+	  , ? 
+	  , ? 
+	  , ? 
+	  )
 	</entry>
 	
 	<entry key="orderUpdate1">

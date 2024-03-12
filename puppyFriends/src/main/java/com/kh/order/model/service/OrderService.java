@@ -38,19 +38,19 @@ public class OrderService {
 	
 	public int orderInsert(Order o, String impUid, String merchantUid, String price, int many) {
 		Connection conn = getConnection();
-		// insert order
-		int result1 = new OrderDao().orderInsert(conn, o);
+		// insert P_ORDER
+		int result1 = new OrderDao().orderInsert(conn, o); // 첫번째 상품 P_Order에 인서트 치러감
 		
 		int result2 = 1;
 		int result3 = 1;
 		
-		if(result1 > 0 && many == 999) {
-			// insert payment
+		if(result1 > 0 && many == 999) { // 첫번째 상품 인서트 치고 토스페이먼트에 디비 작업치러감
+			// insert TOSS_PAYMENT
 			result2 = new OrderDao().paymentInsert(conn, impUid, merchantUid, price);	
 		}
 		
 		if(result2 > 0 && many == 999) {
-			// update order
+			// update P_ORDER
 			result3 = new OrderDao().orderUpdate(conn,o, many);
 			if(result1 > 0 && result2 > 0 && result3 > 0) {
 				commit(conn);

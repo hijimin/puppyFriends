@@ -375,8 +375,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
             		  let list = map.reviewList
             		  let reviewNo = list.reviewNo;
-            		  let loginUserName = '<%= loginUser.getMemberId() %>';
-
+            		  let loginUserName = '<%= loginUser.getMemberId() %>';	
             		  let review = $(".review4");
             		  if(list.length == 0){
             			  review.append("<p>" + "작성된 리뷰가 없습니다" + "</p>");

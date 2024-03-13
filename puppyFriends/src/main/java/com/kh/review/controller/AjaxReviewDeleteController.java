@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.member.model.vo.Member;
 import com.kh.review.model.service.ReviewService;
-import com.kh.review.model.vo.Review;
 
 /**
- * Servlet implementation class AjaxReviewInsertController
+ * Servlet implementation class AjaxReviewDeleteController
  */
-@WebServlet("/rinsert.rv")
-public class AjaxReviewInsertController extends HttpServlet {
+@WebServlet("/reviewDelete.rv")
+public class AjaxReviewDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxReviewInsertController() {
+    public AjaxReviewDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +29,12 @@ public class AjaxReviewInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String reviewContent = request.getParameter("content");
-		int productNo = Integer.parseInt(request.getParameter("pno"));
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
-		Review r = new Review();
-		r.setReviewText(reviewContent);
-		r.setProduct(String.valueOf(productNo));
-		r.setReviewWriter(String.valueOf(userNo));
+		int reviewNum = Integer.parseInt(request.getParameter("rno"));
 		
-		int result = new ReviewService().insertReview(r);
+		int result = new ReviewService().deleteReview(userNo, reviewNum);
 		
 		response.getWriter().print(result);
-		
 	}
 
 	/**

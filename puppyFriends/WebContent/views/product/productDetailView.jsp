@@ -258,10 +258,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               </div>
             </div>
           </div>
-          <!-- 
-        <i class="fa-solid fa-heart"></i>
-        <i class="fa-regular fa-heart"></i>
-        -->
 
           <!-- 상품 상세설명 div -->
           <div id="content2">
@@ -378,25 +374,74 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             			}
 
             		  let list = map.reviewList
+            		  let reviewNo = list.reviewNo;
+            		  let loginUserName = '<%= loginUser.getMemberId() %>';
 
             		  let review = $(".review4");
-            		for(let i=0; i<list.length; i++){
-            			review.append("<div class=\"review4_1\">" + "사진" + "</div>"
-            						+ "<div class=\"review4_2\">"
-            					   + "<div class=\"reviewin\">" + list[i].reviewWriter + " | " + "</div>"
-                               	   + "<div class=\"reviewin\">" + list[i].reviewDate + "</div>"
-                               	   + "<div class=\"reviewpd\">" + "상품명 : " + list[i].product + "</div>"
-                               	   + "<div class=\"reviewcontent\">" + list[i].reviewText + "</div>"
-                               	   +  "</div>");
-            			}
+            		  if(list.length == 0){
+            			  review.append("<p>" + "작성된 리뷰가 없습니다" + "</p>");
+            			  
+            			  
+            		  }else{
+            			  
+            			  
+            			  
+            			  for (let i = 0; i < list.length; i++) {
+            				  let deleteLink = $("<a href=\"#\" onclick=\"deleterv(" + list[i].reviewNo + ")\">Delete</a>");
+            				  
+            				    let $review = $("<div class=\"review4_1\">사진</div>"
+            				        + "<div class=\"review4_2\">"
+            				        + "<div class=\"reviewin\">" + list[i].reviewWriter + " | </div>"
+            				        + "<div class=\"reviewin\">" + list[i].reviewDate + "</div>"
+            				        + "<div class=\"reviewpd\">상품명 : " + list[i].product + "</div>"
+            				        + "<div class=\"deleterv\">"+"</div>"
+            				        + "<div class=\"reviewcontent\">" + list[i].reviewText + "</div>"
+            				        + "</div>");
+
+     
+            				    review.append($review);
+
+            
+            				    if (loginUserName === list[i].reviewWriter) {        				    	
+            				        $review.find('.deleterv').html("<a href=\"#\" class=\"delete-review\" data-review-no=\"" + list[i].reviewNo + "\">삭제</a>");
+            				    }
+            				}
+            			  
+            			  $('.delete-review').on('click', function(event) {
+            				    event.preventDefault();
+  
+            				    var reviewNo = $(this).data('review-no');
+            				    
+            				   	console.log(reviewNo);
+            				   	
+            				   	deleterv(reviewNo);
+            				});
+	  
+            		  }
             		}, error:function(){
             			console.log("aJax 통신 실패!");
             		}
             	});
+            }        
+            
+            
+            function deleterv(reviewnum){
+            	$.ajax({
+            		// 리뷰번호, 로그인유저
+            		url:"reviewDelete.rv",
+            		data:{
+            			rno:reviewnum           			
+            		},
+            		success:function(result){
+            			alert("리뷰가 삭제되었습니다!");
+            			selectReviewList(1);
+            		}, error:function(){
+            			console.log("ajax 통신 실패!");
+            		}       		
+            	});
             }
           </script>
         </div>
-
         <%@ include file="../common/footerbar.jsp" %>
       </body>
     </html>

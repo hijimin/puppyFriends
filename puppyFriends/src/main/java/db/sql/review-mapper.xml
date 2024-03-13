@@ -53,6 +53,13 @@
 	  , ?
 	  )
 	</entry>
+	
+	<entry key="deleteReview">
+		UPDATE REVIEW
+	   SET REVIEW_STATUS = 'N'
+	 WHERE REVIEW_NO = ?
+	   AND MEMBER_NO = ? 
+	</entry>
 
 
 </properties>

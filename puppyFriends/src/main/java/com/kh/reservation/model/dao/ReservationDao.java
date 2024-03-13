@@ -186,7 +186,40 @@ public class ReservationDao {
 		
 		return result;
 	}
-	
+
+	public int selectRvCount(Connection conn, int hotelNo) {
+		int hotelrvCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRvCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, hotelNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				hotelrvCount = rset.getInt("hcount");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		
+		return hotelrvCount;
+	}
+
+
 	
 	/*
 

@@ -13,7 +13,10 @@ public class Reservation {
 	private Date reservationEnd;
 	private int reservationPrice; // 가격
 	private int paymentNo; // 결제번호
+	private String reservationStatus; 
 	
+	private int hcount; // selectRvCount
+
 	
 	public Reservation() {}
 
@@ -30,6 +33,7 @@ public class Reservation {
 		this.reservationEnd = reservationEnd;
 		this.reservationPrice = reservationPrice;
 		this.paymentNo = paymentNo;
+		
 	}
 	
 	
@@ -39,6 +43,32 @@ public class Reservation {
 		this.reservationStart = reservationStart;
 		this.reservationEnd = reservationEnd;
 		this.reservationPrice = reservationPrice;
+	}
+
+	// selectHotelDetail
+	public Reservation(int reservationNo, int hcount) {
+		super();
+		this.reservationNo = reservationNo;
+		this.hcount = hcount;
+	}
+
+	
+	public int getHcount() {
+		return hcount;
+	}
+
+	public void setHcount(int hcount) {
+		this.hcount = hcount;
+	}
+
+
+	public String getReservationStatus() {
+		return reservationStatus;
+	}
+
+
+	public void setReservationStatus(String reservationStatus) {
+		this.reservationStatus = reservationStatus;
 	}
 
 

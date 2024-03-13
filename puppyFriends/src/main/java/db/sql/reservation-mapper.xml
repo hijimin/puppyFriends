@@ -111,6 +111,16 @@
 	  
 	</entry>
 
+	<entry key="selectRvCount">
+	<!-- 호텔용  -->
+	SELECT COUNT(*) HCOUNT
+    FROM RESERVATION
+    WHERE FACILITY_NO = 2
+      AND PROGRAM_NO = ?
+      AND RESERVATION_STATUS = 'Y'
+      
+	
+	</entry>
 
 
 

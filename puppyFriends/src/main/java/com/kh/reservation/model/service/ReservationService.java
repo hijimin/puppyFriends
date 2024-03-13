@@ -50,6 +50,18 @@ public class ReservationService {
 		return result1 * result2 * result3;
 	}
 
+	public int selectRvCount(int hotelNo) {
+		Connection conn = getConnection();
+		int hotelrvCount = new ReservationDao().selectRvCount(conn, hotelNo);
+		
+		close(conn);
+		return hotelrvCount;
+	}
+
+
+
+
+
 	
 
 /*

@@ -18,6 +18,7 @@ public class Hotel {
    private Date reservationStart;
    private Date reservationEnd;
    private int reservationPrice;
+   private int hcount;
    
    private int memberNo;
    private String memberId; // 회원 아이디
@@ -54,7 +55,7 @@ public class Hotel {
    // selectHotelDetail
   
 	public Hotel(int hotelNo, int hotelWriter, String hotelName, String hotelText, String hotelSize, int dNumber,
-		Date hotelStart, Date hotelEnd, String memberId) {
+		Date hotelStart, Date hotelEnd, String memberId, int hcount) {
 	super();
 	this.hotelNo = hotelNo;
 	this.hotelWriter = hotelWriter;
@@ -65,6 +66,7 @@ public class Hotel {
 	this.hotelStart = hotelStart;
 	this.hotelEnd = hotelEnd;
 	this.memberId = memberId;
+	this.hcount = hcount;
 }
 
       
@@ -82,6 +84,8 @@ public class Hotel {
 
 	
 	
+	
+
 	public int getFileNo() {
 		return fileNo;
 	}

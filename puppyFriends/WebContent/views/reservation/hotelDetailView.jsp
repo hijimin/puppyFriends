@@ -5,6 +5,7 @@
     <%
     
     Hotel h = (Hotel)request.getAttribute("h");
+    int hotelrvCount = (int)request.getAttribute("hotelrvCount");
     
     %>
 <!DOCTYPE html>
@@ -14,7 +15,7 @@
 <title>Insert title here</title>
 
 	<style>
-        /* *{
+         * *{
             border: 1px solid red;
         } */
        
@@ -181,7 +182,7 @@
             
             <div class="text" align="right"> <!-- 오른쪽 맵 -->
                 <div class="period">기간 : <%= h.getHotelStart() %> ~ <%= h.getHotelEnd() %> </div> <br><br>
-                <div>(2-결제완료count 필요 / <%= h.getdNumber() %>) , <%= h.getHotelSize() %> </div>
+                <div>( <%= hotelrvCount %> / <%= h.getdNumber() %>) , <%= h.getHotelSize() %> </div>
                 <div class="introduce">
                     <tr>
                         <td>

@@ -212,15 +212,49 @@ public class ReservationDao {
 		}finally {
 			close(rset);
 			close(pstmt);
+
+			//	System.out.println(hotelNo); // 됨
 			
 		}
 		
 		
 		return hotelrvCount;
 	}
-
-
 	
+	
+	
+
+	/*
+	public ArrayList<Hotel> selectHotelThumbnailList(Connection conn) {
+
+		ArrayList<Hotel> h = new ArrayList<Hotel>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectHotelThumbnailList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				Hotel h = new Hotel();
+				
+				h.setHotelNo(rset.getInt("hotel_no"));
+				h.setHotelName(rset.getString("hotel_name"));
+				h.
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return h;
+	}
+*/	
 	/*
 
 	public ArrayList<Hotel> selectHotelList(Connection conn, PageInfo pi) {

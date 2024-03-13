@@ -54,15 +54,28 @@ public class ReservationService {
 		Connection conn = getConnection();
 		int hotelrvCount = new ReservationDao().selectRvCount(conn, hotelNo);
 		
-		close(conn);
+		close(conn); 
+//		System.out.println(hotelNo); ㅇㅇ
 		return hotelrvCount;
 	}
-
-
-
-
-
 	
+	
+	
+	/*
+
+	public ArrayList<Hotel> selectHotelThumbnailList() {
+		Connection conn = getConnection();
+		
+		ArrayList<Hotel> h = new ReservationDao().selectHotelThumbnailList(conn);
+		
+		close(conn);
+		
+		return h;
+		
+	}
+
+*/
+
 
 /*
 	public ArrayList<Hotel> selectHotelList(PageInfo pi) {
@@ -80,7 +93,4 @@ public class ReservationService {
 
 */
 	
-	
-
-
 }

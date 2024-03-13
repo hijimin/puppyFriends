@@ -42,8 +42,6 @@ public class HotelDetailController extends HttpServlet {
 		
 		// ArrayList<Image> list = hService.sel
 		Hotel h = hService.selectHotelDetail(hotelNo);
-//		Reservation rv = hService.selectRvCount(hotelNo);
-//		System.out.println(rv);
 		
 		int hotelrvCount;
 		hotelrvCount = new ReservationService().selectRvCount(hotelNo);

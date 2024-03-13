@@ -99,6 +99,7 @@ public class HotelEnrollController extends HttpServlet {
 				if(result > 0) {
 					request.getSession().setAttribute("alertMsg", "성공적으로 작성되었습니다.");
 					response.sendRedirect(request.getContextPath() + "/detail.hrv");
+				System.out.println("뀨");
 				}
 			}
 			

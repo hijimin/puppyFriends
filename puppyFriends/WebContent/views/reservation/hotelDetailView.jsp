@@ -15,7 +15,7 @@
 <title>Insert title here</title>
 
 	<style>
-         * *{
+         /* *{
             border: 1px solid red;
         } */
        
@@ -143,7 +143,7 @@
         <div class="photo_text"> <!-- 왼쪽 맵-->
             <div class="photo">
                 <div class="photo_pt">
-                    <p>&lt;이미지 미리보기/빈칸예정/&gt;</p>
+                    <p align="center">&lt; 작성자 : <%= h.getMemberId() %> &gt;</p>
                     <div class="photoImg1">
                         <img class="photoImg" src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" style="width:100%">
                         <img class="photoImg" src="https://www.dailysecu.com/news/photo/202104/123449_145665_1147.png" style="width:100%">

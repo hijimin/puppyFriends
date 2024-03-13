@@ -14,6 +14,7 @@ import com.kh.common.model.vo.Image;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.dogfor.model.vo.Attendance;
 import com.kh.member.model.vo.Dog;
+import com.kh.member.model.vo.Member;
 
 public class DogforDao {
 
@@ -111,6 +112,7 @@ public class DogforDao {
 				
 				list.add(new Image(rset.getInt("file_no"),
 						           rset.getString("dog_name"),
+						           rset.getString("content"),
 						           rset.getString("titleimg")));
 				
 			}
@@ -289,9 +291,72 @@ public class DogforDao {
 		
 	}
 	
+	public ArrayList<Member> selectMember(Connection conn){
+		
+		ArrayList<Member> list = new ArrayList<Member>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Member m = new Member(rset.getInt("member_no"),
+						              rset.getString("member_id"),
+						              rset.getString("member_name"));
+				
+				list.add(m);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
 	
-	
-	
+	public int checkAttendance(Connection conn, String userNo, String date) {
+		
+		int check = 0; // 날짜가 이미 있으면 1, 없으면 0
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("checkAttendance");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userNo);
+			pstmt.setString(2, date);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				check++;
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return check;
+		
+	}
 	
 	
 	

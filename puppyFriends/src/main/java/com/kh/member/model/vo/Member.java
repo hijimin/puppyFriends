@@ -66,13 +66,20 @@ public class Member {
 		this.phone1 = phone1;
 		this.phone2 = phone2;
 	}
+	
+	// 갤러리용 회원 조회
+	public Member(int memberNo, String memberId, String memberName) {
+		super();
+		this.memberNo = memberNo;
+		this.memberId = memberId;
+		this.memberName = memberName;
+	}
+	
 
 	public int getCount() {
 		return count;
 	}
 	
-
-
 	public void setCount(int count) {
 		this.count = count;
 	}

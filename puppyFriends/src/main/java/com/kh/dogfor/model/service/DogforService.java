@@ -8,6 +8,7 @@ import com.kh.common.model.vo.PageInfo;
 import com.kh.dogfor.model.dao.DogforDao;
 import com.kh.dogfor.model.vo.Attendance;
 import com.kh.member.model.vo.Dog;
+import com.kh.member.model.vo.Member;
 
 import static com.kh.common.JDBCTemplate.*;
 
@@ -108,6 +109,41 @@ import static com.kh.common.JDBCTemplate.*;
 		return list;
 		
 	}
+	
+	public ArrayList<Member> selectMember(){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Member> list = new DogforDao().selectMember(conn);
+		
+		close(conn);
+		
+		return list;
+		
+	}
+	
+	public int checkAttendance(String userNo, String date) {
+		
+		Connection conn = getConnection();
+				
+		int check = new DogforDao().checkAttendance(conn, userNo, date);
+		
+		
+		return check;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

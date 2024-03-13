@@ -251,7 +251,7 @@ public class ChatDao {
 		
 	}
 	
-	/*
+	
 	public ArrayList<Chat> memberChat(Connection conn, String userId){
 		
 		ArrayList<Chat> list = new ArrayList<Chat>();
@@ -300,7 +300,7 @@ public class ChatDao {
 	
 		
 	}
-	*/
+	
 	
 	
 	

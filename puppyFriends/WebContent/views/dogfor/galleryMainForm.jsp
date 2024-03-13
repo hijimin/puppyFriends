@@ -47,6 +47,12 @@
 	.img-1{
 		height: 220px;
 	}
+	.modal-content{
+		width: 600px; 
+		height: 600px; 
+		border-radius: 3%; 
+		padding: 10px;
+	}
 </style>
 </head>
 <body>
@@ -99,6 +105,7 @@
 				<div class="img" align="center">
 					<div class="img-1"><img src="<%= contextPath %>/<%= i.getTitleImg() %>" style="width: 100%; height: 100%;"></div>
 					<div class="img-2"><br><%= i.getDogNo() %></div>
+					<div class="img-3" style="display: none;"><%= i.getContent() %></div>
 				</div>
 				<% } %>
 			</div>
@@ -123,38 +130,46 @@
 		</div>
 		
 				<!-- Button to Open the Modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-		  Open modal
+		<button type="button" id="modal" style="display: none;"  class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 		</button>
 		
 		<script>
 			$(function(){
 				
-				$("#img-area .img")
+				$("#img-area .img").click(function(){
+					$(".modal-title").html($(this).children().eq(1).text());
+					$(".modal-body1").html($(this).children().eq(0).html());
+					$(".modal-body2").html($(this).children().eq(2).html());
+					$("#modal").click();
+				})
 				
 				
 			})
 		</script>
 		
 		<!-- The Modal -->
-		<div class="modal" id="myModal">
+		<div class="modal" id="myModal" style="z-index: 9999;">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		
 		      <!-- Modal Header -->
-		      <div class="modal-header">
-		        <h4 class="modal-title">Modal Heading</h4>
-		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      <div class="modal-header" style="height: 11%; width: 100%;">
+		        <h3 class="modal-title" align="right" style="width: 57%;" ></h3>
+		        <button type="button" class="close" data-dismiss="modal" style="margin-left: 0;">&times;</button>
 		      </div>
 		
 		      <!-- Modal body -->
-		      <div class="modal-body">
-		        Modal body..
+		      <div class="modal-body1" style="height: 70%; width: 100%;">
+		        <!-- 사진 -->
+		      </div>
+
+			  <div class="modal-body2" style="height: 10%; width: 100%;" align="center">
+		        <!-- 내용 -->
 		      </div>
 		
 		      <!-- Modal footer -->
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		      <div class="modal-footer" style="height: 10%; width: 100%;">
+		        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
 		      </div>
 		
 		    </div>

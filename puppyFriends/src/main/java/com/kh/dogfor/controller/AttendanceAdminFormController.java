@@ -1,7 +1,7 @@
 package com.kh.dogfor.controller;
 
 import java.io.IOException;
-import java.util.Calendar;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.dogfor.model.service.DogforService;
 import com.kh.dogfor.model.vo.Attendance;
 
 /**
- * Servlet implementation class AttendanceInsertFormController
+ * Servlet implementation class AttendanceAdminFormController
  */
-@WebServlet("/insert.at")
-public class AttendanceInsertFormController extends HttpServlet {
+@WebServlet("/select.at")
+public class AttendanceAdminFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AttendanceInsertFormController() {
+    public AttendanceAdminFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,32 +34,24 @@ public class AttendanceInsertFormController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String userNo = request.getParameter("userNo");
-		String date = request.getParameter("date"); // 2024-03-13
-		String status = request.getParameter("status");
+		int year = Integer.parseInt(request.getParameter("year"));
+		int month = Integer.parseInt(request.getParameter("month"));
 		
-		Attendance at = new Attendance();
-		at.setMemberNo(userNo);
-		at.setDate(date);
-		at.setStatus(status);
+		ArrayList<Attendance> list = new DogforService().selectAttendanceList(userNo);
+		ArrayList<Attendance> newList = new ArrayList<Attendance>();
 		
-		// 시스템 오늘날짜
-		Calendar cal = Calendar.getInstance();
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH)+1;
-		
-		System.out.println(date);
-		
-		// 출석 등록여부 확인
-		int result = new DogforService().checkAttendance(userNo, date);
-		
-		
-		int result2 = new DogforService().insertAttendance(at);
-		
-		if(result2 > 0) {
-			response.sendRedirect(request.getContextPath() + "/attendance.at?userNo="+userNo+"&year="+year+"&month="+month);
+		for(Attendance at : list) {
+			System.out.println(at.getDate().substring(0, 4));
+			System.out.println(at.getDate().substring(5, 7));
+			if(Integer.parseInt(at.getDate().substring(0, 4)) == year && Integer.parseInt(at.getDate().substring(5, 7)) == month) {
+				newList.add(at);
+			}
 		}
 		
+		System.out.println(newList);
 		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(newList, response.getWriter());
 		
 	}
 

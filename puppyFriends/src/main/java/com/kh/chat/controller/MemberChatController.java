@@ -34,7 +34,7 @@ public class MemberChatController extends HttpServlet {
 		
 		String userId = request.getParameter("user");
 		
-		// ArrayList<Chat> list = new ChatService().memberChat(userId);
+		ArrayList<Chat> list = new ChatService().memberChat(userId);
 		
 		request.setAttribute("userId", userId);
 		request.getRequestDispatcher("views/chatting/adminChatDetail.jsp").forward(request, response);

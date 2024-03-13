@@ -39,8 +39,9 @@
 		FROM (SELECT ROWNUM RUM, A.*    
 		      FROM (SELECT
 		           FILE_NO
-		         , FILE_PATH || CHANGE_NAME AS "TITLEIMG"  
+		         , FILE_PATH || CHANGE_NAME AS "TITLEIMG"
 		         , DOG_NAME
+		         , CONTENT
 		      FROM IMAGE   
 		      JOIN DOG USING(DOG_NO)
 		     WHERE IMAGE_TYPE = 3
@@ -85,7 +86,9 @@
 		 , TO_CHAR(ATTENDANCE_DATE, 'YYYY-MM-DD') AS "DATE"
          , ATTENDANCE_STATUS
  	  FROM ATTENDANCE
- 	 WHERE MEMBER_NO = ? 
+ 	 WHERE MEMBER_NO = ?
+ 	 ORDER
+ 	    BY ATTENDANCE_DATE
 </entry>
 
 <entry key="searchDog">
@@ -98,8 +101,22 @@
 	 WHERE DOG_NAME LIKE '%'||?||'%'
 </entry>
 
+<entry key="selectMember">
+	SELECT 
+	       MEMBER_NO
+	     , MEMBER_ID
+	     , MEMBER_NAME
+	  FROM MEMBER
+	 WHERE STATUS = 'Y'
+	   AND MEMBER_NO != 1
+</entry>
 
-
+<entry key="checkAttendance">
+	SELECT TO_CHAR(ATTENDANCE_DATE, 'YYYY-MM-DD') AS "DATE"
+	  FROM ATTENDANCE
+	 WHERE MEMBER_NO = ?
+	   AND TO_CHAR(ATTENDANCE_DATE, 'YYYY-MM-DD') = ?
+</entry>
 
 
 

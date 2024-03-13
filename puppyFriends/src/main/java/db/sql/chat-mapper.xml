@@ -43,17 +43,24 @@
 </entry>
 
 <entry key="memberChatList">
-	SELECT CHAT_NO, FROM_ID, CONTENT, CHAT_DATE
-	FROM CHAT
-	WHERE (FROM_ID, CHAT_DATE) IN (
-	    SELECT FROM_ID, MAX(CHAT_DATE) AS MAX_DATE
-	    FROM CHAT
-	    GROUP BY FROM_ID
-	) AND FROM_ID != 'ADMIN'
-	ORDER BY CHAT_DATE DESC
+	SELECT C.CHAT_NO, C.FROM_ID,C.CONTENT, C.CHAT_DATE
+  FROM 
+       (
+       SELECT 
+             CHAT_NO, FROM_ID,CONTENT,CHAT_DATE,
+             ROW_NUMBER()OVER(PARTITION BY FROM_ID ORDER BY CHAT_DATE DESC) AS RNK
+             FROM CHAT
+       ) C
+ WHERE C.RNK = 1
 </entry>
 
-
+<entry key="memberChat">
+	SELECT *
+	  FROM CHAT
+	 WHERE FROM_ID = ? OR TO_ID = ?
+	 ORDER 
+	    BY CHAT_DATE DESC
+</entry>
 
 
 

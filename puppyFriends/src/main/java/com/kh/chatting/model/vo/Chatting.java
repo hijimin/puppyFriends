@@ -38,12 +38,11 @@ public class Chatting {
 	
 	
 
-	public Chatting(int chattingNo, int chattingMemberNo, String chattingCity, Date chattingDate,
+	public Chatting(int chattingNo, int chattingMemberNo,Date chattingDate,
 			String chattingCheck) {
 		super();
 		this.chattingNo = chattingNo;
 		this.chattingMemberNo = chattingMemberNo;
-		this.chattingCity = chattingCity;
 		this.chattingDate = chattingDate;
 		this.chattingCheck = chattingCheck;
 	}

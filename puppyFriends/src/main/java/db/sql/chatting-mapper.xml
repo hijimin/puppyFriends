@@ -5,7 +5,6 @@
 	<entry key="selectChatting">
 		SELECT  CHATTING_NO
               , CHATTING_MEMBER_NO
-              , CHATTING_CITY
               , CHATTING_DATE
               , CHATTING_CHECK
           FROM CHATTING

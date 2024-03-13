@@ -48,7 +48,6 @@ public class ChattingDao {
          while(rset.next()) {      
             list.add(new Chatting(rset.getInt("CHATTING_NO"),
                              rset.getInt("CHATTING_MEMBER_NO"),
-                             rset.getString("CHATTING_CITY"),
                              rset.getDate("CHATTING_DATE"),
                              rset.getString("CHATTING_CHECK")
                              ));

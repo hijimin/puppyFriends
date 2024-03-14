@@ -136,7 +136,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       </div>
 
       <form action="<%= contextPath %>/insert.hrv" id="enroll-form"
-      method="post" enctype="enctype="multipart/form-data">
+      method="post" enctype="multipart/form-data">
       <input
         type="hidden"
         name="memberNo"
@@ -205,6 +205,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 <td>
                   <input
                     type="text"
+                    name="hotelName"
                     class="title"
                     required
                     placeholder="호텔명을 입력해 주세요."
@@ -216,6 +217,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 <td>
                   <textarea
                     class="intro"
+                    name="hotelText"
                     cols="50%"
                     rows="8%"
                     style="resize: none"
@@ -227,7 +229,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               <tr>
                 <th>사이즈 :</th>
                 <td>
-                  <select class="select_text">
+                  <select class="select_text" name="hotelSize">
                     <option value="s">S</option>
                     <option value="m">M</option>
                     <option value="L">L</option>
@@ -239,6 +241,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 <td>
                   <input
                     type="number"
+                    name="dNumber"
                     required
                     placeholder="ex) 5마리"
                     min="1"
@@ -253,11 +256,16 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   시작 :
                   <input
                     type="date"
+                    name="hotelStart"
                     id="start-date"
                     style="margin-bottom: 3px"
                     required
                   /><br />
-                  종료 : <input type="date" id="end-date" required />
+                  종료 : <input 
+                  type="date" 
+                  name="hotelEnd" 
+                  id="end-date" 
+                  required />
                 </td>
               </tr>
               <tr>
@@ -389,6 +397,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
         <br /><br />
       </div>
+    </form>
     </div>
 
     <%@ include file="../common/topBtn.jsp" %> <br />

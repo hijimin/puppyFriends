@@ -40,6 +40,7 @@ public class HotelEnrollController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+	
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
 		
@@ -48,6 +49,12 @@ public class HotelEnrollController extends HttpServlet {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/thumbnail_upfiles/");
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+			System.out.println(multiRequest.getParameter("hotelNo"));
+			System.out.println(multiRequest.getParameter("hotelWriter"));
+			System.out.println(multiRequest.getParameter("hotelName"));
+			System.out.println(multiRequest.getParameter("hotelText"));
+			System.out.println(multiRequest.getParameter("hotelSize"));
+			System.out.println(multiRequest.getParameter("dNumber"));
 	
 			Hotel h = new Hotel();
 				h.setHotelNo(Integer.parseInt(multiRequest.getParameter("hotelNo")));

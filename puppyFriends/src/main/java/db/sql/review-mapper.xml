@@ -60,6 +60,13 @@
 	 WHERE REVIEW_NO = ?
 	   AND MEMBER_NO = ? 
 	</entry>
+	
+	<entry key="updateReview">		
+		UPDATE REVIEW
+	   SET REVIEW_TEXT = ?
+	 WHERE MEMBER_NO = ?
+	   AND REVIEW_NO = ?
+	</entry>
 
 
 </properties>

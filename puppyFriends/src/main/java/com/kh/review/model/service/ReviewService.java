@@ -54,5 +54,18 @@ public class ReviewService {
 		}
 		return result;
 	}
+	
+	public int updateReview(int userNo, int reviewNum, String reviewText) {
+		Connection conn = getConnection();
+		
+		int result = new ReviewDao().updateReview(conn, userNo, reviewNum, reviewText);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;	
+	}
 
 }

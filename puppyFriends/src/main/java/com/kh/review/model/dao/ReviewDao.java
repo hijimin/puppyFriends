@@ -129,5 +129,26 @@ public class ReviewDao {
 		}
 		return result;
 	}
+	
+	public int updateReview(Connection conn, int userNo, int reviewNum, String reviewText) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, reviewText);
+			pstmt.setInt(2, userNo);
+			pstmt.setInt(3, reviewNum);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 }

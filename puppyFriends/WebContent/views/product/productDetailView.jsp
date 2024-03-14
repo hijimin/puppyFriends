@@ -292,50 +292,9 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 </div>
               </div>
             </div>
-            <% } %>
-          </div>
-
-          <div id="content4">
-            <div class="review4"><!-- 리뷰 큰통div--></div>
-          </div>
-
-          <br /><br />
-
-          <!-- 페이징바 -->
-          <div class="paging-area" align="center"></div>
-
-          <script>
-
-
-            function insertReview(){
-            	$.ajax({
-            		url:"rinsert.rv",
-            		data:{pno:<%= p1.getProductNo()%>,
-            			  content:$("#reviewContent").val()
-            			  },
-            		type:"post",
-            		success:function(result){ // result에는 0 또는 1이 있음
-            			if(result > 0){
-            				$("#reviewContent").val("");
-            				selectReviewList(1); // 한번 더 조회하기위해 호출해줘야함!!!
-            			}
-            		}, error:function(){
-            			console.log("리뷰 작석용 ajax 통신 실패!")
-            		}
-
-            	});
-            }
-          </script>
-
-          <script>
-            // 처음 최초로 한번만 실행되는 함수! window.onload는 한번 실행하고 끝나고 그냥 function은 계속 사용할 수 있다
-            // 처음 페이지를 1page로 그리기 위해서 selectReviewList를 호출하면서 매개변수로 값 1을 줌
-            $(function () {
-              selectReviewList(1);
-            });
-          </script>
-
-          <script>
+            
+            
+            <script>         
             function selectReviewList(cpage){
             	// capage에 1이 꽂히고 rvList.rv로 가서 1page의 currentPage를 생성함
             	$.ajax({
@@ -394,6 +353,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             				        + "<div class=\"reviewin\">" + list[i].reviewDate + "</div>"
             				        + "<div class=\"reviewpd\">상품명 : " + list[i].product + "</div>"
             				        + "<div class=\"deleterv\">"+"</div>"
+            				        + "<div class=\"updaterv\">"+"</div>"
             				        + "<div class=\"reviewcontent\">" + list[i].reviewText + "</div>"
             				        + "</div>");
 
@@ -403,6 +363,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             
             				    if (loginUserName === list[i].reviewWriter) {        				    	
             				        $review.find('.deleterv').html("<a href=\"#\" class=\"delete-review\" data-review-no=\"" + list[i].reviewNo + "\">삭제</a>");
+            				        $review.find('.updaterv').html("<a href=\"#\" class=\"update-review\" data-review-text=\"" + list[i].reviewText + "\" data-review-no=\"" + list[i].reviewNo + "\">수정</a>");
             				    }
             				}
             			  
@@ -410,12 +371,30 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             				    event.preventDefault();
   
             				    var reviewNo = $(this).data('review-no');
-            				    
-            				   	console.log(reviewNo);
             				   	
             				   	deleterv(reviewNo);
             				});
-	  
+            			  
+            			  
+            			  $('.update-review').on('click', function(event) {
+          				    event.preventDefault();
+
+          				    var reviewNo = $(this).data('review-no');
+          				    let reviewText = $(this).data('review-text');
+          				  	let reviewContentDiv = $(this).closest('.review4_2').find('.reviewcontent');
+          				     
+          			
+          				  reviewContentDiv.html('<textarea rows="2"style="resize: none; width: 1020px; height: 130px;" id="reviewContent1"></textarea>')          				        	
+          				  $('.update-review').html('<button id="revModify"> 수정 </button>')
+          				  
+          				  $('#revModify').on('click', function(){
+          					var newReviewText = $('#reviewContent1').val();
+          					  console.log(reviewNo);
+          					  console.log(newReviewText);
+          					  
+          				  updaterv(reviewNo,newReviewText);
+          				  })
+          				});  
             		  }
             		}, error:function(){
             			console.log("aJax 통신 실패!");
@@ -429,17 +408,77 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             		// 리뷰번호, 로그인유저
             		url:"reviewDelete.rv",
             		data:{
-            			rno:reviewnum           			
+            			rno:reviewnum
             		},
             		success:function(result){
-            			alert("리뷰가 삭제되었습니다!");
+            			alert("리뷰가 삭제 되었습니다!");
             			selectReviewList(1);
             		}, error:function(){
             			console.log("ajax 통신 실패!");
             		}       		
             	});
             }
+            
+            function updaterv(reviewNo, newReviewText){
+            	$.ajax({
+            		url:"reviewUpdate.rv",
+            		data:{
+            			rno:reviewNo,
+            			rtext:newReviewText
+            		},
+            		success:function(result){
+            			alert("리뷰가 수정 되었습니다!");
+            			selectReviewList(1);
+            		}
+            	})          	
+            }
           </script>
+            <% }else{ %>
+            	<div><p>로그인 후 이용해주세요</p></div>
+            <% } %>
+          </div>
+
+          <div id="content4">
+            <div class="review4"><!-- 리뷰 큰통div--></div>
+          </div>
+
+          <br /><br />
+
+          <!-- 페이징바 -->
+          <div class="paging-area" align="center"></div>
+
+          <script>
+
+
+            function insertReview(){
+            	$.ajax({
+            		url:"rinsert.rv",
+            		data:{pno:<%= p1.getProductNo()%>,
+            			  content:$("#reviewContent").val()
+            			  },
+            		type:"post",
+            		success:function(result){ // result에는 0 또는 1이 있음
+            			if(result > 0){
+            				$("#reviewContent").val("");
+            				selectReviewList(1); // 한번 더 조회하기위해 호출해줘야함!!!
+            			}
+            		}, error:function(){
+            			console.log("리뷰 작석용 ajax 통신 실패!")
+            		}
+
+            	});
+            }
+          </script>
+
+          <script>
+            // 처음 최초로 한번만 실행되는 함수! window.onload는 한번 실행하고 끝나고 그냥 function은 계속 사용할 수 있다
+            // 처음 페이지를 1page로 그리기 위해서 selectReviewList를 호출하면서 매개변수로 값 1을 줌
+            $(function () {
+              selectReviewList(1);
+            });
+          </script>
+
+          
         </div>
         <%@ include file="../common/footerbar.jsp" %>
       </body>

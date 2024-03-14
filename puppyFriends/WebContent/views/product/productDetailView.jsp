@@ -250,7 +250,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   	});
                   }
 
-
                   function cartTest1(){
                   	location.href='<%= contextPath %>/cartList.cr?pno=<%= p1.getProductNo()%>';
                   }
@@ -347,7 +346,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             			  for (let i = 0; i < list.length; i++) {
             				  let deleteLink = $("<a href=\"#\" onclick=\"deleterv(" + list[i].reviewNo + ")\">Delete</a>");
             				  
-            				    let $review = $("<div class=\"review4_1\">사진</div>"
+            				    let $review = $("<div class=\"review4_1\">"+ "<i class=\"fa-solid fa-circle-user fa-2xl\">" + "</i>" + "</div>"
             				        + "<div class=\"review4_2\">"
             				        + "<div class=\"reviewin\">" + list[i].reviewWriter + " | </div>"
             				        + "<div class=\"reviewin\">" + list[i].reviewDate + "</div>"

@@ -33,9 +33,6 @@ public class AjaxReviewUpdateController extends HttpServlet {
 		int reviewNum = Integer.parseInt(request.getParameter("rno"));
 		String reviewText = request.getParameter("rtext");
 		
-		System.out.println(reviewNum);
-		System.out.println(reviewText);
-		
 		int result = new ReviewService().updateReview(userNo, reviewNum, reviewText);
 		
 		response.getWriter().print(result);

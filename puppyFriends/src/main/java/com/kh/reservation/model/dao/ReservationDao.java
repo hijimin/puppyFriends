@@ -172,12 +172,9 @@ public class ReservationDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setDate(1, rv.getReservationStart());
-			pstmt.setDate(2, rv.getReservationEnd());
-			pstmt.setInt(3, rv.getReservationPrice());
+			pstmt.setInt(1, rv.getReservationPrice());
 			
 			result = pstmt.executeUpdate();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

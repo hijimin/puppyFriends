@@ -95,17 +95,13 @@
         RESERVATION_NO
       , PROGRAM_NO
       , FACILITY_NO
-	  , RESERVATION_START
-	  , RESERVATION_END
 	  , RESERVATION_PRICE
 	  )
 	  VALUES
 	  (
-	  SEQ_RESERVATION.NEXTVAL
+	    SEQ_RESERVATION.NEXTVAL
 	  , SEQ_HOTEL.CURRVAL
 	  , 2
-	  , ?
-	  , ?
 	  , ?
 	  )
 	  
@@ -118,8 +114,6 @@
     WHERE FACILITY_NO = 2
       AND PROGRAM_NO = ?
       AND RESERVATION_STATUS = 'Y'
-      
-	
 	</entry>
 
 

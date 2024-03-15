@@ -15,8 +15,6 @@ public class Hotel {
    private String hotelStatus;
    
    private Date writingDate;
-   private Date reservationStart;
-   private Date reservationEnd;
    private int reservationPrice;
    private int hcount;
    
@@ -274,24 +272,6 @@ public class Hotel {
 	}
 
 
-	public Date getReservationStart() {
-		return reservationStart;
-	}
-
-
-	public void setReservationStart(Date reservationStart) {
-		this.reservationStart = reservationStart;
-	}
-
-
-	public Date getReservationEnd() {
-		return reservationEnd;
-	}
-
-
-	public void setReservationEnd(Date reservationEnd) {
-		this.reservationEnd = reservationEnd;
-	}
 
 
 	public String getDogSize() {

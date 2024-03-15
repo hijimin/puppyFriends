@@ -209,6 +209,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     class="title"
                     required
                     placeholder="호텔명을 입력해 주세요."
+                    maxlength="10"
                   />
                 </td>
               </tr>
@@ -223,6 +224,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     style="resize: none"
                     required
                     placeholder="내용을 입력해 주세요."
+                    maxlength="100"
                   ></textarea>
                 </td>
               </tr>
@@ -230,8 +232,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 <th>사이즈 :</th>
                 <td>
                   <select class="select_text" name="hotelSize">
-                    <option value="s">S</option>
-                    <option value="m">M</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
                     <option value="L">L</option>
                   </select>
                 </td>
@@ -315,6 +317,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 <td>
                   <input
                     type="text"
+                    name="reservationPrice"
                     required
                     placeholder="금액 입력"
                     style="width: 45%"

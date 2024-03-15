@@ -38,10 +38,8 @@ public class Reservation {
 	
 	
 	  // HotelEnrollController
-	public Reservation(Date reservationStart, Date reservationEnd, int reservationPrice) {
+	public Reservation(int reservationPrice) {
 		super();
-		this.reservationStart = reservationStart;
-		this.reservationEnd = reservationEnd;
 		this.reservationPrice = reservationPrice;
 	}
 

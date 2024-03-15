@@ -78,7 +78,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             height: auto;
           }
           .review-area {
-            border-right: 1px solid lightgray;
+            border-right: 1px solid rgb(240, 240, 240);
           }
           .review4 {
             width: 1300px;
@@ -94,7 +94,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           }
           .review4_2 {
             width: 95%;
-            border-bottom: 1px solid lightgray;
+            border-bottom: 1px solid rgb(240, 240, 240);
           }
           .reviewin {
             display: inline;
@@ -106,6 +106,9 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
           #content4 {
             height: auto;
+            border: 1px solid rgb(240, 240, 240);
+            border-radius: 10px;
+            margin-top: 10px;
           }
 
           /**/
@@ -277,7 +280,7 @@ a:focus {
   padding-top: 50px;
 }
 
-.insertbtn{
+.insertbtn, .rvpagebtn{
   border: none;
   border-radius: 5px;
 }
@@ -288,6 +291,9 @@ a:focus {
   display: flex;
   flex-direction: column;
   float: right;
+}
+#reviewContent, #reviewContent1{
+  border: 1px solid rgb(240, 240, 240);
 }
         </style>
         <script
@@ -491,9 +497,9 @@ a:focus {
 
             			for(let p=startPage; p<=endPage; p++){
             				if(p == currentPage){
-            					$paging.append("<button>" + p + "</button>");
+            					$paging.append("<button class='rvpagebtn'>" + p + "</button>");
             				}else{
-            					$paging.append("<button onclick='selectReviewList(" + p + ");'>" + p + "</button>") // p는 "+" 방식으로 감싸줘야 변수로 인식함
+            					$paging.append("<button class='rvpagebtn' onclick='selectReviewList(" + p + ");'>" + p + "</button>") // p는 "+" 방식으로 감싸줘야 변수로 인식함
             					// 위 함수가 실행이되고 이 구문은 이 구문만을 위한 함수이기 때문에 한번더 cpage값을 줘야한다.
             					// 2페이지 원해서 2페이지 버튼 클릭시 selectReviewList함수를 호출하면서 매개변수로 숫자2를 줌
             					// p에는 내가 보고있는 페이지 숫자가 들어갈꺼고 p에 2가 들어갈시 capge에 2가 들어가면서 다시 rvList.rv로가서

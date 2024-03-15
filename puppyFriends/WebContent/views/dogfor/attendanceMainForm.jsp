@@ -165,11 +165,13 @@ a:active, a:hover {
 	color: red;
 	font-size: 20px;
 	font-weight: 700;
+	padding-top: 10px;
 }
 #yes{
 	color: blue;
 	font-size: 20px;
 	font-weight: 700;
+	padding-top: 10px;
 }
 #goToday{
 	color: black;
@@ -290,7 +292,8 @@ a:active, a:hover {
 		function findElementByText(text) {
 			var jSpot = $("td")
 				.filter(function() { 
-					return $(this).text().trim() === text && $(this).attr('class').trim() === ''; // 텍스트 일치 및 클래스가 공백인 경우 필터링
+					return $(this).text().trim() === text && $(this).attr('class').trim() === ''
+					|| $(this).text().trim() === text && $(this).attr('class').trim() === 'today'; // 텍스트 일치 및 클래스가 공백인 경우 필터링
 				})
 				.filter(function() { 
 					return $(this).children().length === 0; 
@@ -310,7 +313,7 @@ a:active, a:hover {
 			
 			<script type="text/javascript">
 			
-			findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html(findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html() + "<br><br> <div id='yes'>출석</div>");
+			findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html(findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html() + "<br> <div id='yes'>출석</div>");
 			
 			</script>
 			
@@ -320,7 +323,7 @@ a:active, a:hover {
 			<script type="text/javascript">
 			
 			
-			findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html(findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html() + "<br><br> <div id='no'>결석</div>");
+			findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html(findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html() + "<br> <div id='no'>결석</div>");
 			
 			</script>
 			

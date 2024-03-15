@@ -175,7 +175,7 @@
 	            	toId:"<%= userId %>"
 	            },
 	            success:function(result){
-	            	console.log(result);
+
 	                let value = "";
 	                
 	                for(let i=0; i<result.length; i++){
@@ -213,7 +213,7 @@
 	                scrollToBottom();
 	            },
 	            error:function(){
-	                console.log("ajax 통신 실패");
+	                // console.log("ajax 통신 실패");
 	            }
 	
 	        });
@@ -237,7 +237,7 @@
 	                content: content
 	            },
 	            success:function(result){
-	            	console.log(result);
+	            
 	                if(result > 0){
 	                	selectChatList();
 	                	scrollToBottom();

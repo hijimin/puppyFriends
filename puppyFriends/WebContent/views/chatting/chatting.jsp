@@ -244,7 +244,7 @@
 	    			chatContainer.scrollTop = chatContainer.scrollHeight;
 	            },
 	            error:function(){
-	                console.log("ajax 통신 실패");
+	                // console.log("ajax 통신 실패");
 	            }
 	
 	        });

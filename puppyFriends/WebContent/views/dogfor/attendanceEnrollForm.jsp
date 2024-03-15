@@ -21,14 +21,39 @@
 		border: 1px solid red;
 		float: left;
 	}
-	#table{
+	#date_user{
 		width: 100%;
-		height: 90%;
-		overflow-y: auto;
+		height: 10%;
+		padding-top: 20px;
 	}
+
 	#month_content{
 		width: 100%;
 		height: 10%;
+	}
+	#date_status{
+		width: 100%;
+		height: 60px;
+		padding: 20px;
+	}
+	#date_wrap{
+		border-top: 1px solid gray;
+		width: 100%;
+		height: 80%;
+		overflow-y: auto;
+	}
+	#date{
+		width: 500px;
+		height: 60px;
+		padding: 15px;
+		padding-left: 200px;
+		padding-right: 200px;
+		border-right: 1px solid gray;
+		font-size: 20px;
+	}
+	#status{
+		padding-left: 75px;
+		font-size: 20px;
 	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -37,6 +62,27 @@
 
 	<%@ include file="../common/menubar.jsp" %>
 
+	<script>
+		function prev(){
+			if($("#month").text() == 1){
+				$("#year").text($("#year").text()-1);
+				$("#month").text(12);
+			}else{
+				$("#month").text($("#month").text()-1)
+			}
+			selectList();
+		}
+		function next(){
+			if($("#month").text() == 12){
+				$("#year").text(Number($("#year").text())+1);
+				$("#month").text(1);
+			}else{
+				$("#month").text(Number($("#month").text())+1);
+			}
+			selectList();
+		}
+	</script>
+
 
 	<div class="outer">
 
@@ -44,46 +90,19 @@
 		<div id="content1">
 			<div id="month_content" align="center">
 				<br>
-				<button><<</button>
+				<button onclick="prev();"><<</button>
 				<span id="year">2024</span>년 <span id="month">3</span>월
-				<button>>></button>
+				<button onclick="next();">>></button>
 			</div>
-			<table id="table" border="1">
-				<tr>
-					<th colspan="2">유저아이디</th>
-				</tr>
-				<tr>
-					<td width="550">날짜</td>
-					<td>출결여부</td>
-				</tr>
-				<tr>
-					<td>날짜</td>
-					<td>출결여부</td>
-				</tr>
-				<tr>
-					<td>날짜</td>
-					<td>출결여부</td>
-				</tr>
-				<tr>
-					<td>날짜</td>
-					<td>출결여부</td>
-				</tr>
-				<tr>
-					<td>날짜</td>
-					<td>출결여부</td>
-				</tr>
-				<tr>
-					<td>날짜</td>
-					<td>출결여부</td>
-				</tr>
-				<tr>
-					<td>날짜</td>
-					<td>출결여부</td>
-				</tr>
-			</table>
+			<div id="date_user">
+
+			</div>
+			<div id="date_wrap">
+
+			</div>
 		</div>
 		<div id="content2">
-			<form action="insert.at" method="post">
+			
 
 				회원번호 : <select id="select" name="userNo">
 								<option value="X" selected>선택</option>
@@ -92,7 +111,7 @@
 									<% } %>
 							</select> <br><br>
 	
-				날짜 : <input type="date" name="date"> <br><br>
+				날짜 : <input type="date" id="date1" name="date"> <br><br>
 	
 				출석여부 : 
 				<input type="radio" id="Y" name="status" value="Y"> 
@@ -101,8 +120,8 @@
 				<label for="N">결석</label>
 				<br><br>
 	
-				<button type="submit">등록하기</button>
-			</form>
+				<button onclick="insertList();">등록하기</button>
+			
 		</div>
 
 		
@@ -128,31 +147,40 @@
 				month:$("#month").html()
 			},
 			success:function(result){
-				console.log(result)
+			
 				let user = ""
 				let value = "";
-                for(let i=0; i<result.length; i++){
-                	
-                		 user  = "<tr>"
-                			   + "<th colspan='2' height='10%'>"
-                		       + result[i].userNo
-                		       + "</th>"
-                		       + "</tr>"
-        				value += "<tr>"
-    					       + "<td width='550' height='10%'>"
-    					       + result[i].date
-    					       + "</td>"
-    					       + "<td>"
-    					       + result[i].status
-    					       + "</td>"
-    				           + "</tr>"
-                	
-                }
-                $("#table").html(user + value);
+
+				if(result.length === 0){
+					$("#date_user").html("<tr>" + "<th colspan='2' height='60px'>" + "출결이 없습니다" + "</th>" + "</tr>");
+					$("#date_wrap").html("");
+				}else{
+
+					for(let i=0; i<result.length; i++){
+						
+							user  = "<div>"
+								+ "<h3 align='center'>"
+								+ result[i].memberName
+								+ "</h3>"
+								+ "</div>"
+							value += "<div id='date_status'>"
+								+ "<span id='date'>"
+								+ result[i].date
+								+ "</span>"
+								+ "<span id='status'>"
+								+ result[i].status
+								+ "</span>"
+								+ "</div>"
+								
+						
+					}
+					$("#date_user").html(user);
+					$("#date_wrap").html(value);
+				}
 				
 			},
 			error:function(){
-				console.log("실패")
+				
 			}
 
 
@@ -162,6 +190,34 @@
 
 	}
 
+	function insertList(){
+		
+		$.ajax({
+			type:"post",
+			url:"/puppy/insert.at",
+			data:{
+				userNo:$("select[name=userNo] option:selected").val(),
+				date:$("#date1").val(),
+				status:$("input[name='status']:checked").val()
+			},
+			success:function(result){
+				$("#date1").val("");
+				$("input[name='status']").prop("checked", false);
+				selectList();
+				if(result === 'update good'){
+					alert("출석 변경 성공");
+				}else{
+					alert("출석 등록 성공");
+
+				}
+			},
+			error:function(result){
+				selectList();
+			}
+		})
+		
+
+	}
 
 	</script>
 	

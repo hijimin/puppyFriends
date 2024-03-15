@@ -152,7 +152,7 @@
        
         function sendMessage() {
             var chatMessage = $("#chatMessage");
-            console.log('<%= chu.getMemberId() %>')
+      
             var message = {
                 sender: "<%= chu.getMemberId() %>",
                 content: chatMessage.val()

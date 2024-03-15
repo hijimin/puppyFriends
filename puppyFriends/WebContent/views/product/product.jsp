@@ -267,6 +267,64 @@ body {
 .content2_3c img:hover {
 	cursor: pointer;
 }
+
+
+/*이번주 베스트 상품*/
+#bestpd1{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 160px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  text-align: center;
+  font-family: sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: #ccc;
+}
+#bestpd1:before{
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: #ff005e;
+  color: #fff;
+  transition: 0.5s;
+  transform-origin: bottom;
+  transform: translatey(-100%) rotatex(90deg);
+}
+#bestpd1:hover:before
+{
+  transform: translatey(0) rotatex(0deg);
+}
+
+#bestpd1:after{
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: #ea004f;
+  color: #fff;
+  transition: 0.5s;
+  transform-origin: top;
+  transform: translatey(0) rotatex(0deg);
+}
+#bestpd1:hover:after
+{
+  transform: translatey(100%) rotatex(90deg);
+}
+
+
 </style>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -288,7 +346,8 @@ body {
 	<%@ include file="../common/menubar.jsp"%>
 
 	<div id="bestproduct">
-		<p align="center" id="bestproduct-p">이번주 Best Product!!</p>
+		<!-- <p align="center" id="bestproduct-p">이번주 Best Product!!</p> -->
+		<a id="bestpd1" href="#" data-text="Best">Best</a>
 		<%
 		if (loginUser != null && loginUser.getMemberId().equals("ADMIN")) {
 		%>

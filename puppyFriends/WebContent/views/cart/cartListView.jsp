@@ -132,12 +132,13 @@
         border-bottom: 1px solid #d7d5d5;
     }
     
-    /* .count-wrap {position: relative;padding: 0 38px;border: 1px solid #ddd;overflow: hidden;width: 60px;}
-	.count-wrap > button {border: 0;background: #ddd;color: #000;width: 38px;height: 38px;position: absolute;top: 0;font-size: 12px;} */
+     .count-wrap {position: relative;padding: 0 38px;border: 1px solid #ddd;overflow: hidden;width: 60px;}
+	.count-wrap > button {border: 0;background: #ddd;color: #000;width: 38px;height: 38px;position: absolute;top: 0;font-size: 12px;} 
 
 	.count-wrap .inp {border: 0;height: 38px;text-align: center;display: block;width: 100%;}
     .count-wrap > button.minus {left: 0;}
 	.count-wrap > button.plus {right: 0;}
+    
 
     input::-webkit-inner-spin-button {
     appearance: none;
@@ -153,7 +154,7 @@
     #content2{height: 300px;}
     
     #content2>div{width: 100%;}
-    #content2_1{height: 20%;}
+    /* #content2_1{height: 20%;} */
     #content2_2{height: 80%;}
 
     .required{
@@ -163,6 +164,7 @@
         margin-inline-start: 0px;
         margin-inline-end: 0px;
         text-align: right;
+        margin: -15px 0 0;;
     }
 
     /*배송정보*/
@@ -170,7 +172,27 @@
         height: 400px;
     }
     #content3>div{width: 100%;}
-    #content3_1{height: 20%;}
+    /* #content3_1{height: 20%;} */
+    #content3_1>h6{
+    font-weight: bold;
+    margin: 0;
+    vertical-align: middle;
+    display: inline-block;
+    }
+    #content2_1>h6{
+    font-weight: bold;
+    margin: 0;
+    vertical-align: middle;
+    display: inline-block;
+    }
+    p{
+        display: block;
+    }
+
+    
+
+
+
     #content3_2{height: 80%;}
 
     /*결제수단*/
@@ -277,10 +299,10 @@
                             </td>
                             <td><%= pName %></td>
                             <td>                                                    
-	                            <div class="count-wrap _count">
-								    <button type="button" class="minus" data-product-no="<%= c.getPno() %>" onclick="minusTest();">감소</button>
+	                            <div class="count-wrap _count" style="width:120px">
+								    <button type="button" class="minus" data-product-no="<%= c.getPno() %>" onclick="minusTest();">-</button>
 								    <input type="number" class="inp" value="<%= c.getCartAmount()%>" />
-								    <button type="button" class="plus" data-product-no="<%= c.getPno() %>">증가</button> <!-- onclick="plusTest();" 지워도됨 -->
+								    <button type="button" class="plus" data-product-no="<%= c.getPno() %>">+</button> <!-- onclick="plusTest();" 지워도됨 -->
 								</div>
 								
                             </td>
@@ -628,7 +650,7 @@
                                 배송메시지                             
                             </th>
                             <td style="padding: 10px;">
-                                <textarea id="omessage" maxlength="255" cols="70"></textarea>
+                                <textarea id="omessage" maxlength="255" cols="70" style="resize: none;"></textarea>
                             </td>
                         </tr>
                     </tbody>
@@ -808,6 +830,7 @@
         	var add1 = document.getElementById("sample2_address").value; 
         	let amount = $('#totalprice').text();
         	let price = Number(amount);
+        	console.log(price)
         	//let priceStr = totalPrice;
         	//let price = parseInt(priceStr.replace(/,/g, ''), 10);
         	
@@ -841,7 +864,7 @@
         	let iu;
         	let mc;      	
         	let amount = $('#totalprice').text();
-        	let price = Number(amount);
+        	let price = Number(amount);       	       	
         	      	         
         		<%	
         			ArrayList<Integer> pnoList = new ArrayList<>();
@@ -886,14 +909,46 @@
 	        			},
 	        		success:function(result){
 	        			if(result > 0){
-	        				console.log("결제완료");    
-	        				location.href = '<%= contextPath %>/success.po'
+	        				console.log("결제완료");  
+	        				clear();
+	        				location.href = '<%= contextPath %>/success.po'        					
 	        			}
 	        		}, error:function(){
 	        			console.log("ajax 통신 실패!");
 	        		}
-	        	})       		
+	        	})       		    	
+        }
+        
+        function clear(){
+        	<%	
+			ArrayList<Integer> cnoList = new ArrayList<>();
+			int cno = 0;
+			for(Cart c :list){
+				cno = c.getCartNo();
+				cnoList.add(cno);
+			}
+			
+			String cnoArrayJSON = new Gson().toJson(cnoList);
+		%>
+		
+		var uniqueCnoArray = JSON.parse('<%= cnoArrayJSON %>');
         	
+		console.log(uniqueCnoArray);
+        	
+        	$.ajax({
+        		url:"cstatusUpdate.cr",
+        		traditional : true,
+        		data:{
+        			cno:uniqueCnoArray
+        		},
+        		success:function(result){
+        			if(result > 0){
+        				console.log("장바구니 비우기 성공")
+        			}
+        		}, error:function(){
+        			console.log("ajax 통신 실패!");
+        		}
+        	});
         }
     </script>
 	

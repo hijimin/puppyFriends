@@ -15,10 +15,13 @@ public class Order {
 	 private int orderCount;
 	 private int paymentNo;
 	 
+	 private String cartStatus;
+	 
 	 public Order() {}
 
 	public Order(int orderNo, String orderUser, String productNo, String orderName, String orderAddress,
-			String orderPhone, String orderReq, Date orderDate, int orderDelivery, int orderCount, int paymentNo) {
+			String orderPhone, String orderReq, Date orderDate, int orderDelivery, int orderCount, int paymentNo,
+			String cartStatus) {
 		super();
 		this.orderNo = orderNo;
 		this.orderUser = orderUser;
@@ -31,6 +34,7 @@ public class Order {
 		this.orderDelivery = orderDelivery;
 		this.orderCount = orderCount;
 		this.paymentNo = paymentNo;
+		this.cartStatus = cartStatus;
 	}
 
 	public int getOrderNo() {
@@ -121,13 +125,19 @@ public class Order {
 		this.paymentNo = paymentNo;
 	}
 
+	public String getCartStatus() {
+		return cartStatus;
+	}
+
+	public void setCartStatus(String cartStatus) {
+		this.cartStatus = cartStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", orderUser=" + orderUser + ", productNo=" + productNo + ", orderName="
 				+ orderName + ", orderAddress=" + orderAddress + ", orderPhone=" + orderPhone + ", orderReq=" + orderReq
 				+ ", orderDate=" + orderDate + ", orderDelivery=" + orderDelivery + ", orderCount=" + orderCount
-				+ ", paymentNo=" + paymentNo + "]";
+				+ ", paymentNo=" + paymentNo + ", cartStatus=" + cartStatus + "]";
 	}
-
-	
 }

@@ -62,6 +62,12 @@ SELECT
 	 WHERE MEMBER_NO = ?
 	   AND PRODUCT_NO = ?
 	</entry>
+	
+	<entry key="cartStatusUpdate">
+		UPDATE CART
+	  SET CART_STATUS = 'N'
+	WHERE CART_NO = ?
+	</entry>
 
 
 

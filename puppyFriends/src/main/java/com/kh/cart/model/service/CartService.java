@@ -64,5 +64,18 @@ public class CartService {
 		return result;		
 	}
 	
+	public int cartStatusUpdate(int cno) {
+		Connection conn = getConnection();
+		int result = new CartDao().cartStatusUpdate(conn, cno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
+		
+	}
+	
 
 }

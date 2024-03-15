@@ -119,6 +119,176 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             width: 223px;
             height: 55px;
           }
+
+          /* 버튼 */
+          @import url(https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600);
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: 'codropsicons';
+  src: url("../fonts/codropsicons/codropsicons.eot");
+  src: url("../fonts/codropsicons/codropsicons.eot?#iefix") format("embedded-opentype"), url("../fonts/codropsicons/codropsicons.woff") format("woff"), url("../fonts/codropsicons/codropsicons.ttf") format("truetype"), url("../fonts/codropsicons/codropsicons.svg#codropsicons") format("svg");
+}
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: #cfd8dc;
+  color: #37474f;
+  font-weight: 400;
+  font-size: 1em;
+  font-family: 'Raleway', Arial, sans-serif;
+}
+
+a {
+  color: #7986cb;
+  text-decoration: none;
+  outline: none;
+}
+a:hover,
+a:focus {
+  color: #3f51b5;
+}
+
+
+/* Box colors */
+.bg-1 {
+  background: #ECEFF1;
+  color: #37474f;
+}
+.bg-2 {
+  background: #7986cb;
+  color: #ECEFF1;
+}
+.bg-3 {
+  background: #37474f;
+  color: #fff;
+}
+
+/* Common button styles */
+.button {
+  float: left;
+  min-width: 150px;
+  max-width: 250px;
+  display: block;
+  margin: 1em;
+  padding: 1em 2em;
+  border: none;
+  background: none;
+  color: inherit;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+.button:focus {
+  outline: none;
+}
+.button > span {
+  vertical-align: middle;
+}
+
+/* Sizes */
+.button--size-s {
+  font-size: 14px;
+}
+.button--size-m {
+  font-size: 16px;
+}
+.button--size-l {
+  font-size: 18px;
+}
+
+
+/* Borders */
+.button--border-thin {
+  border: 1px solid;
+}
+.button--border-medium {
+  border: 2px solid;
+}
+.button--border-thick {
+  border: 3px solid;
+}
+
+/* Winona */
+.button--winona {
+  overflow: hidden;
+  padding: 0;
+  -webkit-transition: border-color 0.3s, background-color 0.3s;
+  transition: border-color 0.3s, background-color 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+.button--winona::after {
+  content: attr(data-text);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  color: #3f51b5;
+  -webkit-transform: translate3d(0, 25%, 0);
+  transform: translate3d(0, 25%, 0);
+}
+.button--winona > span {
+  display: block;
+}
+.button--winona.button--inverted {
+  color: #7986cb;
+}
+.button--winona.button--inverted:after {
+  color: #fff;
+}
+.button--winona::after,
+.button--winona > span {
+  padding: 1em 2em;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+  transition: transform 0.3s, opacity 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+.button--winona:hover {
+  border-color: #3f51b5;
+  background-color: rgba(63, 81, 181, 0.1);
+}
+.button--winona.button--inverted:hover {
+  border-color: #21333C;
+  background-color: #21333C;
+}
+.button--winona:hover::after {
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.button--winona:hover > span {
+  opacity: 0;
+  -webkit-transform: translate3d(0, -25%, 0);
+  transform: translate3d(0, -25%, 0);
+}
+
+.fa-solid{
+  padding-top: 50px;
+}
+
+.insertbtn{
+  border: none;
+  border-radius: 5px;
+}
+
+/*리뷰 등록 삭제버튼*/
+.deleterv, .updaterv{
+  /* display: inline; */
+  display: flex;
+  flex-direction: column;
+  float: right;
+}
         </style>
         <script
           src="https://kit.fontawesome.com/5de30c093c.js"
@@ -170,14 +340,18 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
                 <div class="cart">
                   <div>
-                    <a onclick="cartTest2();" class="btn btn-sm btn-warning"
+                    <button onclick="cartTest2();" class="button button--winona button--border-thin button--round-s" data-text="Add To Cart"><span>Add To Cart</span></button>
+                    <!-- <a onclick="cartTest2();" class="btn btn-sm btn-warning"
                       >장바구니</a
-                    >
-                    <a
+                    > -->
+
+                    <button onclick="location.href='<%= contextPath %>/order.od?pno=<%= p1.getProductNo() %>'" class="button button--winona button--border-thin button--round-s" data-text="구매하기"><span>구매하기</span></button>
+
+                    <!-- <a
                       href="<%= contextPath %>/order.od?pno=<%= p1.getProductNo() %>"
                       class="btn btn-sm btn-warning"
                       >구매하기</a
-                    >
+                    > -->
                     <i
                       class="fa-solid fa-bucket fa-2xl"
                       onclick="cartTest1();"
@@ -287,7 +461,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 </table>
                 <br />
                 <div align="center">
-                  <button onclick="insertReview();">등록하기</button>
+                  <button class="insertbtn" onclick="insertReview();">리뷰등록</button>
                 </div>
               </div>
             </div>

@@ -4,11 +4,16 @@ import java.sql.Connection;
 
 import static com.kh.common.JDBCTemplate.*;
 
+import com.kh.cart.model.dao.CartDao;
 import com.kh.order.model.dao.OrderDao;
 import com.kh.order.model.vo.Order;
 
 public class OrderService {
 	
+	/**
+	 * @param 단건결제
+	 * @return
+	 */
 	public int orderInsert(Order o, String impUid, String merchantUid, String price) {
 		Connection conn = getConnection();
 		// insert order
@@ -36,17 +41,22 @@ public class OrderService {
 		return result1 * result2 * result3;
 	}
 	
+	/**
+	 * @param 다건결제
+	 * @return
+	 */
 	public int orderInsert(Order o, String impUid, String merchantUid, String price, int many) {
 		Connection conn = getConnection();
 		// insert P_ORDER
 		int result1 = new OrderDao().orderInsert(conn, o); // 첫번째 상품 P_Order에 인서트 치러감
 		
 		int result2 = 1;
+		
 		int result3 = 1;
 		
 		if(result1 > 0 && many == 999) { // 첫번째 상품 인서트 치고 토스페이먼트에 디비 작업치러감
 			// insert TOSS_PAYMENT
-			result2 = new OrderDao().paymentInsert(conn, impUid, merchantUid, price);	
+			result2 = new OrderDao().paymentInsert(conn, impUid, merchantUid, price);
 		}
 		
 		if(result2 > 0 && many == 999) {

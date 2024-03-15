@@ -212,7 +212,6 @@
 	            	toId:"ADMIN"
 	            },
 	            success:function(result){
-	            	console.log(result);
 	                let value = "";
 	                for(let i=0; i<result.length; i++){
 	                	if(result[i].fromId == "<%= userId %>"){
@@ -273,7 +272,6 @@
 	                content: content
 	            },
 	            success:function(result){
-	            	console.log(result);
 	                if(result > 0){
 	                	selectChatList();
 	                	scrollToBottom();

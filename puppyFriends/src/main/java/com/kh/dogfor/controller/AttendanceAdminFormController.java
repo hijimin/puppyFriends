@@ -37,18 +37,20 @@ public class AttendanceAdminFormController extends HttpServlet {
 		int year = Integer.parseInt(request.getParameter("year"));
 		int month = Integer.parseInt(request.getParameter("month"));
 		
-		ArrayList<Attendance> list = new DogforService().selectAttendanceList(userNo);
+		ArrayList<Attendance> list = new ArrayList<Attendance>();
+		if(!userNo.equals("X")) {
+			
+			list = new DogforService().selectAttendanceList(userNo);
+		}
 		ArrayList<Attendance> newList = new ArrayList<Attendance>();
 		
 		for(Attendance at : list) {
-			System.out.println(at.getDate().substring(0, 4));
-			System.out.println(at.getDate().substring(5, 7));
+
 			if(Integer.parseInt(at.getDate().substring(0, 4)) == year && Integer.parseInt(at.getDate().substring(5, 7)) == month) {
 				newList.add(at);
 			}
 		}
-		
-		System.out.println(newList);
+
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(newList, response.getWriter());

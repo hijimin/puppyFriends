@@ -238,7 +238,8 @@ public class DogforDao {
 				Attendance at = new Attendance(rset.getInt("attendance_no"),
 									           rset.getString("member_no"),
 									           rset.getString("date"),
-									           rset.getString("attendance_status"));
+									           rset.getString("attendance_status"),
+									           rset.getString("member_name"));
 				
 				list.add(at);
 				
@@ -358,7 +359,32 @@ public class DogforDao {
 		
 	}
 	
-	
+	public int updateAttendance(Connection conn, Attendance at) {
+		
+		int insert = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateAttendance");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, at.getStatus());
+			pstmt.setInt(2, Integer.parseInt(at.getMemberNo()));
+			pstmt.setString(3, at.getDate());
+			
+			insert = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return insert;
+		
+	}
 	
 	
 	

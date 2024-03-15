@@ -6,6 +6,7 @@ public class Attendance {
 	private String memberNo;
 	private String date;
 	private String status;
+	private String memberName;
 	
 	public Attendance() {}
 	
@@ -15,6 +16,25 @@ public class Attendance {
 		this.memberNo = memberNo;
 		this.date = date;
 		this.status = status;
+	}
+	
+	
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public Attendance(int attendanceNo, String memberNo, String date, String status, String memberName) {
+		super();
+		this.attendanceNo = attendanceNo;
+		this.memberNo = memberNo;
+		this.date = date;
+		this.status = status;
+		this.memberName = memberName;
 	}
 
 	public int getAttendanceNo() {

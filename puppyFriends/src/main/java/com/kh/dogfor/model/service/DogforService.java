@@ -128,13 +128,30 @@ import static com.kh.common.JDBCTemplate.*;
 				
 		int check = new DogforDao().checkAttendance(conn, userNo, date);
 		
+		close(conn);
 		
 		return check;
 		
 		
 	}
 	
-	
+	public int updateAttendance(Attendance at) {
+		
+		Connection conn = getConnection();
+		
+		int insert = new DogforDao().updateAttendance(conn, at);
+		
+		if(insert > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return insert;
+		
+	}
 	
 	
 	

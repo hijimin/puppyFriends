@@ -36,6 +36,7 @@ public class AttendanceInsertFormController extends HttpServlet {
 		String date = request.getParameter("date"); // 2024-03-13
 		String status = request.getParameter("status");
 		
+		
 		Attendance at = new Attendance();
 		at.setMemberNo(userNo);
 		at.setDate(date);
@@ -46,16 +47,29 @@ public class AttendanceInsertFormController extends HttpServlet {
 		int year = cal.get(Calendar.YEAR);
 		int month = cal.get(Calendar.MONTH)+1;
 		
-		System.out.println(date);
 		
 		// 출석 등록여부 확인
-		int result = new DogforService().checkAttendance(userNo, date);
+		int check = new DogforService().checkAttendance(userNo, date);
 		
-		
-		int result2 = new DogforService().insertAttendance(at);
-		
-		if(result2 > 0) {
-			response.sendRedirect(request.getContextPath() + "/attendance.at?userNo="+userNo+"&year="+year+"&month="+month);
+		if(check == 1) { // 해당 날짜 존재 update
+			int update = new DogforService().updateAttendance(at);
+			
+			if(update > 0) {
+				response.getWriter().print("update good");
+			}else {
+				response.getWriter().print("update bad");
+			}
+			
+		}else { // 해당 날짜 없음 insert
+			int insert = new DogforService().insertAttendance(at);
+			
+			if(insert > 0) {
+				response.getWriter().print("insert good");
+			}else {
+				response.getWriter().print("insert bad");
+			}
+			
+			
 		}
 		
 		

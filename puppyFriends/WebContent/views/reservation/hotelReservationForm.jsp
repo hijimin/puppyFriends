@@ -1,9 +1,11 @@
+<%@page import="com.kh.common.model.vo.Image"%>
 <%@page import="com.kh.reservation.model.vo.Hotel"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
 	ArrayList<Hotel> list = (ArrayList<Hotel>)request.getAttribute("list");
+
 %>
 <!DOCTYPE html>
 <html>

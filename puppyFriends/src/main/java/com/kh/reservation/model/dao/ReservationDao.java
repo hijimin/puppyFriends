@@ -217,7 +217,61 @@ public class ReservationDao {
 		
 		return hotelrvCount;
 	}
-	
+
+	public int deleteHotel(Connection conn, int hotelNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteHotel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, hotelNo);
+		
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Image> selectHotelImgList(Connection conn, int hotelNo) {
+
+		ArrayList<Image> img = new ArrayList<Image>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectHotelImgList");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Image image = new Image();
+				image.setChangeName(rset.getString("change_name"));
+				image.setFilePath(rset.getString("file_path"));
+
+				img.add(image);
+			}
+			System.out.println(img);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return img;
+	}
+
 	
 	
 

@@ -1,6 +1,7 @@
 package com.kh.common.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Image {
 	private int fileNo;
@@ -31,8 +32,13 @@ public class Image {
 		this.dogNo = dogNo;
 	}
 
-	
-	
+	// selectHotelImgList
+	public Image(String filePath, String changeName) {
+		super();
+		this.filePath = filePath;
+		this.changeName = changeName;
+	}
+
 	public Image(int fileNo, String dogNo, String titleImg) {
 		super();
 		this.fileNo = fileNo;
@@ -133,6 +139,11 @@ public class Image {
 		return "Image [fileNo=" + fileNo + ", refBoardNo=" + refBoardNo + ", imageType=" + imageType + ", filePath="
 				+ filePath + ", fileLevel=" + fileLevel + ", fileName=" + fileName + ", changeName=" + changeName
 				+ ", imageUpdate=" + imageUpdate + ", dogNo=" + dogNo + "]";
+	}
+
+	public void add(ArrayList<Image> img) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	 

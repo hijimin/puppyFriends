@@ -14,7 +14,7 @@
 	  FROM HOTEL H
 	  JOIN MEMBER M ON (HOTEL_WRITER = MEMBER_NO)
 	 WHERE HOTEL_STATUS = 'Y' 
-	 ORDER BY SYSDATE DESC
+	 ORDER BY HOTEL_NO DESC
 	
 	</entry>
 	
@@ -35,6 +35,20 @@
        AND HOTEL_STATUS = 'Y'
 	    
 	</entry>
+	
+	<entry key="selectHotelImgList">
+	
+	SELECT 
+	       FILE_NO
+	     , FILE_NAME
+	     , CHANGE_NAME
+	     , FILE_PATH
+	  FROM IMAGE
+	 WHERE REF_BNO = ?
+	
+	</entry>
+
+	
 	
 	<entry key="insertThHotel">
 	INSERT
@@ -109,13 +123,21 @@
 
 	<entry key="selectRvCount">
 	<!-- 호텔용  -->
-	SELECT COUNT(*) HCOUNT
-    FROM RESERVATION
-    WHERE FACILITY_NO = 2
-      AND PROGRAM_NO = ?
-      AND RESERVATION_STATUS = 'Y'
+	SELECT 
+		   COUNT(*) HCOUNT
+   	  FROM RESERVATION
+     WHERE FACILITY_NO = 2
+       AND PROGRAM_NO = ?
+       AND RESERVATION_STATUS = 'Y'
 	</entry>
 
+	<entry key="deleteHotel">
+	  UPDATE 
+	  		 HOTEL
+      	 SET HOTEL_STATUS = 'N'
+   	   WHERE HOTEL_NO = ?
+		
+	</entry>
 
 
 

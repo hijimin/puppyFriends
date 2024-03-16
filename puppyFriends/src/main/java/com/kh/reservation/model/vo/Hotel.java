@@ -51,7 +51,6 @@ public class Hotel {
    }
 
    // selectHotelDetail
-  
 	public Hotel(int hotelNo, int hotelWriter, String hotelName, String hotelText, String hotelSize, int dNumber,
 		Date hotelStart, Date hotelEnd, String memberId, int hcount) {
 	super();
@@ -65,8 +64,11 @@ public class Hotel {
 	this.hotelEnd = hotelEnd;
 	this.memberId = memberId;
 	this.hcount = hcount;
+	
 }
 
+	
+	
       
    // HotelEnrollController
 	public Hotel(int hotelNo, int hotelWriter, String hotelName, String hotelText, String hotelSize, int dNumber) {
@@ -79,9 +81,6 @@ public class Hotel {
 	this.dNumber = dNumber;
 
 }
-
-	
-	
 	
 
 	public int getFileNo() {

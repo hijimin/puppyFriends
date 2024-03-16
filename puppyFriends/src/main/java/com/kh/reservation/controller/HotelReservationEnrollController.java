@@ -31,12 +31,6 @@ public class HotelReservationEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		/* 안 쓸 듯
-		ArrayList<Hotel> h = new ReservationService().selectHotelThumbnailList();
-		
-		request.setAttribute("h", h);
-		*/
 		
 		request.getRequestDispatcher("views/reservation/hotelEnrollForm.jsp").forward(request, response);
 	

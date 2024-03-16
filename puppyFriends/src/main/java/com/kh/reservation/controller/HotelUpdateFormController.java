@@ -12,19 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.common.model.vo.Image;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Hotel;
-import com.kh.reservation.model.vo.Reservation;
 
 /**
- * Servlet implementation class HotelDetailController
+ * Servlet implementation class HotelUpdateFormController
  */
-@WebServlet("/detail.hrv")
-public class HotelDetailController extends HttpServlet {
+@WebServlet("/updateForm.hrv")
+public class HotelUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HotelDetailController() {
+    public HotelUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +32,18 @@ public class HotelDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int hotelNo = Integer.parseInt(request.getParameter("hno"));
+//		
+//		int hotelNo = Integer.parseInt(request.getParameter("hno"));
+//
+//		ReservationService hService = new ReservationService();
+//		
+//		ArrayList<Image> img = hService.selectHotelImgList(hotelNo);
+//		Hotel h = hService.selectHotelDetail(hotelNo);
+//			
+//			request.setAttribute("h", h);
+//			request.setAttribute("img", img);
 
-		ReservationService hService = new ReservationService();
-		
-		int hotelrvCount;
-		hotelrvCount = new ReservationService().selectRvCount(hotelNo);
-				
-			Hotel h = hService.selectHotelDetail(hotelNo);
-			ArrayList<Image> img = hService.selectHotelImgList(hotelNo);
-			
-			request.setAttribute("h", h);
-			request.setAttribute("img", img);
-			request.setAttribute("hotelrvCount", hotelrvCount);
-
-			request.getRequestDispatcher("views/reservation/hotelDetailView.jsp").forward(request, response);
+			request.getRequestDispatcher("views/reservation/hotelUpdateForm.jsp").forward(request, response);
 
 
 	}

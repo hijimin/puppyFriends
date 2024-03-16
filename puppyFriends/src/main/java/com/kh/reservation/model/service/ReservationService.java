@@ -55,10 +55,34 @@ public class ReservationService {
 		int hotelrvCount = new ReservationDao().selectRvCount(conn, hotelNo);
 		
 		close(conn); 
-//		System.out.println(hotelNo); ㅇㅇ
 		return hotelrvCount;
 	}
-	
+
+	public int deleteHotel(int hotelNo) {
+		Connection conn = getConnection();
+		
+		int result = new ReservationDao().deleteHotel(conn, hotelNo);
+		
+		if(result>0) {
+			commit(conn);
+			
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<Image> selectHotelImgList(int hotelNo) {
+
+		Connection conn = getConnection();
+		ArrayList<Image> img = new ReservationDao().selectHotelImgList(conn, hotelNo);
+		close(conn);
+		
+		return img;
+	}
+
 	
 	
 	/*

@@ -1,3 +1,5 @@
+<%@page import="com.kh.common.model.vo.Image"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.kh.reservation.model.vo.Hotel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,6 +8,7 @@
     
     Hotel h = (Hotel)request.getAttribute("h");
     int hotelrvCount = (int)request.getAttribute("hotelrvCount");
+    ArrayList<Image> img = (ArrayList<Image>)request.getAttribute("img");
     
     %>
 <!DOCTYPE html>
@@ -114,16 +117,30 @@
             height: 5%;
             position: relative;
         }
-        .btn_bar1>button{
+        .btn_bar1>.H_update{
+            padding: 10px 15px;
             border: none;
             background-color: rgb(255, 222, 239);
             position: absolute;
-            bottom: 0; 
+            bottom: 0;
             right: 0;
             border-radius: 20px;
+            text-decoration: none;
+            color: white;
         
         }
-
+        .btn_bar1>.H_delete{
+            padding: 10px 15px;
+            border: none;
+            background-color: rgb(255, 222, 239);
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            border-radius: 20px;
+            text-decoration: none;
+            color: white;
+        }
+        
 	</style>
 </head>
 <body>
@@ -136,7 +153,7 @@
         </div>
         <br><br>
         <div class="hotelName">
-            <h1 align="right"><%= h.getHotelName() %></h1>
+            <h1 align="right"> <%= h.getHotelName() %></h1>
         </div>
         <br>
         
@@ -145,9 +162,12 @@
                 <div class="photo_pt">
                     <p align="center">&lt; 작성자 : <%= h.getMemberId() %> &gt;</p>
                     <div class="photoImg1">
-                        <img class="photoImg" src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" style="width:100%">
-                        <img class="photoImg" src="https://www.dailysecu.com/news/photo/202104/123449_145665_1147.png" style="width:100%">
-                        <img class="photoImg" src="https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG" style="width:100%">
+                        <img class="photoImg" src="<%= contextPath %>/<%= img.get(0).getFilePath() + img.get(0).getChangeName() %>" style="width:100%">
+                       <% for(int i = 1; i<img.size(); i++) { %>
+                        <img class="photoImg" src="<%= contextPath %>/<%= img.get(i).getFilePath() + img.get(i).getChangeName() %>" style="width:100%">
+                   	   <% } %>
+                   
+                   
                     </div>
                 </div>
                     <div class="photoBar" align="center">
@@ -202,10 +222,11 @@
 				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")) { %>
 
                 <div class="btn_bar1">
-                    <button>수정하기// 관리자로 수정하기</button> 
+                	<a href="<%= contextPath %>/updateForm.hrv?num=<%= h.getHotelNo() %>" class="H_update">수정하기</a>
                 </div>
                 <div class="btn_bar1">
-                    <button>삭제하기// 관리자로 수정하기</button> 
+                    <a href="<%= contextPath %>/delete.hrv?num=<%= h.getHotelNo() %>" class="H_delete">삭제하기</a>
+                    
                 </div>
                 <% } %>
             </div>

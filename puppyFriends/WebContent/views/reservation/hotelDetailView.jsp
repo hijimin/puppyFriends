@@ -191,10 +191,10 @@
                  if문 사용해서 관리자 아니면 막아야 함ㄱㄱ
 
                 <div class="btn_bar1">
-                    <button>수정하기// 관리자 아니면 안 보이게</button> 
+                    <button>수정하기</button> 
                 </div>
                 <div class="btn_bar1">
-                    <button>삭제하기// 관리자 아니면 안 보이게</button> 
+                    <button>삭제하기</button> 
                 </div>
                 
             </div>

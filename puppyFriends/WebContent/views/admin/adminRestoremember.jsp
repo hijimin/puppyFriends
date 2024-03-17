@@ -1,35 +1,24 @@
-<%@page import="com.kh.common.model.vo.AdminPageInfo"%>
-<%@page import="com.kh.member.model.vo.Member"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.kh.common.model.vo.AdminPageInfo"%>
+<%@page import="com.kh.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
     <%
-    
-    String contextPath = request.getContextPath();
-    
-	Member loginUser = (Member)session.getAttribute("loginUser");
-	
-	String alertMsg = (String)session.getAttribute("alertMsg");
-    
-    ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
-    
-    AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi");
-    int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
-   	
-   %>
-    
+		String contextPath = request.getContextPath();
+	    
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		String alertMsg = (String)session.getAttribute("alertMsg");
+		
+		ArrayList<Member> dList = (ArrayList<Member>)request.getAttribute("dList");
+    %>
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 회원조회</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<title>회원복구</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	
   <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
@@ -39,7 +28,7 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-   <style>
+    <style>
         .outer{
             width: 1903px;
             height: 950px;
@@ -144,7 +133,7 @@
 </head>
 <body>
 
-   <div class="outer">
+	<div class="outer">
         <div class="headerbar">
                 <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 760px;">PuppyFriends Manager</h1>
         </div>
@@ -187,22 +176,20 @@
                     </thead>
                   
                         <tbody align="center">
-                            <form id="deleteForm" action="adminDelete.me" method="post"  onsubmit="return confirmDelete()">
-                            <% for(Member m : list) {  %>
+                           
+                           <% for(Member dm : dList) { %>
                                 <tr>
-                                    <th><input type="checkbox" value="<%= m.getMemberNo() %>" name="deleteMember"></th>
-                                    <td id="detailInfo"><%= m.getMemberNo() %></td>
-                                    <td><%= m.getMemberId() %></td>
-                                    <td><%= m.getMemberName() %></td>
-                                    <td><%= m.getDogNo() %></td>
-                                    <td><%= m.getDogName() %></td>
-                                    <td><%= m.getMemberEmail() %></td>
-                                    <td><%= m.getMemberPhone() %></td>
+                                    <th><input type="checkbox" value="<%= dm.getMemberNo() %>" name="RestoreMember"></th>
+                                    <td id="detailInfo"><%= dm.getMemberNo() %></td>
+                                    <td><%= dm.getMemberId() %></td>
+                                    <td><%=dm.getMemberName()  %></td>
+                                    <td><%= dm.getDogNo() %></td>
+                                    <td><%= dm.getDogName() %></td>
+                                    <td><%= dm.getMemberEmail() %></td>
+                                    <td><%= dm.getMemberPhone() %></td>
                                 </tr>
-                        	<% } %>
-							</form>
-                            <button type="submit" id="deleteBtn" onclick="deleteConfirm()">강제추방</button>
-                            <a href="views/admin/adminRestoremember.jsp">dd</a>
+                        	<% } %>							
+                            <button type="submit" id="restoreBtn" onclick="restoreConfirm()">회원복구</button>
                         </tbody>
                         
                        
@@ -240,24 +227,7 @@
 				
 			
                 <br><br>
-                
-                <div class="paging-area" align="center">
-                    <% if(currentPage != 1) { %>
-                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage - 1 %>'"> &lt; </button>
-                    <% } %>
-                    
-                    <% for(int p=startPage; p<=endPage; p++) { %>
-                        <% if(p == currentPage) { %>
-                        <button style="background-color:pink;"><%= p %></button>
-                        <% } else { %>
-                        <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= p %>'"><%= p %></button>
-                        <% } %>
-                    <% } %>
-                    
-                    <% if(currentPage != maxPage) { %>
-                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage + 1 %>'"> &gt; </button>
-                    <% } %>
-                </div>
+             
                 <br>
             </div>
             
@@ -266,7 +236,8 @@
         
     </div>
 
-
+	
+	
 
 </body>
 </html>

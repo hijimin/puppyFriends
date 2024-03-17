@@ -56,8 +56,23 @@
 	</entry>
 	
 	
-	<entry key="">
-	
+	<entry key="adminDeleteMemberList">
+		 SELECT *
+			  FROM(SELECT ROWNUM RNUM, D.*
+			          FROM(SELECT
+			                  MEMBER_NO
+			                , MEMBER_ID
+			                , MEMBER_NAME
+			                , DOG_NO
+			                , DOG_NAME
+			                , MEMBER_EMAIL
+			                , MEMBER_PHONE
+			              FROM MEMBER
+			              LEFT JOIN DOG USING(MEMBER_NO)
+			              WHERE STATUS = 'N'
+			              ORDER 
+			                 BY MEMBER_NO DESC) D)
+			   WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
 	

@@ -1,6 +1,8 @@
 package com.kh.dogfor.controller;
 
 import java.io.IOException;
+
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +17,7 @@ import com.kh.dogfor.model.service.DogforService;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class GalleryInsertController
+ * {@link Servlet} implementation class GalleryInsertController
  */
 @WebServlet("/insert.ga")
 public class GalleryInsertController extends HttpServlet {

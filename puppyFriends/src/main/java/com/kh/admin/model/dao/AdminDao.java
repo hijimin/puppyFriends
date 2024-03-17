@@ -149,6 +149,24 @@ public class AdminDao {
         try {
             pstmt = conn.prepareStatement(sql);
             
+            /*//*
+            
+            String willDeleteMemeberIds = "";
+            for (int i = 0; i < adminDeleteMember.length; i++) {
+            	if (willDeleteMemberIds.length == 0) {
+            		willDeleteMemberIds = "'" + adminDeleMember[i] + "'";
+            	} else {
+            		willDeleteMemberIds = willDeleteMemberIds + ", '" + adminDeleMember[i] + "'";
+            	}
+            }
+            
+            // 'user01', 'user02', 'user03'
+            
+            // UPDATE MEMBER SET status = 'N' where memberId = ?
+            // UPDATE MEMBER SET status = 'N' where in (?)
+            
+            //*/
+            
             for (int i = 0; i < adminDeleteMember.length; i++) {
                 pstmt.setInt(1, adminDeleteMember[i]);
                 pstmt.executeUpdate();
@@ -170,5 +188,38 @@ public class AdminDao {
         return result;
         
     } // adminDeleteMember
+	
+	public ArrayList<Member> adminRestoreMember(Connection conn){
+		ArrayList<Member> dList = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminDeleteMemberList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				dList.add(new Member(rset.getInt("member_no"),
+									rset.getString("member_id"),
+									rset.getString("member_name"),
+									rset.getInt("dog_no"),
+									rset.getString("dog_name"),
+									rset.getString("member_email"),
+									rset.getString("member_phone")
+									));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return dList;
+		
+	}
+
 	
 }

@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style>
     .chat-window {
-        width: 806px;
+        width: 785px;
         height: 700px;
         overflow-y: auto;
         padding: 10px;     
@@ -28,7 +28,7 @@
         border-bottom-left-radius:0%;
         border-bottom-right-radius:0%;
         background-color: rgb(255, 222, 239);
-        padding-top: 0%;
+        padding-top: 20px;
     }
 
     
@@ -124,6 +124,7 @@
             border-bottom: 2px solid rgb(255, 222, 239);
             border-left: 1px solid rgb(255, 222, 239);
             border-top: none;
+            border-bottom-right-radius: 10px;
         }
 
         .chatting-send{
@@ -168,9 +169,9 @@
         <div id="chattingMsg" class="col-md-6 offset-md-3">     
             <div class="chat-window" id="chatWindow" align="center"></div>
             <div class="text-send d-flex"> 
-                <textarea type="text" id="chatMessage" rows="1" cols="100" onkeyup="if(event.keyCode==13) sendMessage();"></textarea>
-                <button class="send-btn" onclick="sendMessage()">전송</button>                
-                <button class="voting-buttons" onclick="startVoting()">투표</button>                
+                <textarea type="text" id="chatMessage" rows="1" cols="100" onkeyup="if(event.keyCode==13) sendMessage(true);"></textarea>
+                <button class="send-btn" onclick="sendMessage(true)">전송</button> 
+              
             </div>
         </div>
     </div>
@@ -182,44 +183,13 @@
 <script>
    var serverUrl = "ws://" + window.location.hostname + ":" + window.location.port + "${pageContext.request.contextPath}/ChatingServer";
    var webSocket = new WebSocket(serverUrl);
-   var votingInProgress = false;
-   var selectedOption = null;
-   var hasVoted = false;
    
-   webSocket.onmessage = function(event) {
-       var message = JSON.parse(event.data);
-       if (message.type === "voteUpdate") {
-           updateVoteCount(message.option, message.count);
-       } else if (message.type === "voteCounts") {
-           updateAllVoteCounts(message.counts);
-       } else {
-           // Handle other message types if necessary
-       }
-   };
-   
-   function updateVoteCount(option, count) {
-       var voteCountSpan = $("span[data-option='" + option + "']");
-       if (voteCountSpan.length > 0) {
-           voteCountSpan.html("<i class='fa fa-check'></i>");
-       }
-   }
-   
-   function updateAllVoteCounts(counts) {
-       for (var option in counts) {
-           if (counts.hasOwnProperty(option)) {
-               var count = counts[option];
-               var voteCountSpan = $("span[data-option='" + option + "']");
-               if (voteCountSpan.length > 0) {
-                   voteCountSpan.html("<i class='fa fa-check'></i>");
-               }
-           }
-       }
-   }
-   
-   function sendMessage() {
+   function sendMessage(isChat) {
        var chatMessage = $("#chatMessage").val().trim(); 
-       if (chatMessage !== "") {
+       if (isChat !== true || chatMessage !== "") {
            var message = {
+        	   type: (isChat !== false ? "CHAT" : "COMMAND"),
+        	   whisperReceiver: "",
                sender: "<%= chat.getMemberId() %>",
                content: chatMessage
            };
@@ -235,6 +205,8 @@
    
        webSocket.onmessage = function(event) {
            var message = JSON.parse(event.data);
+           var messageType = message.type;
+           var messageWhisperReceiver = message.whisperReceiver;
            var messageContent = message.content;
            var now = new Date();
            var hours = now.getHours();
@@ -245,89 +217,37 @@
            var currentTime =  currentTime + " " + hours + ":" + (minutes < 10 ? '0' : '') + minutes;
    
            if (message.sender == "<%= chat.getMemberId() %>") {
-               chatWindow.append("<br>" + "<div class='mych'>" +  "My" + "<br>" + "</div>" + "<div class='my'><span class='message-time'>" + currentTime + "</span><div class='myChat'>" + messageContent + "</div></div>");
+        	   if(messageType !== "WHISPER") {
+        		   chatWindow.append("<br>" + "<div class='mych'>" +  "My" + "<br>" + "</div>" + "<div class='my'><span class='message-time'>" + currentTime + "</span><div class='myChat'>" + messageContent + "</div></div>");
+        	   } else {
+        	  	   chatWindow.append("<br>" + "<div class='mych'>" + "(" + messageWhisperReceiver + ")" + "🔒" +  "My" + "<br>" + "</div>" + "<div class='my'><span class='message-time'>" + currentTime + "</span><div class='myChat'>" + messageContent + "</div></div>");
+        	   }
            } else {
-               chatWindow.append( "<br>" + "<div class='otch'>" + message.sender + "</div>" + "<div class='others'><div class='othersChat'>" + messageContent + "</div><span class='message-time'>" + currentTime + "</span></div>");
+        	  	if (messageType !== "WHISPER") {
+               	   chatWindow.append( "<br>" + "<div class='otch'>" + message.sender + "</div>" + "<div class='others'><div class='othersChat'>" + messageContent + "</div><span class='message-time'>" + currentTime + "</span></div>");
+        	   } else {
+        		   chatWindow.append( "<br>" + "<div class='otch'>" + message.sender  + "🔒" + "(" + messageWhisperReceiver + ")" +"</div>" + "<div class='others'><div class='othersChat'>" + "<i>" + messageContent+ "</i>" + "</div><span class='message-time'>" + currentTime + "</span></div>");
+        	   }
            }
    
            chatWindow.scrollTop(chatWindow.prop("scrollHeight"));
        };
+       
+       window.onload = function(event) {
+    	   setTimeout(function() {
+    		   sendMessage(false);   
+    	   }, 500);
+    	   
+       }
    
        $(".send-btn").click(sendMessage); 
        $(".voting-buttons").click(startVoting);
    });
    
-   function startVoting(event) {
-       event.preventDefault(); 
-       
-       if (votingInProgress) {
-           alert("이미 진행 중인 투표가 있습니다.");
-           return;
-       }
-       
-       var ask = confirm("투표를 생성 하시겠습니까?");
-       if (ask) {          
-           var voteOptions = prompt("투표 옵션을 입력하세요 (쉼표로 구분하여 입력)");
-           if (voteOptions !== null) {
-               var optionsArray = voteOptions.split(",");
-               var voteHTML = "<div id='votingOptions'>";
-               optionsArray.forEach(function(option) {
-                   voteHTML += "<input type='radio' name='voteOption' data-option='" + option.trim() + "'>" + option.trim() + "<span class='voteCount'> <i class='fa fa-check'></i></span><br>";
-               });
-               voteHTML += "<button class='checkedOption-btn' onclick='checkedVoting()'>선택</button>";
-               voteHTML += "<button id='endVotingBtn' class='end-btn' onclick='endVoting()'>투표 종료</button>";
-               voteHTML += "</div>";
-               var message = {
-                   sender: "<%= chat.getMemberId() %>",
-                   content: voteHTML
-               };
-               webSocket.send(JSON.stringify(message));
-               votingInProgress = true;
-           } else {
-               return;
-           }
-       }
-   }
-       
-   function checkedVoting() {
-	    var selectedRadio = $("input[name='voteOption']:checked");
-	    if (selectedRadio.length > 0) {
-	        if (hasVoted) {
-	            alert("이미 투표하셨습니다.");
-	            return;
-	        }
-	        selectedOption = selectedRadio.data("option");
-	        var voteCountSpan = selectedRadio.next(); 
-	        voteCountSpan.html("<i class='fa fa-check'></i>");
-	        hasVoted = true; 
-	        $(".voting-buttons").prop('disabled', true);
-	        
-	        $("input[name='voteOption']").not(selectedRadio).next().empty();
-	    }
-	}
    
    
-   function endVoting() {
-       if (votingInProgress) {
-           var isAdmin = "<%= chat.getMemberId() %>" === "ADMIN"; 
-           var isCreator = "<%= chat.getMemberId() %>" === "<%= chat.getMemberId() %>"; 
-   
-           if (isAdmin || isCreator) {
-               var endMessage = {
-                   sender: "<%= chat.getMemberId() %>",
-                   content: "<strong>투표가 종료되었습니다.</strong>"
-               };
-               webSocket.send(JSON.stringify(endMessage));
-               votingInProgress = false;
-               hasVoted = false; 
-               $("#checkedOption").prop('disabled', true);
-               $(".voting-buttons").prop('disabled', false);
-           } else {
-               alert("채팅 생성자 또는 관리자만 채팅을 종료할 수 있습니다.");
-           }
-       }
-   }
 </script>
 
+<br><br><br>
 </body>
 </html>

@@ -55,5 +55,16 @@ public class AdminService {
 	} // adminDeleteMember
 	
 	
+	public ArrayList<Member> adminRestoreMember(){
+		
+		Connection conn = getConnection();
+		ArrayList<Member> dList = new AdminDao().adminRestoreMember(conn);
+		
+		close(conn);
+		return dList;
+		
+	}
+
+	
 
 } // class

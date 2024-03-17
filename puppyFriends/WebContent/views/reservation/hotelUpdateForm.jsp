@@ -1,8 +1,16 @@
+<%@page import="com.kh.common.model.vo.Image"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.kh.reservation.model.vo.Hotel"%> <%@ page language="java"
 contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
 
+  <%
+    
+    Hotel h = (Hotel)request.getAttribute("h");
+    ArrayList<Image> img = (ArrayList<Image>)request.getAttribute("img");
+    
+    %>
+    
 
 <!DOCTYPE html>
 <html>
@@ -75,7 +83,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         height: 40px;
         display: inline-block;
       }
-      .photoImg_input:hover {transform: scale(1.1);}
+      .photoImg_input:hover {
+        cursor: not-allowed;
+        /* transform: scale(1.1); */
+      }
 
       .blank1 {
         left: 50%;
@@ -119,6 +130,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         bottom: 0;
         right: 0;
         border-radius: 20px;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -128,19 +140,19 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
     <div class="outer">
       <div align="right" class="outer_name">
-        프로그램 &gt; 호텔 예약 &gt; 호텔 등록 &nbsp; &nbsp;
+        프로그램 &gt; 호텔 예약 &gt; 호텔 contextPath + 수정 , 폼부터 수정 필요함//  &nbsp; &nbsp;
       </div>
       <br /><br />
       <div class="hotelName">
         <h1 align="right" style="vertical-align: top">등록</h1>
       </div>
 
-      <form action="<%= contextPath %>/update.hrv" id="enroll-form"
+      <form action="#" id="update-form"
       method="post" enctype="multipart/form-data">
       <input
         type="hidden"
-        name="memberNo"
-        value="<%= loginUser.getMemberNo() %>"
+        name="hno"
+        value="<%= h.getHotelNo() %>"
       />
 
       <div class="photo_text">
@@ -151,9 +163,15 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             <p>&lt;이미지 미리보기&gt;</p>
                            
             <div class="photoImg1">
-              <img class="photoImg" id="previewTitleImg" style="width: 100%" src="#"/>
+            
+            <% if(img != null) { %>
+	               <!-- 현재 이 게시글에 딸린 첨부파일이 있을 경우 -->
+	               <!-- 원본명.png-->
+              <img class="photoImg" id="previewTitleImg" style="width: 100%" 
+              src="<%= contextPath %>/<%= img.get(0).getTitleImg() + img.get(0).getChangeName() %>"/>
               <img class="photoImg" id="previewContentImg1" style="width: 100%" src="#" />
               <img class="photoImg" id="previewContentImg2" style="width: 100%" src="#" />
+              <% } %>
             </div>
             
             
@@ -208,10 +226,9 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     name="hotelName"
                     class="title"
                     required
-                    placeholder="호텔명을 입력해 주세요."
                     maxlength="10"
-                    disabled
-                  />
+                    placeholder="<%= h.getHotelName() %>">
+                    
                 </td>
               </tr>
               <tr>
@@ -223,16 +240,17 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     cols="50%"
                     rows="8%"
                     style="resize: none"
-                    required
-                    placeholder="내용을 입력해 주세요."
                     maxlength="100"
-                  ></textarea>
+                    required
+                    placeholder="<%= h.getHotelText() %>">
+                    
+                  </textarea>
                 </td>
               </tr>
               <tr>
                 <th>사이즈 :</th>
                 <td>
-                  <select class="select_text" name="hotelSize">
+                  <select class="select_text" name="hotelSize" >
                     <option value="S">S</option>
                     <option value="M">M</option>
                     <option value="L">L</option>
@@ -278,6 +296,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     class="photoImg_input"
                     id="titleImg"
                     onclick="chooseFile(1)"
+                  
                   />
                   <img
                     class="photoImg_input"
@@ -292,23 +311,27 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
                   <div id="file-area" style="display: none">
                     <input
+                    
                       type="file"
                       name="file1"
                       id="file1"
                       onchange="loadImg(this, 1);"
-                      required
+                      
+                      
                     />
                     <input
                       type="file"
                       name="file2"
                       id="file2"
                       onchange="loadImg(this, 2);"
+                      
                     />
                     <input
                       type="file"
                       name="file3"
                       id="file3"
                       onchange="loadImg(this, 3);"
+                      
                     />
                   </div>
                 </td>
@@ -324,6 +347,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     style="width: 45%"
                     id="amountInput"
                     oninput="formatInput(this)"
+                    
                   />
                 </td>
               </tr>

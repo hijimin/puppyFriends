@@ -88,6 +88,7 @@ public class Hotel {
 	}
 
 
+
 	public void setFileNo(int fileNo) {
 		this.fileNo = fileNo;
 	}

@@ -119,6 +119,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         bottom: 0;
         right: 0;
         border-radius: 20px;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -151,9 +152,9 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             <p>&lt;이미지 미리보기&gt;</p>
                            
             <div class="photoImg1">
-              <img class="photoImg" id="previewTitleImg" style="width: 100%" src="#"/>
-              <img class="photoImg" id="previewContentImg1" style="width: 100%" src="#" />
-              <img class="photoImg" id="previewContentImg2" style="width: 100%" src="#" />
+              <img class="photoImg" id="previewTitleImg" style="width: 100%" />
+              <img class="photoImg" id="previewContentImg1" style="width: 100%" />
+              <img class="photoImg" id="previewContentImg2" style="width: 100%" />
             </div>
             
             

@@ -253,15 +253,19 @@ public class ReservationDao {
 
 			rset = pstmt.executeQuery();
 
+			
 			while (rset.next()) {
 				Image image = new Image();
-				image.setChangeName(rset.getString("change_name"));
+				image.setFileNo(rset.getInt("file_no"));
 				image.setFilePath(rset.getString("file_path"));
+				image.setFileName(rset.getString("file_name"));
+				image.setChangeName(rset.getString("change_name"));
 
 				img.add(image);
 			}
-			System.out.println(img);
+//			System.out.println(img);
 
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

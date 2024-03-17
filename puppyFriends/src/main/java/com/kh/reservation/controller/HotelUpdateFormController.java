@@ -32,16 +32,19 @@ public class HotelUpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		
-//		int hotelNo = Integer.parseInt(request.getParameter("hno"));
-//
-//		ReservationService hService = new ReservationService();
-//		
-//		ArrayList<Image> img = hService.selectHotelImgList(hotelNo);
-//		Hotel h = hService.selectHotelDetail(hotelNo);
-//			
-//			request.setAttribute("h", h);
-//			request.setAttribute("img", img);
+		
+		int hotelNo = Integer.parseInt(request.getParameter("hno"));
+
+		System.out.println(hotelNo);
+
+		ReservationService hService = new ReservationService();
+		
+
+		Hotel h = hService.selectHotelDetail(hotelNo);
+		ArrayList<Image> img = hService.selectHotelImgList(hotelNo);
+			
+			request.setAttribute("h", h);
+			request.setAttribute("img", img);
 
 			request.getRequestDispatcher("views/reservation/hotelUpdateForm.jsp").forward(request, response);
 

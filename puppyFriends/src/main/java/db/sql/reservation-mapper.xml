@@ -40,9 +40,9 @@
 	
 	SELECT 
 	       FILE_NO
+	     , FILE_PATH
 	     , FILE_NAME
 	     , CHANGE_NAME
-	     , FILE_PATH
 	  FROM IMAGE
 	 WHERE REF_BNO = ?
 	

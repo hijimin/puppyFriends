@@ -32,12 +32,19 @@ public class Image {
 		this.dogNo = dogNo;
 	}
 
-	// selectHotelImgList
-	public Image(String filePath, String changeName) {
+	// selectHotelImgList ?
+
+	public Image(int fileNo, String filePath, String fileName,
+			String changeName) {
 		super();
+		this.fileNo = fileNo;
 		this.filePath = filePath;
+		this.fileName = fileName;
 		this.changeName = changeName;
+		
+		
 	}
+
 
 	public Image(int fileNo, String dogNo, String titleImg) {
 		super();
@@ -45,6 +52,8 @@ public class Image {
 		this.dogNo = dogNo;
 		this.titleImg = titleImg;
 	}
+
+	
 
 	public String getTitleImg() {
 		return titleImg;

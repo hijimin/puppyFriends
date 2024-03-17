@@ -145,9 +145,9 @@
 </head>
 <body>
     <%@ include file="../common/menubar.jsp" %>
-
+	<form id="detail-form" action="<%= contextPath %>/detail.hrv" method="post" enctype="multipart/form-data">
 	<div class="outer">
-
+ 
         <div align="right" class="outer_name">
             프로그램 &gt; 호텔 예약 &gt; <%= h.getHotelName() %> &nbsp; &nbsp;
         </div>
@@ -235,6 +235,7 @@
 
         </div>
     </div>
+  </form>
 
 
     

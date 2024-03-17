@@ -45,6 +45,14 @@ public class Image {
 		
 	}
 
+ // selectHotelThumbnailList
+	public Image(int fileNo, int refBoardNo, String fileName, String titleImg) {
+		super();
+		this.fileNo = fileNo;
+		this.refBoardNo = refBoardNo;
+		this.fileName = fileName;
+		this.titleImg = titleImg;
+	}
 
 	public Image(int fileNo, String dogNo, String titleImg) {
 		super();

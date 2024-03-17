@@ -117,7 +117,7 @@
             height: 5%;
             position: relative;
         }
-        .btn_bar1>.H_update{
+        .btn_bar1>.H_back{
             padding: 10px 15px;
             border: none;
             background-color: rgb(255, 222, 239);
@@ -218,15 +218,13 @@
                     <button class="btn-open-modal" >예약하기// onclick 예정 , 예약 alert 띄운 후 동의 시 결제 페이지로 넘어감 alert 이후 결제 페이지로 넘어가게</button> 
                 </div>
 
-                 
-				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")) { %>
-
                 <div class="btn_bar1">
-                	<a href="<%= contextPath %>/updateForm.hrv?num=<%= h.getHotelNo() %>" class="H_update">수정하기</a>
+                	<a href="<%= contextPath %>/hotel.hrv" class="H_back">뒤로가기</a>
                 </div>
+
+				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")) { %>
                 <div class="btn_bar1">
                     <a href="<%= contextPath %>/delete.hrv?num=<%= h.getHotelNo() %>" class="H_delete">삭제하기</a>
-                    
                 </div>
                 <% } %>
             </div>

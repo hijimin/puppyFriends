@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.common.model.vo.Image;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Hotel;
 
@@ -32,17 +33,16 @@ public class HotelReservationInsert extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/*
-		int page = 1; // 기본 페이지 번호
-		String requestedPage = request.getParameter("page"); // 쿼리 문자열에서 페이지 번호 가져오기
-		if (requestedPage != null) {
-		    page = Integer.parseInt(requestedPage);
-		}
-		*/
+		int hotelNo = Integer.parseInt(request.getParameter("hno"));
+	
+		ReservationService hService = new ReservationService();
 		
-		ArrayList<Hotel> list = new ReservationService().selectHotelList(); // 전달해 줄 거 없음
-
+		ArrayList<Hotel> list = hService.selectHotelList(); // 전달해 줄 거 없음
+		ArrayList<Image> img = hService.selectHotelThumbnailList(hotelNo);
+		
 		request.setAttribute("list",list);
+		request.setAttribute("img", img);
+		
 		request.getRequestDispatcher("views/reservation/hotelReservationForm.jsp").forward(request, response);
 		
 		

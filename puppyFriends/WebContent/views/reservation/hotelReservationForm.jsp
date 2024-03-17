@@ -5,6 +5,7 @@
     pageEncoding="UTF-8"%>
 <% 
 	ArrayList<Hotel> list = (ArrayList<Hotel>)request.getAttribute("list");
+	ArrayList<Image> img = (ArrayList<Image>)request.getAttribute("img");		
 
 %>
 <!DOCTYPE html>
@@ -159,7 +160,11 @@
 <body>
 
     <%@ include file="../common/menubar.jsp" %>
-
+    
+    
+	<form action="<%= contextPath %>/hotel.hrv" id="hotelmain-form"
+      method="post" enctype="multipart/form-data">
+      
     <!-- <h2 align="center">호텔 예약: 메인바에 contextPath로 넣을지 생각 중</h2>  -->
     
     <div class="outer">
@@ -181,21 +186,21 @@
                 <div class="thum_tool">
                     <% for(Hotel h : list){ %>
                         <div class="thumbnail">
-                                <input type="hidden" value="<%= h.getHotelNo() %>" >
-                                    <img src="<%= contextPath %> " width="250px" height="190px"> <br> 이미지 들어가게
+                                <input type="hidden" name="hno" value="<%= h.getHotelNo() %>"  >
+                                    <img src="<%= contextPath %>/<%= img.get(0).getTitleImg() %> " width="250px" height="190px"> <br> 이미지 들어가게
                                     <div>
                                         호텔명 : <%= h.getHotelName() %> <br> 
-                                        소개 or 사이즈 전용 : <%= h.getHotelSize() %> <br>
+                                        전용 사이즈 : <%= h.getHotelSize() %> <br>
                                     </div>
                         </div>
                     <% } %>
                 </div>
             </div>
-			
+            			
             <div class="btn_bar">
-     <!--   <% if(loginUser != null && (loginUser.getMemberId().equals("ADMIN"))) {%>  -->
+      		 <% if(loginUser != null && (loginUser.getMemberId().equals("ADMIN"))) {%>
         	    <a href="<%= contextPath %>/enrollForm.hrv" class="H_enroll">등록하기</a>
-        <!--	 <% } %> -->
+        	 <% } %>
             </div>
             
             <br>
@@ -229,6 +234,7 @@
 
     
     
+    </form>
     
    <%@ include file="../common/topBtn.jsp" %> <br>
    <%@ include file="../common/footerbar.jsp" %>

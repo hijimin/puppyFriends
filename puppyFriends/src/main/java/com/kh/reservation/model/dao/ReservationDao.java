@@ -64,6 +64,52 @@ public class ReservationDao {
 	
 	}
 
+	public ArrayList<Image> selectHotelThumbnailList(Connection conn, int hotelNo) {
+		Hotel h = new Hotel();
+		
+		ArrayList<Image> img = new ArrayList<Image>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectHotelThumbnailList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, hotelNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Image image = new Image();
+				
+				System.out.println(rset.getInt("file_no"));
+				System.out.println(rset.getInt("ref_bno"));
+				System.out.println(rset.getString("file_name"));	
+				System.out.println(rset.getString("title_img"));
+						
+						
+				image.setFileNo(rset.getInt("file_no"));
+				image.setRefBoardNo(rset.getInt("ref_bno"));
+				image.setFileName(rset.getString("file_name"));
+				image.setTitleImg(rset.getString("title_img"));
+				
+				img.add(image);
+			
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		return img;
+	}
+	
+	
 	public Hotel selectHotelDetail(Connection conn, int hotelNo) {
 		Hotel h = null;
 		
@@ -257,10 +303,12 @@ public class ReservationDao {
 			while (rset.next()) {
 				Image image = new Image();
 				image.setFileNo(rset.getInt("file_no"));
-				image.setFilePath(rset.getString("file_path"));
+				image.setRefBoardNo(rset.getInt("ref_bno"));
 				image.setFileName(rset.getString("file_name"));
-				image.setChangeName(rset.getString("change_name"));
+				image.setTitleImg(rset.getString("title_img"));
 
+				
+				
 				img.add(image);
 			}
 //			System.out.println(img);
@@ -276,81 +324,12 @@ public class ReservationDao {
 		return img;
 	}
 
+
+
 	
 	
 
-	/*
-	public ArrayList<Hotel> selectHotelThumbnailList(Connection conn) {
-
-		ArrayList<Hotel> h = new ArrayList<Hotel>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectHotelThumbnailList");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-
-			while(rset.next()) {
-				Hotel h = new Hotel();
-				
-				h.setHotelNo(rset.getInt("hotel_no"));
-				h.setHotelName(rset.getString("hotel_name"));
-				h.
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		
-		return h;
-	}
-*/	
-	/*
-
-	public ArrayList<Hotel> selectHotelList(Connection conn, PageInfo pi) {
-
-		ArrayList<Hotel> list = new ArrayList<Hotel>(); // [텅 빈 리스트]
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("selectHotelList");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() -1;
-			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				list.add(new Hotel(rset.getInt("hotel_no"),
-								   rset.getString("hotel_name"),
-								   rset.getString("member_id")));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-	return list;
 	
-	}
-	
-	*/
 	
 	
 }

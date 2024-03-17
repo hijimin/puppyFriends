@@ -22,6 +22,18 @@ public class ReservationService {
 		return list;
 	}
 
+	
+	public ArrayList<Image> selectHotelThumbnailList(int hotelNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<Image> img = new ReservationDao().selectHotelThumbnailList(conn, hotelNo);
+		
+		close(conn);
+		
+		
+		return img;
+	}
+	
 	public Hotel selectHotelDetail(int hotelNo) {
 		Connection conn = getConnection();
 		
@@ -82,6 +94,8 @@ public class ReservationService {
 		
 		return img;
 	}
+
+
 
 	
 	

@@ -16,6 +16,7 @@
 <meta charset="UTF-8">
 <title>PUPPY</title>
 <style>
+    
     body{
             margin: 0px;
     }
@@ -244,7 +245,7 @@
             </li>
             <li class="program"><a href="#">프로그램</a>
               <ul class="reservation">
-                <li class="hotel"><a href="<%= contextPath %>/insert.hrv">호텔 예약</a></li>
+                <li class="hotel"><a href="<%= contextPath %>/hotel.hrv">호텔 예약</a></li>
                 <li class="kindergarten"><a href="#">유치원 예약</a></li>
               </ul>
             </li>

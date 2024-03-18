@@ -13,6 +13,7 @@ import static com.kh.common.JDBCTemplate.*;
 
 import com.kh.common.model.vo.Image;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.order.model.vo.Order;
 import com.kh.product.model.vo.Product;
 
 public class ProductDao {
@@ -336,6 +337,45 @@ public class ProductDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	public int updateProductStock(Connection conn, Order o) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateProductStock");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(o.getProductNo()));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateProductmfStock(Connection conn, Order o) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateProductmfStock");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, o.getOrderCount());
+			pstmt.setInt(2, Integer.parseInt(o.getProductNo()));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 

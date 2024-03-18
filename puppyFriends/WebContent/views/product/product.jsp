@@ -18,624 +18,740 @@
 	int maxPage = pi.getMaxPage();
 	
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<style>
-div {
-	box-sizing: border-box;
-	/* border: 1px solid red; */
-}
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="UTF-8" />
+            <title>Insert title here</title>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <style>
+              div {
+                box-sizing: border-box;
+                /* border: 1px solid red; */
+              }
 
-body {
-	margin: 0px;
-}
+              body {
+                margin: 0px;
+              }
 
-#content {
-	/* height: 2300px; */
-	height: auto;
-	display: flex;
-	justify-content: center;
-}
+              #content {
+                /* height: 2300px; */
+                height: auto;
+                display: flex;
+                justify-content: center;
+              }
 
-#bestproduct {
-	height: 180px;
-}
+              #bestproduct {
+                height: 180px;
+              }
 
-#content>div {
-	height: 100%;
-	float: left;
-}
+              #content > div {
+                height: 100%;
+                float: left;
+              }
 
-#content_2 {
-	/* width: 80%; */
-	width: 1903px;
-	min-width: 1000px;
-}
+              #content_2 {
+                /* width: 80%; */
+                width: 1903px;
+                min-width: 1000px;
+              }
 
-#content_2>div {
-	width: 80%;
-	margin: auto;
-}
+              #content_2 > div {
+                width: 80%;
+                margin: auto;
+              }
 
-#content2_1 {
-	/* height: 20%; */
-	height: auto;
-}
+              #content2_1 {
+                /* height: 20%; */
+                height: auto;
+              }
 
-#content2_2 {
-	/* height: 2%; */
-	height: auto;
-}
+              #content2_2 {
+                /* height: 2%; */
+                height: auto;
+              }
 
-#content2_3 {
-	height: auto;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 15px;
-}
+              #content2_3 {
+                height: auto;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+              }
 
-/*페이징바 세로길이*/
-#content2_4 {
-	height: 60px;
-	margin-bottom: 100px;
-}
+              /*페이징바 세로길이*/
+              #content2_4 {
+                height: 60px;
+                margin-bottom: 100px;
+              }
 
-/* #content2_3>div{height: 100%; float: left;} */
-#content2_3 {
-	padding-left: 100px;
-	padding-right: 100px;
-}
+              /* #content2_3>div{height: 100%; float: left;} */
+              #content2_3 {
+                padding-left: 100px;
+                padding-right: 100px;
+              }
 
-.content2_3c>img {
-	height: 400px;
-}
+              .content2_3c > img {
+                height: 400px;
+              }
 
-/*인기순 최신순 조회순 버튼*/
-#content2_2 a {
-	text-decoration: none;
-	font-size: 15px;
-	color: black;
-}
+              /*인기순 최신순 조회순 버튼*/
+              #content2_2 a {
+                text-decoration: none;
+                font-size: 15px;
+                color: black;
+              }
 
-#content2_2>div {
-	margin-top: 10px;
-}
+              #content2_2 > div {
+                margin-top: 10px;
+              }
 
-/*슬라이더 스타일*/
-#slider-container {
-	position: relative;
-	overflow: hidden;
-	width: 85%;
-	margin: auto;
-}
+              /*슬라이더 스타일*/
+              #slider-container {
+                position: relative;
+                overflow: hidden;
+                width: 85%;
+                margin: auto;
+              }
 
-#slider {
-	display: flex;
-	transition: transform 0.5s ease-in-out;
-}
+              #slider {
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+              }
 
-.slide {
-	min-width: 25%;
-	box-sizing: border-box;
-	padding: 5px;
-}
+              .slide {
+                min-width: 25%;
+                box-sizing: border-box;
+                padding: 5px;
+              }
 
-#prev-btn, #next-btn {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	font-size: 24px;
-	cursor: pointer;
-}
+              #prev-btn,
+              #next-btn {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 24px;
+                cursor: pointer;
+              }
 
-#prev-btn {
-	left: 10px;
-}
+              #prev-btn {
+                left: 10px;
+              }
 
-#next-btn {
-	right: 10px;
-}
+              #next-btn {
+                right: 10px;
+              }
 
-.name_sub {
-	font-size: 14px;
-	color: #777;
-	word-break: keep-all;
-}
+              .name_sub {
+                font-size: 14px;
+                color: #777;
+                word-break: keep-all;
+              }
 
-/*베스트상품 슬라이더 스타일*/
-.priceGroup {
-	position: relative;
-	padding: 22px 0 12px;
-}
+              /*베스트상품 슬라이더 스타일*/
+              .priceGroup {
+                position: relative;
+                padding: 22px 0 12px;
+              }
 
-.custom_pro {
-	position: absolute;
-	bottom: 10px;
-	right: 0;
-	font-size: 18px;
-	font-weight: 600;
-	color: #e84200;
-	line-height: 18px;
-}
+              .custom_pro {
+                position: absolute;
+                bottom: 10px;
+                right: 0;
+                font-size: 18px;
+                font-weight: 600;
+                color: #e84200;
+                line-height: 18px;
+              }
 
-.prs.prsLine {
-	color: rgba(0, 0, 0, 0.2);
-	text-decoration: line-through;
-	font-weight: normal;
-	margin-right: 8px;
-}
+              .prs.prsLine {
+                color: rgba(0, 0, 0, 0.2);
+                text-decoration: line-through;
+                font-weight: normal;
+                margin-right: 8px;
+              }
 
-.prs {
-	display: inline-block;
-	font-size: 16px;
-	font-weight: 500;
-	letter-spacing: -0.63px;
-	line-height: 1;
-	vertical-align: middle;
-}
+              .prs {
+                display: inline-block;
+                font-size: 16px;
+                font-weight: 500;
+                letter-spacing: -0.63px;
+                line-height: 1;
+                vertical-align: middle;
+              }
 
-.prs.prsBold {
-	color: #3a3a3a;
-	font-weight: 600;
-	font-size: 18px !important;
-}
+              .prs.prsBold {
+                color: #3a3a3a;
+                font-weight: 600;
+                font-size: 18px !important;
+              }
 
-.prs {
-	display: inline-block;
-	font-size: 16px;
-	font-weight: 500;
-	letter-spacing: -0.63px;
-	line-height: 1;
-	vertical-align: middle;
-}
+              .prs {
+                display: inline-block;
+                font-size: 16px;
+                font-weight: 500;
+                letter-spacing: -0.63px;
+                line-height: 1;
+                vertical-align: middle;
+              }
 
-#bestproduct-p {
-	/* display: inline; */
-	margin-top: 100px;
-}
+              #bestproduct-p {
+                /* display: inline; */
+                margin-top: 100px;
+              }
 
-/* 페이징 바*/
-.page_wrap {
-	text-align: center;
-	font-size: 0;
-}
+              /* 페이징 바*/
+              .page_wrap {
+                text-align: center;
+                font-size: 0;
+              }
 
-.page_nation {
-	display: inline-block;
-	margin-top: 10px;
-	margin-left: 37%;
-}
+              .page_nation {
+                display: inline-block;
+                margin-top: 10px;
+                margin-left: 37%;
+              }
 
-.page_nation .none {
-	display: none;
-}
+              .page_nation .none {
+                display: none;
+              }
 
-.page_nation a {
-	display: block;
-	margin: 0 3px;
-	float: left;
-	border: 1px solid #e6e6e6;
-	width: 28px;
-	height: 28px;
-	line-height: 28px;
-	text-align: center;
-	background-color: #fff;
-	font-size: 13px;
-	color: #999999;
-	text-decoration: none;
-}
+              .page_nation a {
+                display: block;
+                margin: 0 3px;
+                float: left;
+                border: 1px solid #e6e6e6;
+                width: 28px;
+                height: 28px;
+                line-height: 28px;
+                text-align: center;
+                background-color: #fff;
+                font-size: 13px;
+                color: #999999;
+                text-decoration: none;
+              }
 
-.page_nation .arrow {
-	border: 1px solid #ccc;
-}
+              .page_nation .arrow {
+                border: 1px solid #ccc;
+              }
 
-.page_nation .pprev {
-	background: #f8f8f8 url('resources/product_img/page_pprev.png')
-		no-repeat center center;
-	margin-left: 0;
-}
+              .page_nation .pprev {
+                background: #f8f8f8 url("resources/product_img/page_pprev.png")
+                  no-repeat center center;
+                margin-left: 0;
+              }
 
-.page_nation .prev {
-	background: #f8f8f8 url('resources/product_img/page_prev.png') no-repeat
-		center center;
-	margin-right: 7px;
-}
+              .page_nation .prev {
+                background: #f8f8f8 url("resources/product_img/page_prev.png")
+                  no-repeat center center;
+                margin-right: 7px;
+              }
 
-.page_nation .next {
-	background: #f8f8f8 url('resources/product_img/page_next.png') no-repeat
-		center center;
-	margin-left: 7px;
-}
+              .page_nation .next {
+                background: #f8f8f8 url("resources/product_img/page_next.png")
+                  no-repeat center center;
+                margin-left: 7px;
+              }
 
-.page_nation .nnext {
-	background: #f8f8f8 url('resources/product_img/page_nnext.png')
-		no-repeat center center;
-	margin-right: 0;
-}
+              .page_nation .nnext {
+                background: #f8f8f8 url("resources/product_img/page_nnext.png")
+                  no-repeat center center;
+                margin-right: 0;
+              }
 
-.page_nation a.active {
-	background-color: #42454c;
-	color: #fff;
-	border: 1px solid #42454c;
-}
+              .page_nation a.active {
+                background-color: #42454c;
+                color: #fff;
+                border: 1px solid #42454c;
+              }
 
-.content2_3c img:hover {
-	cursor: pointer;
-}
+              .content2_3c img:hover {
+                cursor: pointer;
+              }
 
+              /*이번주 베스트 상품*/
+              #bestpd1 {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 160px;
+                height: 50px;
+                line-height: 50px;
+                font-size: 20px;
+                text-align: center;
+                font-family: sans-serif;
+                text-decoration: none;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                background: #ccc;
+              }
+              #bestpd1:before {
+                content: attr(data-text);
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                background: #ff005e;
+                color: #fff;
+                transition: 0.5s;
+                transform-origin: bottom;
+                transform: translatey(-100%) rotatex(90deg);
+              }
+              #bestpd1:hover:before {
+                transform: translatey(0) rotatex(0deg);
+              }
 
-/*이번주 베스트 상품*/
-#bestpd1{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  width: 160px;
-  height: 50px;
-  line-height: 50px;
-  font-size: 20px;
-  text-align: center;
-  font-family: sans-serif;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  background: #ccc;
-}
-#bestpd1:before{
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  background: #ff005e;
-  color: #fff;
-  transition: 0.5s;
-  transform-origin: bottom;
-  transform: translatey(-100%) rotatex(90deg);
-}
-#bestpd1:hover:before
-{
-  transform: translatey(0) rotatex(0deg);
-}
+              #bestpd1:after {
+                content: attr(data-text);
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                background: #ea004f;
+                color: #fff;
+                transition: 0.5s;
+                transform-origin: top;
+                transform: translatey(0) rotatex(0deg);
+              }
+              #bestpd1:hover:after {
+                transform: translatey(100%) rotatex(90deg);
+              }
 
-#bestpd1:after{
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  background: #ea004f;
-  color: #fff;
-  transition: 0.5s;
-  transform-origin: top;
-  transform: translatey(0) rotatex(0deg);
-}
-#bestpd1:hover:after
-{
-  transform: translatey(100%) rotatex(90deg);
-}
+              /*검색*/
+              .search {
+                position: relative;
+                width: 200px;
+                margin: auto;
+              }
 
+              .searchclass {
+                width: 100%;
+                border: 1px solid #bbb;
+                border-radius: 8px;
+                padding: 10px 12px;
+                font-size: 14px;
+              }
 
-</style>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+              .searchimg {
+                position: absolute;
+                width: 17px;
+                top: 10px;
+                right: 12px;
+                margin: 0;
+                cursor: pointer;
+              }
+            </style>
+            <link
+              rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+            />
 
-<!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <!-- jQuery library -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<!-- Popper JS -->
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+            <!-- Popper JS -->
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
+            <!-- Latest compiled JavaScript -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+          </head>
+          <body>
+            <%@ include file="../common/menubar.jsp"%>
 
-	<%@ include file="../common/menubar.jsp"%>
+            <div id="bestproduct">
+              <!-- <p align="center" id="bestproduct-p">이번주 Best Product!!</p> -->
+              <a id="bestpd1" href="#" data-text="Best">Best</a>
+              <% if (loginUser != null &&
+              loginUser.getMemberId().equals("ADMIN")) { %>
+              <div align="right" style="width: 1700px">
+                <br />
+                <br />
+                <br />
+                <br />
+                <a
+                  href="<%=contextPath%>/enrollForm.pd"
+                  class="btn btn-sm btn-secondary"
+                  >상품등록</a
+                >
+              </div>
+              <% } %>
 
-	<div id="bestproduct">
-		<!-- <p align="center" id="bestproduct-p">이번주 Best Product!!</p> -->
-		<a id="bestpd1" href="#" data-text="Best">Best</a>
-		<%
-		if (loginUser != null && loginUser.getMemberId().equals("ADMIN")) {
-		%>
-		<div align="right" style="width: 1700px;">
-			<br> <br> <br> <br> <a
-				href="<%=contextPath%>/enrollForm.pd"
-				class="btn btn-sm btn-secondary">글작성</a>
-		</div>
-		<%
-		}
-		%>
+              <div class="search">
+                <input
+                  class="searchclass"
+                  type="text"
+                  placeholder="검색어 입력"
+                />
+                <img
+                  onclick="searchTest();"
+                  class="searchimg"
+                  src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
+                />
+              </div>
+            </div>
 
-	</div>
+            <script>
+              function searchTest() {}
+            </script>
 
-	<div id="content">
-		<div id="content_2">
-			<div id="content2_1">
-				<!-- 상품슬라이더-->
-				<div id="slider-container">
-					<div id="slider">
-						<%
-						for (Product p : list) {
-						%>
-						<div class="slide">
+            <div id="content">
+              <div id="content_2">
+                <div id="content2_1">
+                  <!-- 상품슬라이더-->
+                  <div id="slider-container">
+                    <div id="slider">
+                      <% for (Product p : list) { %>
+                      <div class="slide">
+                        <div class="tag1">
+                          <span style="background-color: #f7af36">BEST</span
+                          ><span style="background-color: #e84200">new</span>
+                        </div>
 
-							<div class="tag1">
-								<span style="background-color: #f7af36">BEST</span><span
-									style="background-color: #e84200">new</span>
-							</div>
+                        <img
+                          src="<%=contextPath%>/<%=p.getTitleImg()%>"
+                          alt="Slide 1"
+                          width="100%"
+                          height="350"
+                        />
+                        <div style="margin: 0; border: 0px">
+                          <%=p.getProductName()%>
+                        </div>
+                        <div class="name_sub"><%=p.getProductDesc()%></div>
+                        <div class="priceGroup">
+                          <div
+                            class="custom_pro"
+                            d-price="29900"
+                            d-custom="23900"
+                          >
+                            <%=p.getDiscount() + "%"%>
+                          </div>
+                          <div class="prs prsLine">
+                            <%=p.getPrice() + "원"%>
+                          </div>
+                          <div class="prs prsBold">
+                            <%=p.getdPrice() + "원"%>
+                          </div>
+                        </div>
+                      </div>
+                      <% } %>
 
-							<img src="<%=contextPath%>/<%=p.getTitleImg()%>" alt="Slide 1"
-								width="100%" height="350">
-							<div style="margin: 0; border: 0px;"><%=p.getProductName()%></div>
-							<div class="name_sub"><%=p.getProductDesc()%></div>
-							<div class="priceGroup">
-								<div class="custom_pro" d-price="29900" d-custom="23900"><%=p.getDiscount() + "%"%></div>
-								<div class="prs prsLine"><%=p.getPrice() + "원"%></div>
-								<div class="prs prsBold"><%=p.getdPrice() + "원"%></div>
-							</div>
-						</div>
-						<%
-						}
-						%>
+                      <!-- Add more slides as needed -->
+                    </div>
+                    <div id="prev-btn" onclick="prevSlide()">&#10094;</div>
+                    <div id="next-btn" onclick="nextSlide()">&#10095;</div>
+                  </div>
+                </div>
 
-						<!-- Add more slides as needed -->
-					</div>
-					<div id="prev-btn" onclick="prevSlide()">&#10094;</div>
-					<div id="next-btn" onclick="nextSlide()">&#10095;</div>
-				</div>
-			</div>
+                <div id="content2_2">
+                  <div align="right" style="width: 90%; margin-bottom: 5px">
+                    <a href="#" onclick="orderSelect(1);">인기순|</a
+                    ><a href="#" onclick="recentSelect();">최신순|</a
+                    ><a href="#" onclick="countSelect();">조회순</a>
+                  </div>
+                </div>
 
-			<div id="content2_2">
-				<div align="right" style="width: 90%; margin-bottom: 5px;">
-					<a href="#" onclick="orderSelect();">인기순|</a><a href="#" onclick="recentSelect();">최신순|</a><a href="#" onclick="countSelect();">조회순</a>
-				</div>
-			</div>
-			
-			<script>
-			
-			function orderSelect(){			
-				$.ajax({
-					url:"goodAjax.pd",				
-					success:function(result){
+                <script>
+                  function orderSelect(cpage) {
+                    $.ajax({
+                      url: "goodAjax.pd",
+                      data: { cpage: cpage },
+                      success: function (map) {
+                    	 
+                        let pi = map.pi;
+                        console.log(pi)
+                        let currentPage = pi.currentPage;
+                        let startPage = pi.startPage;
+                        let endPage = pi.endPage;
+                        let maxPage = pi.maxPage;
+                        let $paging = $(".page_nation");
 						
-						$('#content2_3').html("");
-						
-						let value = "";
-						
-						for(let i=0; i<result.length; i++){
-							let rv = result[i];
+                        $("#content2_3").html("");
+                        $paging.html("");
 
-							
-							let titleImg = rv.titleImg;
-							console.log(titleImg);
-							let productName = rv.productName;
-							let productDesc = rv.productDesc;
-							let productNo = rv.productNo;
-							
-							value +=								
-								"<div class='content2_3c'>"
-								+ "<img id='img1' src='<%=contextPath%>/" + titleImg + "' alt='Slide 4' width='100%' height='300'>"
-								+ "<input type='hidden' id='pdno' name='pno' value='productNo'>"
-							+ "<div style='margin: 0; border: 0px;'>" + productName + "</div>"
-							+ "<div class='name_sub'>" + productDesc + "</div>"
-							+ "<div class='priceGroup'>" 
-								+ "<div class='custom_pro' d-price='29900' d-custom='23900'>" + rv.discount + '%'+ "</div>"
-								+ "<div class='prs prsLine'>" + rv.price + '원' + "</div>"
-								+ "<div class='prs prsBold'>" + rv.dPrice + '원' + "</div>"
-							+ "</div>"
-						+ "</div>"	
-						}
-					$('#content2_3').html(value);
-					}, error:function(){
-						console.log("ajax 통신실패!");
-					}
-				});
-			}
-			
-			function recentSelect(){
-				$.ajax({
-					url:"recentAjax.pd",
-					success:function(result){
-						
-					$('#content2_3').html("");
-						
-						let value = "";
-						
-						for(let i=0; i<result.length; i++){
-							
-							let rv = result[i];
+                        if (currentPage != 1) {
+                          $paging.append(
+                            "<button onclick='orderSelect(" +(currentPage - 1) +");'>&lt;</button>");
+                        }
 
-							
-							let titleImg = rv.titleImg;
-							console.log(titleImg);
-							let productName = rv.productName;
-							let productDesc = rv.productDesc;
-							let productNo = rv.productNo;
-							
-							value +=								
-								"<div class='content2_3c'>"
-								+ "<img id='img1' src='<%=contextPath%>/" + titleImg + "' alt='Slide 4' width='100%' height='300'>"
-								+ "<input type='hidden' id='pdno' name='pno' value='productNo'>"
-							+ "<div style='margin: 0; border: 0px;'>" + productName + "</div>"
-							+ "<div class='name_sub'>" + productDesc + "</div>"
-							+ "<div class='priceGroup'>" 
-								+ "<div class='custom_pro' d-price='29900' d-custom='23900'>" + rv.discount + '%'+ "</div>"
-								+ "<div class='prs prsLine'>" + rv.price + '원' + "</div>"
-								+ "<div class='prs prsBold'>" + rv.dPrice + '원' + "</div>"
-							+ "</div>"
-						+ "</div>"							
-						}
-						$('#content2_3').html(value);
-						
-					}, error:function(){
-						console.log("ajax 통신 실패!!");
-					}
-				});
-			}
-			
-			function countSelect(){
-				$.ajax({
-					url:"countAjax.pd",
-					success:function(result){
-						
-					$('#content2_3').html("");
-						
-						let value = "";
-						
-						for(let i=0; i<result.length; i++){
-							
-							let rv = result[i];
+                        for (let p = startPage; p <= endPage; p++) {
+                          if (p == currentPage) {
+                            $paging.append("<button class='rvpagebtn'>" + p + "</button>");
+                          } else {
+                            $paging.append("<button class='rvpagebtn' onclick='orderSelect("+p+");'>" + p +"</button>");
+                          }
+                        }
 
-							
-							let titleImg = rv.titleImg;
-							console.log(titleImg);
-							let productName = rv.productName;
-							let productDesc = rv.productDesc;
-							let productNo = rv.productNo;
-							
-							value +=								
-								"<div class='content2_3c'>"
-								+ "<img id='img1' src='<%=contextPath%>/" + titleImg + "' alt='Slide 4' width='100%' height='300'>"
-								+ "<input type='hidden' id='pdno' name='pno' value='productNo'>"
-							+ "<div style='margin: 0; border: 0px;'>" + productName + "</div>"
-							+ "<div class='name_sub'>" + productDesc + "</div>"
-							+ "<div class='priceGroup'>" 
-								+ "<div class='custom_pro' d-price='29900' d-custom='23900'>" + rv.discount + '%'+ "</div>"
-								+ "<div class='prs prsLine'>" + rv.price + '원' + "</div>"
-								+ "<div class='prs prsBold'>" + rv.dPrice + '원' + "</div>"
-							+ "</div>"
-						+ "</div>"							
-						}
-						$('#content2_3').html(value);
-						
-					}, error:function(){
-						console.log("ajax 통신 실패!");
-					}
-				});
-				
-			}
-			
-			</script>
-			
-			
+                        if (currentPage != maxPage) {
+                          $paging.append(
+                            "<button onclick='orderSelect(" + (currentPage + 1) +");'>&gt;</button>"
+                          );
+                        }
 
-			<!-- 상품 전체목록 -->
-			<div id="content2_3">
+                        let result = map.goodList;
 
-				
-				 <%
-				 for (Product p : list1) {
-				 %>
-				 <div class="content2_3c">
-				 	<img id="img1" src="<%=contextPath%>/<%=p.getTitleImg()%>"
-				 		alt="Slide 4" width="100%" height="300"> <input
-				 		type="hidden" id="pdno" name="pno" value="<%=p.getProductNo()%>">
-					<div style="margin: 0; border: 0px;"><%=p.getProductName()%></div>
-				 	<div class="name_sub"><%=p.getProductDesc()%></div>
-				 	<div class="priceGroup">
-				 		<div class="custom_pro" d-price="29900" d-custom="23900"><%=p.getDiscount() + "%"%></div>
-				 		<div class="prs prsLine"><%=p.getPrice() + "원"%></div>
-				 		<div class="prs prsBold"><%=p.getdPrice() + "원"%></div>
-				 	</div>
-				 </div>
-				 <%
-				 }
-				 %>
+                        let value = "";
 
-			</div>
+                        for (let i = 0; i < result.length; i++) {
+                          let rv = result[i];
 
-			<!-- 상품상세조회 script -->
-			<script>              	
-                	$(function(){               		
-                		$(".content2_3c").click(function(){
-                			location.href ='<%=contextPath%>/detail.pd?pno=' + $(this).children('input').val();
-									});
-				})
-			</script>
+                          let titleImg = rv.titleImg;
+                          let productName = rv.productName;
+                          let productDesc = rv.productDesc;
+                          let productNo = rv.productNo;
 
-			<!-- 페이징바 -->
-			<div id="content2_4">
-				<div class="page_nation">
-					<a class="arrow pprev" href="#"></a> <a class="arrow prev" href="#"></a>
+                          value +=
+                            "<div class='content2_3c'>" +
+                            "<img id='img1' src='<%=contextPath%>/" +
+                            titleImg +
+                            "' alt='Slide 4' width='100%' height='300'>" +
+                            "<input type='hidden' id='pdno' name='pno' value='productNo'>" +
+                            "<div style='margin: 0; border: 0px;'>" +
+                            productName +
+                            "</div>" +
+                            "<div class='name_sub'>" +
+                            productDesc +
+                            "</div>" +
+                            "<div class='priceGroup'>" +
+                            "<div class='custom_pro' d-price='29900' d-custom='23900'>" +
+                            rv.discount +
+                            "%" +
+                            "</div>" +
+                            "<div class='prs prsLine'>" +
+                            rv.price +
+                            "원" +
+                            "</div>" +
+                            "<div class='prs prsBold'>" +
+                            rv.dPrice +
+                            "원" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>";
+                        }
+                        $("#content2_3").html(value);
+                      },
+                      error: function () {
+                        console.log("ajax 통신실패!");
+                      },
+                    });
+                  }
 
-					<%
-					for (int p = startPage; p <= endPage; p++) {
-						%>
-					<%
-					if (p == currentPage) {
-						%>
-					<a href="#" class="active"><%=p%></a>
-					<%
-					} else {
-					%>
-					<a href="<%=contextPath%>/list.pd?cpage=<%=p%>" class="active"><%=p%></a>
-					<%
-					}
-						%>
-					<%
-					}
-					%>
+                  function recentSelect() {
+                    $.ajax({
+                      url: "recentAjax.pd",
+                      success: function (result) {
+                        $("#content2_3").html("");
 
+                        let value = "";
 
-					<a class="arrow next" href="#"></a> <a class="arrow nnext" href="#"></a>
-				</div>
-			</div>
-			<!-- 페이징바 끝 -->
+                        for (let i = 0; i < result.length; i++) {
+                          let rv = result[i];
 
+                          let titleImg = rv.titleImg;
+                          console.log(titleImg);
+                          let productName = rv.productName;
+                          let productDesc = rv.productDesc;
+                          let productNo = rv.productNo;
 
-		</div>
-	</div>
+                          value +=
+                            "<div class='content2_3c'>" +
+                            "<img id='img1' src='<%=contextPath%>/" +
+                            titleImg +
+                            "' alt='Slide 4' width='100%' height='300'>" +
+                            "<input type='hidden' id='pdno' name='pno' value='productNo'>" +
+                            "<div style='margin: 0; border: 0px;'>" +
+                            productName +
+                            "</div>" +
+                            "<div class='name_sub'>" +
+                            productDesc +
+                            "</div>" +
+                            "<div class='priceGroup'>" +
+                            "<div class='custom_pro' d-price='29900' d-custom='23900'>" +
+                            rv.discount +
+                            "%" +
+                            "</div>" +
+                            "<div class='prs prsLine'>" +
+                            rv.price +
+                            "원" +
+                            "</div>" +
+                            "<div class='prs prsBold'>" +
+                            rv.dPrice +
+                            "원" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>";
+                        }
+                        $("#content2_3").html(value);
+                      },
+                      error: function () {
+                        console.log("ajax 통신 실패!!");
+                      },
+                    });
+                  }
 
-	
+                  function countSelect() {
+                    $.ajax({
+                      url: "countAjax.pd",
+                      success: function (result) {
+                        $("#content2_3").html("");
 
+                        let value = "";
 
+                        for (let i = 0; i < result.length; i++) {
+                          let rv = result[i];
 
+                          let titleImg = rv.titleImg;
+                          console.log(titleImg);
+                          let productName = rv.productName;
+                          let productDesc = rv.productDesc;
+                          let productNo = rv.productNo;
 
-	<script>
-		let currentIndex = 0;
-		const slides = document.querySelectorAll('.slide');
+                          value +=
+                            "<div class='content2_3c'>" +
+                            "<img id='img1' src='<%=contextPath%>/" +
+                            titleImg +
+                            "' alt='Slide 4' width='100%' height='300'>" +
+                            "<input type='hidden' id='pdno' name='pno' value='productNo'>" +
+                            "<div style='margin: 0; border: 0px;'>" +
+                            productName +
+                            "</div>" +
+                            "<div class='name_sub'>" +
+                            productDesc +
+                            "</div>" +
+                            "<div class='priceGroup'>" +
+                            "<div class='custom_pro' d-price='29900' d-custom='23900'>" +
+                            rv.discount +
+                            "%" +
+                            "</div>" +
+                            "<div class='prs prsLine'>" +
+                            rv.price +
+                            "원" +
+                            "</div>" +
+                            "<div class='prs prsBold'>" +
+                            rv.dPrice +
+                            "원" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>";
+                        }
+                        $("#content2_3").html(value);
+                      },
+                      error: function () {
+                        console.log("ajax 통신 실패!");
+                      },
+                    });
+                  }
+                </script>
 
-		function showSlides() {
-			const totalSlides = (slides.length / 4);
-			currentIndex = (currentIndex + totalSlides) % totalSlides;
+                <!-- 상품 전체목록 -->
+                <div id="content2_3">
+                  <% for (Product p : list1) { %>
+                  <div class="content2_3c">
+                    <img
+                      id="img1"
+                      src="<%=contextPath%>/<%=p.getTitleImg()%>"
+                      alt="Slide 4"
+                      width="100%"
+                      height="300"
+                    />
+                    <input
+                      type="hidden"
+                      id="pdno"
+                      name="pno"
+                      value="<%=p.getProductNo()%>"
+                    />
+                    <div style="margin: 0; border: 0px">
+                      <%=p.getProductName()%>
+                    </div>
+                    <div class="name_sub"><%=p.getProductDesc()%></div>
+                    <div class="priceGroup">
+                      <div class="custom_pro" d-price="29900" d-custom="23900">
+                        <%=p.getDiscount() + "%"%>
+                      </div>
+                      <div class="prs prsLine"><%=p.getPrice() + "원"%></div>
+                      <div class="prs prsBold"><%=p.getdPrice() + "원"%></div>
+                    </div>
+                  </div>
+                  <% } %>
+                </div>
 
-			const translateValue = -currentIndex * 100 + '%';
-			document.getElementById('slider').style.transform = 'translateX('
-					+ translateValue + ')';
-		}
+                <!-- 상품상세조회 script -->
+                <script>
+                  $(function () {
+                    $(".content2_3c").click(function () {
+                      location.href =
+                        "<%=contextPath%>/detail.pd?pno=" +
+                        $(this).children("input").val();
+                    });
+                  });
+                </script>
 
-		function prevSlide() {
-			if (currentIndex > 0) {
-				currentIndex--;
-				showSlides();
-			} else {
-				//
-			}
-		}
+                <!-- 페이징바 -->
+                <div id="content2_4">
+                  <div class="page_nation">
+                    <a class="arrow pprev" href="#"></a>
+                    <a class="arrow prev" href="#"></a>
 
-		function nextSlide() {
-			// if(currentIndex > slides.length-1){
-			// }
-			currentIndex++;
-			showSlides();
-		}
-	</script>
+                    <% for (int p = startPage; p <= endPage; p++) { %> <% if (p
+                    == currentPage) { %>
+                    <a href="#" class="active"><%=p%></a>
+                    <% } else { %>
+                    <a
+                      href="<%=contextPath%>/list.pd?cpage=<%=p%>"
+                      class="active"
+                      ><%=p%></a
+                    >
+                    <% } %> <% } %>
 
-	<%@ include file="../common/footerbar.jsp"%>
+                    <a class="arrow next" href="#"></a>
+                    <a class="arrow nnext" href="#"></a>
+                  </div>
+                </div>
+                <!-- 페이징바 끝 -->
+                
+       
 
-</body>
-</html>
+              
+              </div>
+            </div>
+
+            <script>
+              let currentIndex = 0;
+              const slides = document.querySelectorAll(".slide");
+
+              function showSlides() {
+                const totalSlides = slides.length / 4;
+                currentIndex = (currentIndex + totalSlides) % totalSlides;
+
+                const translateValue = -currentIndex * 100 + "%";
+                document.getElementById("slider").style.transform =
+                  "translateX(" + translateValue + ")";
+              }
+
+              function prevSlide() {
+                if (currentIndex > 0) {
+                  currentIndex--;
+                  showSlides();
+                } else {
+                  //
+                }
+              }
+
+              function nextSlide() {
+                // if(currentIndex > slides.length-1){
+                // }
+                currentIndex++;
+                showSlides();
+              }
+            </script>
+
+            <%@ include file="../common/footerbar.jsp"%>
+          </body>
+        </html></Product
+      ></Product
+    ></Product
+  ></Product
+>

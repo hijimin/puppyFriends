@@ -27,6 +27,7 @@
 	FROM CART
 	WHERE MEMBER_NO = ?
 	  AND PRODUCT_NO = ?
+	  AND CART_STATUS = 'Y'
 	</entry>
 	
 	<entry key="updateCart">

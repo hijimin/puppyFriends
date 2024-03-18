@@ -31,7 +31,7 @@ public class ReviewDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectListCount");
-		
+			
 		try {
 			pstmt = conn.prepareStatement(sql);
 			

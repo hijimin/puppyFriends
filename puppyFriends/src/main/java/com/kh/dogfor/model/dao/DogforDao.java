@@ -386,7 +386,40 @@ public class DogforDao {
 		
 	}
 	
-	
+	public ArrayList<Image> selectImage(Connection conn){
+		
+		ArrayList<Image> imgList = new ArrayList<Image>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectImage");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Image i = new Image();
+				i.setFileNo(rset.getInt("file_no"));		
+				i.setTitleImg(rset.getString("titleimg"));
+				
+				imgList.add(i);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return imgList;
+		
+		
+	}
 	
 	
 	

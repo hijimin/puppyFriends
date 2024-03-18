@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.common.model.vo.Image;
 import com.kh.dogfor.model.service.DogforService;
 import com.kh.dogfor.model.vo.Attendance;
 
@@ -89,11 +90,13 @@ public class DogforMaincontroller extends HttpServlet {
         
          double per = (double)yes/weekdaysCount*100;
          double roundedNumber = Math.round(per * 10.0) / 10.0;
+         
+         ArrayList<Image> imgList = new DogforService().selectImage();
         
         request.setAttribute("per", roundedNumber);
 		request.setAttribute("yes", yes);
 		request.setAttribute("no", no);
-		
+		request.setAttribute("list", imgList);
 		request.getRequestDispatcher("/views/dogfor/dogforMain.jsp").forward(request, response);
 	
 	

@@ -96,7 +96,7 @@
     background-color: rgb(255, 222, 239);
     position: sticky;
     top: 0;
-    z-index: 9999;
+    z-index: 999;
     }
 
     .navigator_tool>li {

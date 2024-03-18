@@ -53,6 +53,19 @@
 		border-radius: 3%; 
 		padding: 10px;
 	}
+	.modal-body2{
+		overflow-y: auto;
+		margin-top: 20px;
+	}
+	.modal-footer{
+		margin-top: 25px;
+	}
+	#img-area .img:hover{
+		cursor: pointer;
+		margin-top: -2px;
+		transform: translateY(-5px);
+		transform: scale(1.1);
+	}
 </style>
 </head>
 <body>
@@ -153,22 +166,22 @@
 		    <div class="modal-content">
 		
 		      <!-- Modal Header -->
-		      <div class="modal-header" style="height: 11%; width: 100%;">
+		      <div class="modal-header" style="height: 11%; width: 100%; ">
 		        <h3 class="modal-title" align="right" style="width: 57%;" ></h3>
 		        <button type="button" class="close" data-dismiss="modal" style="margin-left: 0;">&times;</button>
 		      </div>
 		
 		      <!-- Modal body -->
-		      <div class="modal-body1" style="height: 70%; width: 100%;">
+		      <div class="modal-body1" style="height: 65%; width: 100%; padding-top: 20px;">
 		        <!-- 사진 -->
 		      </div>
 
-			  <div class="modal-body2" style="height: 10%; width: 100%;" align="center">
+			  <div class="modal-body2" style="height: 15%; width: 100%;" align="center">
 		        <!-- 내용 -->
 		      </div>
 		
 		      <!-- Modal footer -->
-		      <div class="modal-footer" style="height: 10%; width: 100%;">
+		      <div class="modal-footer" style="height: 8%; width: 100%;">
 		        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
 		      </div>
 		

@@ -153,7 +153,17 @@ import static com.kh.common.JDBCTemplate.*;
 		
 	}
 	
-	
+	public ArrayList<Image> selectImage(){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Image> imgList = new DogforDao().selectImage(conn);
+		
+		close(conn);
+
+		return imgList;
+		
+	}
 	
 	
 	

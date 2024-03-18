@@ -55,8 +55,13 @@ body {
 	font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
 }
 
-a{
-  color: black;
+.change-date1{
+  color: black !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+.change-date2{
+  color: black !important;
   text-decoration: none;
   cursor: pointer;
 }
@@ -139,7 +144,7 @@ a:active, a:hover {
 	height: 95%;
 }
 #gauge{
-	height: 60%;
+	height: 70%;
 	width: 100%;
 	position : relative;
 }
@@ -192,9 +197,9 @@ a:active, a:hover {
 		<div class="calendar">
 			<div class="title">
 				<% if(month == 1){ %>
-					<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year-1%>&month=<%=12%>" onclick="next();"><</a>
+					<a class="change-date1" href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year-1%>&month=<%=12%>" onclick="next();"><</a>
 				<% }else{ %>
-					<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=month-1%>" onclick="next();"><</a>
+					<a class="change-date2" href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=month-1%>" onclick="next();"><</a>
 				<% } %>
 				
 				<label id="yymm"><%=year%>년 <%=month%>월</label>
@@ -206,7 +211,7 @@ a:active, a:hover {
 				<% } %>
 			
 			</div>
-			
+			<br>
 			<table>
 				<thead>
 					<tr>
@@ -264,7 +269,7 @@ a:active, a:hover {
 		</div>
 
 		<div id="bar" align="center">
-			
+			<br>
 			<h2 align="center">100%</h2><br>
 
 			<div id="gauge">
@@ -274,8 +279,6 @@ a:active, a:hover {
 			</div>
 
 			<br><h2 align="center">0%</h2><br>
-
-			<a href=""><h3>보상확인</h3></a>
 
 		</div>
 

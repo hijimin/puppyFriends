@@ -127,6 +127,15 @@
 	   AND TO_CHAR(ATTENDANCE_DATE, 'YYYY-MM-DD') = ?
 </entry>
 
+<entry key="selectImage">
+	SELECT 
+	       FILE_NO
+	     , FILE_PATH || CHANGE_NAME AS "TITLEIMG" 
+	  FROM IMAGE
+	 WHERE IMAGE_TYPE = 3
+</entry>
+
+
 
 
 

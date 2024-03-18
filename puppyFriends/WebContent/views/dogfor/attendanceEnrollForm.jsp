@@ -14,12 +14,17 @@
 		margin: auto;
 		margin-top: 50px;
 		width: 1400px;
+		height: 800px;
+		border : 3px solid rgb(255, 222, 239);
 	}
 	.outer>div{
 		width: 50%;
 		height: 800px;
-		border: 1px solid red;
 		float: left;
+		padding: 10px;
+	}
+	.outer>#content2{
+		border-left: 3px solid rgb(255, 222, 239);
 	}
 	#date_user{
 		width: 100%;
@@ -138,6 +143,7 @@
 	})
 
 	function selectList(){
+
 		$.ajax({
 			type:"post",
 			url:"/puppy/select.at",
@@ -180,7 +186,7 @@
 				
 			},
 			error:function(){
-				
+				alert("등록 실패")
 			}
 
 
@@ -192,6 +198,13 @@
 
 	function insertList(){
 		
+		if($("select[name=userNo] option:selected").val() === 'X' || $("#date1").val() === "" || $("input[name='status']:checked").val() == null){
+			alert("등록실패");
+			$("#date1").val("");
+			$("input[name='status']").prop("checked", false);
+			return;
+		}
+
 		$.ajax({
 			type:"post",
 			url:"/puppy/insert.at",
@@ -220,8 +233,8 @@
 	}
 
 	</script>
-	
 
+	<%@ include file="../common/footerbar.jsp" %>
 
 
 </body>

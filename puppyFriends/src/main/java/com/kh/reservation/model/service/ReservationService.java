@@ -9,6 +9,7 @@ import com.kh.common.model.vo.Image;
 //import com.kh.common.model.vo.PageInfo;
 import com.kh.reservation.model.dao.ReservationDao;
 import com.kh.reservation.model.vo.Hotel;
+import com.kh.reservation.model.vo.KinderClass;
 import com.kh.reservation.model.vo.Reservation;
 
 public class ReservationService {
@@ -94,6 +95,17 @@ public class ReservationService {
 		close(conn);
 		
 		return img;
+	}
+
+	public ArrayList<KinderClass> selectKinderClassService() {
+
+		Connection conn = getConnection();
+		
+		ArrayList<KinderClass> list = new ReservationDao().selectKinderClassService(conn);
+		
+		close(conn);
+				
+		return list;
 	}
 
 	

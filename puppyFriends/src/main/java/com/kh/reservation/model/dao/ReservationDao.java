@@ -15,6 +15,7 @@ import com.kh.common.model.vo.Image;
 // import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.reservation.model.vo.Hotel;
+import com.kh.reservation.model.vo.KinderClass;
 import com.kh.reservation.model.vo.Reservation;
 
 public class ReservationDao {
@@ -49,7 +50,7 @@ public class ReservationDao {
 	                           rset.getString("hotel_text"),
 	                           rset.getString("hotel_size"),
 	                           rset.getString("member_id"), 
-	                           rset.getString("title_img")
+	                           rset.getString("titleimg")
 	                           ));
 	         }
 		} catch (SQLException e) {
@@ -321,6 +322,41 @@ public class ReservationDao {
 		}
 
 		return img;
+	}
+
+	public ArrayList<KinderClass> selectKinderClassService(Connection conn) {
+		
+ArrayList<KinderClass> list = new ArrayList<KinderClass>(); // [텅 빈 리스트]
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectKinderClassService");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+	            list.add(new KinderClass(rset.getInt("class_no"),
+	            			   rset.getInt("class_writer"),
+	                           rset.getString("class_name"),
+	                           rset.getString("class_text"),
+	                           rset.getString("class_size"),
+	                           rset.getString("member_id"), 
+	                           rset.getString("titleimg")
+	                           ));
+	         }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+	return list;
+
 	}
 
 

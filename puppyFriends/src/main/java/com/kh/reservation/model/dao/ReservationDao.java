@@ -48,10 +48,10 @@ public class ReservationDao {
 	                           rset.getString("hotel_name"),
 	                           rset.getString("hotel_text"),
 	                           rset.getString("hotel_size"),
-	                           rset.getString("member_id")
+	                           rset.getString("member_id"), 
+	                           rset.getString("title_img")
 	                           ));
 	         }
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			
@@ -64,6 +64,7 @@ public class ReservationDao {
 	
 	}
 
+/*
 	public ArrayList<Image> selectHotelThumbnailList(Connection conn, int hotelNo) {
 		Hotel h = new Hotel();
 		
@@ -79,14 +80,14 @@ public class ReservationDao {
 			
 			rset = pstmt.executeQuery();
 			
+			
+			System.out.println(rset.getInt("file_no"));
+			System.out.println(rset.getInt("ref_bno"));
+			System.out.println(rset.getString("file_name"));	
+			System.out.println(rset.getString("titleimg"));
+			
 			while(rset.next()) {
 				Image image = new Image();
-				
-				System.out.println(rset.getInt("file_no"));
-				System.out.println(rset.getInt("ref_bno"));
-				System.out.println(rset.getString("file_name"));	
-				System.out.println(rset.getString("title_img"));
-						
 						
 				image.setFileNo(rset.getInt("file_no"));
 				image.setRefBoardNo(rset.getInt("ref_bno"));
@@ -109,6 +110,7 @@ public class ReservationDao {
 		return img;
 	}
 	
+	*/
 	
 	public Hotel selectHotelDetail(Connection conn, int hotelNo) {
 		Hotel h = null;
@@ -302,16 +304,13 @@ public class ReservationDao {
 			
 			while (rset.next()) {
 				Image image = new Image();
-				image.setFileNo(rset.getInt("file_no"));
-				image.setRefBoardNo(rset.getInt("ref_bno"));
+				image.setFileNo(rset.getInt("FILE_NO"));
+				image.setRefBoardNo(rset.getInt("REF_BNO"));
 				image.setFileName(rset.getString("file_name"));
-				image.setTitleImg(rset.getString("title_img"));
+				image.setTitleImg(rset.getString("titleImg"));
 
-				
-				
 				img.add(image);
 			}
-//			System.out.println(img);
 
 			
 		} catch (SQLException e) {

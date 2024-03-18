@@ -39,7 +39,20 @@ public class Hotel {
    public Hotel() {}
 
    
-  // selectHotelList
+  public Hotel(int hotelNo, int hotelWriter, String hotelName, String hotelText, String hotelSize, String memberId,
+		String titleImg) {
+	super();
+	this.hotelNo = hotelNo;
+	this.hotelWriter = hotelWriter;
+	this.hotelName = hotelName;
+	this.hotelText = hotelText;
+	this.hotelSize = hotelSize;
+	this.memberId = memberId;
+	this.titleImg = titleImg;
+}
+
+
+// selectHotelList
    public Hotel(int hotelNo, int hotelWriter, String hotelName, String hotelText, String hotelSize, String memberId) {
       super();
       this.hotelNo = hotelNo;

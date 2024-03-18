@@ -33,15 +33,11 @@ public class HotelReservationInsert extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int hotelNo = Integer.parseInt(request.getParameter("hno"));
-	
 		ReservationService hService = new ReservationService();
 		
 		ArrayList<Hotel> list = hService.selectHotelList(); // 전달해 줄 거 없음
-		ArrayList<Image> img = hService.selectHotelThumbnailList(hotelNo);
 		
 		request.setAttribute("list",list);
-		request.setAttribute("img", img);
 		
 		request.getRequestDispatcher("views/reservation/hotelReservationForm.jsp").forward(request, response);
 		

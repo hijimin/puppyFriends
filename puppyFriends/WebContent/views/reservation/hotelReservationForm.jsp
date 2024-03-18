@@ -5,7 +5,6 @@
     pageEncoding="UTF-8"%>
 <% 
 	ArrayList<Hotel> list = (ArrayList<Hotel>)request.getAttribute("list");
-	ArrayList<Image> img = (ArrayList<Image>)request.getAttribute("img");		
 
 %>
 <!DOCTYPE html>
@@ -77,6 +76,7 @@
         flex: 1 0 21%; /* flex-grow | flex-shrink | flex-basis */
         width: 300px;
         height: 250px;
+        
     }
 
     .btn_bar{
@@ -187,7 +187,7 @@
                     <% for(Hotel h : list){ %>
                         <div class="thumbnail">
                                 <input type="hidden" name="hno" value="<%= h.getHotelNo() %>"  >
-                                    <img src="<%= contextPath %>/<%= img.get(0).getTitleImg() %> " width="250px" height="190px"> <br> 이미지 들어가게
+                                    <img src="<%= contextPath %>/<%= h.getTitleImg() %> " width="230px" height="200px" style="border-radius: 5%; "> <br>
                                     <div>
                                         호텔명 : <%= h.getHotelName() %> <br> 
                                         전용 사이즈 : <%= h.getHotelSize() %> <br>

@@ -11,13 +11,16 @@
 	     , HOTEL_TEXT
 	     , HOTEL_SIZE
 	     , MEMBER_ID
+	     , FILE_PATH || CHANGE_NAME AS "TITLE_IMG"
 	  FROM HOTEL H
 	  JOIN MEMBER M ON (HOTEL_WRITER = MEMBER_NO)
+	  JOIN IMAGE ON (HOTEL_NO = REF_BNO)
 	 WHERE HOTEL_STATUS = 'Y' 
 	 ORDER BY HOTEL_NO DESC
 	
 	</entry>
 	
+	<!-- 
 	<entry key="selectHotelThumbnailList">
 	
 	SELECT 
@@ -32,7 +35,8 @@
        AND REF_BNO = ?
 	
 	</entry>
-	
+	 -->
+	 
 	<entry key="selectHotelDetail">
 	SELECT 
 	       HOTEL_NO
@@ -52,12 +56,11 @@
 	</entry>
 	
 	<entry key="selectHotelImgList">
-
 		SELECT 
            FILE_NO
          , REF_BNO
-         , FILE_PATH || CHANGE_NAME AS "TITLEIMG" 
          , FILE_NAME
+         , FILE_PATH || CHANGE_NAME AS "TITLEIMG" 
       FROM IMAGE 
       JOIN HOTEL ON (HOTEL_NO = REF_BNO)
      WHERE IMAGE_TYPE = 2 

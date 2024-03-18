@@ -162,9 +162,9 @@
                 <div class="photo_pt">
                     <p align="center">&lt; 작성자 : <%= h.getMemberId() %> &gt;</p>
                     <div class="photoImg1">
-                        <img class="photoImg" src="<%= contextPath %>/<%= img.get(0).getFilePath() + img.get(0).getChangeName() %>" style="width:100%">
+                        <img class="photoImg" src="<%= contextPath %>/<%= img.get(0).getTitleImg() %>" style="width:100%">
                        <% for(int i = 1; i<img.size(); i++) { %>
-                        <img class="photoImg" src="<%= contextPath %>/<%= img.get(i).getFilePath() + img.get(i).getChangeName() %>" style="width:100%">
+                        <img class="photoImg" src="<%= contextPath %>/<%= img.get(i).getTitleImg() %>" style="width:100%">
                    	   <% } %>
                    
                    
@@ -212,7 +212,6 @@
                     </tr>
                 </div>
                 
-                
                 <div class="btn_bar">
                     if 사 등록된 사이즈와 동일하지 않을 시 자동으로 예약 버튼 막힘
                     <button class="btn-open-modal" >예약하기// onclick 예정 , 예약 alert 띄운 후 동의 시 결제 페이지로 넘어감 alert 이후 결제 페이지로 넘어가게</button> 
@@ -224,10 +223,23 @@
 
 				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")) { %>
                 <div class="btn_bar1">
-                    <a href="<%= contextPath %>/delete.hrv?num=<%= h.getHotelNo() %>" class="H_delete">삭제하기</a>
+                    <a href="#" onclick="confirmDelete('<%= h.getHotelNo() %>')" class="H_delete">삭제하기</a>
                 </div>
                 <% } %>
             </div>
+
+			<script>
+			// 삭제 alert
+			function confirmDelete(hotelNo) {
+			    var result = confirm("삭제하시겠습니까?");
+			    
+			    if (result) {
+			        window.location.href = "<%= contextPath %>/delete.hrv?num=" + hotelNo;
+			    }else{
+			    	alert("삭제가 취소되었습니다.");
+			    }
+			}
+			</script>
 
             <br><br>
 

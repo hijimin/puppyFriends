@@ -50,12 +50,14 @@ public class BoardChattingServer {
         		// 3.17 hasWhisper가 실행될 때 귓속말인지 확인하고 귓속말이면 broadcast를 실행하지 않도록 함
         		if (!hasWhisper(session, message)) {
         			broadcast(message);
+        			// clientSessionMap.remove(session.getId());
         		}
         	} else if (type.equals("COMMAND")) {
         		clientSessionMap.put(session.getId(), sender);
         	}
         	
         	System.out.println(clientSessionMap);
+        	
         }
     }
 

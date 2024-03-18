@@ -1,3 +1,4 @@
+<%@page import="com.kh.common.model.vo.AdminPageInfo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.kh.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,7 +12,14 @@
 		String alertMsg = (String)session.getAttribute("alertMsg");
 		
 		ArrayList<Member> dList = (ArrayList<Member>)request.getAttribute("dList");
-    %>
+   
+		AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi");
+	    int currentPage = pi.getCurrentPage();
+		int startPage = pi.getStartPage();
+		int endPage = pi.getEndPage();
+		int maxPage = pi.getMaxPage();
+		
+		%>
     
 <!DOCTYPE html>
 <html>
@@ -124,9 +132,51 @@
         	cursor: pointer;
         }
 
-        #deleteBtn{
+        #restoreBtn{
             margin-left: 1278px;
             margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        
+        .sidebar li ul {
+        display: none;
+      	 }
+
+        .sidebar li:hover > ul {
+            display: block;
+        }
+        
+        .sidebar a{
+            color: rgb(255, 118, 189);
+            font-size: 20px;
+            text-decoration:none;
+            text-align:center;
+            display:inline-block;
+            padding-left: 0px;
+        }
+        
+         .sidebar li{        
+            color: rgb(255, 118, 189);
+            font-size: 20px;
+            text-align:center;
+            list-style-type: none;
+            margin-right: 5px;
+            font-size: 20px;
+        }
+        
+        .sidebar li{        
+           color: rgb(255, 118, 189);
+            font-size: 20px;
+            text-align:center;
+            list-style-type: none;
+            margin-right: 5px;
+        }
+        
+         .sidebar ul{
+            padding-left: 0px;
+            text-align:center;
+            margin-top: 10px;
+
         }
        
     </style>
@@ -140,20 +190,34 @@
     
         <div class="mid">
             <div class="sidebar">
-                <ul style="list-style-type: none;">
-                    <li><a href="">&nbsp;공지사항</a></li>
-                    <br><br><br><br>
-                    <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;회원</a></li>
-                    <br><br><br><br>
-                    <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;수업</a></li>
-                    <br><br><br><br>
-                    <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;호텔</a></li>
-                    <br><br><br><br>
-                    <li><a href="<%= contextPath %>/list.pd?cpage=1">&nbsp;&nbsp;&nbsp;&nbsp;상품</a></li>
-                    <br><br><br><br>
-                    <li><a href="">&nbsp;&nbsp;&nbsp;게시판</a></li>
+            <li class="boardAdmin"><a href="#" >공지사항</a></li>
+            <br><br><br>
+            <li class="memberMana"><a href="<%= contextPath %>/adminSelectMember.me?cpage=1">회원</a>
+                <ul class="memberData" style="color: white;">
+                    <li><a href="<%= contextPath %>/adminSelectMember.me?cpage=1"  style="color: white;">회원조회</a></li><br>
+                    <li><a href="<%= contextPath %>/adminRestoreMemberList.me?cpage=1"  style="color: white;">추방복구</a></li>
                 </ul>
-            </div>
+            </li> 
+            <br><br><br><br>
+            <li class="adminChat">채팅
+                <ul class="chatMana" style="color: white;">
+                    <li><a href="<%= contextPath %>/chatForm.ch"  style="color: white;">단체체팅</a></li><br>
+                    <li><a href="<%= contextPath %>/memberChatList.me"  style="color: white;">회원채팅</a></li>
+                </ul>
+            </li>
+            <br><br><br><br>
+            <li class="adminDogInfo">반려견정보
+                <ul class="dogInfo1">
+                    <li><a href="<%= contextPath %>/dogforMain.do"  style="color: white;">출석부</a></li><br>
+                    <li><a href="<%= contextPath %>/dogforMain.do#"  style="color: white;">갤러리</a></li>
+                </ul>
+            </li>
+            <br><br><br><br>
+            <li class="product-admin"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a>
+                <ul class="product-data"><a href=""  style="color: white;">상품리스트</a></ul>
+            </li>
+            
+        </div>
 
 
             <div class="content">
@@ -178,17 +242,19 @@
                         <tbody align="center">
                            
                            <% for(Member dm : dList) { %>
+                           		<form id="restoreFrom" action="adminRestore.me" method="post" onsubmit="return confirmRestore()">
                                 <tr>
                                     <th><input type="checkbox" value="<%= dm.getMemberNo() %>" name="RestoreMember"></th>
-                                    <td id="detailInfo"><%= dm.getMemberNo() %></td>
+                                    <td id="restoreInfo"><%= dm.getMemberNo() %></td>
                                     <td><%= dm.getMemberId() %></td>
                                     <td><%=dm.getMemberName()  %></td>
                                     <td><%= dm.getDogNo() %></td>
                                     <td><%= dm.getDogName() %></td>
                                     <td><%= dm.getMemberEmail() %></td>
                                     <td><%= dm.getMemberPhone() %></td>
-                                </tr>
-                        	<% } %>							
+                                </tr>                 
+                        	<% } %>	
+                        	</from>						
                             <button type="submit" id="restoreBtn" onclick="restoreConfirm()">회원복구</button>
                         </tbody>
                         
@@ -199,23 +265,23 @@
 
 				<script>
 					$(function(){
-						$(".list-area>tbody>tr>#detailInfo").click(function(){
+						$(".list-area>tbody>tr>#restoreInfo").click(function(){
 							location.href='<%= contextPath %>/adminDog.me?mno=' + $(this).text();
 						})
 					})
 					
-				    function deleteConfirm() {
+				    function restoreConfirm() {
 						
 				        var check = $("input[type=checkbox]").is(":checked") == true;
 						  if(!check){ // 아무것도 체크안함
-					        	alert("체크박스를 선택 후 추방버튼을 눌러주세요");
+					        	alert("체크박스를 선택 후 복구버튼을 눌러주세요");
 					        	return;
 					        }       
 						  
-				        var result = confirm("해당 회원을 삭제 하시겠습니까?");
+				        var result = confirm("해당 회원을 복구 하시겠습니까?");
 					       if(result){
-					            document.getElementById("deleteForm").submit();
-					            alert("삭제 완료되었습니다!");
+					            document.getElementById("restoreFrom").submit();
+					            alert("복구 완료되었습니다!");
 					        } else {							        	
 					        	alert("취소 되었습니다.");
 					        }
@@ -225,9 +291,24 @@
 					
 				</script>
 				
-			
                 <br><br>
-             
+             	 <div class="paging-area" align="center">
+                    <% if(currentPage != 1) { %>
+                    <button onclick="location.href='<%= contextPath %>/adminRestoreMemberList.me?cpage=<%= currentPage - 1 %>'"> &lt; </button>
+                    <% } %>
+                    
+                    <% for(int p=startPage; p<=endPage; p++) { %>
+                        <% if(p == currentPage) { %>
+                        <button style="background-color:pink;"><%= p %></button>
+                        <% } else { %>
+                        <button onclick="location.href='<%= contextPath %>/adminRestoreMemberList.me?cpage=<%= p %>'"><%= p %></button>
+                        <% } %>
+                    <% } %>
+                    
+                    <% if(currentPage != maxPage) { %>
+                    <button onclick="location.href='<%= contextPath %>/adminRestoreMemberList.me?cpage=<%= currentPage + 1 %>'"> &gt; </button>
+                    <% } %>
+                </div>
                 <br>
             </div>
             

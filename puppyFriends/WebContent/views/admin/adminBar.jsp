@@ -132,12 +132,6 @@
             display: block;
         }
 
-      
-
-      
-
-      
-        
     </style>
 </head>
 <body>
@@ -178,9 +172,7 @@
             
         </div>
 
-        <div class="content">
-            
-        </div>
+        
         
     </div>
         

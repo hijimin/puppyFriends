@@ -60,7 +60,7 @@
 		 SELECT *
 			  FROM(SELECT ROWNUM RNUM, D.*
 			          FROM(SELECT
-			                  MEMBER_NO
+			                 MEMBER_NO
 			                , MEMBER_ID
 			                , MEMBER_NAME
 			                , DOG_NO
@@ -73,6 +73,48 @@
 			              ORDER 
 			                 BY MEMBER_NO DESC) D)
 			   WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	<entry key="adminRestoreMember">
+		UPDATE
+		      MEMBER
+		  SET
+		     STATUS = 'Y'
+		WHERE MEMBER_NO = ?
+	</entry>
+	
+	
+	<entry key="adminSelectProductList">
+		SELECT *
+		  FROM (SELECT ROWNUM RNUM, P.*
+		          FROM(SELECT 
+		                PRODUCT_NO
+		              , PRODUCT_NAME
+		              , PRODUCT_DESC
+		              , PRODUCT_PRICE
+		              , PRODUCT_STOCK
+		              , PRODUCT_UPDATE
+		              , PRODUCT_DISCOUNT
+		          FROM PRODUCT
+		          WHERE PRODUCT_STATUS = 'Y'
+		          ORDER 
+		             BY PRODUCT_NO DESC)P)
+		        WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	<entry key="adminProductDelete">
+		UPDATE
+		      PRODUCT
+		  SET
+		     PRODUCT_STATUS = 'N'
+		WHERE PRODUCT_NO = ?
+	</entry>
+	
+	
+	<entry key="">
+	
 	</entry>
 	
 	

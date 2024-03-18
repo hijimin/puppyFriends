@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style>
     .chat-window {
-        width: 785px;
+        width: 806px;
         height: 700px;
         overflow-y: auto;
         padding: 10px;     
@@ -185,7 +185,7 @@
    var webSocket = new WebSocket(serverUrl);
    
    function sendMessage(isChat) {
-       var chatMessage = $("#chatMessage").val().trim(); 
+       var chatMessage = $("#chatMessage").val(); 
        if (isChat !== true || chatMessage !== "") {
            var message = {
         	   type: (isChat !== false ? "CHAT" : "COMMAND"),
@@ -195,8 +195,7 @@
            };
    
            webSocket.send(JSON.stringify(message));
-           $("#chatMessage").val(""); 
-           $("#chatMessage").focus();
+           $("#chatMessage").val("").focus(); 
        }
    }
    
@@ -207,7 +206,7 @@
            var message = JSON.parse(event.data);
            var messageType = message.type;
            var messageWhisperReceiver = message.whisperReceiver;
-           var messageContent = message.content;
+           var messageContent = message.content.trim();
            var now = new Date();
            var hours = now.getHours();
            var minutes = now.getMinutes();

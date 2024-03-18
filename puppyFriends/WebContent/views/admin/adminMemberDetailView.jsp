@@ -139,7 +139,38 @@
             
         }
 
-       
+       .sidebar li ul {
+        display: none;
+      	 }
+
+        .sidebar li:hover > ul {
+            display: block;
+        }
+        
+        .sidebar a{
+            color: rgb(255, 118, 189);
+            font-size: 20px;
+            text-decoration:none;
+            text-align:center;
+            display:inline-block;
+            padding-left: 0px;
+        }
+        
+         .sidebar li{        
+            color: rgb(255, 118, 189);
+            font-size: 20px;
+            text-align:center;
+            list-style-type: none;
+            margin-right: 5px;
+            font-size: 20px;
+        }
+        
+         .sidebar ul{
+            padding-left: 0px;
+            text-align:center;
+            margin-top: 10px;
+
+        }
         
        
     </style>
@@ -153,20 +184,35 @@
     
         <div class="mid">
             <div class="sidebar">
-                <ul style="list-style-type: none;">
-                    <li><a href="">&nbsp;공지사항</a></li>
-                    <br><br><br>
-                    <li><a href="<%= contextPath %>//adminSelectMember.me?cpage=1">&nbsp;&nbsp;&nbsp;&nbsp;회원</a></li>
-                    <br><br><br><br>
-                    <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;수업</a></li>
-                    <br><br><br><br>
-                    <li><a href="">&nbsp;&nbsp;&nbsp;&nbsp;호텔</a></li>
-                    <br><br><br><br>
-                    <li><a href="<%= contextPath %>/list.pd?cpage=1">&nbsp;&nbsp;&nbsp;&nbsp;상품</a></li>
-                    <br><br><br><br>
-                    <li><a href="">&nbsp;&nbsp;&nbsp;게시판</a></li>
+            <li class="boardAdmin"><a href="#" >공지사항</a></li>
+            <br><br><br>
+            <li class="memberMana"><a href="<%= contextPath %>/adminSelectMember.me?cpage=1">회원</a>
+                <ul class="memberData" style="color: white;">
+                    <li><a href="<%= contextPath %>/adminSelectMember.me?cpage=1"  style="color: white;">회원조회</a></li><br>
+                    <li><a href="<%= contextPath %>/adminRestoreMemberList.me?cpage=1"  style="color: white;">추방복구</a></li>
                 </ul>
-            </div>
+            </li> 
+            <br><br><br><br>
+            <li class="adminChat">채팅
+                <ul class="chatMana" style="color: white;">
+                    <li><a href="<%= contextPath %>/chatForm.ch"  style="color: white;">단체체팅</a></li><br>
+                    <li><a href="<%= contextPath %>/memberChatList.me"  style="color: white;">회원채팅</a></li>
+                </ul>
+            </li>
+            <br><br><br><br>
+            <li class="adminDogInfo">반려견정보
+                <ul class="dogInfo1">
+                    <li><a href="<%= contextPath %>/dogforMain.do"  style="color: white;">출석부</a></li><br>
+                    <li><a href="<%= contextPath %>/dogforMain.do#"  style="color: white;">갤러리</a></li>
+                </ul>
+            </li>
+            <br><br><br><br>
+            <li class="product-admin"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a>
+                <ul class="product-data"><a href=""  style="color: white;">상품리스트</a></ul>
+            </li>
+            
+        </div>
+
 
 
             <div class="content">

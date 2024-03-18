@@ -18,6 +18,7 @@ import static com.kh.common.JDBCTemplate.*;
 import com.kh.common.model.vo.AdminPageInfo;
 import com.kh.member.model.vo.Dog;
 import com.kh.member.model.vo.Member;
+import com.kh.product.model.vo.Product;
 
 public class AdminDao {
 	
@@ -189,24 +190,31 @@ public class AdminDao {
         
     } // adminDeleteMember
 	
-	public ArrayList<Member> adminRestoreMember(Connection conn){
+	public ArrayList<Member> adminRestoreMember(Connection conn, AdminPageInfo pi){
 		ArrayList<Member> dList = new ArrayList<Member>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("adminDeleteMemberList");
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 
 			while(rset.next()) {
-				dList.add(new Member(rset.getInt("member_no"),
-									rset.getString("member_id"),
-									rset.getString("member_name"),
-									rset.getInt("dog_no"),
-									rset.getString("dog_name"),
-									rset.getString("member_email"),
-									rset.getString("member_phone")
+				dList.add(new Member(rset.getInt("MEMBER_NO"),
+									rset.getString("MEMBER_ID"),
+									rset.getString("MEMBER_NAME"),
+									rset.getInt("DOG_NO"),
+									rset.getString("DOG_NAME"),
+									rset.getString("MEMBER_EMAIL"),
+									rset.getString("MEMBER_PHONE")
 									));
 			}
 			
@@ -221,5 +229,101 @@ public class AdminDao {
 		
 	}
 
+	public int[] adminStartRestoreMember(Connection conn, int[] adminStartRestoreMember) {
+        int[] result = null;
+        PreparedStatement pstmt = null;
+        String sql = prop.getProperty("adminRestoreMember");
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            for (int i = 0; i < adminStartRestoreMember.length; i++) {
+                pstmt.setInt(1, adminStartRestoreMember[i]);
+                pstmt.executeUpdate();
+            }
+            
+            result = adminStartRestoreMember;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        return result;
+        
+    } // adminDeleteMember
 	
-}
+	public ArrayList<Product> adminSelectProductList(Connection conn, AdminPageInfo pi){
+		ArrayList<Product> pList = new ArrayList<Product>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminSelectProductList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				pList.add(new Product(rset.getInt("PRODUCT_NO"),
+									  rset.getString("PRODUCT_NAME"),
+									  rset.getString("PRODUCT_DESC"),
+									  rset.getString("PRODUCT_PRICE"),
+									  rset.getInt("PRODUCT_STOCK"),
+									  rset.getDate("PRODUCT_UPDATE"),
+									  rset.getInt("PRODUCT_DISCOUNT")));
+			}
+			
+		} catch (SQLException e) {	
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return pList;
+		
+	} // adminSelectProductList
+	
+	public int[] adminDeleteProduct(Connection conn, int[] adminDeleteProduct) {
+		int[] result = null;
+        PreparedStatement pstmt = null;
+        String sql = prop.getProperty("adminProductDelete");
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            for (int i = 0; i < adminDeleteProduct.length; i++) {
+                pstmt.setInt(1, adminDeleteProduct[i]);
+                pstmt.executeUpdate();
+            }
+            
+            result = adminDeleteProduct;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        return result;
+	} // adminDeleteProduct
+	
+} // CLASS

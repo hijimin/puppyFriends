@@ -8,23 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.admin.model.service.AdminService;
 import com.kh.common.model.vo.AdminPageInfo;
-import com.kh.member.model.vo.Member;
+import com.kh.product.model.vo.Product;
 
 /**
- * Servlet implementation class adminRestoreMemberList
+ * Servlet implementation class AdminSelectProductListController
  */
-@WebServlet("/adminRestoreMemberList.me")
-public class adminRestoreMemberList extends HttpServlet {
+@WebServlet("/AdminSelectProductList.pr")
+public class AdminSelectProductListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adminRestoreMemberList() {
+    public AdminSelectProductListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -65,14 +64,13 @@ public class adminRestoreMemberList extends HttpServlet {
 		
 		AdminPageInfo pi = new AdminPageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		
-		ArrayList<Member> dList = new AdminService().adminRestoreMember(pi);
+		ArrayList<Product> pList = new AdminService().adminSelectPRoductList(pi);
 		
 		request.setAttribute("pi", pi);
-		request.setAttribute("dList", dList);
-		request.getRequestDispatcher("views/admin/adminRestoremember.jsp").forward(request, response);
-	    
-	}
+		request.setAttribute("pList", pList);
+		request.getRequestDispatcher("views/admin/adminProductList.jsp").forward(request, response);;
+		
+	} // doGet
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

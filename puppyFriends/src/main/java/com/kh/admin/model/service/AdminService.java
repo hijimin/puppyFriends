@@ -10,6 +10,7 @@ import com.kh.admin.model.dao.AdminDao;
 import com.kh.common.model.vo.AdminPageInfo;
 import com.kh.member.model.vo.Dog;
 import com.kh.member.model.vo.Member;
+import com.kh.product.model.vo.Product;
 
 public class AdminService {
 	
@@ -55,16 +56,49 @@ public class AdminService {
 	} // adminDeleteMember
 	
 	
-	public ArrayList<Member> adminRestoreMember(){
+	public ArrayList<Member> adminRestoreMember(AdminPageInfo pi){
 		
 		Connection conn = getConnection();
-		ArrayList<Member> dList = new AdminDao().adminRestoreMember(conn);
+		ArrayList<Member> dList = new AdminDao().adminRestoreMember(conn, pi);
 		
 		close(conn);
 		return dList;
 		
 	}
-
 	
+	public int[] adminStartRestoreMember(int[] adminStartRestoreMember) {
+		Connection conn = getConnection();
+		int[] result = new AdminDao().adminStartRestoreMember(conn,  adminStartRestoreMember);
+		
+		 if (result != null) {
+		        commit(conn);
+		    } else {
+		        rollback(conn);
+		    }
+		    close(conn);
+		    return result;		
+	} // adminStartRestoreMember
+
+	public ArrayList<Product> adminSelectPRoductList(AdminPageInfo pi){
+		Connection conn = getConnection();
+		ArrayList<Product> pList = new AdminDao().adminSelectProductList(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+	} // adminSelectPRoductList
+	
+	public int[] adminDeleteProduct(int[] adminDeleteProduct) {
+		Connection conn = getConnection();
+	    int[] result = new AdminDao().adminDeleteProduct(conn, adminDeleteProduct);
+
+	    if (result != null) {
+	        commit(conn);
+	    } else {
+	        rollback(conn);
+	    }
+	    close(conn);
+	    return result;
+	}
 
 } // class

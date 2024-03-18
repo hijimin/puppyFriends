@@ -86,13 +86,24 @@ public class Product {
 	}
 	
 	
-
-
+	// 관리자 조회용
+	public Product(int productNo, String productName, String productDesc, String price, int stock,
+			Date productUpdate, int discount) {
+		super();
+		this.productNo = productNo;
+		this.productName = productName;
+		this.productDesc = productDesc;
+		this.price = price;
+		this.stock = stock;
+		this.productUpdate = productUpdate;
+		this.discount = discount;
+	}
+	
+	
 
 	public int getProductNo() {
 		return productNo;
 	}
-
 
 
 	public void setProductNo(int productNo) {

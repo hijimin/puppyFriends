@@ -5,6 +5,7 @@
 <%
 	String contextPath = request.getContextPath(); //  "/Test"
 	
+	// 회원, 반려견 정보 담은 유저 정보
 	Member loginUser = (Member)session.getAttribute("loginUser"); // 일반 로그인 유저
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");
@@ -16,6 +17,7 @@
 <meta charset="UTF-8">
 <title>PUPPY</title>
 <style>
+    
     body{
             margin: 0px;
     }
@@ -247,7 +249,7 @@
             </li>
             <li class="program"><a href="#">프로그램</a>
               <ul class="reservation">
-                <li class="hotel"><a href="<%= contextPath %>/insert.hrv">호텔 예약</a></li>
+                <li class="hotel"><a href="<%= contextPath %>/hotel.hrv">호텔 예약</a></li>
                 <li class="kindergarten"><a href="#">유치원 예약</a></li>
               </ul>
             </li>

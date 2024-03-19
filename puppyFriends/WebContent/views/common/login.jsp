@@ -86,8 +86,8 @@
                     <form action="<%= request.getContextPath() %>/login">
                         <h3>로그인</h3>
                         <input type="hidden" id="userNo" name="userNo">
-                        <input type="text" id="userId" name="userId" placeholder="아이디" style="width: 300px; height: 50px;"><br>
-                        <input type="password" id="userPwd" name="userPwd" placeholder="비밀번호" style="width: 300px; height: 50px;"><br><br>
+                        <input type="text" id="userId" name="userId" required placeholder="아이디" style="width: 300px; height: 50px;"><br>
+                        <input type="password" id="userPwd" name="userPwd" required placeholder="비밀번호" style="width: 300px; height: 50px;"><br><br>
 
                         <input type="submit" value="로그인" style="border-radius: 10px; width: 300px; height: 30px; background-color: rgb(255, 222, 239); border-color: rgb(255, 222, 239);">
                     </form>

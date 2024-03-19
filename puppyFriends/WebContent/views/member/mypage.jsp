@@ -6,211 +6,347 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    div{box-sizing: border-box; border: 1px solid red;}
 
-    .mypage-wrap{height: 1000px;}
+    div{border: 1px solid white; box-sizing: border-box;}
 
-    .mypage-sidespace{
-        width: 60%;
+    .mypage-wrap{width: 100%; height: 1000px;}    
+    .mypage-form{height: 100%; width: 80%;}
+    .mypage-header{height: 10%;}
+    .mypage-menu-empty{height: 30%;} 
+    .mypage-order{height: 25%; padding: 0; margin: 0;}
+    .mypage-order li{
+        float: left;
+        padding: 0px 5px;
         height: 100%;
-        margin: auto;
-        border: 1px solid lightgray;
+        /* border: 1px solid red; */
+        list-style-type: none;
+        margin: 0px;
     }
-
-    .mypage-header{height: 100px; border-bottom: 2px solid lightgray;}
-
-    .mypage-header>div{float: left;}
-
-    .header-logo{
-        height: 100%;
-        width: 20%;
-        background-color: rgb(255, 222, 239);
-        cursor: pointer;
-    }
-    .header-logo>h2{margin-top: 25px; text-align: center;}
-
-    .header-title{width: 55%; height: 100%;}
-    .header-title>h1{margin-left: 17px; margin-top: 20px;}
-
-    .header-info{width: 25%; height: 100%; }
-    .header-info>div{float: right;}
     
-    .info-alram, .info-user{
-        width: 50px;
-        height: 50px;
-        margin-top: 20px;
+    .mypage-order a{
+        /* border: 1px solid red; */
+        text-decoration: none;
+        font-size: 14px;
+        color: black;
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+    span{font-size: 14px;}
+
+    .mypage-order a:hover{
+        color: black;
+        text-decoration: none;
+    }
+
+    .mypage-content{height: 90%; display: flex;}
+    .mypage-select-zone{width: 15%;}
+    .mypage-select-header{height: 10%;}
+    .mypage-select-header>h2{text-align: left; margin-top: 20px;}
+    .mypage-content-zone{width: 85%;}
+    .line{border: 1px solid black; width: 100%;}
+    
+    .mypage-select-main{height: 90%;}
+    .mypage-select-main>ul{
+        /* border: 1px solid blue; */
+        list-style-type: none;
+        padding: 16px 0px;
+        text-align: left;
+        padding-left: 0px;
+        height: 100%;
+
+    }
+
+    .mypage-select-main a{
+        text-decoration: none;
+        color:black;
+        font-size: 16px;
+        font-weight: 800;
+    }
+
+    .mypage-select-main li{margin-top: 40px;}
+    .mypage-select-main a:hover{color: black;}
+
+    .mypage-content-side{width: 98%; height: 100%; padding: 30px 0px;}
+    .mypage-content-main{width: 95%; height: 100%; padding-top: 20px;}
+    .input-row{
+        width: 90%;
+        height: 8%;  
+        display: flex; 
+        padding: 10px 16px;
+        border-bottom: 1px solid #666666;
         
     }
-    .info-alram{margin-right: 20px; margin-top: 28px;}
-    
-    .mypage-content{width: 100%; height: 900px;}
-    .mypage-content>div{float: left;}
-    .mypage-content1{width: 20%; height: 100%; background-color: rgb(255, 222, 239);}
-    .mypage-content2{width: 80%; height: 100%;}
 
-    .member-info, .select-reservation,
-    .product-info, .board-info, .mileage-info{
-        height: 20%;
-        text-align: center;
-        padding-top: 60px;
-        cursor: pointer;
-        border-bottom: 2px solid white;
+    .input-title{
+        width: 20%; 
+        height: 100%;
+        margin-right: 4px;
+        padding-top: 4px;
+        text-align: left;
+        color:#666666;
     }
-    
-    .update-icon{margin-left: 50px;}
 
-    .nickname-form{height: 50px;}
-    .nickname-form>div{float: left;}
-
-    .update-nickname-header{padding-left: 15px;}
-
-    .nickname-form1{width: 10%; height: 100%; padding-top: 20px;}
-    .nickname-form2{height: 100%; padding-top: 20px;}
-    .nickname-form2>input{
-        border-style: none;
-        border-bottom-style: solid;
-    }
-    .update-nickname-button{margin-top: 20px; margin-left: 10px;}
-
-    .line{height: 11px;
-        border-style: none;
-        border-bottom-style: solid;
-        border-color: lightgray;
-    }
-    .pet-info{height: 180px;}
-    .pet-info div{float: left;}
-    .pet-info-header{width: 100%; height: 65px;}
-    .pet-info-header>div{float: left;}
-    .pet-info-name{padding-left: 15px; width: 30%; height: 100%;}
-    .pet-significant{padding-left: 15px; width: 70%; height: 100%;}
-
-    .pet-info-content{width: 100%; height: 115px;}
-    tr input{
-        border-style: none;
-        border-bottom-style: solid;
-    }
-    .pet-name-value{width: 30%; height: 100%;}
-    .pet-significant-text{
-        width: 42%;
+    .input-group{
+        width: 90%; 
         height: 100%; 
+        padding-right: 20px;
     }
-    .pet-significant-button{margin-top: 85px; margin-left: 10px;}
-
-    .change-password-info{height: 31%;}
-    .change-password-header{height: 19%;}
-    .change-password-content{height: 81%;}
     
+    .input-group>input{
+        flex: 1;
+        border-style: none;
+        background-color: #f6f6f6;
+        border-radius: 5px;
+    }
+
+    .input-group-radio{
+        width: 90%;
+        height: 100%;
+        padding-top: 7px;
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    .change-pwd-button{height: 8%; margin-top: 40px;}
+    .change-pwd-button>div{float: left;}
+
+    .cancle-update-button, .register-update-button{width: 50%;height: 100%;}
+
+    .cancle-update-button>button, .register-update-button>button{width: 40%;height: 100%;}
+
+    .input-textbox{
+        width: 90%;
+    }
+    .dogsignificant-box{
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        border-style: none;
+        background-color: #f6f6f6;
+        
+    }
+
+
 
 </style>
 <script src="https://kit.fontawesome.com/d48d14d77f.js" crossorigin="anonymous"></script>
 
+<script src="https://kit.fontawesome.com/d48d14d77f.js" crossorigin="anonymous"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
     
-	<div class="mypage-wrap">
-        <div class="mypage-sidespace">
-            <div class="mypage-header">
-                <div class="header-logo">
-                    <h2 onclick="location.href='<%= request.getContextPath() %>'">PUPPYFRIENDS</h2>
-                </div>
-    
-                <div class="header-title"><h1>회원 정보 조회</h1></div>
-    
-                <div class="header-info">
-                    <div class="info-user">
-                        <i class="fa-regular fa-circle-user fa-3x"></i>
-                    </div>
-                    <div class="info-alram">
-                        <i class="fa-solid fa-bell fa-2x"></i>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="mypage-content">
-                <div class="mypage-content1">
-                    <div class="member-info" onclick="location.href='<%=request.getContextPath()%>/mypage'"><h2>회원</h2></div> 
-                    <div class="select-reservation" onclick="location.href='<%=request.getContextPath()%>/confirmReservation'"><h2>예약 조회</h2></div>
-                    <div class="product-info" onclick="location.href='<%=request.getContextPath()%>/confirmProduct'"><h2>상품</h2></div> 
-                    <div class="board-info" onclick="location.href='<%=request.getContextPath()%>/confirmBoard'"><h2>게시판</h2></div>
-                    <div class="mileage-info" onclick="location.href='<%=request.getContextPath()%>/confirmMileage'"><h2>쿠폰함</h2></div>
-                </div>
-                <div class="mypage-content2">
-                    <div class="update-nickname-header"><h2><프로필 변경></h2></div>
-                    <div class="update-icon fa-solid fa-circle-user fa-3x"></div>
-                    <div class="nickname-form">
-                        <div class="nickname-form1" align="center">닉네임</div>
-                        <div class="nickname-form2">
-                            <input type="text">
-                        </div>
-                        <div class="update-nickname-button">
-                            <button>수정</button>
-                        </div>
-                    </div>
-
-                    <div class="line"></div>
-                    
-                    <div class="pet-info">
-                        <div class="pet-info-header">
-                            <div class="pet-info-name"><h3><반려동물 정보></h3></div>
-                            <div class="pet-significant"><h3><특이사항 및 자랑></h3></div>
-                        </div>
-
-                        <div class="pet-info-content">
-                            <div class="pet-name-value">
-                                <table style="padding-left: 15px;">
-                                    <tr>
-                                        <th width="50">이름</th>
-                                        <td height="50"><input type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>견종</th>
-                                        <td><input type="text"></td>
-                                    </tr>
-                                </table>
-                            </div>
-
-                            <div class="pet-significant-text">
-                                <textarea name="dogSgnificant" cols="50" rows="7" style="resize: none;" placeholder="내용을 입력해주세요."></textarea>
-                            </div>
-                            <div class="pet-significant-button">
-                                <button>수정</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="line"></div>
-                    
-                    <div class="change-password-info">
-                        <div class="change-password-header">
-                            <h2><비밀번호 변경></h2>
-                        </div>
-                        <div class="change-password-content">
-                            <table>
-                                <tr>
-                                    <th width="130" height="130">현재 비밀번호</th>
-                                    <td><input type="password"></td>
-                                </tr>
-                                <tr>
-                                    <th height="38px">새로운 비밀번호</th>
-                                    <td><input type="password"></td>
-                                </tr>
-                                <tr>
-                                    <th height="38">비밀번호 확인</th>
-                                    <td><input type="password"></td>
-                                    <td style="padding-left: 10px;"><button>변경</button></td>
-                                </tr>
-                                
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-    
+	 <%@ include file="../common/menubar.jsp" %>
+	 
+	 <%
+	 	int memberNo = loginUser.getMemberNo();
+	 	String memberId = loginUser.getMemberId(); // 아이디
+	 	String memberName = loginUser.getMemberName(); // 회원이름
+	 	String email = loginUser.getMemberEmail(); // 회원 이메일
+	 	String phone = (loginUser.getMemberPhone()) == null ? "" : loginUser.getMemberPhone(); // 전화번호
+	 	String dogName = loginUser.getDogName(); // 반려견 이름
+	 	String dogValue = loginUser.getDogValue();// 반려견 종류
+	 	int dogAge = loginUser.getDogAge();// 반려견 나이
+	 	String dogGender = loginUser.getDogGender(); // 반려견 성별
+	 	String dogSize = loginUser.getDogSize();
+	 	String dogVaccine = loginUser.getDogVaccine(); // 반려견 접종
+	 	String dogSig = loginUser.getDogSignificant(); // 반려견 특이사항
+	 %>
 	
+     <div class="mypage-wrap" align="center">
+        <div class="mypage-form">
+            <div class="mypage-header">
+                <div class="mypage-menu-empty"></div>
+                <div class="mypage-order">
+                    <li><a href="<%= request.getContextPath()%>">Home ></a></li>
+                    <li><a href="<%= request.getContextPath()%>/mypage">Mypage ></a></li>
+                    <li><span>회원정보수정</span></li>
+                </div>
+            </div>
+            <div class="mypage-content">
+                <div class="mypage-select-zone">
+                    <div class="mypage-select-header">
+                        <h2>MY PAGE</h2>
+                    </div>
+                    <div class="line"></div>
+                    <div class="mypage-select-main">
+                        <ul>
+                            <li><a href="<%= request.getContextPath()%>/mypage">회원정보수정</a></li>
+                            <li><a href="<%= request.getContextPath()%>/updatePwd">비밀번호변경</a></li>
+                            <li><a href="<%= request.getContextPath()%>/mypageProduct">구매 내역 조회</a></li>
+                            <li><a href="<%= request.getContextPath()%>/mypageReservation">예약 조회</a></li>
+                            <li><a href="<%= request.getContextPath()%>/mypageBoard">내가 쓴 글</a></li>
+                            <li><a href="javascript:"onclick="deleteMember();">회원탈퇴</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mypage-content-zone">
+                    <div class="mypage-content-side">
+                        <div class="mypage-content-main">
+	
+
+                            <form action="<%= contextPath %>/update.me" method="post">
+
+                                <input type="hidden" name="memberNo" value="<%= memberNo %>">
+
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>아이디</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" readonly name="memberId" value="<%= memberId %>">
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>이름</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" readonly name="memberName" value="<%= memberName %>">
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>이메일</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" name="memberEmail" value="<%= email %>">
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>전화번호</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" name="memberPhone" value="<%= phone %>">
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>반려견 이름</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" name="dogName" value="<%= dogName %>">
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>반려견 견종</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" name="dogValue" value="<%= dogValue %>">
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>반려견 나이</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" name="dogAge" value="<%= dogAge %>">
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>반려견 성별</b>
+                                    </div>
+                                    <div class="input-group-radio">
+                                        <input type="radio" name="dogGender" id="male" value="M"
+                                        <% if(dogGender.equals("M")) { %>
+                                            checked	
+                                        <% } %>
+                                        > 남아
+                                            
+                                        <input type="radio" name="dogGender" id="female" value="F"
+                                        <% if(dogGender.equals("F")) { %>
+                                            checked	
+                                        <% } %>
+                                        > 여아
+                                    </div>
+                                </div>
+                                
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>반려견 크기</b>
+                                    </div>
+                                    <div class="input-group-radio">
+                                        <input type="radio" name="dogSize" id="" value="S"
+                                        <% if(dogSize.equals("S")) { %>
+                                            checked	
+                                        <% } %>
+                                        > 소형견
+                                        <input type="radio" name="dogSize" id="" value="M"
+                                        <% if(dogSize.equals("M")) { %>
+                                            checked	
+                                        <% } %>
+                                        > 중형견
+                                        <input type="radio" name="dogSize" id="" value="L"
+                                        <% if(dogSize.equals("L")) { %>
+                                            checked	
+                                        <% } %>
+                                        > 대형견
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="input-title" style="font-size: 14px;">
+                                        <b >필수 예방 접종 여부</b>
+                                    </div>
+                                    <div class="input-group-radio">
+                                        <input type="radio" name="dogVaccine" value="Y"
+                                        <% if(dogVaccine.equals("Y")) { %>
+                                            checked	
+                                            <% } %>
+                                            > O
+                                            <input type="radio" name="dogVaccine" value="N"
+                                            <% if(dogVaccine.equals("N")) { %>
+                                            checked	
+                                            <% } %>
+                                            > X
+                                        </div>
+                                    </div>
+                                    <div class="input-row" style="height: auto;">
+                                        <div class="input-title">
+                                            <b>특이사항</b>
+                                        </div>
+                                        <div class="input-textbox">
+                                            <textarea class="dogsignificant-box" name="dogSignificant" style="resize: none;"><%= dogSig %></textarea>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="change-pwd-button">
+                                        <div class="register-update-button">
+                                            <button class="btn btn-primary btn-lg">저장</button>
+                                        </div>
+                                        <div class="cancle-update-button ">
+                                            <button type="button" onclick="location.href='<%= contextPath %>'" class="btn btn-danger btn-lg">취소</button>
+                                        </div>
+                                    </div>
+                                    
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+     
+
+
+
+     
+   
 </body>
 </html>

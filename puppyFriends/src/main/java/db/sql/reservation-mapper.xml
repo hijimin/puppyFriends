@@ -3,23 +3,160 @@
 <properties>
 
 	<entry key = "selectHotelList">
+	
 	SELECT 
 	       HOTEL_NO
+	     , HOTEL_WRITER
 	     , HOTEL_NAME
+	     , HOTEL_TEXT
+	     , HOTEL_SIZE
 	     , MEMBER_ID
+	     , FILE_PATH || CHANGE_NAME AS "TITLE_IMG"
 	  FROM HOTEL H
-	  JOIN RESERVATION RV ON (HOTEL_NO = FACILITY_NO)
-	  JOIN MEMBER M USING (MEMBER_NO)
-	 WHERE M.STATUS = 'Y'
-	 ORDER BY SYSDATE DESC
+	  JOIN MEMBER M ON (HOTEL_WRITER = MEMBER_NO)
+	  JOIN IMAGE ON (HOTEL_NO = REF_BNO)
+	 WHERE HOTEL_STATUS = 'Y' 
+	 ORDER BY HOTEL_NO DESC
 	
 	</entry>
 	
+	<!-- 
+	<entry key="selectHotelThumbnailList">
+	
+	SELECT 
+           FILE_NO
+         , REF_BNO
+         , FILE_PATH || CHANGE_NAME AS "TITLEIMG" 
+         , FILE_NAME
+      FROM IMAGE 
+      JOIN HOTEL ON (HOTEL_NO = REF_BNO)
+     WHERE IMAGE_TYPE = 2 
+       AND FILE_LEVEL = 1
+       AND REF_BNO = ?
+	
+	</entry>
+	 -->
+	 
+	<entry key="selectHotelDetail">
+	SELECT 
+	       HOTEL_NO
+         , HOTEL_WRITER
+	     , HOTEL_NAME
+	     , HOTEL_TEXT
+	     , HOTEL_SIZE
+	     , D_NUMBER
+	     , HOTEL_START
+	     , HOTEL_END
+	     , MEMBER_ID
+	  FROM HOTEL H
+      JOIN MEMBER M ON (HOTEL_WRITER = MEMBER_NO)
+	 WHERE HOTEL_NO = ?
+       AND HOTEL_STATUS = 'Y'
+	    
+	</entry>
+	
+	<entry key="selectHotelImgList">
+		SELECT 
+           FILE_NO
+         , REF_BNO
+         , FILE_NAME
+         , FILE_PATH || CHANGE_NAME AS "TITLEIMG" 
+      FROM IMAGE 
+      JOIN HOTEL ON (HOTEL_NO = REF_BNO)
+     WHERE IMAGE_TYPE = 2 
+       AND REF_BNO = ?
+	</entry>
 
+	
+	
+	<entry key="insertThHotel">
+	INSERT
+	  INTO HOTEL
+	  (
+	    HOTEL_NO
+	  , HOTEL_WRITER
+	  , HOTEL_NAME
+	  , HOTEL_TEXT
+	  , HOTEL_SIZE
+	  , D_NUMBER
+	  , HOTEL_START
+	  , HOTEL_END
+	  )
+	  VALUES
+	  (
+	  SEQ_HOTEL.NEXTVAL
+	, ?
+	, ?
+	, ?
+	, ?
+	, ?
+	, ?
+	, ?
+	)
+	  
+	</entry>
+	
+	<entry key="insertThumbnailList">
+	INSERT
+	  INTO IMAGE
+	  (
+	    FILE_NO <!-- 파일번호 -->
+	  , REF_BNO <!-- 참조게시글번호 -->
+	  , IMAGE_TYPE
+	  , FILE_NAME <!-- 파일원본명 -->
+	  , CHANGE_NAME <!-- 파일수정명 -->
+	  , FILE_PATH <!-- 이미지저장경로, 호텔-2 -->
+	  , FILE_LEVEL <!-- 파일레벨 -->
+	  )
+	  VALUES
+	  (
+	    SEQ_IMAGE.NEXTVAL
+	  , SEQ_HOTEL.CURRVAL
+	  , 2
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  )
+	  
+	</entry>
+	
+	<entry key="inserThReservation">
+	INSERT
+	  INTO RESERVATION
+	  (
+        RESERVATION_NO
+      , PROGRAM_NO
+      , FACILITY_NO
+	  , RESERVATION_PRICE
+	  )
+	  VALUES
+	  (
+	    SEQ_RESERVATION.NEXTVAL
+	  , SEQ_HOTEL.CURRVAL
+	  , 2
+	  , ?
+	  )
+	  
+	</entry>
 
+	<entry key="selectRvCount">
+	<!-- 호텔용  -->
+	SELECT 
+		   COUNT(*) HCOUNT
+   	  FROM RESERVATION
+     WHERE FACILITY_NO = 2
+       AND PROGRAM_NO = ?
+       AND RESERVATION_STATUS = 'Y'
+	</entry>
 
-
-
+	<entry key="deleteHotel">
+	  UPDATE 
+	  		 HOTEL
+      	 SET HOTEL_STATUS = 'N'
+   	   WHERE HOTEL_NO = ?
+		
+	</entry>
 
 
 

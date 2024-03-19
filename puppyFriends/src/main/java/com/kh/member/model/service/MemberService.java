@@ -79,7 +79,22 @@ public class MemberService {
 		return updateMem;
 	}
 	
-	
+	public Member updatePwdMember(String memberId, String memberPwd, String updatePwd) {
+		Connection conn = getConnection();
+		int result = new MemberDao().updatePwdMember(conn, memberId, memberPwd, updatePwd);
+		
+		Member updateMem = null;
+		if(result>0) {
+			commit(conn);
+			updateMem = new MemberDao().selectMember(conn, memberId);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return updateMem;
+		
+	}
 	
 	
 	public Member selectOrderMember(int userNo) {

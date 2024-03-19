@@ -165,6 +165,9 @@
 	 	String dogSig = loginUser.getDogSignificant(); // 반려견 특이사항
 	 %>
 	
+
+     <form action="<%= contextPath %>/update.me" method="post">
+
      <div class="mypage-wrap" align="center">
         <div class="mypage-form">
             <div class="mypage-header">
@@ -196,146 +199,141 @@
                     <div class="mypage-content-side">
                         <div class="mypage-content-main">
 	
+                            <input type="hidden" name="memberNo" value="<%= memberNo %>">
 
-                            <form action="<%= contextPath %>/update.me" method="post">
-
-                                <input type="hidden" name="memberNo" value="<%= memberNo %>">
-
-                                <div class="input-row">
-                                    <div class="input-title">
-                                        <b>아이디</b>
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="text" readonly name="memberId" value="<%= memberId %>">
-                                    </div>
+                            <div class="input-row">
+                                <div class="input-title">
+                                    <b>아이디</b>
                                 </div>
-                                <div class="input-row">
-                                    <div class="input-title">
-                                        <b>이름</b>
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="text" readonly name="memberName" value="<%= memberName %>">
-                                    </div>
+                                <div class="input-group">
+                                    <input type="text" readonly name="memberId" value="<%= memberId %>">
                                 </div>
-                                <div class="input-row">
-                                    <div class="input-title">
-                                        <b>이메일</b>
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="text" name="memberEmail" value="<%= email %>">
-                                    </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-title">
+                                    <b>이름</b>
                                 </div>
-                                <div class="input-row">
-                                    <div class="input-title">
-                                        <b>전화번호</b>
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="text" name="memberPhone" value="<%= phone %>">
-                                    </div>
+                                <div class="input-group">
+                                    <input type="text" readonly name="memberName" value="<%= memberName %>">
                                 </div>
-                                <div class="input-row">
-                                    <div class="input-title">
-                                        <b>반려견 이름</b>
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="text" name="dogName" value="<%= dogName %>">
-                                    </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-title">
+                                    <b>이메일</b>
                                 </div>
-                                <div class="input-row">
-                                    <div class="input-title">
-                                        <b>반려견 견종</b>
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="text" name="dogValue" value="<%= dogValue %>">
-                                    </div>
+                                <div class="input-group">
+                                    <input type="text" name="memberEmail" value="<%= email %>">
                                 </div>
-                                <div class="input-row">
-                                    <div class="input-title">
-                                        <b>반려견 나이</b>
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="text" name="dogAge" value="<%= dogAge %>">
-                                    </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-title">
+                                    <b>전화번호</b>
                                 </div>
-                                <div class="input-row">
-                                    <div class="input-title">
-                                        <b>반려견 성별</b>
-                                    </div>
-                                    <div class="input-group-radio">
-                                        <input type="radio" name="dogGender" id="male" value="M"
-                                        <% if(dogGender.equals("M")) { %>
-                                            checked	
+                                <div class="input-group">
+                                    <input type="text" name="memberPhone" value="<%= phone %>">
+                                </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-title">
+                                    <b>반려견 이름</b>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" name="dogName" value="<%= dogName %>">
+                                </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-title">
+                                    <b>반려견 견종</b>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" name="dogValue" value="<%= dogValue %>">
+                                </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-title">
+                                    <b>반려견 나이</b>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" name="dogAge" value="<%= dogAge %>">
+                                </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-title">
+                                    <b>반려견 성별</b>
+                                </div>
+                                <div class="input-group-radio">
+                                    <input type="radio" name="dogGender" id="male" value="M"
+                                    <% if(dogGender.equals("M")) { %>
+                                        checked	
+                                    <% } %>
+                                    > 남아
+                                        
+                                    <input type="radio" name="dogGender" id="female" value="F"
+                                    <% if(dogGender.equals("F")) { %>
+                                        checked	
+                                    <% } %>
+                                    > 여아
+                                </div>
+                            </div>
+                            
+                            <div class="input-row">
+                                <div class="input-title">
+                                    <b>반려견 크기</b>
+                                </div>
+                                <div class="input-group-radio">
+                                    <input type="radio" name="dogSize" id="" value="S"
+                                    <% if(dogSize.equals("S")) { %>
+                                        checked	
+                                    <% } %>
+                                    > 소형견
+                                    <input type="radio" name="dogSize" id="" value="M"
+                                    <% if(dogSize.equals("M")) { %>
+                                        checked	
+                                    <% } %>
+                                    > 중형견
+                                    <input type="radio" name="dogSize" id="" value="L"
+                                    <% if(dogSize.equals("L")) { %>
+                                        checked	
+                                    <% } %>
+                                    > 대형견
+                                </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-title" style="font-size: 14px;">
+                                    <b >필수 예방 접종 여부</b>
+                                </div>
+                                <div class="input-group-radio">
+                                    <input type="radio" name="dogVaccine" value="Y"
+                                    <% if(dogVaccine.equals("Y")) { %>
+                                        checked	
                                         <% } %>
-                                        > 남아
-                                            
-                                        <input type="radio" name="dogGender" id="female" value="F"
-                                        <% if(dogGender.equals("F")) { %>
-                                            checked	
+                                        > O
+                                        <input type="radio" name="dogVaccine" value="N"
+                                        <% if(dogVaccine.equals("N")) { %>
+                                        checked	
                                         <% } %>
-                                        > 여아
+                                        > X
+                                    </div>
+                                </div>
+                                <div class="input-row" style="height: auto;">
+                                    <div class="input-title">
+                                        <b>특이사항</b>
+                                    </div>
+                                    <div class="input-textbox">
+                                        <textarea class="dogsignificant-box" name="dogSignificant" style="resize: none;"><%= dogSig %></textarea>
+                                        
                                     </div>
                                 </div>
                                 
-                                <div class="input-row">
-                                    <div class="input-title">
-                                        <b>반려견 크기</b>
+                                
+                                <div class="change-pwd-button">
+                                    <div class="register-update-button">
+                                        <button class="btn btn-primary btn-lg">저장</button>
                                     </div>
-                                    <div class="input-group-radio">
-                                        <input type="radio" name="dogSize" id="" value="S"
-                                        <% if(dogSize.equals("S")) { %>
-                                            checked	
-                                        <% } %>
-                                        > 소형견
-                                        <input type="radio" name="dogSize" id="" value="M"
-                                        <% if(dogSize.equals("M")) { %>
-                                            checked	
-                                        <% } %>
-                                        > 중형견
-                                        <input type="radio" name="dogSize" id="" value="L"
-                                        <% if(dogSize.equals("L")) { %>
-                                            checked	
-                                        <% } %>
-                                        > 대형견
+                                    <div class="cancle-update-button ">
+                                        <button type="button" onclick="location.href='<%= contextPath %>'" class="btn btn-danger btn-lg">취소</button>
                                     </div>
                                 </div>
-                                <div class="input-row">
-                                    <div class="input-title" style="font-size: 14px;">
-                                        <b >필수 예방 접종 여부</b>
-                                    </div>
-                                    <div class="input-group-radio">
-                                        <input type="radio" name="dogVaccine" value="Y"
-                                        <% if(dogVaccine.equals("Y")) { %>
-                                            checked	
-                                            <% } %>
-                                            > O
-                                            <input type="radio" name="dogVaccine" value="N"
-                                            <% if(dogVaccine.equals("N")) { %>
-                                            checked	
-                                            <% } %>
-                                            > X
-                                        </div>
-                                    </div>
-                                    <div class="input-row" style="height: auto;">
-                                        <div class="input-title">
-                                            <b>특이사항</b>
-                                        </div>
-                                        <div class="input-textbox">
-                                            <textarea class="dogsignificant-box" name="dogSignificant" style="resize: none;"><%= dogSig %></textarea>
-                                            
-                                        </div>
-                                    </div>
-                                    
-                                    
-                                    <div class="change-pwd-button">
-                                        <div class="register-update-button">
-                                            <button class="btn btn-primary btn-lg">저장</button>
-                                        </div>
-                                        <div class="cancle-update-button ">
-                                            <button type="button" onclick="location.href='<%= contextPath %>'" class="btn btn-danger btn-lg">취소</button>
-                                        </div>
-                                    </div>
-                                    
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -343,7 +341,7 @@
         </div>
      </div>
      
-
+     </form>
 
 
      

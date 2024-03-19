@@ -15,6 +15,7 @@ import com.kh.common.model.vo.Image;
 // import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.reservation.model.vo.Hotel;
+import com.kh.reservation.model.vo.KinderClass;
 import com.kh.reservation.model.vo.Reservation;
 
 public class ReservationDao {
@@ -49,7 +50,7 @@ public class ReservationDao {
 	                           rset.getString("hotel_text"),
 	                           rset.getString("hotel_size"),
 	                           rset.getString("member_id"), 
-	                           rset.getString("title_img")
+	                           rset.getString("titleimg")
 	                           ));
 	         }
 		} catch (SQLException e) {
@@ -127,7 +128,8 @@ public class ReservationDao {
 	
 			rset = pstmt.executeQuery();
 			
-			while(rset.next()) {
+			
+			if(rset.next()) {
 				h = new Hotel();
 				h.setHotelNo(rset.getInt("hotel_no"));
 				h.setHotelWriter(rset.getInt("hotel_writer"));
@@ -137,6 +139,7 @@ public class ReservationDao {
 				h.setdNumber(rset.getInt("d_number"));
 				h.setHotelStart(rset.getDate("hotel_start"));
 				h.setHotelEnd(rset.getDate("hotel_end"));
+				h.setReservationPrice(rset.getInt("reservation_price"));
 				h.setMemberId(rset.getString("member_id"));
 			}
 				
@@ -304,8 +307,8 @@ public class ReservationDao {
 			
 			while (rset.next()) {
 				Image image = new Image();
-				image.setFileNo(rset.getInt("FILE_NO"));
-				image.setRefBoardNo(rset.getInt("REF_BNO"));
+				image.setFileNo(rset.getInt("file_no"));
+				image.setRefBoardNo(rset.getInt("ref_bno"));
 				image.setFileName(rset.getString("file_name"));
 				image.setTitleImg(rset.getString("titleImg"));
 
@@ -323,10 +326,171 @@ public class ReservationDao {
 		return img;
 	}
 
+	public ArrayList<KinderClass> selectKinderClassService(Connection conn) {
+		
+ArrayList<KinderClass> list = new ArrayList<KinderClass>(); // [텅 빈 리스트]
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectKinderClassService");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+	            list.add(new KinderClass(rset.getInt("class_no"),
+	            			   rset.getInt("class_writer"),
+	                           rset.getString("class_name"),
+	                           rset.getString("class_text"),
+	                           rset.getString("class_size"),
+	                           rset.getString("member_id"), 
+	                           rset.getString("titleimg")
+	                           ));
+	         }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+	return list;
+
+	}
+
+	public KinderClass selectClassDetail(Connection conn, int classNo) {
+
+		KinderClass c = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectClassDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, classNo);
+			
+			rset = pstmt.executeQuery();
+		
+			if(rset.next()) {
+				c = new KinderClass();
+				c.setClassNo(rset.getInt("class_no"));
+				c.setClassWriter(rset.getInt("class_writer"));
+				c.setClassName(rset.getString("class_name"));
+				c.setClassText(rset.getString("class_text"));
+				c.setClassSize(rset.getString("class_size"));
+				c.setdNumber(rset.getInt("d_number"));
+				c.setReservationStart(rset.getDate("reservation_start"));
+				c.setReservationEnd(rset.getDate("reservation_end"));
+				c.setReservationPrice(rset.getInt("reservation_price"));
+				c.setMemberId(rset.getString("member_id"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return c;
+	}
+
+	public int selectClassRvCount(Connection conn, int classNo) {
+		int classrvCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("classrvCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, classNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				classrvCount = rset.getInt("cCount");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		
+		return classrvCount;
+	}
+
+	public ArrayList<Image> selectClassImgList(Connection conn, int classNo) {
+
+		ArrayList<Image> img = new ArrayList<Image>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectClassImgList");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, classNo);
+
+			rset = pstmt.executeQuery();
+
+			
+			 if(rset.next()) {
+				Image image = new Image();
+				image.setFileNo(rset.getInt("file_no"));
+				image.setRefBoardNo(rset.getInt("ref_bno"));
+				image.setFileName(rset.getString("file_name"));
+				image.setTitleImg(rset.getString("titleImg"));
+
+				img.add(image);
+			}
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return img;
+	}
+
+	public int deleteClass(Connection conn, int classNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteClass");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, classNo);
+		
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+		
+
+
 
 
 	
-	
+
 
 	
 	

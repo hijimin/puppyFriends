@@ -1,3 +1,4 @@
+<%@page import="com.kh.reservation.model.vo.KinderClass"%>
 <%@page import="com.kh.common.model.vo.Image"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.kh.reservation.model.vo.Hotel"%>
@@ -6,9 +7,10 @@
     
     <%
     
-    Hotel h = (Hotel)request.getAttribute("h");
-    int hotelrvCount = (int)request.getAttribute("hotelrvCount");
+    KinderClass c = (KinderClass)request.getAttribute("c");
+    int classrvCount = (int)request.getAttribute("classrvCount");
     ArrayList<Image> img = (ArrayList<Image>)request.getAttribute("img");
+    
     
     %>
 <!DOCTYPE html>
@@ -18,9 +20,11 @@
 <title>Insert title here</title>
 
 	<style>
-         /* *{
+        /*
+         *{
             border: 1px solid red;
-        } */
+        } 
+        */
        
         .outer{
             margin: auto;
@@ -88,12 +92,13 @@
            height: 100%;
            
         }
+        
         .period{
             position: relative;
             width: 100%;
             height: 10%;
         }
-       .introduce{
+        .introduce{
             width: 80%;
             height: 45%;
             border: 2px solid rgb(255, 222, 239);
@@ -102,10 +107,12 @@
       		flex-direction: column;
             justify-content: space-between; /* 내용물을 상단과 하단에 분리 */
         }
+        
               
         #text_price {
 	        border-top: 2px solid rgb(255, 222, 239);
         }
+        
         .btn_bar{
             width: 100%;
             height: 20%;
@@ -125,7 +132,7 @@
             height: 5%;
             position: relative;
         }
-        .btn_bar1>.H_back{
+        .btn_bar1>.C_back{
             padding: 10px 15px;
             border: none;
             background-color: rgb(255, 222, 239);
@@ -137,7 +144,7 @@
             color: white;
         
         }
-        .btn_bar1>.H_delete{
+        .btn_bar1>.C_delete{
             padding: 10px 15px;
             border: none;
             background-color: rgb(255, 222, 239);
@@ -153,22 +160,22 @@
 </head>
 <body>
     <%@ include file="../common/menubar.jsp" %>
-	<form id="detail-form" action="<%= contextPath %>/detail.hrv" method="post" enctype="multipart/form-data">
+	<form id="detail-form" action="<%= contextPath %>/detail.crv" method="post" enctype="multipart/form-data">
 	<div class="outer">
  
         <div align="right" class="outer_name">
-            프로그램 &gt; 호텔 예약 &gt; <%= h.getHotelName() %> &nbsp; &nbsp;
+            프로그램 &gt; 유치원 예약 &gt; <%= c.getClassName() %> &nbsp; &nbsp;
         </div>
         <br><br>
         <div class="hotelName">
-            <h1 align="right"> <%= h.getHotelName() %></h1>
+            <h1 align="right"> <%= c.getClassName() %> </h1>
         </div>
         <br>
         
         <div class="photo_text"> <!-- 왼쪽 맵-->
             <div class="photo">
                 <div class="photo_pt">
-                    <p align="center">&lt; 작성자 : <%= h.getMemberId() %> &gt;</p>
+                    <p align="center">&lt; 작성자 : <%= c.getMemberId() %> &gt;</p>
                     <div class="photoImg1">
                         <img class="photoImg" src="<%= contextPath %>/<%= img.get(0).getTitleImg() %>" style="width:100%">
                        <% for(int i = 1; i<img.size(); i++) { %>
@@ -209,16 +216,16 @@
             <div class="blank1" style="border-left: 2px solid rgb(255, 222, 239); height: 78%;"></div> <!-- 중간 줄임-->
             
             <div class="text" align="right"> <!-- 오른쪽 맵 -->
-                <div class="period">기간 : <%= h.getHotelStart() %> ~ <%= h.getHotelEnd() %> </div> <br><br>
-                <div>( <%= hotelrvCount %> / <%= h.getdNumber() %>) , <%= h.getHotelSize() %> </div>
+                <div class="period">기간 : <%= c.getReservationStart() %> ~ <%= c.getReservationEnd() %> </div> <br><br>
+                <div>( <%= c.getcCount() %> / <%= c.getdNumber() %> ) , <%= c.getClassSize() %> </div>
                 <div class="introduce">
                     <tr>
                         <td>
-                         <p style="text-align: left; padding: 10px;"><%= h.getHotelText() %></p>
+                        <p style="text-align: left; padding: 10px;"><%= c.getClassText() %> </p>
                         </td>
                     </tr>
-	                   <div id="text_price">
-                    	<p id="price" style="text-align: right; padding: 10px;"><%= h.getReservationPrice() %> 원 </p>
+               		<div id="text_price">
+                    	<p id="price" style="text-align: right; padding: 10px;"><%= c.getReservationPrice() %> 원 </p>
 				    </div>  
 				    <script>
 				        document.addEventListener('DOMContentLoaded', function() {
@@ -228,31 +235,33 @@
 				            priceElement.innerText = price + ' 원';
 				        });
 				    </script>
-                </div>
+				</div>
+
                 
                 <div class="btn_bar">
-                    if 사 등록된 사이즈와 동일하지 않을 시 자동으로 예약 버튼 막힘
+                     등록된 사이즈와 동일하지 않을 시 자동으로 예약 버튼 막힘
                     <button class="btn-open-modal" >예약하기// onclick 예정 , 예약 alert 띄운 후 동의 시 결제 페이지로 넘어감 alert 이후 결제 페이지로 넘어가게</button> 
                 </div>
 
                 <div class="btn_bar1">
-                	<a href="<%= contextPath %>/hotel.hrv" class="H_back">뒤로가기</a> <br>
+                	<a href="<%= contextPath %>/kinderClass.crv" class="C_back">뒤로가기</a> <br>
                 </div>
 
+				관리자도 삭제 가능, 트레이너는 트레이너 것만 삭제 가능하게
 				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")) { %>
                 <div class="btn_bar1">
-                <a href="#" onclick="confirmDelete('<%= h.getHotelNo() %>')" class="H_delete">삭제하기</a>
+                <a href="#" onclick="confirmDelete('<%= c.getClassNo() %>')" class="C_delete">삭제하기</a>
                 </div>
                 <% } %>
             </div>
 
 			<script>
 			// 삭제 alert
-			function confirmDelete(hotelNo) {
+			function confirmDelete(classNo) {
 			    var result = confirm("삭제하시겠습니까?");
 			    
 			    if (result) {
-			        window.location.href = "<%= contextPath %>/delete.hrv?num=" + hotelNo;
+			        window.location.href = "<%= contextPath %>/delete.crv?num=" + classNo;
 			    }else{
 			    	alert("삭제가 취소되었습니다.");
 			    }

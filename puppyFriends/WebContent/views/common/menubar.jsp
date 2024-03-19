@@ -250,7 +250,7 @@
             <li class="program"><a href="#">프로그램</a>
               <ul class="reservation">
                 <li class="hotel"><a href="<%= contextPath %>/hotel.hrv">호텔 예약</a></li>
-                <li class="kindergarten"><a href="#">유치원 예약</a></li>
+                <li class="kindergarten"><a href="<%= contextPath %>/kinderClass.crv">유치원 예약</a></li>
               </ul>
             </li>
             <li class="dog_data"><a href="#">강아지정보</a>

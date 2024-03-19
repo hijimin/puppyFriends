@@ -26,7 +26,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         width: 100%;
         height: 5%;
       }
-      .hotel_Name {
+      .class_Name {
         width: 100%;
         height: 10%;
       }
@@ -89,18 +89,18 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         width: 48%;
         height: 100%;
       }
-      .hotel_rv {
+      .class_rv {
         height: 70%;
       }
-      .hotel_rv_intro {
+      .class_rv_intro {
         align: center;
         margin-top: 145px;
         border: 3px solid rgb(255, 222, 239);
       }
-      .hotel_rv_intro th {
+      .class_rv_intro th {
         width: 30%;
       }
-      .hotel_rv_intro td {
+      .class_rv_intro td {
         width: 70%;
       }
 
@@ -129,14 +129,14 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
     <div class="outer">
       <div align="right" class="outer_name">
-        프로그램 &gt; 호텔 예약 &gt; 호텔 등록 &nbsp; &nbsp;
+        프로그램 &gt; 유치원 예약 &gt; 유치원 등록 &nbsp; &nbsp;
       </div>
       <br /><br />
-      <div class="hotel_Name">
-        <h1 align="right" style="vertical-align: top">호텔 등록</h1>
+      <div class="class_Name">
+        <h1 align="right" style="vertical-align: top">유치원 등록</h1>
       </div>
 
-      <form action="<%= contextPath %>/insert.hrv" id="enroll-form"
+      <form action="<%= contextPath %>/insert.crv" id="enroll-form"
       method="post" enctype="multipart/form-data">
       <input
         type="hidden"
@@ -199,17 +199,17 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <div class="text" align="right">
           <!-- 오른쪽 맵 -->
 
-          <div class="hotel_rv">
-            <table class="hotel_rv_intro" border="1">
+          <div class="class_rv">
+            <table class="class_rv_intro" border="1">
               <tr>
-                <th>호텔명 :</th>
+                <th>유치원 :</th>
                 <td>
                   <input
                     type="text"
-                    name="hotelName"
+                    name="className"
                     class="title"
                     required
-                    placeholder="호텔명을 입력해 주세요."
+                    placeholder="유치원명을 입력해 주세요."
                     maxlength="10"
                   />
                 </td>
@@ -219,7 +219,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 <td>
                   <textarea
                     class="intro"
-                    name="hotelText"
+                    name="classText"
                     cols="50%"
                     rows="8%"
                     style="resize: none"
@@ -232,7 +232,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               <tr>
                 <th>사이즈 :</th>
                 <td>
-                  <select class="select_text" name="hotelSize">
+                  <select class="select_text" name="classSize">
                     <option value="S">S</option>
                     <option value="M">M</option>
                     <option value="L">L</option>
@@ -259,14 +259,14 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   시작 :
                   <input
                     type="date"
-                    name="hotelStart"
+                    name="reservationStart"
                     id="start-date"
                     style="margin-bottom: 3px"
                     required
                   /><br />
                   종료 : <input 
                   type="date" 
-                  name="hotelEnd" 
+                  name="reservationEnd" 
                   id="end-date" 
                   required />
                 </td>

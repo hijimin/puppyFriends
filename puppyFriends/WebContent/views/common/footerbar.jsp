@@ -35,7 +35,7 @@
 <body>
     <div class="wrap">
         <div class="wrap1" style="border-top: 4px solid rgb(255, 222, 239); "></div>
-        <div class="footer">
+        <div class="footer" style="position: relative;">
             <ul id="footerL"><br>
                 <strong style="color: black;">이용약관    |    QNA     |    개인정보처리방침</strong> <br><br><br>
                 <strong style="color: black;">Puppyfriends케어센터</strong><br>
@@ -44,6 +44,12 @@
                 <strong >Copyright @ 2024 PuppyFriends케어센터   |   반려견의 행복한 문화를 만들어요 All right reserved</strong>
               
             </ul>  
+            <div style="position: absolute; bottom:60px; right: 150px;">
+                <img src="https://kh-academy.co.kr/resources/images/main/footer_emblem_d.png" alt="" style="width: 100px; height: 100px;">
+                <img src="https://kh-academy.co.kr/resources/images/main/footer_emblem_g.png" alt="" style="width: 100px; height: 100px;">
+                <img src="https://kh-academy.co.kr/resources/images/main/main_renewal/main_bottom_emblem01.png" alt="" style="width: 100px; height: 100px;">
+                <img src="https://kh-academy.co.kr/resources/images/main/main_renewal/main_bottom_emblem05.png" alt="" style="width: 100px; height: 100px;">
+            </div>
         </div>
     </div>
 

@@ -36,9 +36,6 @@ public class AttendanceInsertFormController extends HttpServlet {
 		String date = request.getParameter("date"); // 2024-03-13
 		String status = request.getParameter("status");
 		
-		System.out.println(date);
-		System.out.println(status);
-		
 		Attendance at = new Attendance();
 		at.setMemberNo(userNo);
 		at.setDate(date);

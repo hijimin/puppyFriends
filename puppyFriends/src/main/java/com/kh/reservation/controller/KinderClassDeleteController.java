@@ -6,18 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.kh.reservation.model.service.ReservationService;
 
 /**
- * Servlet implementation class KinderClassEnrollForm
+ * Servlet implementation class KinderClassDeleteController
  */
-@WebServlet("/enrollForm.crv")
-public class KinderClassEnrollForm extends HttpServlet {
+@WebServlet("/delete.crv")
+public class KinderClassDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public KinderClassEnrollForm() {
+    public KinderClassDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,9 +30,24 @@ public class KinderClassEnrollForm extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.getRequestDispatcher("views/reservation/classEnrollForm.jsp").forward(request, response);
-				
+		int classNo = Integer.parseInt(request.getParameter("num"));
+		int result = new ReservationService().deleteClass(classNo);
+		
+		if(result > 0) {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "유치원 삭제가 완료되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/kinderClass.crv");
+			
+		}else {
+			request.setAttribute("errorMsg", "삭제를 실패하였습니다.");
+		}
+		
+		
 	}
+		
+	
+	
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

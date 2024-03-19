@@ -65,7 +65,7 @@ public class Hotel {
 
    // selectHotelDetail
 	public Hotel(int hotelNo, int hotelWriter, String hotelName, String hotelText, String hotelSize, int dNumber,
-		Date hotelStart, Date hotelEnd, String memberId, int hcount) {
+		Date hotelStart, Date hotelEnd, int reservationPrice, String memberId, int hcount) {
 	super();
 	this.hotelNo = hotelNo;
 	this.hotelWriter = hotelWriter;
@@ -75,6 +75,7 @@ public class Hotel {
 	this.dNumber = dNumber;
 	this.hotelStart = hotelStart;
 	this.hotelEnd = hotelEnd;
+	this.reservationPrice = reservationPrice;
 	this.memberId = memberId;
 	this.hcount = hcount;
 	
@@ -95,6 +96,17 @@ public class Hotel {
 
 }
 	
+	
+	
+	public int getHcount() {
+		return hcount;
+	}
+
+
+	public void setHcount(int hcount) {
+		this.hcount = hcount;
+	}
+
 
 	public int getFileNo() {
 		return fileNo;

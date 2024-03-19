@@ -85,7 +85,7 @@
         position: absolute; 
         bottom: 0;
     }
-    .btn_bar>.H_enroll{
+    .btn_bar>.C_enroll{
         padding: 10px 15px;
         border: none;
         background-color: rgb(255, 222, 239);

@@ -12,6 +12,12 @@ public class KinderClass {
 	private String classSize;
 	private int dNumber;
 	private String classStatus;
+	private int cCount;
+	
+	private Date writingDate;
+	private Date reservationStart;
+	private Date reservationEnd;
+	private int reservationPrice;
 	
 	private int memberNo;
 	private String memberId; 
@@ -29,6 +35,7 @@ public class KinderClass {
 	private String titleImg;
 	
 	
+	
 	public KinderClass() {}
 
 	
@@ -44,14 +51,84 @@ public class KinderClass {
 		this.titleImg = titleImg;
 	}
 	
+	// selectClassDetail
+	public KinderClass(int classNo, int classWriter, String className, String classText, String classSize, int dNumber, int cCount, 
+			Date reservationStart, Date reservationEnd, int reservationPrice, String memberId) {
+		super();
+		this.classNo = classNo;
+		this.classWriter = classWriter;
+		this.className = className;
+		this.classText = classText;
+		this.classSize = classSize;
+		this.dNumber = dNumber;
+		this.cCount = cCount;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.reservationPrice = reservationPrice;
+		this.memberId = memberId;
+		
+	}
+	
+	
 	
 	 // "/insert.hrv" 참고해서 기재 , "/enrollForm.crv") ? 
 	
 	
-
+	
 	public int getMemberNo() {
 		return memberNo;
 	}
+
+
+	public int getcCount() {
+		return cCount;
+	}
+
+
+	public void setcCount(int cCount) {
+		this.cCount = cCount;
+	}
+
+
+	public Date getWritingDate() {
+		return writingDate;
+	}
+
+
+	public void setWritingDate(Date writingDate) {
+		this.writingDate = writingDate;
+	}
+
+
+	public Date getReservationStart() {
+		return reservationStart;
+	}
+
+
+	public void setReservationStart(Date reservationStart) {
+		this.reservationStart = reservationStart;
+	}
+
+
+	public Date getReservationEnd() {
+		return reservationEnd;
+	}
+
+
+	public void setReservationEnd(Date reservationEnd) {
+		this.reservationEnd = reservationEnd;
+	}
+
+
+	public int getReservationPrice() {
+		return reservationPrice;
+	}
+
+
+	public void setReservationPrice(int reservationPrice) {
+		this.reservationPrice = reservationPrice;
+	}
+
 
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;

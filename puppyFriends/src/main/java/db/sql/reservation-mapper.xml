@@ -15,7 +15,8 @@
 	  FROM HOTEL H
 	  JOIN MEMBER M ON (HOTEL_WRITER = MEMBER_NO)
 	  JOIN IMAGE ON (HOTEL_NO = REF_BNO)
-	 WHERE HOTEL_STATUS = 'Y' 
+	 WHERE HOTEL_STATUS = 'Y'
+	   AND FILE_LEVEL = 1 
 	   AND IMAGE_TYPE = 2
 	 ORDER BY HOTEL_NO DESC
 	
@@ -41,19 +42,21 @@
 	<entry key="selectHotelDetail">
 	SELECT 
 	       HOTEL_NO
-         , HOTEL_WRITER
+	     , HOTEL_WRITER
 	     , HOTEL_NAME
 	     , HOTEL_TEXT
 	     , HOTEL_SIZE
 	     , D_NUMBER
 	     , HOTEL_START
 	     , HOTEL_END
+	     , RESERVATION_PRICE
 	     , MEMBER_ID
 	  FROM HOTEL H
-      JOIN MEMBER M ON (HOTEL_WRITER = MEMBER_NO)
+	  JOIN RESERVATION R ON (HOTEL_NO = PROGRAM_NO)
+	  JOIN MEMBER M ON (H.HOTEL_WRITER = M.MEMBER_NO)
 	 WHERE HOTEL_NO = ?
-       AND HOTEL_STATUS = 'Y'
-	    
+	   AND HOTEL_STATUS = 'Y'
+	   
 	</entry>
 	
 	<entry key="selectHotelImgList">
@@ -63,7 +66,6 @@
          , FILE_NAME
          , FILE_PATH || CHANGE_NAME AS "TITLEIMG" 
       FROM IMAGE 
-      JOIN HOTEL ON (HOTEL_NO = REF_BNO)
      WHERE IMAGE_TYPE = 2 
        AND REF_BNO = ?
 	</entry>
@@ -173,19 +175,63 @@
 	  FROM CLASS C
 	  JOIN MEMBER M ON (CLASS_WRITER = MEMBER_NO)
 	  JOIN IMAGE ON (CLASS_NO = REF_BNO)
-	 WHERE CLASS_STATUS = 'Y' 
+	 WHERE CLASS_STATUS = 'Y'
+	   AND FILE_LEVEL = 1 
 	   AND IMAGE_TYPE = 4
 	 ORDER BY CLASS_NO DESC
 
-
-	
 	</entry>
 
+	<entry key="selectClassDetail">
+	
+	   SELECT 
+	          CLASS_NO
+	        , CLASS_WRITER
+	        , CLASS_NAME
+	        , CLASS_TEXT
+	        , CLASS_SIZE
+	        , D_NUMBER
+	        , RESERVATION_START
+	        , RESERVATION_END
+	        , RESERVATION_PRICE
+	        , MEMBER_ID
+	     FROM CLASS C
+	     JOIN RESERVATION R ON (CLASS_NO = PROGRAM_NO)
+	     JOIN MEMBER M ON (C.CLASS_WRITER = M.MEMBER_NO)
+	    WHERE CLASS_NO = ?
+	      AND CLASS_STATUS = 'Y'
+	     
+	</entry>
 
+	<entry key="classrvCount">
+	<!-- 유치원  -->
+	SELECT 
+	       COUNT(*) CCOUNT
+	  FROM RESERVATION
+	 WHERE FACILITY_NO = 4
+	   AND PROGRAM_NO = ?
+	   AND MEMBER_NO != 0
+	   AND RESERVATION_STATUS = 'Y'
+	</entry>
 
+	<entry key="selectClassImgList">
+	    SELECT 
+	       FILE_NO
+	     , REF_BNO
+	     , FILE_NAME
+	     , FILE_PATH || CHANGE_NAME AS "TITLEIMG" 
+	  FROM IMAGE 
+	 WHERE IMAGE_TYPE = 4
+	   AND REF_BNO = ?
+	</entry>
 
-
-
+	<entry key="deleteClass">
+	  UPDATE 
+	  		 CLASS
+      	 SET CLASS_STATUS = 'N'
+   	   WHERE CLASS_NO = ?
+		
+	</entry>
 
 </properties>
 

@@ -108,7 +108,53 @@ public class ReservationService {
 		return list;
 	}
 
-	
+	public KinderClass selectClassDetail(int classNo) {
+		Connection conn = getConnection();
+		
+		KinderClass c = new ReservationDao().selectClassDetail(conn, classNo);
+		
+		close(conn);
+
+		return c;
+		
+		
+	}
+
+	public int selectClassRvCount(int classNo) {
+		Connection conn = getConnection();
+		int classrvCount = new ReservationDao().selectClassRvCount(conn, classNo);
+		
+		close(conn); 
+		return classrvCount;
+		
+	}
+
+	public ArrayList<Image> selectClassImgList(int classNo) {
+		Connection conn = getConnection();
+		ArrayList<Image> img = new ReservationDao().selectClassImgList(conn, classNo);
+		close(conn);
+		
+		return img;
+	}
+
+	public int deleteClass(int classNo) {
+	Connection conn = getConnection();
+			
+		int result = new ReservationDao().deleteClass(conn, classNo);
+		
+		if(result>0) {
+			commit(conn);
+			
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+
+
 
 	
 	

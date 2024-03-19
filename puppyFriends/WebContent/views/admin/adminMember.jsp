@@ -191,7 +191,7 @@
 
    <div class="outer">
         <div class="headerbar">
-                <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 760px;">PuppyFriends Manager</h1>
+                <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 760px;"><a href="<%= contextPath %>/AdminMemberCount.me">PuppyFriends Manager</a></h1>
         </div>
     
         <div class="mid">

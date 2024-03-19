@@ -1,4 +1,3 @@
-<%@page import="com.google.gson.reflect.TypeToken"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
@@ -6,10 +5,6 @@
 <%@page import="com.kh.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.util.Base64"%>
-<%@page import="java.util.Calendar"%>
-<%@page import="java.util.Date"%>
-<%@page import="javax.servlet.http.Cookie"%>
 
 <%
    String contextPath = request.getContextPath();
@@ -42,51 +37,7 @@
    String clickCountsJson = new Gson().toJson(clickCounts);
    
    
-   // 쿠키에서 그래프 데이터 가져오기
-    String graphDataCookieValue = "";
-    Cookie[] cookies = request.getCookies();
-    if (cookies != null) {
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("graphData")) {
-                graphDataCookieValue = cookie.getValue();
-                break;
-            }
-        }
-    }
-
-    // 쿠키에 저장된 그래프 데이터가 있는지 확인하고 없으면 새로운 데이터 생성
-    List<Map<String, Object>> graphData = new ArrayList<>();
-    if (!graphDataCookieValue.isEmpty()) {
-        // 쿠키에 저장된 데이터가 있다면 디코딩하여 그래프 데이터로 변환
-        byte[] decodedBytes = Base64.getDecoder().decode(graphDataCookieValue);
-        String decodedString = new String(decodedBytes);
-        graphData = new Gson().fromJson(decodedString, new TypeToken<List<Map<String, Object>>>() {}.getType());
-    } else {
-        // 쿠키에 저장된 데이터가 없으면 초기값 설정
-        graphData.add(Map.of("menu", "공지사항", "clicks", 0));
-        graphData.add(Map.of("menu", "회원", "clicks", 0));
-        graphData.add(Map.of("menu", "채팅", "clicks", 0));
-        graphData.add(Map.of("menu", "반려견정보", "clicks", 0));
-        graphData.add(Map.of("menu", "상품", "clicks", 0));
-    }
-
-    // 24시간마다 그래프 데이터 초기화를 위한 쿠키 설정
-    Calendar calendar = Calendar.getInstance();
-    calendar.add(Calendar.HOUR_OF_DAY, 24);
-    Date expirationTime = calendar.getTime();
-    String expirationString = expirationTime.toString();
-    Cookie expirationCookie = new Cookie("resetGraph", "true");
-    expirationCookie.setMaxAge(60 * 60 * 24); // 24시간 설정
-    expirationCookie.setPath("/");
-    response.addCookie(expirationCookie);
-
-    // 그래프 데이터를 JSON으로 변환하여 쿠키에 저장
-    String graphDataJson = new Gson().toJson(graphData);
-    String encodedGraphData = Base64.getEncoder().encodeToString(graphDataJson.getBytes());
-    Cookie graphDataCookie = new Cookie("graphData", encodedGraphData);
-    graphDataCookie.setMaxAge(60 * 60 * 24); // 24시간 설정
-    graphDataCookie.setPath("/");
-    response.addCookie(graphDataCookie);
+   
 %>
 
 <!DOCTYPE html>
@@ -208,14 +159,14 @@
         }
         
         .c1{
-             border:1px solid gray;
-           width:600px;
-           height:310px;
+       		border:1px solid gray;
+        	width:600px;
+        	height:310px;
             border-radius: 10px;
         }
         
         .c2{
-           border:1px solid gray;
+        	border:1px solid gray;
             width: 600px;
             height: 405px;
             margin-top: 10px;
@@ -224,12 +175,12 @@
         }
         
         a {
-           color:gray;
-           text-decoration-line: none;
+        	color:gray;
+        	text-decoration-line: none;
         }
         
         .ynm{
-           width: 600px;
+        	width: 600px;
             height: 100%;
             text-align: center;
             font-size: 30px;
@@ -298,7 +249,7 @@
         </div>
 
         <div class="content">
-           <div class="c1">
+        	<div class="c1">
             <canvas id="myChart" style="width: 100%; height: 100%;"></canvas>
             <script>
                 const xValues = <%= menuNamesJson %>;
@@ -339,12 +290,12 @@
                     <div class="ynm">
                         <ul>
                              <li><a href="adminSelectMember.me?cpage=1">이용기능 회원</a></li>
-                             <br>                 
-                            <li id="ymm"><%= yResult %></li>
+                             <br>	           	
+                        	 <li id="ymm"><%= yResult %></li>
                              <br><hr><br>
-                            <li><a href="adminRestoreMemberList.me?cpage=1">정지회원</a></li>
-                            <br>
-                           <li id="nmm"><%= nResult %></li>                    
+	                         <li><a href="adminRestoreMemberList.me?cpage=1">정지회원</a></li>
+	                         <br>
+	                        <li id="nmm"><%= nResult %></li>		           	
                         </ul>                  
                     </div>
                  </div>

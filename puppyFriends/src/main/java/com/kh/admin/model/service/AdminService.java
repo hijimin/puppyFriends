@@ -100,5 +100,21 @@ public class AdminService {
 	    close(conn);
 	    return result;
 	}
+	
+	public int yCountMember() {
+		Connection conn = getConnection();
+		int yResult = new AdminDao().yCountMember(conn);
+		
+		close(conn);
+		return yResult;
+	}
+	
+	public int nCountMember() {
+		Connection conn = getConnection();
+		int nResult = new AdminDao().nCountMember(conn);
+		
+		close(conn);
+		return nResult;
+	}
 
 } // class

@@ -50,15 +50,12 @@ public class LoginController extends HttpServlet {
 	         RequestDispatcher view = request.getRequestDispatcher("views/common/login.jsp");
 	         view.forward(request, response);
 	      } else {
-	         if(loginUser.getMemberId().equals("ADMIN")) {
-	            session.setAttribute("loginUser", loginUser);
-	            response.sendRedirect(request.getContextPath() + "/views/admin/adminMain.jsp");
-	         } else if(loginUser != null){
-	            session.setAttribute("loginUser", loginUser);
-	            response.sendRedirect(request.getContextPath());      
+	    	  session.setAttribute("loginUser", loginUser);
+	    	  response.sendRedirect(request.getContextPath());      	         
 	         } 
 	         
-	      }
+	         
+	     }
 		
 		
 		// if(loginUser == null) {
@@ -71,7 +68,7 @@ public class LoginController extends HttpServlet {
 		// session.setAttribute("loginUser", loginUser);
 		// response.sendRedirect(request.getContextPath());
 		
-	}	
+		
 	
 	
 	

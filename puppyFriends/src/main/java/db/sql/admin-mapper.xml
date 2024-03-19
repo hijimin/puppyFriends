@@ -113,13 +113,17 @@
 	</entry>
 	
 	
-	<entry key="">
-	
+	<entry key="adminMainMemberY">
+		SELECT COUNT(*) AS YM
+		  FROM MEMBER
+		 WHERE STATUS = 'Y'
 	</entry>
 	
 	
-	<entry key="">
-	
+	<entry key="adminMainMemberN">
+		SELECT COUNT(*) AS NM
+		  FROM MEMBER
+		 WHERE STATUS = 'N'
 	</entry>
 	
 	

@@ -326,4 +326,55 @@ public class AdminDao {
         return result;
 	} // adminDeleteProduct
 	
+	public int yCountMember(Connection conn) {
+		int yResult = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminMainMemberY");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				yResult = rset.getInt("YM");
+			} 
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return yResult;
+		
+	} // yCountMember
+	
+	public int nCountMember(Connection conn) {
+		int nResult = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminMainMemberN");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				nResult = rset.getInt("NM");
+			} 
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return nResult;
+		
+	} // nCountMember
+	
 } // CLASS

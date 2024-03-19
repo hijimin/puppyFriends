@@ -222,6 +222,9 @@
 	            		
 	                        <b><%= loginUser.getMemberName() %>님</b>의 방문을 환영합니다 <br><br>
 	                        <div align="center">
+	                        <% if(loginUser.getMemberId().equals("ADMIN")) %>
+	                        	<a href="<%= contextPath %>/AdminMemberCount.me">관리자</a>
+	                        <% }  %>
 	                            <a href="<%= contextPath %>/mypage">마이페이지</a>
 	                            <a href="<%= contextPath %>/logout">로그아웃</a>
 	                        </div>
@@ -229,7 +232,7 @@
 	                    </div>
 	                    
 	                    
-            		<% } %>
+            		
             
                 </div>
             </div>

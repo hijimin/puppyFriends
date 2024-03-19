@@ -1,3 +1,5 @@
+<%@page import="com.kh.dogfor.model.vo.Attendance"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -30,6 +32,11 @@
 	month = cal.get(Calendar.MONTH)+1;
 	
 	int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
+	
+	ArrayList<Attendance> list = (ArrayList<Attendance>)request.getAttribute("list");
+	
+	double per = (double)request.getAttribute("per");
+	
 %>    
 <!DOCTYPE html>
 <html>
@@ -48,8 +55,13 @@ body {
 	font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
 }
 
-a{
-  color: black;
+.change-date1{
+  color: black !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+.change-date2{
+  color: black !important;
   text-decoration: none;
   cursor: pointer;
 }
@@ -132,7 +144,7 @@ a:active, a:hover {
 	height: 95%;
 }
 #gauge{
-	height: 60%;
+	height: 70%;
 	width: 100%;
 	position : relative;
 }
@@ -154,8 +166,24 @@ a:active, a:hover {
 #enroll{
 	width: 1440px;
 }
+#no{
+	color: red;
+	font-size: 20px;
+	font-weight: 700;
+	padding-top: 10px;
+}
+#yes{
+	color: blue;
+	font-size: 20px;
+	font-weight: 700;
+	padding-top: 10px;
+}
+#goToday{
+	color: black;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 </head>
 <body>
 
@@ -168,11 +196,22 @@ a:active, a:hover {
 	<div class="outer1">
 		<div class="calendar">
 			<div class="title">
-				<a href="<%= contextPath %>/attendance.at?year=<%=year%>&month=<%=month-1%>"><</a>
-				<label><%=year%>년 <%=month%>월</label>
-				<a href="<%= contextPath %>/attendance.at?year=<%=year%>&month=<%=month+1%>">></a>
-			</div>
+				<% if(month == 1){ %>
+					<a class="change-date1" href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year-1%>&month=<%=12%>" onclick="next();"><</a>
+				<% }else{ %>
+					<a class="change-date2" href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=month-1%>" onclick="next();"><</a>
+				<% } %>
+				
+				<label id="yymm"><%=year%>년 <%=month%>월</label>
+				
+				<% if(month == 12){ %>
+					<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year+1%>&month=<%=1%>" onclick="next();">></a>
+				<% }else{ %>
+					<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=month+1%>" onclick="next();">></a>
+				<% } %>
 			
+			</div>
+			<br>
 			<table>
 				<thead>
 					<tr>
@@ -223,25 +262,23 @@ a:active, a:hover {
 			</table>
 		
 			<div class="footer">
-				<a href="<%= contextPath %>/attendance.at">오늘날짜로</a>
+				<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=tm%>" id="goToday">오늘날짜로</a>
 			</div>
 
 			
 		</div>
 
 		<div id="bar" align="center">
-			
+			<br>
 			<h2 align="center">100%</h2><br>
 
 			<div id="gauge">
 				<div id="gauge2">
-					xx%
+					<%= per %>%
 				</div>
 			</div>
 
 			<br><h2 align="center">0%</h2><br>
-
-			<a href=""><h3>보상확인</h3></a>
 
 		</div>
 
@@ -252,12 +289,14 @@ a:active, a:hover {
 
 	<%@ include file="../common/footerbar.jsp" %>
 
+
 	<script>
 
 		function findElementByText(text) {
 			var jSpot = $("td")
 				.filter(function() { 
-					return $(this).text().trim() === text && $(this).attr('class').trim() === ''; // 텍스트 일치 및 클래스가 공백인 경우 필터링
+					return $(this).text().trim() === text && $(this).attr('class').trim() === ''
+					|| $(this).text().trim() === text && $(this).attr('class').trim() === 'today'; // 텍스트 일치 및 클래스가 공백인 경우 필터링
 				})
 				.filter(function() { 
 					return $(this).children().length === 0; 
@@ -266,19 +305,34 @@ a:active, a:hover {
 			return jSpot;
 		}
 
-		$(function(){
-			let a = findElementByText("2");
-			let a1 = findElementByText("3");
-
-
-			a.html(a.html() + "<br><br> 결석");
-			a1.html(a1.html() + "<br><br> 결석");
-		});
-
+		$("#gauge2").css("height", "<%= per %>%")
+		
 
 	</script>
-
 	
+	<% for(Attendance at : list){ %>
+	
+		<% if(at.getStatus().equals("Y")){ %>
+			
+			<script type="text/javascript">
+			
+			findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html(findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html() + "<br> <div id='yes'>출석</div>");
+			
+			</script>
+			
+	
+		<% }else{ %>
+		
+			<script type="text/javascript">
+			
+			
+			findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html(findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html() + "<br> <div id='no'>결석</div>");
+			
+			</script>
+			
+		<% } %>
+
+	<% } %>
 
 </body>
 </html>

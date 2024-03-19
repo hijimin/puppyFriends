@@ -51,7 +51,7 @@ public class ChatService {
 		
 	}
 	
-	/*
+	
 	public ArrayList<Chat> memberChat(String userId){
 		
 		Connection conn = getConnection();
@@ -63,7 +63,7 @@ public class ChatService {
 		return list;
 		
 	}
-	*/
+	
 	
 	
 

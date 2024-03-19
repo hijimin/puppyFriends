@@ -208,6 +208,15 @@ public class Member {
 	
 	
 	
+	
+	// 갤러리용 회원 조회
+	public Member(int memberNo, String memberId, String memberName) {
+		super();
+		this.memberNo = memberNo;
+		this.memberId = memberId;
+		this.memberName = memberName;
+	}
+	
 
 	public int getCount() {
 		return count;

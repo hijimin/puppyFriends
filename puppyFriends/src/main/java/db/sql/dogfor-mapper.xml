@@ -39,8 +39,9 @@
 		FROM (SELECT ROWNUM RUM, A.*    
 		      FROM (SELECT
 		           FILE_NO
-		         , FILE_PATH || CHANGE_NAME AS "TITLEIMG"  
+		         , FILE_PATH || CHANGE_NAME AS "TITLEIMG"
 		         , DOG_NAME
+		         , CONTENT
 		      FROM IMAGE   
 		      JOIN DOG USING(DOG_NO)
 		     WHERE IMAGE_TYPE = 3
@@ -78,13 +79,61 @@
 	     )
 </entry>
 
+<entry key="selectAttendanceList">
+	SELECT 
+		   ATTENDANCE_NO
+		 , MEMBER_NO
+		 , TO_CHAR(ATTENDANCE_DATE, 'YYYY-MM-DD') AS "DATE"
+         , ATTENDANCE_STATUS
+         , MEMBER_NAME
+ 	  FROM ATTENDANCE
+      JOIN MEMBER USING(MEMBER_NO)
+ 	 WHERE MEMBER_NO = ?
+ 	 ORDER
+ 	    BY ATTENDANCE_DATE
+</entry>
 
+<entry key="searchDog">
+	SELECT 
+	       FILE_PATH || CHANGE_NAME AS "FILE_PATH" 
+	     , CONTENT
+	     , DOG_NAME
+	  FROM IMAGE
+	  JOIN DOG USING (DOG_NO)
+	 WHERE DOG_NAME LIKE '%'||?||'%'
+</entry>
 
+<entry key="selectMember">
+	SELECT 
+	       MEMBER_NO
+	     , MEMBER_ID
+	     , MEMBER_NAME
+	  FROM MEMBER
+	 WHERE STATUS = 'Y'
+	   AND MEMBER_NO != 1
+</entry>
 
+<entry key="checkAttendance">
+	SELECT TO_CHAR(ATTENDANCE_DATE, 'YYYY-MM-DD') AS "DATE"
+	  FROM ATTENDANCE
+	 WHERE MEMBER_NO = ?
+	   AND TO_CHAR(ATTENDANCE_DATE, 'YYYY-MM-DD') = ?
+</entry>
 
+<entry key="updateAttendance">
+	UPDATE ATTENDANCE
+	   SET ATTENDANCE_STATUS = ?
+	 WHERE MEMBER_NO = ?
+	   AND TO_CHAR(ATTENDANCE_DATE, 'YYYY-MM-DD') = ?
+</entry>
 
-
-
+<entry key="selectImage">
+	SELECT 
+	       FILE_NO
+	     , FILE_PATH || CHANGE_NAME AS "TITLEIMG" 
+	  FROM IMAGE
+	 WHERE IMAGE_TYPE = 3
+</entry>
 
 
 

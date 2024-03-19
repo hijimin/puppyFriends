@@ -57,8 +57,8 @@
                     <th width="120">강아지 이름</th>
                     <td colspan="3">
                         <select name="dogNo" id="dogNo">
-                        	<% for(Dog d : list){ %>
-                            <option value="<%= d.getDogNo() %>"><%= d.getDogName() %></option>
+                        	<% for(Dog dog : list){ %>
+                            <option value="<%= dog.getDogNo() %>"><%= dog.getDogName() %></option>
                             <% } %>
                         </select>
                     </td>

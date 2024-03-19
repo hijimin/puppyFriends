@@ -54,6 +54,14 @@ public class Image {
 		this.titleImg = titleImg;
 	}
 
+	public Image(int fileNo, String dogNo, String content, String titleImg) {
+		super();
+		this.fileNo = fileNo;
+		this.dogNo = dogNo;
+		this.content = content;
+		this.titleImg = titleImg;
+	}
+
 	public Image(int fileNo, String dogNo, String titleImg) {
 		super();
 		this.fileNo = fileNo;

@@ -343,6 +343,10 @@
                 margin: 0;
                 cursor: pointer;
               }
+
+              .slideimgg{
+                cursor: pointer;
+              }
             </style>
             <link
               rel="stylesheet"
@@ -379,7 +383,7 @@
               </div>
               <% } %>
 
-              <div class="search">
+              <!-- <div class="search">
                 <input
                   class="searchclass"
                   type="text"
@@ -390,7 +394,7 @@
                   class="searchimg"
                   src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
                 />
-              </div>
+              </div> -->
             </div>
 
             <script>
@@ -407,25 +411,17 @@
                       <div class="slide">
                         <div class="tag1">
                           <span style="background-color: #f7af36">BEST</span
-                          ><span style="background-color: #e84200">new</span>
-                        </div>
-
-                        <img
-                          src="<%=contextPath%>/<%=p.getTitleImg()%>"
-                          alt="Slide 1"
-                          width="100%"
-                          height="350"
-                        />
+                            ><span style="background-color: #e84200">new</span>
+                          </div>
+                          
+                          <img class="slideimgg" src="<%=contextPath%>/<%=p.getTitleImg()%>" alt="Slide 1" width="100%" height="350"/>
+                          <input type="hidden" id="pdno" name="pno" value="<%= p.getProductNo()%>">
                         <div style="margin: 0; border: 0px">
                           <%=p.getProductName()%>
                         </div>
                         <div class="name_sub"><%=p.getProductDesc()%></div>
                         <div class="priceGroup">
-                          <div
-                            class="custom_pro"
-                            d-price="29900"
-                            d-custom="23900"
-                          >
+                          <div class="custom_pro" d-price="29900" d-custom="23900">
                             <%=p.getDiscount() + "%"%>
                           </div>
                           <div class="prs prsLine">
@@ -733,6 +729,10 @@
                     $(".content2_3c").click(function () {
                       location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).children("input").val();
                     });
+                    $(".slideimgg").click(function(){
+                      console.log($(this).siblings("input"));
+                      location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).siblings("input").val();
+                    })
                   });
                 </script>
 

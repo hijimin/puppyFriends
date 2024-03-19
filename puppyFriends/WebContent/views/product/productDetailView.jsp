@@ -357,26 +357,29 @@ a:focus {
 					<% if(p1.getStock() == 0){ %>
 					<button style="color: #fa0404;" disabled onclick="location.href='<%= contextPath %>/order.od?pno=<%= p1.getProductNo() %>'" class="button button--winona button--border-thin button--round-s" data-text="품절"><span>품절</span></button>
                     <% }else{ %>
-                    <button onclick="location.href='<%= contextPath %>/order.od?pno=<%= p1.getProductNo() %>'" class="button button--winona button--border-thin button--round-s" data-text="구매하기"><span>구매하기</span></button>
+                    <button onclick="testChange();" class="button button--winona button--border-thin button--round-s" data-text="구매하기"><span>구매하기</span></button>
 					<% } %>
                     <!-- <a
                       href="<%= contextPath %>/order.od?pno=<%= p1.getProductNo() %>"
                       class="btn btn-sm btn-warning"
                       >구매하기</a
                     > -->
-                    <i
-                      class="fa-solid fa-bucket fa-2xl"
-                      onclick="cartTest1();"
-                    ></i>
+                    <i class="fa-solid fa-bucket fa-2xl" onclick="cartTest1();"></i>
                   </div>
                 </div>
                 
                 <script>
-                
+                  function testChange(){      
+                	  // button에서 onChange, onClick 2개를 같이 사용할수 없어서 onclick에 함수를 부여해서 따로 빼주었음
+                	  <% if(loginUser == null){ %>
+                	  alert("로그인 후 이용해주세요!");
+                	  return;
+                	  <% }else{%>
+                	  location.href='<%= contextPath %>/order.od?pno=<%= p1.getProductNo() %>';
+                	  <% }%>
+                  }               
                 </script>
                 
-                
-
                 <script>
                   function cartTest2(){
                   	// 중복체크하고

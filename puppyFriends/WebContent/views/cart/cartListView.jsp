@@ -122,6 +122,11 @@
         text-align: center;
     }
 
+    #content4_2{
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+
     #content1_2c1{
         display: inline;
         float: right;
@@ -213,6 +218,7 @@
     }
     #content5>div{width: 100%;}
     #content5_1{
+        margin-top: 40px;
         height: 20%;
         border-bottom: 1px solid #d7d5d5;
 
@@ -236,7 +242,17 @@
     .tossimg{
         width: 180px;
         height: 50px;
+        border: 1px solid black;
     }
+
+    /*버튼*/
+    .selectdeletebtn{
+        cursor: pointer;
+    }
+
+    
+
+ 
     
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -454,9 +470,9 @@
             </script>
             
                     <div id="content1_2c">                       
-                        <span><a onclick="validate();">선택삭제</a></span>
+                        <span><a class="selectdeletebtn" onclick="validate();">선택삭제</a></span>
                         <div id="content1_2c1">
-                            <span>상품금액</span> <span id="totalprice"></span>                                      
+                            <span>상품금액</span> <span id="totalprice"></span>원                                      
                         </div>                
                     </div>
                     
@@ -782,7 +798,7 @@
                         <tr>
                             <td>
                                 <div>
-                                    <strong class="toto"></strong>
+                                    <strong class="toto"></strong>원
                                 </div>
                             </td>
 
@@ -795,7 +811,7 @@
                             <td>
                                 <div>
                                     <strong>
-                                        <span class="toto"></span>
+                                        <span class="toto"></span>원
                                     </strong>
                                 </div>
                             </td>
@@ -811,7 +827,8 @@
         <div id="content6">
             <div id="content6_1">
                 <a href="#" onclick="requestPay();" class="btn btn-dark">결제하기</a>
-                <a href="#" class="btn btn-dark">뒤로가기</a>
+                <!-- <button onclick="requestPay();" class="button button--winona button--border-thin button--round-s" data-text="결제하기"><span>결제하기</span></button> -->
+                <a href="javascript:window.history.back();" class="btn btn-dark">뒤로가기</a>
             </div>
         </div>
     </div>
@@ -930,7 +947,7 @@
 			}
 			
 			String cnoArrayJSON = new Gson().toJson(cnoList);
-		%>
+			%>
 		
 		var uniqueCnoArray = JSON.parse('<%= cnoArrayJSON %>');
         	

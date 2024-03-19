@@ -125,6 +125,11 @@
         text-align: center;
     }
 
+    #content4_2{
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+
     #content1_2c1{
         display: inline;
         float: right;
@@ -205,6 +210,11 @@
     .tossimg{
         width: 180px;
         height: 50px;
+        border: 1px solid black;
+    }
+
+    .selectdeletebtn{
+        cursor: pointer;
     }
     
 </style>
@@ -271,7 +281,7 @@
             </table>
                 
                     <div id="content1_2c">                       
-                        <span><a onclick="validate();">선택삭제</a></span>
+                        <span><a class="selectdeletebtn" onclick="validate();">선택삭제</a></span>
                         <div id="content1_2c1">
                             <span>상품금액</span> <span><%= p.getdPrice() %>원</span>                                      
                         </div>                
@@ -451,7 +461,7 @@
                                 배송메시지                             
                             </th>
                             <td style="padding: 10px;">
-                                <textarea id="omessage" maxlength="255" cols="70"></textarea>
+                                <textarea id="omessage" maxlength="255" cols="70" style="resize: none;"></textarea>
                             </td>
                         </tr>
                     </tbody>

@@ -51,6 +51,16 @@ private Properties prop = new Properties();
 				m.setMemberName(rset.getString("member_name"));
 				m.setMemberEmail(rset.getString("member_email"));
 				m.setMemberPhone(rset.getString("member_phone"));
+				m.setDogNo(rset.getInt("dog_no"));
+				m.setDogName(rset.getString("dog_name"));
+				m.setDogSize(rset.getString("dog_size"));
+				m.setDogValue(rset.getString("dog_value"));
+				m.setDogAge(rset.getInt("dog_age"));
+				m.setDogGender(rset.getString("dog_gender"));
+				m.setDogVaccine(rset.getString("dog_vaccine"));
+				m.setDogSignificant(rset.getString("dog_significant"));
+				
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -63,6 +73,108 @@ private Properties prop = new Properties();
 		return m;
 		
 	}
+	
+	
+	public int updateMember(Connection conn, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemberEmail());
+			pstmt.setString(2, m.getMemberPhone());
+			pstmt.setString(3, m.getMemberId());
+			
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int updateDog(Connection conn, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateDog");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getDogName());
+			pstmt.setString(2, m.getDogValue());
+			pstmt.setInt(3, m.getDogAge());
+			pstmt.setString(4, m.getDogGender());
+			pstmt.setString(5, m.getDogSize());
+			pstmt.setString(6, m.getDogVaccine());
+			pstmt.setString(7, m.getDogSignificant());
+			pstmt.setInt(8, m.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public Member selectMember(Connection conn, String memberId) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getInt("member_no"),
+							   rset.getString("member_id"),
+							   rset.getString("member_pwd"),
+							   rset.getString("member_name"),
+							   rset.getString("member_email"),
+							   rset.getString("member_phone"),
+							   rset.getInt("dog_no"),
+							   rset.getString("dog_name"),
+							   rset.getString("dog_value"),
+							   rset.getString("dog_size"),
+							   rset.getInt("dog_age"),
+							   rset.getString("dog_gender"),
+							   rset.getString("dog_vaccine"),
+							   rset.getString("dog_significant")
+							 
+							   );
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+	
+	
+	
 	
 	public Member kakaoLoginMember(Connection conn, String memberId, String memberName, String memberEmail) {
 		Member m = null;
@@ -212,4 +324,6 @@ private Properties prop = new Properties();
 		}
 		return m;
 	}
+	
+	
 }

@@ -96,23 +96,30 @@ public class ProductService {
 		return p;
 	}
 	
-	public ArrayList<Product> selectGoodList(){
+	public ArrayList<Product> selectGoodList(PageInfo pi){
 		Connection conn = getConnection();
-		ArrayList<Product> list = new ProductDao().selectGoodList(conn);
+		ArrayList<Product> list = new ProductDao().selectGoodList(conn, pi);
 		close(conn);
 		return list;
 	}
 	
-	public ArrayList<Product> selectRecentList(){
+	public ArrayList<Product> selectRecentList(PageInfo pi){
 		Connection conn = getConnection();
-		ArrayList<Product> list = new ProductDao().selectRecentList(conn);
+		ArrayList<Product> list = new ProductDao().selectRecentList(conn, pi);
 		close(conn);
 		return list;
 	}
 	
-	public ArrayList<Product> selectCountList(){
+	public ArrayList<Product> selectCountList(PageInfo pi){
 		Connection conn = getConnection();
-		ArrayList<Product> list = new ProductDao().selectCountList(conn);
+		ArrayList<Product> list = new ProductDao().selectCountList(conn, pi);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Product> selectStockList(){
+		Connection conn = getConnection();
+		ArrayList<Product> list = new ProductDao().selectStockList(conn);
 		close(conn);
 		return list;
 	}

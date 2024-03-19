@@ -6,6 +6,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     Product p1 = list.get(0); // 1
     Product p2 = list.get(1); // 2
 	// 상품번호, 상품명, 상품상세설명, 상품원래가격, 할인율, 이미지경로, 할인된가격, 파일레벨(1,2)
+	
+	ArrayList<Product> stockList = (ArrayList<Product>)request.getAttribute("stockList");
 %> 
 
     <!DOCTYPE html>
@@ -318,10 +320,11 @@ a:focus {
               <div>
                 <div class="tag">
                   <span></span>
-                  <span style="color: white; background-color: #e84200"
-                    >NEW</span
-                  >
-
+                  <% if(p1.getStock() == 0){ %>
+                  <span style="color: white; background-color: #e84200">품절</span>
+                  <% }else{%>
+                   <span style="color: white; background-color: #e84200">NEW</span>
+                   <% } %>
                   <p><%= p1.getProductName() %></p>
                   <h2><%= p1.getProductName() %></h2>
                 </div>
@@ -351,8 +354,11 @@ a:focus {
                       >장바구니</a
                     > -->
 
+					<% if(p1.getStock() == 0){ %>
+					<button style="color: #fa0404;" disabled onclick="location.href='<%= contextPath %>/order.od?pno=<%= p1.getProductNo() %>'" class="button button--winona button--border-thin button--round-s" data-text="품절"><span>품절</span></button>
+                    <% }else{ %>
                     <button onclick="location.href='<%= contextPath %>/order.od?pno=<%= p1.getProductNo() %>'" class="button button--winona button--border-thin button--round-s" data-text="구매하기"><span>구매하기</span></button>
-
+					<% } %>
                     <!-- <a
                       href="<%= contextPath %>/order.od?pno=<%= p1.getProductNo() %>"
                       class="btn btn-sm btn-warning"
@@ -364,10 +370,15 @@ a:focus {
                     ></i>
                   </div>
                 </div>
+                
+                <script>
+                
+                </script>
+                
+                
 
                 <script>
                   function cartTest2(){
-                  	console.log("되냐?");
                   	// 중복체크하고
                   	// 상품명이 중복이면 업데이트 컨트롤러타게
                   	// 중복이 아니면 isnert함수호출

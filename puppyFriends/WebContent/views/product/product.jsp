@@ -16,7 +16,6 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
-	
 %>
         <!DOCTYPE html>
         <html>
@@ -449,8 +448,8 @@
                 <div id="content2_2">
                   <div align="right" style="width: 90%; margin-bottom: 5px">
                     <a href="#" onclick="orderSelect(1);">인기순|</a
-                    ><a href="#" onclick="recentSelect();">최신순|</a
-                    ><a href="#" onclick="countSelect();">조회순</a>
+                    ><a href="#" onclick="recentSelect(1);">최신순|</a
+                    ><a href="#" onclick="countSelect(1);">조회순</a>
                   </div>
                 </div>
 
@@ -462,7 +461,6 @@
                       success: function (map) {
                     	 
                         let pi = map.pi;
-                        console.log(pi)
                         let currentPage = pi.currentPage;
                         let startPage = pi.startPage;
                         let endPage = pi.endPage;
@@ -539,11 +537,42 @@
                     });
                   }
 
-                  function recentSelect() {
+                  function recentSelect(cpage) {
                     $.ajax({
                       url: "recentAjax.pd",
-                      success: function (result) {
+                      data: { cpage: cpage },
+                      success: function (map) {
+                    	  let pi = map.pi;
+                          let currentPage = pi.currentPage;
+                          let startPage = pi.startPage;
+                          let endPage = pi.endPage;
+                          let maxPage = pi.maxPage;
+                          let $paging = $(".page_nation");
+                          
                         $("#content2_3").html("");
+                        $paging.html("");
+                        
+                        if (currentPage != 1) {
+                            $paging.append(
+                              "<button onclick='recentSelect(" +(currentPage - 1) +");'>&lt;</button>");
+                          }
+
+                          for (let p = startPage; p <= endPage; p++) {
+                            if (p == currentPage) {
+                              $paging.append("<button class='rvpagebtn'>" + p + "</button>");
+                            } else {
+                              $paging.append("<button class='rvpagebtn' onclick='recentSelect("+p+");'>" + p +"</button>");
+                            }
+                          }
+
+                          if (currentPage != maxPage) {
+                            $paging.append(
+                              "<button onclick='recentSelect(" + (currentPage + 1) +");'>&gt;</button>"
+                            );
+                          }
+                        
+                        
+                          let result = map.recentList;
 
                         let value = "";
 
@@ -551,7 +580,6 @@
                           let rv = result[i];
 
                           let titleImg = rv.titleImg;
-                          console.log(titleImg);
                           let productName = rv.productName;
                           let productDesc = rv.productDesc;
                           let productNo = rv.productNo;
@@ -592,13 +620,45 @@
                     });
                   }
 
-                  function countSelect() {
+                  function countSelect(cpage) {
                     $.ajax({
                       url: "countAjax.pd",
-                      success: function (result) {
+                      data: { cpage: cpage },
+                      success: function (map) {
+                    	  let pi = map.pi;
+                          let currentPage = pi.currentPage;
+                          let startPage = pi.startPage;
+                          let endPage = pi.endPage;
+                          let maxPage = pi.maxPage;
+                          let $paging = $(".page_nation");
+                    	  
+                    	  
                         $("#content2_3").html("");
+                        $paging.html("");
 
                         let value = "";
+                        
+                        if (currentPage != 1) {
+                            $paging.append(
+                              "<button onclick='countSelect(" +(currentPage - 1) +");'>&lt;</button>");
+                          }
+
+                          for (let p = startPage; p <= endPage; p++) {
+                            if (p == currentPage) {
+                              $paging.append("<button class='rvpagebtn'>" + p + "</button>");
+                            } else {
+                              $paging.append("<button class='rvpagebtn' onclick='countSelect("+p+");'>" + p +"</button>");
+                            }
+                          }
+
+                          if (currentPage != maxPage) {
+                            $paging.append(
+                              "<button onclick='countSelect(" + (currentPage + 1) +");'>&gt;</button>"
+                            );
+                          }
+                          
+                          let result = map.countList;
+                        
 
                         for (let i = 0; i < result.length; i++) {
                           let rv = result[i];
@@ -650,19 +710,8 @@
                 <div id="content2_3">
                   <% for (Product p : list1) { %>
                   <div class="content2_3c">
-                    <img
-                      id="img1"
-                      src="<%=contextPath%>/<%=p.getTitleImg()%>"
-                      alt="Slide 4"
-                      width="100%"
-                      height="300"
-                    />
-                    <input
-                      type="hidden"
-                      id="pdno"
-                      name="pno"
-                      value="<%=p.getProductNo()%>"
-                    />
+                    <img id="img1" src="<%=contextPath%>/<%=p.getTitleImg()%>" alt="Slide 4" width="100%" height="300"/>
+                    <input type="hidden" id="pdno" name="pno" value="<%=p.getProductNo()%>"/>
                     <div style="margin: 0; border: 0px">
                       <%=p.getProductName()%>
                     </div>
@@ -676,15 +725,13 @@
                     </div>
                   </div>
                   <% } %>
-                </div>
-
+                </div>               
+               
                 <!-- 상품상세조회 script -->
                 <script>
                   $(function () {
                     $(".content2_3c").click(function () {
-                      location.href =
-                        "<%=contextPath%>/detail.pd?pno=" +
-                        $(this).children("input").val();
+                      location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).children("input").val();
                     });
                   });
                 </script>
@@ -695,16 +742,13 @@
                     <a class="arrow pprev" href="#"></a>
                     <a class="arrow prev" href="#"></a>
 
-                    <% for (int p = startPage; p <= endPage; p++) { %> <% if (p
-                    == currentPage) { %>
+                    <% for (int p = startPage; p <= endPage; p++) { %> 
+                    <% if (p== currentPage) { %>
                     <a href="#" class="active"><%=p%></a>
-                    <% } else { %>
-                    <a
-                      href="<%=contextPath%>/list.pd?cpage=<%=p%>"
-                      class="active"
-                      ><%=p%></a
-                    >
-                    <% } %> <% } %>
+                    	<% } else { %>
+                    <a href="<%=contextPath%>/list.pd?cpage=<%=p%>" class="active"><%=p%></a>
+                    	<% } %> 
+                    <% } %>
 
                     <a class="arrow next" href="#"></a>
                     <a class="arrow nnext" href="#"></a>

@@ -582,7 +582,7 @@
                         <tr>
                             <td>
                                 <div>
-                                    <strong>14,900원</strong>
+                                    <strong><%= p.getdPrice() %>원</strong>
                                 </div>
                             </td>
 
@@ -595,7 +595,7 @@
                             <td>
                                 <div>
                                     <strong>
-                                        <span>14,900원</span>
+                                        <span><%= p.getdPrice() %>원</span>
                                     </strong>
                                 </div>
                             </td>
@@ -611,7 +611,7 @@
         <div id="content6">
             <div id="content6_1">
                 <a href="#" onclick="requestPay();" class="btn btn-dark">결제하기</a>
-                <a href="#" class="btn btn-dark">뒤로가기</a>
+                <a href="javascript:window.history.back();" class="btn btn-dark">뒤로가기</a>
             </div>
         </div>
     </div>

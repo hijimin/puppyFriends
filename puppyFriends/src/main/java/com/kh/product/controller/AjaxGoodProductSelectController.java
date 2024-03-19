@@ -56,7 +56,7 @@ public class AjaxGoodProductSelectController extends HttpServlet {
 		}
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Product> goodList = new ProductService().selectGoodList();
+		ArrayList<Product> goodList = new ProductService().selectGoodList(pi);
 		
 		HashMap<String, Object> list = new HashMap<String, Object>();
 		list.put("pi", pi);

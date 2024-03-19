@@ -61,6 +61,8 @@ public class ProductListController extends HttpServlet {
 		
 		ArrayList<Product> list = new ProductService().selectProductList();
 		
+		
+		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.setAttribute("list1", list1);

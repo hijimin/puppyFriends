@@ -334,6 +334,7 @@
                 }
                 console.log(sumTotal);
                 $('#totalprice').text(sumTotal);
+                $('.toto').text(sumTotal);
 
                 
 
@@ -781,7 +782,7 @@
                         <tr>
                             <td>
                                 <div>
-                                    <strong>14,900원</strong>
+                                    <strong class="toto"></strong>
                                 </div>
                             </td>
 
@@ -794,7 +795,7 @@
                             <td>
                                 <div>
                                     <strong>
-                                        <span>14,900원</span>
+                                        <span class="toto"></span>
                                     </strong>
                                 </div>
                             </td>

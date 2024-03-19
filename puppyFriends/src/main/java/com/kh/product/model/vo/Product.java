@@ -84,8 +84,30 @@ public class Product {
 		this.dPrice = dPrice;
 		this.fileLevel = fileLevel;
 	}
-	
-	
+
+
+
+	public Product(int productNo, String productName, String productDesc, String price, int stock, int discount,
+			String titleImg, String dPrice, int fileLevel) {
+		super();
+		this.productNo = productNo;
+		this.productName = productName;
+		this.productDesc = productDesc;
+		this.price = price;
+		this.stock = stock;
+		this.discount = discount;
+		this.titleImg = titleImg;
+		this.dPrice = dPrice;
+		this.fileLevel = fileLevel;
+	}
+
+
+
+	public Product(int productNo, int stock) {
+		super();
+		this.productNo = productNo;
+		this.stock = stock;
+	}
 
 
 

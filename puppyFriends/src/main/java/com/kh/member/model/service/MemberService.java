@@ -43,8 +43,6 @@ public class MemberService {
 	}
 	
 	
-	
-	
 	public int insertMember(Member m, Dog d) {
 		Connection conn = getConnection();
 		int result = new MemberDao().insertMember(conn, m);
@@ -61,6 +59,26 @@ public class MemberService {
 		return result * result2;
 				
 	}
+	
+	public Member updateMember(Member m) {
+		Connection conn = getConnection();
+		
+		int result1 = new MemberDao().updateMember(conn, m);
+		int result2 = new MemberDao().updateDog(conn, m);
+		
+		Member updateMem = null;
+		if(result1 * result2>0) {
+			commit(conn);
+			updateMem = new MemberDao().selectMember(conn, m.getMemberId());
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return updateMem;
+	}
+	
 	
 	
 	

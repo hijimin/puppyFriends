@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class MoveToMypageController
@@ -26,8 +27,18 @@ public class MoveToMypageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
 		
-		request.getRequestDispatcher("views/member/mypage.jsp").forward(request, response);
+		if(session.getAttribute("loginUser") == null) {
+			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스 입니다.");
+			response.sendRedirect(request.getContextPath());
+		}else {
+			request.getRequestDispatcher("views/member/mypage.jsp").forward(request, response);
+			
+		}
+		
+		
 
 	}
 

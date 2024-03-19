@@ -12,9 +12,19 @@ public class Member {
 	
 	
 	
-	// 회원조회용 추가
 	private int dogNo;
 	private String dogName;
+	private String dogValue;
+	private String dogSize;
+	private int dogAge;
+	private String dogGender;
+	private String dogVaccine;
+	private String dogSignificant;
+	
+	
+	
+
+	// 회원조회용 추가
 	private int count;
 	
 	
@@ -68,6 +78,69 @@ public class Member {
 	}
 	
 	
+	// 로그인에 회원, 반려견 정보 넣기 위한 반려견 추가
+	public Member(int memberNo, String memberId, String memberName, String memberEmail, String memberPhone, int dogNo,
+			String dogName, String dogValue, String dogSize, int dogAge, String dogGender, String dogVaccine, String dogSignificant) {
+		super();
+		this.memberNo = memberNo;
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.memberEmail = memberEmail;
+		this.memberPhone = memberPhone;
+		this.dogNo = dogNo;
+		this.dogName = dogName;
+		this.dogValue = dogValue;
+		this.dogSize = dogSize;
+		this.dogAge = dogAge;
+		this.dogGender = dogGender;
+		this.dogVaccine = dogVaccine;
+		this.dogSignificant = dogSignificant;
+	}
+	
+	
+	// loginUser 수정용
+	public Member(int memberNo, String memberId, String memberName, String memberEmail, String memberPhone, String dogName,
+			 String dogValue, String dogSize, int dogAge, String dogGender, String dogVaccine, String dogSignificant) {
+		super();
+		this.memberNo = memberNo;
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.memberEmail = memberEmail;
+		this.memberPhone = memberPhone;
+		this.dogName = dogName;
+		this.dogValue = dogValue;
+		this.dogSize = dogSize;
+		this.dogAge = dogAge;
+		this.dogGender = dogGender;
+		this.dogVaccine = dogVaccine;
+		this.dogSignificant = dogSignificant;
+	}
+
+	// 회원 정보 수정용
+	public Member(int memberNo, String memberId, String memberPwd, String memberName, String memberEmail,
+			String memberPhone, int dogNo, String dogName , String dogValue, String dogSize, int dogAge,
+			String dogGender, String dogVaccine, String dogSignificant) {
+		super();
+		this.memberNo = memberNo;
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+		this.memberName = memberName;
+		this.memberEmail = memberEmail;
+		this.memberPhone = memberPhone;
+		this.dogNo = dogNo;
+		this.dogName = dogName;
+		this.dogValue = dogValue;
+		this.dogSize = dogSize;
+		this.dogAge = dogAge;
+		this.dogGender = dogGender;
+		this.dogVaccine = dogVaccine;
+		this.dogSignificant = dogSignificant;
+	}
+	
+	
+	
+	
+	
 	// kakao 로그인용 
 	public Member(int memberNo, String memberId, String memberName, String memberEmail) {
 		super();
@@ -76,6 +149,63 @@ public class Member {
 		this.memberName = memberName;
 		this.memberEmail = memberEmail;
 	}
+	
+	
+	
+	
+
+	public String getDogValue() {
+		return dogValue;
+	}
+	
+	public void setDogValue(String dogValue) {
+		this.dogValue = dogValue;
+	}
+	
+	public int getDogAge() {
+		return dogAge;
+	}
+	
+	public void setDogAge(int dogAge) {
+		this.dogAge = dogAge;
+	}
+	
+	public String getDogGender() {
+		return dogGender;
+	}
+	
+	public void setDogGender(String dogGender) {
+		this.dogGender = dogGender;
+	}
+	
+	public String getDogVaccine() {
+		return dogVaccine;
+	}
+	
+	public void setDogVaccine(String dogVaccine) {
+		this.dogVaccine = dogVaccine;
+	}
+	
+
+	public String getDogSignificant() {
+		return dogSignificant;
+	}
+	
+	public void setDogSignificant(String dogSignificant) {
+		this.dogSignificant = dogSignificant;
+	}
+	
+	public String getDogSize() {
+		return dogSize;
+	}
+	
+	public void setDogSize(String dogSize) {
+		this.dogSize = dogSize;
+	}
+	
+
+	
+	
 	
 	
 

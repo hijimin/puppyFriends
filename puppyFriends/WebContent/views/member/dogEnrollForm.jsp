@@ -163,7 +163,7 @@
                     <br><br>
 					<form action="<%= request.getContextPath()%>/insert.me">
 						
-						<!-- <input type="hidden" name="memberId" value="<%= memberId %>">
+						<input type="hidden" name="memberId" value="<%= memberId %>">
 						<% if(memberPwd != null) { %>
 	                    	<input type="hidden" name="memberPwd" value="<%= memberPwd %>">
 	                    	
@@ -172,7 +172,7 @@
 	                    <input type="hidden" name="memberEmail" value="<%= memberEmail %>">
 	                    <% if(memberPhone != null) { %>
 	                    	<input type="hidden" name="memberPhone" value="<%= memberPhone %>">
-	                    <% } %> -->
+	                    <% } %>
                     
 	                    <div class="enroll-dog-info" align="center">
                             <div class="dog-name">

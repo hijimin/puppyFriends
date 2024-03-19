@@ -5,6 +5,7 @@
 <%
 	String contextPath = request.getContextPath(); //  "/Test"
 	
+	// 회원, 반려견 정보 담은 유저 정보
 	Member loginUser = (Member)session.getAttribute("loginUser"); // 일반 로그인 유저
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");

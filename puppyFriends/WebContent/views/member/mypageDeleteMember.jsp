@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
 
-    div{border: 1px solid white; box-sizing: border-box;}
+    div{border: 1px solid red; box-sizing: border-box;}
 
     .mypage-wrap{width: 100%; height: 1000px;}    
     .mypage-form{height: 100%; width: 80%;}
@@ -70,41 +70,9 @@
     .mypage-content-side{width: 98%; height: 100%; padding: 30px 0px;}
     .mypage-content-main{
         width: 95%; 
-        height: 55%; 
+        height: 90%; 
     }
 
-    .mypage-change-pwd{
-        width: 80%;
-        height: 80%;
-        margin-top: 30px;
-    }
-
-    .change-pwd-main{
-        height: 85%;
-    }
-    .change-pwd-button{height: 15%;}
-    .change-pwd-button>div{float: left;}
-    .input-row{
-        width: 90%; 
-        height: 20%; 
-        display: flex;
-        margin-top: 20px;
-    }
-    .input-title{
-        width: 30%;
-        height: 100%;
-        padding-top: 20px;
-    }
-    .input-group{
-        width:80%; 
-        height: 100%;
-        padding: 12px 20px 0px 0px;
-    }
-    .input-group>input{flex: 1;}
-
-    .cancle-update-button, .register-update-button{width: 50%;height: 100%;}
-
-    .cancle-update-button>button, .register-update-button>button{width: 70%;height: 100%;}
 
 </style>    
 <script src="https://kit.fontawesome.com/d48d14d77f.js" crossorigin="anonymous"></script>
@@ -149,43 +117,14 @@
                             <li><a href="<%= request.getContextPath()%>/mypageProduct">구매 내역 조회</a></li>
                             <li><a href="<%= request.getContextPath()%>/mypageReservation">예약 조회</a></li>
                             <li><a href="<%= request.getContextPath()%>/mypageBoard">내가 쓴 글</a></li>
-                            <li><a href="<%= request.getContextPath()%>/deleteMember">회원탈퇴</a></li>
+                            <li><a href="javascript:"onclick="">회원탈퇴</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="mypage-content-zone">
                     <div class="mypage-content-side">
                         <div class="mypage-content-main">
-                           <div class="mypage-change-pwd">
-                                <div class="change-pwd-main">
-                                    <div class="input-row">
-                                        <div class="input-title"><b>현재 비밀번호</b></div>
-                                        <div class="input-group">
-                                            <input type="text">
-                                        </div>
-                                    </div>
-                                    <div class="input-row">
-                                        <div class="input-title"><b>바꿀 비밀번호</b></div>
-                                        <div class="input-group">
-                                            <input type="text">
-                                        </div>
-                                    </div>
-                                    <div class="input-row">
-                                        <div class="input-title"><b>비밀번호 확인</b></div>
-                                        <div class="input-group">
-                                            <input type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="change-pwd-button">
-                                    <div class="cancle-update-button ">
-                                        <button class="btn btn-danger btn-lg">취소</button>
-                                    </div>
-                                    <div class="register-update-button">
-                                        <button class="btn btn-primary btn-lg">확인</button>
-                                    </div>
-                                </div>
-                           </div>
+                           
 
                         </div>
                     </div>

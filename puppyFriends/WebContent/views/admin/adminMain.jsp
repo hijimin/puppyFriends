@@ -13,82 +13,82 @@
 <%@page import="javax.servlet.http.Cookie"%>
 
 <%
-   String contextPath = request.getContextPath();
+String contextPath = request.getContextPath();
 
-   Member loginUser = (Member)session.getAttribute("loginUser");
-   
-   String alertMsg = (String)session.getAttribute("alertMsg");
+Member loginUser = (Member)session.getAttribute("loginUser");
 
-   int yResult = (int)request.getAttribute("yResult"); 
-   int nResult = (int)request.getAttribute("nResult");
-   ArrayList<Product> apList = (ArrayList<Product>)request.getAttribute("apList");
-   
-  
-   List<Map<String, Object>> topClickedMenus = new ArrayList<>();
-   topClickedMenus.add(Map.of("menu", "공지사항", "clicks", 0));
-   topClickedMenus.add(Map.of("menu", "회원", "clicks", 0));
-   topClickedMenus.add(Map.of("menu", "채팅", "clicks", 0));
-   topClickedMenus.add(Map.of("menu", "반려견정보", "clicks", 0));
-   topClickedMenus.add(Map.of("menu", "상품", "clicks", 0));
+String alertMsg = (String)session.getAttribute("alertMsg");
+
+int yResult = (int)request.getAttribute("yResult"); 
+int nResult = (int)request.getAttribute("nResult");
+ArrayList<Product> apList = (ArrayList<Product>)request.getAttribute("apList");
 
 
-   List<String> menuNames = new ArrayList<>();
-   List<Integer> clickCounts = new ArrayList<>();
-   for (Map<String, Object> menuData : topClickedMenus) {
-       menuNames.add((String) menuData.get("menu"));
-       clickCounts.add((Integer) menuData.get("clicks"));
-   }
+List<Map<String, Object>> topClickedMenus = new ArrayList<>();
+topClickedMenus.add(Map.of("menu", "공지사항", "clicks", 0));
+topClickedMenus.add(Map.of("menu", "회원", "clicks", 0));
+topClickedMenus.add(Map.of("menu", "채팅", "clicks", 0));
+topClickedMenus.add(Map.of("menu", "반려견정보", "clicks", 0));
+topClickedMenus.add(Map.of("menu", "상품", "clicks", 0));
 
 
-   String menuNamesJson = new Gson().toJson(menuNames);
-   String clickCountsJson = new Gson().toJson(clickCounts);
-   
-   
-   // 쿠키에서 그래프 데이터 가져오기
-    String graphDataCookieValue = "";
-    Cookie[] cookies = request.getCookies();
-    if (cookies != null) {
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("graphData")) {
-                graphDataCookieValue = cookie.getValue();
-                break;
-            }
-        }
-    }
+List<String> menuNames = new ArrayList<>();
+List<Integer> clickCounts = new ArrayList<>();
+for (Map<String, Object> menuData : topClickedMenus) {
+    menuNames.add((String) menuData.get("menu"));
+    clickCounts.add((Integer) menuData.get("clicks"));
+}
 
-    // 쿠키에 저장된 그래프 데이터가 있는지 확인하고 없으면 새로운 데이터 생성
-    List<Map<String, Object>> graphData = new ArrayList<>();
-    if (!graphDataCookieValue.isEmpty()) {
-        // 쿠키에 저장된 데이터가 있다면 디코딩하여 그래프 데이터로 변환
-        byte[] decodedBytes = Base64.getDecoder().decode(graphDataCookieValue);
-        String decodedString = new String(decodedBytes);
-        graphData = new Gson().fromJson(decodedString, new TypeToken<List<Map<String, Object>>>() {}.getType());
-    } else {
-        // 쿠키에 저장된 데이터가 없으면 초기값 설정
-        graphData.add(Map.of("menu", "공지사항", "clicks", 0));
-        graphData.add(Map.of("menu", "회원", "clicks", 0));
-        graphData.add(Map.of("menu", "채팅", "clicks", 0));
-        graphData.add(Map.of("menu", "반려견정보", "clicks", 0));
-        graphData.add(Map.of("menu", "상품", "clicks", 0));
-    }
 
-    // 24시간마다 그래프 데이터 초기화를 위한 쿠키 설정
-    Calendar calendar = Calendar.getInstance();
-    calendar.add(Calendar.HOUR_OF_DAY, 24);
-    Date expirationTime = calendar.getTime();
-    String expirationString = expirationTime.toString();
-    Cookie expirationCookie = new Cookie("resetGraph", "true");
-    expirationCookie.setMaxAge(60 * 60 * 24); // 24시간 설정
-    expirationCookie.setPath("/");
-    response.addCookie(expirationCookie);
+String menuNamesJson = new Gson().toJson(menuNames);
+String clickCountsJson = new Gson().toJson(clickCounts);
 
-    // 그래프 데이터를 JSON으로 변환하여 쿠키에 저장
-    String graphDataJson = new Gson().toJson(graphData);
-    String encodedGraphData = Base64.getEncoder().encodeToString(graphDataJson.getBytes());
-    Cookie graphDataCookie = new Cookie("graphData", encodedGraphData);
-    graphDataCookie.setMaxAge(60 * 60 * 24); // 24시간 설정
-    graphDataCookie.setPath("/");
-    response.addCookie(graphDataCookie);
+
+// Retrieve graph data from cookie
+ String graphDataCookieValue = "";
+ Cookie[] cookies = request.getCookies();
+ if (cookies != null) {
+     for (Cookie cookie : cookies) {
+         if (cookie.getName().equals("graphData")) {
+             graphDataCookieValue = cookie.getValue();
+             break;
+         }
+     }
+ }
+
+ // Check if graph data exists in the cookie, otherwise initialize with default values
+ List<Map<String, Object>> graphData = new ArrayList<>();
+ if (!graphDataCookieValue.isEmpty()) {
+     // Decode the data and convert it back to graph data format
+     byte[] decodedBytes = Base64.getDecoder().decode(graphDataCookieValue);
+     String decodedString = new String(decodedBytes);
+     graphData = new Gson().fromJson(decodedString, new TypeToken<List<Map<String, Object>>>() {}.getType());
+ } else {
+     // Set default values if no data is found in the cookie
+     graphData.add(Map.of("menu", "공지사항", "clicks", 0));
+     graphData.add(Map.of("menu", "회원", "clicks", 0));
+     graphData.add(Map.of("menu", "채팅", "clicks", 0));
+     graphData.add(Map.of("menu", "반려견정보", "clicks", 0));
+     graphData.add(Map.of("menu", "상품", "clicks", 0));
+ }
+
+ // Set expiration time for resetting the graph data after 24 hours
+ Calendar calendar = Calendar.getInstance();
+ calendar.add(Calendar.HOUR_OF_DAY, 24);
+ Date expirationTime = calendar.getTime();
+ String expirationString = expirationTime.toString();
+ Cookie expirationCookie = new Cookie("resetGraph", "true");
+ expirationCookie.setMaxAge(60 * 60 * 24); // 24 hours
+ expirationCookie.setPath("/");
+ response.addCookie(expirationCookie);
+
+ // Convert graph data to JSON and store in the cookie
+ String graphDataJson = new Gson().toJson(graphData);
+ String encodedGraphData = Base64.getEncoder().encodeToString(graphDataJson.getBytes());
+ Cookie graphDataCookie = new Cookie("graphData", encodedGraphData);
+ graphDataCookie.setMaxAge(60 * 60 * 24); // 24 hours
+ graphDataCookie.setPath("/");
+ response.addCookie(graphDataCookie);
 %>
 
 <!DOCTYPE html>
@@ -109,7 +109,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
    <style>
         .outer{
-            width: 1903px;
+            width: 1800px;
             height: 950px;
             margin: auto;
         }
@@ -196,9 +196,10 @@
             overflow: hidden;
         }
 
-        .content2{      
+        .content2{   
+            width: 720px;
+            height: 730px;
             margin-top: 40px;
-            margin-left: 50px;
             overflow: hidden;
         }
 
@@ -234,7 +235,7 @@
 
        .c3 {
         border: 1px solid gray;
-        width: 700px;
+        width: 680px;
         height: 310px;
         border-radius: 10px;
         color: gray;
@@ -248,6 +249,14 @@
         margin: 0 auto;
         width: 700px;    
        }
+
+       .c4 {
+            border: 1px solid gray;
+            width: 714px;
+            height: 405px;
+            border-radius: 10px;
+            margin-top: 76px;
+       }
         
         a {
            color:gray;
@@ -255,7 +264,7 @@
         }
         
         .ynm{
-           width: 600px;
+            width: 100%;
             height: 100%;
             text-align: center;
             font-size: 30px;
@@ -263,7 +272,7 @@
 
         .ynm ul{
             padding-left: 0%;
-            padding-top: 20px;
+            padding-top: 10px;
         }
 
         .ynm li{
@@ -283,7 +292,10 @@
         margin-bottom: 5px;
        }
 
-       
+       #poomjul {
+        color: red;
+       }
+
 
     </style>
 </head>
@@ -321,7 +333,7 @@
             <br><br><br><br>
             <li class="product-admin" onmouseover="updateChart(4)"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a>
                 <ul class="product-data"><a href="<%= contextPath %>/AdminSelectProductList.pr?cpage=1"  style="color: white;">상품리스트</a></ul>
-                <ul class="adminOrder-data"><a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1 style="color: white;">주문확인</a></ul>
+                <ul class="adminOrder-data"><a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1"style="color: white;">주문확인</a></ul>
             </li>
             
         </div>
@@ -380,8 +392,8 @@
             </div><!-- .content -->
             <div class="content2">
                 <div class="c3"> 
-                    <table> 
-                        <thead align="center">
+                 <table> 
+                    <thead align="center">
                     <tr>
                         <th width="150">상품번호</th>
                         <th width="150">상품명</th>
@@ -389,19 +401,20 @@
                         <th width="150">업로드일자</th>
                     </tr>
                     </thead>
-                    <br><br>  
-                    <tbody align="center">     
+                    <tbody align="center">   
             	<% for(Product p : apList) { %>
-                    <tr>
+                    <tr style="margin-top: 20px;">
                         <td><%= p.getProductNo() %></td>
                         <td> <%= p.getProductName() %></td>
-                        <td><% if(p.getStock() == 0) { %>품절<% } %></td>
+                        <td id="poomjul"><% if(p.getStock() == 0) { %>품절<% } %></td>
                         <td><%= p.getProductUpdate() %></td>
                     </tr>                                          
                 <% } %> 
                  </tbody>
+                 <br>
                 </div>  
             </table>
+            <div class="c4"></div>
             </div>
 </div>
 </body>

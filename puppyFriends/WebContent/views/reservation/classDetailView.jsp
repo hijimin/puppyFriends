@@ -1,3 +1,4 @@
+<%@page import="com.kh.reservation.model.vo.Reservation"%>
 <%@page import="com.kh.reservation.model.vo.KinderClass"%>
 <%@page import="com.kh.common.model.vo.Image"%>
 <%@page import="java.util.ArrayList"%>
@@ -10,7 +11,6 @@
     KinderClass c = (KinderClass)request.getAttribute("c");
     int classrvCount = (int)request.getAttribute("classrvCount");
     ArrayList<Image> img = (ArrayList<Image>)request.getAttribute("img");
-    
     
     %>
 <!DOCTYPE html>
@@ -238,13 +238,17 @@
 				</div>
 
                 
-                <div class="btn_bar">
+                <div class="btn_bar" style="padding-bottom: 1%;">
+                 <% if(loginUser != null && loginUser.getDogSize().equals(c.getClassSize())) { %>
                      등록된 사이즈와 동일하지 않을 시 자동으로 예약 버튼 막힘
                     <button class="btn-open-modal" >예약하기// onclick 예정 , 예약 alert 띄운 후 동의 시 결제 페이지로 넘어감 alert 이후 결제 페이지로 넘어가게</button> 
+                 <% } else { %>
+                    <button class="btn-open-modal" disabled >예약하기</button> 
+                 <% } %>
                 </div>
 
                 <div class="btn_bar1">
-                	<a href="<%= contextPath %>/kinderClass.crv" class="C_back">뒤로가기</a> <br>
+                	<a href="<%= contextPath %>/kinderClass.crv" class="C_back" style="padding-bottom: 1%;">뒤로가기</a> <br>
                 </div>
 
 				관리자도 삭제 가능, 트레이너는 트레이너 것만 삭제 가능하게

@@ -153,6 +153,32 @@ public class ReservationService {
 		return result;
 	}
 
+	public int insertThumbnailClass(KinderClass c, ArrayList<Image> list, Reservation rv) {
+
+		Connection conn = getConnection();
+		
+		int result1 = new ReservationDao().insertThClass(conn, c); // dao의 result 담김
+		int result2 = new ReservationDao().insertThumbnailClassList(conn, list);
+		int result3 = new ReservationDao().inserThClassReservation(conn, rv);
+		
+		
+		if(result1 > 0 && result2 > 0 && result3 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result1 * result2 * result3;
+	}
+	
+	
+	
+	
+	
+	
+}
+
 
 
 
@@ -190,4 +216,4 @@ public class ReservationService {
 
 */
 	
-}
+

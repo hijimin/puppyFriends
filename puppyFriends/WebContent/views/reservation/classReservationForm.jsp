@@ -56,8 +56,8 @@
     .thum_tool{
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
-
+        /* justify-content: flex-start; */
+        /* justify-content: space-between; */
         /* border: 2px solid rgb(255, 222, 239); */
         width: 100%;
         height: auto;
@@ -73,7 +73,7 @@
         top: 0;
         padding: 2%;
         position: relative;
-        flex: 1 0 21%; /* flex-grow | flex-shrink | flex-basis */
+        /* flex: 1 0 21%;  // flex-grow | flex-shrink | flex-basis */
         width: 300px;
         height: 250px;
         

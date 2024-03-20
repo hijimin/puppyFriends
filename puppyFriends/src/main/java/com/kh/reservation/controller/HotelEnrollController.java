@@ -63,9 +63,9 @@ public class HotelEnrollController extends HttpServlet {
 
 			try {
 				h.setHotelStart(new java.sql.Date(
-						new SimpleDateFormat("yyyy-mm-dd").parse(multiRequest.getParameter("hotelStart")).getTime()));
+						new SimpleDateFormat("yyyy-MM-dd").parse(multiRequest.getParameter("hotelStart")).getTime()));
 				h.setHotelEnd(new java.sql.Date(
-						new SimpleDateFormat("yyyymmdd").parse(multiRequest.getParameter("hotelEnd")).getTime()));
+						new SimpleDateFormat("yyyy-MM-dd").parse(multiRequest.getParameter("hotelEnd")).getTime()));
 
 			} catch (ParseException e) {
 				e.printStackTrace();

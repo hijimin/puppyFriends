@@ -36,8 +36,16 @@ public class Reservation {
 		
 	}
 	
-	
-	  // HotelEnrollController
+	//inserThClassReservation
+	  public Reservation(Date reservationStart, Date reservationEnd, int reservationPrice) {
+		super();
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.reservationPrice = reservationPrice;
+	}
+
+
+	// HotelEnrollController
 	public Reservation(int reservationPrice) {
 		super();
 		this.reservationPrice = reservationPrice;

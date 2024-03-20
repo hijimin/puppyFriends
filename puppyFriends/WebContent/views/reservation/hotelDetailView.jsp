@@ -1,3 +1,4 @@
+<%@page import="com.kh.reservation.model.vo.Reservation"%>
 <%@page import="com.kh.common.model.vo.Image"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.kh.reservation.model.vo.Hotel"%>
@@ -230,13 +231,16 @@
 				    </script>
                 </div>
                 
-                <div class="btn_bar">
-                    if 사 등록된 사이즈와 동일하지 않을 시 자동으로 예약 버튼 막힘
+                <div class="btn_bar" style="padding-bottom: 1%;">
+                <% if(loginUser != null && loginUser.getDogSize().equals(h.getHotelSize())) { %>
                     <button class="btn-open-modal" >예약하기// onclick 예정 , 예약 alert 띄운 후 동의 시 결제 페이지로 넘어감 alert 이후 결제 페이지로 넘어가게</button> 
+                <% } else { %>
+                    <button class="btn-open-modal" disabled >예약하기</button> 
+              	<% } %> 
                 </div>
 
-                <div class="btn_bar1">
-                	<a href="<%= contextPath %>/hotel.hrv" class="H_back">뒤로가기</a> <br>
+                <div class="btn_bar1" style="padding-bottom: 1%;">
+                	<a href="<%= contextPath %>/hotel.hrv" class="H_back" style="padding-bottom: 1%;">뒤로가기</a> <br>
                 </div>
 
 				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")) { %>

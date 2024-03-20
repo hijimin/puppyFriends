@@ -484,7 +484,71 @@ ArrayList<KinderClass> list = new ArrayList<KinderClass>(); // [텅 빈 리스�
 		
 		return result;
 	}
+
+	public int insertThClass(Connection conn, KinderClass c) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertThClass");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, c.getClassWriter());
+			pstmt.setString(2, c.getClassName());
+			pstmt.setString(3, c.getClassText());
+			pstmt.setString(4, c.getClassSize());
+			pstmt.setInt(5, c.getdNumber());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+
+	public int insertThumbnailClassList(Connection conn, ArrayList<Image> list) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertThumbnailClassList");
+		
+			try {
+				
+				for(Image img : list) {
+				
+				pstmt = conn.prepareStatement(sql);
+			
+				pstmt.setString(1, img.getFileName());
+				pstmt.setString(2, img.getChangeName());
+				pstmt.setString(3, img.getFilePath());
+				pstmt.setInt(4, img.getFileLevel());
+				
+				result = pstmt.executeUpdate();
+				
+			}
+			
+		} catch (SQLException e) {
+		e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	
+		return result;
+	}
+
+	public int inserThClassReservation(Connection conn, Reservation rv) {
+
+// 작성 필요
+		
+		return 0;
+	}
+	
+
 
 
 

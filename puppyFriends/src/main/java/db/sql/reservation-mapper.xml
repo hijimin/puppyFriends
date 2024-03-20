@@ -232,6 +232,56 @@
    	   WHERE CLASS_NO = ?
 		
 	</entry>
+	
+	<entry key="insertThClass">
+	
+	INSERT
+	  INTO CLASS
+	  (
+	    CLASS_NO
+	  , CLASS_WRITER
+	  , CLASS_NAME
+	  , CLASS_TEXT
+	  , CLASS_SIZE
+	  , D_NUMBER
+	  )
+	  VALUES
+	  (
+	  SEQ_CLASS.NEXTVAL
+	, ?
+	, ?
+	, ?
+	, ?
+	, ?
+	)
+	
+	</entry>
+	
+	
+	<entry key="insertThumbnailClassList">
+	INSERT
+	  INTO IMAGE
+	  (
+	    FILE_NO <!-- 파일번호 -->
+	  , REF_BNO <!-- 참조게시글번호 -->
+	  , IMAGE_TYPE
+	  , FILE_NAME <!-- 파일원본명 -->
+	  , CHANGE_NAME <!-- 파일수정명 -->
+	  , FILE_PATH <!-- 이미지저장경로, 호텔-2 -->
+	  , FILE_LEVEL <!-- 파일레벨 -->
+	  )
+	  VALUES
+	  (
+	    SEQ_IMAGE.NEXTVAL
+	  , SEQ_CLASS.CURRVAL
+	  , 4
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  )
+	  
+	</entry>
 
 </properties>
 

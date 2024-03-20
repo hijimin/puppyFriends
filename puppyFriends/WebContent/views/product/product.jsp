@@ -42,6 +42,8 @@
 
               #bestproduct {
                 height: 180px;
+                padding-top: 100px;
+                padding-left: 1000px;
               }
 
               #content > div {
@@ -380,7 +382,7 @@
               </div>
               <% } %>
 
-              <!-- <div class="search">
+              <div class="search">
                 <input
                   class="searchclass"
                   type="text"
@@ -391,7 +393,7 @@
                   class="searchimg"
                   src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
                 />
-              </div> -->
+              </div>
             </div>
 
             <script>

@@ -422,6 +422,91 @@ public class ProductDao {
 		return list;
 	}
 	
+	public ArrayList<Product> selectProductNum(Connection conn){
+		ArrayList<Product> list = new ArrayList<Product>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectProductNum");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Product(rset.getInt("product_no")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public Product selectProduct(Connection conn, int produtNo) {
+		Product p = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, produtNo);
+			
+			if(rset.next()) {
+				p = new Product();
+				p.setProductName(rset.getString("product_name"));
+				p.setProductDesc(rset.getString("product_desc"));
+				p.setPrice(rset.getString("product_price"));
+				p.setDiscount(rset.getInt("product_discount"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return p;
+	}
+	
+	public ArrayList<Image> selectImgList(Connection conn, int productNo){
+		ArrayList<Image> list = new ArrayList<Image>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectImgList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, productNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Image im = new Image();
+				im.setChangeName(rset.getString("change_name"));
+				im.setFilePath(rset.getString("file_path"));
+				
+				list.add(im);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;	
+	}
+	
 
 	
 

@@ -5,14 +5,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.imgimg{
+		text-align: center;
+	}
+</style>
 </head>
 <body>
 
 	<%@ include file="../common/menubar.jsp" %>
 	
-	<h2 align="center">담긴것이 없습니다.</h2>
+	<h2 align="center">담긴 상품이 없습니다.</h2>
 	
-	<img src="resources/image/empty.png">
+	<div class="imgimg">		
+		<img src="resources/image/empty.png">
+	</div>
 	
 	
 	<%@ include file="../common/footerbar.jsp" %>

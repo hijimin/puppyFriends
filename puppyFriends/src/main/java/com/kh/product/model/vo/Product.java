@@ -108,6 +108,15 @@ public class Product {
 		this.productNo = productNo;
 		this.stock = stock;
 	}
+	
+	
+
+
+
+	public Product(int productNo) {
+		super();
+		this.productNo = productNo;
+	}
 
 
 

@@ -224,6 +224,30 @@ ORDER BY PRODUCT_COUNT DESC)A
  WHERE PRODUCT_STATUS = 'Y'
 	</entry>
 	
+	<entry key="selectProductNum">
+		SELECT PRODUCT_NO
+	 FROM PRODUCT
+	</entry>
+	
+	<entry key="selectProduct">
+		SELECT 
+	       PRODUCT_NAME
+	     , PRODUCT_DESC
+	     , PRODUCT_PRICE
+	     , PRODUCT_DISCOUNT
+	 FROM PRODUCT
+	WHERE PRODUCT_NO = ?
+	</entry>
+	
+	<entry key="selectImgList">
+		SELECT 
+	       CHANGE_NAME
+	     , FILE_PATH
+	 FROM IMAGE
+	 JOIN PRODUCT ON(REF_BNO = PRODUCT_NO)
+	WHERE PRODUCT_NO = ?
+	</entry>
+	
 	
 
 		

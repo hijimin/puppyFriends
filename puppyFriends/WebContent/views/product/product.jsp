@@ -375,11 +375,8 @@
                 <br />
                 <br />
                 <br />
-                <a
-                  href="<%=contextPath%>/enrollForm.pd"
-                  class="btn btn-sm btn-secondary"
-                  >상품등록</a
-                >
+                <a href="<%=contextPath%>/enrollForm.pd" class="btn btn-sm btn-secondary">상품등록</a>
+                <a href="<%= contextPath%>/upEnrollForm.pd" class="btn btn-sm btn-secondary">상품수정</a>
               </div>
               <% } %>
 

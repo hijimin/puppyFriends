@@ -124,6 +124,30 @@ public class ProductService {
 		return list;
 	}
 	
+	public ArrayList<Product> selectProductNum(){
+		Connection conn = getConnection();
+		ArrayList<Product> list = new ProductDao().selectProductNum(conn);
+		close(conn);
+		return list;
+	}
+	
+	public Product selectProduct(int productNo) {
+		Connection conn = getConnection();
+		
+		Product p = new ProductDao().selectProduct(conn, productNo);
+		
+		close(conn);
+		return p;
+	}
+	
+	public ArrayList<Image> selectImgList(int productNo){
+		Connection conn = getConnection();
+		ArrayList<Image> list = new ProductDao().selectImgList(conn, productNo);
+		close(conn);
+		return list;
+		
+	}
+	
 	
 	
 

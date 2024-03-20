@@ -69,6 +69,7 @@
 
     .mypage-content-side{width: 98%; height: 100%; padding: 30px 0px;}
     .mypage-content-main{width: 95%; height: 100%; padding-top: 20px;}
+    #mypage-content-mainForm{width: 100%; height: 100%;}
     .input-row{
         width: 90%;
         height: 8%;  
@@ -166,7 +167,6 @@
 	 %>
 	
 
-     <form action="<%= contextPath %>/update.me" method="post">
 
      <div class="mypage-wrap" align="center">
         <div class="mypage-form">
@@ -191,120 +191,122 @@
                             <li><a href="<%= request.getContextPath()%>/mypageProduct">구매 내역 조회</a></li>
                             <li><a href="<%= request.getContextPath()%>/mypageReservation">예약 조회</a></li>
                             <li><a href="<%= request.getContextPath()%>/mypageBoard">내가 쓴 글</a></li>
-                            <li><a href="javascript:"onclick="deleteMember();">회원탈퇴</a></li>
+                            <li><a data-toggle="modal" href="#deleteModal">회원탈퇴</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="mypage-content-zone">
                     <div class="mypage-content-side">
                         <div class="mypage-content-main">
-	
-                            <input type="hidden" name="memberNo" value="<%= memberNo %>">
 
-                            <div class="input-row">
-                                <div class="input-title">
-                                    <b>아이디</b>
+                            <form id="mypage-content-mainForm" action="<%= contextPath %>/update.me" method="post">
+
+                                <input type="hidden" name="memberNo" value="<%= memberNo %>">
+
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>아이디</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" readonly name="memberId" value="<%= memberId %>">
+                                    </div>
                                 </div>
-                                <div class="input-group">
-                                    <input type="text" readonly name="memberId" value="<%= memberId %>">
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>이름</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" readonly name="memberName" value="<%= memberName %>">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="input-row">
-                                <div class="input-title">
-                                    <b>이름</b>
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>이메일</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" name="memberEmail" value="<%= email %>">
+                                    </div>
                                 </div>
-                                <div class="input-group">
-                                    <input type="text" readonly name="memberName" value="<%= memberName %>">
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>전화번호</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" name="memberPhone" value="<%= phone %>">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="input-row">
-                                <div class="input-title">
-                                    <b>이메일</b>
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>반려견 이름</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" name="dogName" value="<%= dogName %>">
+                                    </div>
                                 </div>
-                                <div class="input-group">
-                                    <input type="text" name="memberEmail" value="<%= email %>">
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>반려견 견종</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" name="dogValue" value="<%= dogValue %>">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="input-row">
-                                <div class="input-title">
-                                    <b>전화번호</b>
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>반려견 나이</b>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" name="dogAge" value="<%= dogAge %>">
+                                    </div>
                                 </div>
-                                <div class="input-group">
-                                    <input type="text" name="memberPhone" value="<%= phone %>">
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>반려견 성별</b>
+                                    </div>
+                                    <div class="input-group-radio">
+                                        <input type="radio" name="dogGender" id="male" value="M"
+                                        <% if(dogGender.equals("M")) { %>
+                                            checked	
+                                        <% } %>
+                                        > 남아
+                                            
+                                        <input type="radio" name="dogGender" id="female" value="F"
+                                        <% if(dogGender.equals("F")) { %>
+                                            checked	
+                                        <% } %>
+                                        > 여아
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="input-row">
-                                <div class="input-title">
-                                    <b>반려견 이름</b>
+                                
+                                <div class="input-row">
+                                    <div class="input-title">
+                                        <b>반려견 크기</b>
+                                    </div>
+                                    <div class="input-group-radio">
+                                        <input type="radio" name="dogSize" id="" value="S"
+                                        <% if(dogSize.equals("S")) { %>
+                                            checked	
+                                        <% } %>
+                                        > 소형견
+                                        <input type="radio" name="dogSize" id="" value="M"
+                                        <% if(dogSize.equals("M")) { %>
+                                            checked	
+                                        <% } %>
+                                        > 중형견
+                                        <input type="radio" name="dogSize" id="" value="L"
+                                        <% if(dogSize.equals("L")) { %>
+                                            checked	
+                                        <% } %>
+                                        > 대형견
+                                    </div>
                                 </div>
-                                <div class="input-group">
-                                    <input type="text" name="dogName" value="<%= dogName %>">
-                                </div>
-                            </div>
-                            <div class="input-row">
-                                <div class="input-title">
-                                    <b>반려견 견종</b>
-                                </div>
-                                <div class="input-group">
-                                    <input type="text" name="dogValue" value="<%= dogValue %>">
-                                </div>
-                            </div>
-                            <div class="input-row">
-                                <div class="input-title">
-                                    <b>반려견 나이</b>
-                                </div>
-                                <div class="input-group">
-                                    <input type="text" name="dogAge" value="<%= dogAge %>">
-                                </div>
-                            </div>
-                            <div class="input-row">
-                                <div class="input-title">
-                                    <b>반려견 성별</b>
-                                </div>
-                                <div class="input-group-radio">
-                                    <input type="radio" name="dogGender" id="male" value="M"
-                                    <% if(dogGender.equals("M")) { %>
-                                        checked	
-                                    <% } %>
-                                    > 남아
-                                        
-                                    <input type="radio" name="dogGender" id="female" value="F"
-                                    <% if(dogGender.equals("F")) { %>
-                                        checked	
-                                    <% } %>
-                                    > 여아
-                                </div>
-                            </div>
-                            
-                            <div class="input-row">
-                                <div class="input-title">
-                                    <b>반려견 크기</b>
-                                </div>
-                                <div class="input-group-radio">
-                                    <input type="radio" name="dogSize" id="" value="S"
-                                    <% if(dogSize.equals("S")) { %>
-                                        checked	
-                                    <% } %>
-                                    > 소형견
-                                    <input type="radio" name="dogSize" id="" value="M"
-                                    <% if(dogSize.equals("M")) { %>
-                                        checked	
-                                    <% } %>
-                                    > 중형견
-                                    <input type="radio" name="dogSize" id="" value="L"
-                                    <% if(dogSize.equals("L")) { %>
-                                        checked	
-                                    <% } %>
-                                    > 대형견
-                                </div>
-                            </div>
-                            <div class="input-row">
-                                <div class="input-title" style="font-size: 14px;">
-                                    <b >필수 예방 접종 여부</b>
-                                </div>
-                                <div class="input-group-radio">
-                                    <input type="radio" name="dogVaccine" value="Y"
-                                    <% if(dogVaccine.equals("Y")) { %>
+                                <div class="input-row">
+                                    <div class="input-title" style="font-size: 14px;">
+                                        <b >필수 예방 접종 여부</b>
+                                    </div>
+                                    <div class="input-group-radio">
+                                        <input type="radio" name="dogVaccine" value="Y"
+                                        <% if(dogVaccine.equals("Y")) { %>
                                         checked	
                                         <% } %>
                                         > O
@@ -334,6 +336,7 @@
                                         <button type="button" onclick="location.href='<%= contextPath %>'" class="btn btn-danger btn-lg">취소</button>
                                     </div>
                                 </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -341,7 +344,33 @@
         </div>
      </div>
      
-     </form>
+      <!-- 회원탈퇴용 Modal -->
+	  <div class="modal" id="deleteModal">
+        <div class="modal-dialog" style="margin-top: 250px;">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">회원탈퇴</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body" align="center">
+              
+              <form action="<%= contextPath %>/delete.me" method="post">
+                  <input type="hidden" name="userId" value="<%= memberId %>">
+                  <b>탈퇴 후 복구가 불가능합니다. <br> 정말로 탈퇴하시겠습니까? </b> <br><br>
+                  비밀번호 : <input type="password" name="userPwd" required> <br><br>
+                     <button type="submit" class="btn btn-sm btn-danger" onclick="return deleteMember();">탈퇴하기</button>
+              </form>
+              
+            </div>
+      
+      
+          </div>
+        </div>
+      </div>
 
 
      

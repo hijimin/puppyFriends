@@ -39,6 +39,7 @@ public class UpdatePwdController extends HttpServlet {
 		HttpSession session = request.getSession();
 		if(updateMem == null) {
 			session.setAttribute("alertMsg", "비밀번호 변경에 실패했습니다!");
+			response.sendRedirect(request.getContextPath() + "/mypage");
 		}else {
 			session.setAttribute("alertMsg", "성공적으로 비밀번호 변경됐습니다");
 			session.setAttribute("loginUser", updateMem);

@@ -187,109 +187,138 @@ pageEncoding="UTF-8"%>
   <body>
     <%@ include file="../common/menubar.jsp" %>
 
-<form action="<%= contextPath %>/updatePwd.me" method="post">
-    <div class="mypage-wrap" align="center">
-      <div class="mypage-form">
-        <div class="mypage-header">
-          <div class="mypage-menu-empty"></div>
-          <div class="mypage-order">
-            <li><a href="">Home ></a></li>
-            <li><a href="">Mypage ></a></li>
-            <li><span>비밀번호변경</span></li>
-          </div>
-        </div>
-        <div class="mypage-content">
-          <div class="mypage-select-zone">
-            <div class="mypage-select-header">
-              <h2>MY PAGE</h2>
-            </div>
-            <div class="line"></div>
-            <div class="mypage-select-main">
-              <ul>
-                <li>
-                  <a href="<%= request.getContextPath()%>/mypage"
-                    >회원정보수정</a
-                  >
-                </li>
-                <li>
-                  <a href="<%= request.getContextPath()%>/updatePwd"
-                    >비밀번호변경</a
-                  >
-                </li>
-                <li>
-                  <a href="<%= request.getContextPath()%>/mypageProduct"
-                    >구매 내역 조회</a
-                  >
-                </li>
-                <li>
-                  <a href="<%= request.getContextPath()%>/mypageReservation"
-                    >예약 조회</a
-                  >
-                </li>
-                <li>
-                  <a href="<%= request.getContextPath()%>/mypageBoard"
-                    >내가 쓴 글</a
-                  >
-                </li>
-                <li>
-                  <a href="<%= request.getContextPath()%>/deleteMember"
-                    >회원탈퇴</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
+      <form action="<%= contextPath %>/updatePwd.me" method="post">
+          <div class="mypage-wrap" align="center">
+            <div class="mypage-form">
+              <div class="mypage-header">
+                <div class="mypage-menu-empty"></div>
+                <div class="mypage-order">
+                  <li><a href="">Home ></a></li>
+                  <li><a href="">Mypage ></a></li>
+                  <li><span>비밀번호변경</span></li>
+                </div>
+              </div>
+              <div class="mypage-content">
+                <div class="mypage-select-zone">
+                  <div class="mypage-select-header">
+                    <h2>MY PAGE</h2>
+                  </div>
+                  <div class="line"></div>
+                  <div class="mypage-select-main">
+                    <ul>
+                      <li>
+                        <a href="<%= request.getContextPath()%>/mypage"
+                          >회원정보수정</a
+                        >
+                      </li>
+                      <li>
+                        <a href="<%= request.getContextPath()%>/updatePwd"
+                          >비밀번호변경</a
+                        >
+                      </li>
+                      <li>
+                        <a href="<%= request.getContextPath()%>/mypageProduct"
+                          >구매 내역 조회</a
+                        >
+                      </li>
+                      <li>
+                        <a href="<%= request.getContextPath()%>/mypageReservation"
+                          >예약 조회</a
+                        >
+                      </li>
+                      <li>
+                        <a href="<%= request.getContextPath()%>/mypageBoard"
+                          >내가 쓴 글</a
+                        >
+                      </li>
+                      <li>
+                        <a data-toggle="modal" href="#deleteModal"
+                          >회원탈퇴</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
 
 
-          <div class="mypage-content-zone">
-            <div class="mypage-content-side">
-              <div class="mypage-content-main">
-                  <div class="mypage-change-pwd">
-                    <div class="change-pwd-main">
-                      <input type="hidden" name="memberId" value="<%= loginUser.getMemberId() %>">  
-                      <div class="input-row">
-                        <div class="input-title"><b>현재 비밀번호</b></div>
-                        <div class="input-group">
-                          <input type="password" name="memberPwd" />
+                <div class="mypage-content-zone">
+                  <div class="mypage-content-side">
+                    <div class="mypage-content-main">
+                        <div class="mypage-change-pwd">
+                          <div class="change-pwd-main">
+                            <input type="hidden" name="memberId" value="<%= loginUser.getMemberId() %>">  
+                            <div class="input-row">
+                              <div class="input-title"><b>현재 비밀번호</b></div>
+                              <div class="input-group">
+                                <input type="password" name="memberPwd" />
+                              </div>
+                            </div>
+                            <div class="input-row">
+                              <div class="input-title"><b>바꿀 비밀번호</b></div>
+                              <div class="input-group">
+                                <input type="password" name="updatePwd"/>
+                              </div>
+                            </div>
+                            <div class="input-row">
+                              <div class="input-title"><b>비밀번호 확인</b></div>
+                              <div class="input-group">
+                                <input type="password" name="checkPwd"/>
+                              </div>
+                            </div>
+                          </div>
+                          <br><br><br>
+                          <div class="change-pwd-button">
+                            <div class="cancle-update-button">
+                              <button type="button" onclick="location.href='<%= contextPath %>'" class="btn btn-danger btn-lg">취소</button>
+                            </div>
+                            <div class="register-update-button">
+                              <button type="submit" class="btn btn-primary btn-lg" onclick="return validatePwd();">비밀번호 변경</button>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="input-row">
-                        <div class="input-title"><b>바꿀 비밀번호</b></div>
-                        <div class="input-group">
-                          <input type="password" name="updatePwd"/>
-                        </div>
-                      </div>
-                      <div class="input-row">
-                        <div class="input-title"><b>비밀번호 확인</b></div>
-                        <div class="input-group">
-                          <input type="password" name="checkPwd"/>
-                        </div>
-                      </div>
-                    </div>
-                    <br><br><br>
-                    <div class="change-pwd-button">
-                      <div class="cancle-update-button">
-                        <button type="button" onclick="location.href='<%= contextPath %>'" class="btn btn-danger btn-lg">취소</button>
-                      </div>
-                      <div class="register-update-button">
-                        <button type="submit" class="btn btn-primary btn-lg" onclick="return validatePwd();">비밀번호 변경</button>
                       </div>
                     </div>
                   </div>
-                </div>
               </div>
             </div>
+          </div>
+      </form>
+      <script>
+        function validatePwd(){
+          if($("input[name=updatePwd]").val() != $("input[name=checkPwd]").val()){
+            alert("변경할 비밀번호가 일치하지 않습니다.");
+            return false;
+          }
+        }
+      </script>
+      
+      <!-- 회원탈퇴용 Modal -->
+      <div class="modal" id="deleteModal">
+        <div class="modal-dialog" style="margin-top: 250px;">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">회원탈퇴</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" align="center">
+              
+              <form action="<%= contextPath %>/delete.me" method="post">
+                  <input type="hidden" name="userId" value="<%= loginUser.getMemberId() %>">
+                  <b>탈퇴 후 복구가 불가능합니다. <br> 정말로 탈퇴하시겠습니까? </b> <br><br>
+                  비밀번호 : <input type="password" name="userPwd" required> <br><br>
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return deleteMember();">탈퇴하기</button>
+              </form>
+              
+            </div>
+
+
+          </div>
         </div>
       </div>
-    </div>
-</form>
-<script>
-  function validatePwd(){
-    if($("input[name=updatePwd]").val() != $("input[name=checkPwd]").val()){
-      alert("변경할 비밀번호가 일치하지 않습니다.");
-      return false;
-    }
-  }
-</script>
+
   </body>
 </html>

@@ -23,6 +23,29 @@ public class OrderDao {
 		}
 	}
 	
+	public int orderInsert2(Connection conn, Order o) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("orderInsert2");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(o.getOrderUser()));
+			pstmt.setInt(2, Integer.parseInt(o.getProductNo()));
+			pstmt.setString(3, o.getOrderName());
+			pstmt.setString(4, o.getOrderAddress());
+			pstmt.setString(5, o.getOrderPhone());
+			pstmt.setString(6, o.getOrderReq());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;			
+	}
+	
 	public int orderInsert(Connection conn, Order o) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -36,6 +59,7 @@ public class OrderDao {
 			pstmt.setString(4, o.getOrderAddress());
 			pstmt.setString(5, o.getOrderPhone());
 			pstmt.setString(6, o.getOrderReq());
+			pstmt.setInt(7, o.getOrderCount());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -67,17 +91,60 @@ public class OrderDao {
 		return result;
 	}
 	
-	public int orderUpdate(Connection conn, Order o) {
+	public int orderUpdate(Connection conn, Order o, int many) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("orderUpdate");
+		String sql = "";
+		if(many == 999) {
+			sql = prop.getProperty("orderUpdate1"); // 첫번째 상품이면 여기를 탐
+		}else {
+			sql = prop.getProperty("orderUpdate2"); // 두번째 상품이면 여기를 탐
+		}
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, Integer.parseInt(o.getProductNo()));
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateOrderCount(Connection conn, int userNo, int productNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateOrderCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, productNo);
+			pstmt.setInt(2, userNo);
 			
 			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateOrderCountMinus(Connection conn, int userNo, int productNo ) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateOrderCountMinus");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, productNo);
+			pstmt.setInt(2, userNo);
+			
+			result = pstmt.executeUpdate();			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

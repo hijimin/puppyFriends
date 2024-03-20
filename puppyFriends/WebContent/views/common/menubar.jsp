@@ -166,14 +166,14 @@
     .dog_data:hover > .dog_data2{
         display: block;
         position: absolute;
-        left: 44%;
+        left: 49.8%;
         transform: translateX(0%);
     }
     
     .board_All:hover>.board_Detail{
     	display: block;
         position: absolute;
-        left: 76%;
+        left: 70.1%;
         transform: translateX(0%);
     
     }

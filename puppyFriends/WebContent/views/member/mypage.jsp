@@ -69,6 +69,7 @@
 
     .mypage-content-side{width: 98%; height: 100%; padding: 30px 0px;}
     .mypage-content-main{width: 95%; height: 100%; padding-top: 20px;}
+    #mypage-content-mainForm{width: 100%; height: 100%;}
     .input-row{
         width: 90%;
         height: 8%;  
@@ -165,6 +166,8 @@
 	 	String dogSig = loginUser.getDogSignificant(); // 반려견 특이사항
 	 %>
 	
+
+
      <div class="mypage-wrap" align="center">
         <div class="mypage-form">
             <div class="mypage-header">
@@ -185,19 +188,17 @@
                         <ul>
                             <li><a href="<%= request.getContextPath()%>/mypage">회원정보수정</a></li>
                             <li><a href="<%= request.getContextPath()%>/updatePwd">비밀번호변경</a></li>
-                            <li><a href="<%= request.getContextPath()%>/mypageProduct">구매 내역 조회</a></li>
+                            <li><a href="<%= request.getContextPath()%>/mypageProduct">장바구니 조회</a></li>
                             <li><a href="<%= request.getContextPath()%>/mypageReservation">예약 조회</a></li>
-                            <li><a href="<%= request.getContextPath()%>/mypageBoard">내가 쓴 글</a></li>
-                            <li><a href="javascript:"onclick="deleteMember();">회원탈퇴</a></li>
+                            <li><a data-toggle="modal" href="#deleteModal">회원탈퇴</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="mypage-content-zone">
                     <div class="mypage-content-side">
                         <div class="mypage-content-main">
-	
 
-                            <form action="<%= contextPath %>/update.me" method="post">
+                            <form id="mypage-content-mainForm" action="<%= contextPath %>/update.me" method="post">
 
                                 <input type="hidden" name="memberNo" value="<%= memberNo %>">
 
@@ -305,36 +306,35 @@
                                     <div class="input-group-radio">
                                         <input type="radio" name="dogVaccine" value="Y"
                                         <% if(dogVaccine.equals("Y")) { %>
-                                            checked	
-                                            <% } %>
-                                            > O
-                                            <input type="radio" name="dogVaccine" value="N"
-                                            <% if(dogVaccine.equals("N")) { %>
-                                            checked	
-                                            <% } %>
-                                            > X
-                                        </div>
+                                        checked	
+                                        <% } %>
+                                        > O
+                                        <input type="radio" name="dogVaccine" value="N"
+                                        <% if(dogVaccine.equals("N")) { %>
+                                        checked	
+                                        <% } %>
+                                        > X
                                     </div>
-                                    <div class="input-row" style="height: auto;">
-                                        <div class="input-title">
-                                            <b>특이사항</b>
-                                        </div>
-                                        <div class="input-textbox">
-                                            <textarea class="dogsignificant-box" name="dogSignificant" style="resize: none;"><%= dogSig %></textarea>
-                                            
-                                        </div>
+                                </div>
+                                <div class="input-row" style="height: auto;">
+                                    <div class="input-title">
+                                        <b>특이사항</b>
                                     </div>
-                                    
-                                    
-                                    <div class="change-pwd-button">
-                                        <div class="register-update-button">
-                                            <button class="btn btn-primary btn-lg">저장</button>
-                                        </div>
-                                        <div class="cancle-update-button ">
-                                            <button type="button" onclick="location.href='<%= contextPath %>'" class="btn btn-danger btn-lg">취소</button>
-                                        </div>
+                                    <div class="input-textbox">
+                                        <textarea class="dogsignificant-box" name="dogSignificant" style="resize: none;"><%= dogSig %></textarea>
+                                        
                                     </div>
-                                    
+                                </div>
+                                
+                                
+                                <div class="change-pwd-button">
+                                    <div class="register-update-button">
+                                        <button class="btn btn-primary btn-lg">저장</button>
+                                    </div>
+                                    <div class="cancle-update-button ">
+                                        <button type="button" onclick="location.href='<%= contextPath %>'" class="btn btn-danger btn-lg">취소</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -343,7 +343,33 @@
         </div>
      </div>
      
-
+      <!-- 회원탈퇴용 Modal -->
+	  <div class="modal" id="deleteModal">
+        <div class="modal-dialog" style="margin-top: 250px;">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">회원탈퇴</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body" align="center">
+              
+              <form action="<%= contextPath %>/delete.me" method="post">
+                  <input type="hidden" name="memberId" value="<%= memberId %>">
+                  <b>탈퇴 후 복구가 불가능합니다. <br> 정말로 탈퇴하시겠습니까? </b> <br><br>
+                  비밀번호 : <input type="password" name="memberPwd" required> <br><br>
+                     <button type="submit" class="btn btn-sm btn-danger" onclick="return deleteMember();">탈퇴하기</button>
+              </form>
+              
+            </div>
+      
+      
+          </div>
+        </div>
+      </div>
 
 
      

@@ -96,25 +96,72 @@ public class ProductService {
 		return p;
 	}
 	
-	public ArrayList<Product> selectGoodList(){
+	public ArrayList<Product> selectGoodList(PageInfo pi){
 		Connection conn = getConnection();
-		ArrayList<Product> list = new ProductDao().selectGoodList(conn);
+		ArrayList<Product> list = new ProductDao().selectGoodList(conn, pi);
 		close(conn);
 		return list;
 	}
 	
-	public ArrayList<Product> selectRecentList(){
+	public ArrayList<Product> selectRecentList(PageInfo pi){
 		Connection conn = getConnection();
-		ArrayList<Product> list = new ProductDao().selectRecentList(conn);
+		ArrayList<Product> list = new ProductDao().selectRecentList(conn, pi);
 		close(conn);
 		return list;
 	}
 	
-	public ArrayList<Product> selectCountList(){
+	public ArrayList<Product> selectCountList(PageInfo pi){
 		Connection conn = getConnection();
-		ArrayList<Product> list = new ProductDao().selectCountList(conn);
+		ArrayList<Product> list = new ProductDao().selectCountList(conn, pi);
 		close(conn);
 		return list;
+	}
+	
+	public ArrayList<Product> selectStockList(){
+		Connection conn = getConnection();
+		ArrayList<Product> list = new ProductDao().selectStockList(conn);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Product> selectProductNum(){
+		Connection conn = getConnection();
+		ArrayList<Product> list = new ProductDao().selectProductNum(conn);
+		close(conn);
+		return list;
+	}
+	
+	public Product selectProduct(int productNo) {
+		Connection conn = getConnection();
+		
+		Product p = new ProductDao().selectProduct(conn, productNo);
+		
+		close(conn);
+		return p;
+	}
+	
+	public ArrayList<Image> selectImgList(int productNo){
+		Connection conn = getConnection();
+		ArrayList<Image> list = new ProductDao().selectImgList(conn, productNo);
+		close(conn);
+		return list;		
+	}
+	
+	public int updateProduct(Product p, Image im) {
+		Connection conn = getConnection();
+		
+		int result1 = new ProductDao().updateProduct(conn,p);
+		int result2 = 1;		
+		result2 = new ProductDao().updateImg(conn,im,p);
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1 * result2;
 	}
 	
 	

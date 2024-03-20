@@ -27,6 +27,7 @@
 	FROM CART
 	WHERE MEMBER_NO = ?
 	  AND PRODUCT_NO = ?
+	  AND CART_STATUS = 'Y'
 	</entry>
 	
 	<entry key="updateCart">
@@ -61,6 +62,12 @@ SELECT
 	  FROM CART
 	 WHERE MEMBER_NO = ?
 	   AND PRODUCT_NO = ?
+	</entry>
+	
+	<entry key="cartStatusUpdate">
+		UPDATE CART
+	  SET CART_STATUS = 'N'
+	WHERE CART_NO = ?
 	</entry>
 
 

@@ -33,7 +33,6 @@ public class AjaxReviewInsertController extends HttpServlet {
 		String reviewContent = request.getParameter("content");
 		int productNo = Integer.parseInt(request.getParameter("pno"));
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
-		System.out.println(userNo);
 		Review r = new Review();
 		r.setReviewText(reviewContent);
 		r.setProduct(String.valueOf(productNo));

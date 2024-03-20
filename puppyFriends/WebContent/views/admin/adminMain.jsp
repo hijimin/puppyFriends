@@ -286,8 +286,8 @@
             <br><br><br><br>
             <li class="adminDogInfo" onmouseover="updateChart(3)">반려견정보
                 <ul class="dogInfo1">
-                    <li><a href="<%= contextPath %>/dogforMain.do"  style="color: white;">출석부</a></li><br>
-                    <li><a href="<%= contextPath %>/dogforMain.do#"  style="color: white;">갤러리</a></li>
+                    <li><a href="<%= contextPath %>/enroll.at"  style="color: white;">출석부 등록</a></li><br>
+                    <li><a href="<%= contextPath %>/dogforMain.do"  style="color: white;">갤러리</a></li>
                 </ul>
             </li>
             <br><br><br><br>

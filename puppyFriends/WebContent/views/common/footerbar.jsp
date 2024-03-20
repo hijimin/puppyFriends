@@ -13,6 +13,7 @@
         margin-top: 50px;
         background-color: rgb(255, 238, 247);
         font-size: 13px;
+        z-index: 10;
     }
     .footer{
             width: 100%;

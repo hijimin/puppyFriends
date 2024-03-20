@@ -69,11 +69,17 @@ public class KinderClass {
 		
 	}
 	
-	
-	
-	 // "/insert.hrv" 참고해서 기재 , "/enrollForm.crv") ? 
-	
-	
+	// insertThClass
+	public KinderClass(int classNo, int classWriter, String className, String classText, String classSize,
+			int dNumber) {
+		super();
+		this.classNo = classNo;
+		this.classWriter = classWriter;
+		this.className = className;
+		this.classText = classText;
+		this.classSize = classSize;
+		this.dNumber = dNumber;
+	}
 	
 	public int getMemberNo() {
 		return memberNo;

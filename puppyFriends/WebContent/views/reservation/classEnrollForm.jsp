@@ -7,7 +7,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Insert title here</title>
 
     <style>
@@ -131,7 +131,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       <div align="right" class="outer_name">
         프로그램 &gt; 유치원 예약 &gt; 유치원 등록 &nbsp; &nbsp;
       </div>
-      <br /><br />
+      <br><br>
       <div class="class_Name">
         <h1 align="right" style="vertical-align: top">유치원 등록</h1>
       </div>
@@ -142,7 +142,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         type="hidden"
         name="memberNo"
         value="<%= loginUser.getMemberNo() %>"
-      />
+      >
 
       <div class="photo_text">
         <!-- 왼쪽 맵-->
@@ -152,9 +152,9 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             <p>&lt;이미지 미리보기&gt;</p>
                            
             <div class="photoImg1">
-              <img class="photoImg" id="previewTitleImg" style="width: 100%" />
-              <img class="photoImg" id="previewContentImg1" style="width: 100%" />
-              <img class="photoImg" id="previewContentImg2" style="width: 100%" />
+              <img class="photoImg" id="previewTitleImg" style="width: 100%">
+              <img class="photoImg" id="previewContentImg1" style="width: 100%">
+              <img class="photoImg" id="previewContentImg2" style="width: 100%">
             </div>
             
             
@@ -211,7 +211,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     required
                     placeholder="유치원명을 입력해 주세요."
                     maxlength="10"
-                  />
+                  >
                 </td>
               </tr>
               <tr>
@@ -250,7 +250,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     min="1"
                     max="30"
                     style="width: 45%"
-                  />
+                  >
                 </td>
               </tr>
               <tr>
@@ -263,12 +263,12 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     id="start-date"
                     style="margin-bottom: 3px"
                     required
-                  /><br />
+                  ><br>
                   종료 : <input 
                   type="date" 
                   name="reservationEnd" 
                   id="end-date" 
-                  required />
+                  required>
                 </td>
               </tr>
               <tr>
@@ -283,12 +283,12 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     class="photoImg_input"
                     id="contentImg1"
                     onclick="chooseFile(2)"
-                  />
+                  >
                   <img
                     class="photoImg_input"
                     id="contentImg2"
                     onclick="chooseFile(3)"
-                  />
+                  >
 
                   <div id="file-area" style="display: none">
                     <input
@@ -297,19 +297,19 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       id="file1"
                       onchange="loadImg(this, 1);"
                       required
-                    />
+                    >
                     <input
                       type="file"
                       name="file2"
                       id="file2"
                       onchange="loadImg(this, 2);"
-                    />
+                    >
                     <input
                       type="file"
                       name="file3"
                       id="file3"
                       onchange="loadImg(this, 3);"
-                    />
+                    >
                   </div>
                 </td>
               </tr>
@@ -324,7 +324,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     style="width: 45%"
                     id="amountInput"
                     oninput="formatInput(this)"
-                  />
+                  >
                 </td>
               </tr>
             </table>
@@ -399,12 +399,12 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           </div>
         </div>
 
-        <br /><br />
+        <br><br>
       </div>
     </form>
     </div>
 
-    <%@ include file="../common/topBtn.jsp" %> <br />
+    <%@ include file="../common/topBtn.jsp" %> <br>
     <%@ include file="../common/footerbar.jsp" %>
   </body>
 </html>

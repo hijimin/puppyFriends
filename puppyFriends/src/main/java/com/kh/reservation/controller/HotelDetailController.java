@@ -44,6 +44,7 @@ public class HotelDetailController extends HttpServlet {
 			Hotel h = hService.selectHotelDetail(hotelNo);
 			ArrayList<Image> img = hService.selectHotelImgList(hotelNo);
 			
+			
 			request.setAttribute("h", h);
 			request.setAttribute("img", img);
 			request.setAttribute("hotelrvCount", hotelrvCount);

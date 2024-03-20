@@ -232,8 +232,9 @@
                 </div>
                 
                 <div class="btn_bar" style="padding-bottom: 1%;">
+                <input type="hidden" id="hno" value="<%= h.getHotelNo() %>">
                 <% if(loginUser != null && loginUser.getDogSize().equals(h.getHotelSize())) { %>
-                    <button class="btn-open-modal" >예약하기// onclick 예정 , 예약 alert 띄운 후 동의 시 결제 페이지로 넘어감 alert 이후 결제 페이지로 넘어가게</button> 
+                    <button class="btn-open-modal" id="makehotelRv">예약하기// onclick 예정 , 예약 alert 띄운 후 동의 시 결제 페이지로 넘어감 alert 이후 결제 페이지로 넘어가게</button> 
                 <% } else { %>
                     <button class="btn-open-modal" disabled >예약하기</button> 
               	<% } %> 
@@ -250,6 +251,8 @@
                 <% } %>
             </div>
 
+
+
 			<script>
 			// 삭제 alert
 			function confirmDelete(hotelNo) {
@@ -261,6 +264,20 @@
 			    	alert("삭제가 취소되었습니다.");
 			    }
 			}
+			
+			$("#makehotelRv").click(function() {
+			      var confirmSubmit = confirm("호텔 예약을 하시겠습니까?");
+			    	  var hno = $("#hno").val();
+			      if (confirmSubmit) {
+				      location.href = "<%= contextPath %>/detail.hrv?hno=" + hno;
+				      
+			      } else{
+			    	  alert("예약이 취소되었습니다.");
+				      location.href = "<%= contextPath %>/detail.hrv?hno=" + hno;
+				      
+			      }
+			      
+			   });
 			</script>
 
             <br><br>

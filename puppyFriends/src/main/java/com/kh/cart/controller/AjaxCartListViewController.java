@@ -41,7 +41,6 @@ public class AjaxCartListViewController extends HttpServlet {
 		
 		request.setAttribute("m", m);
 		request.setAttribute("list", list);
-		System.out.println(list);
 		request.getRequestDispatcher("views/cart/cartListView.jsp").forward(request, response);
 		
 		

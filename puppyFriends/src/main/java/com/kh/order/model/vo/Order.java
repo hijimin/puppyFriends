@@ -12,12 +12,16 @@ public class Order {
 	 private String orderReq;
 	 private Date orderDate;
 	 private int orderDelivery;
+	 private int orderCount;
 	 private int paymentNo;
+	 
+	 private String cartStatus;
 	 
 	 public Order() {}
 
 	public Order(int orderNo, String orderUser, String productNo, String orderName, String orderAddress,
-			String orderPhone, String orderReq, Date orderDate, int orderDelivery, int paymentNo) {
+			String orderPhone, String orderReq, Date orderDate, int orderDelivery, int orderCount, int paymentNo,
+			String cartStatus) {
 		super();
 		this.orderNo = orderNo;
 		this.orderUser = orderUser;
@@ -28,9 +32,10 @@ public class Order {
 		this.orderReq = orderReq;
 		this.orderDate = orderDate;
 		this.orderDelivery = orderDelivery;
+		this.orderCount = orderCount;
 		this.paymentNo = paymentNo;
+		this.cartStatus = cartStatus;
 	}
-	
 
 	public int getOrderNo() {
 		return orderNo;
@@ -104,6 +109,14 @@ public class Order {
 		this.orderDelivery = orderDelivery;
 	}
 
+	public int getOrderCount() {
+		return orderCount;
+	}
+
+	public void setOrderCount(int orderCount) {
+		this.orderCount = orderCount;
+	}
+
 	public int getPaymentNo() {
 		return paymentNo;
 	}
@@ -111,12 +124,20 @@ public class Order {
 	public void setPaymentNo(int paymentNo) {
 		this.paymentNo = paymentNo;
 	}
-	
+
+	public String getCartStatus() {
+		return cartStatus;
+	}
+
+	public void setCartStatus(String cartStatus) {
+		this.cartStatus = cartStatus;
+	}
 
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", orderUser=" + orderUser + ", productNo=" + productNo + ", orderName="
 				+ orderName + ", orderAddress=" + orderAddress + ", orderPhone=" + orderPhone + ", orderReq=" + orderReq
-				+ ", orderDate=" + orderDate + ", orderDelivery=" + orderDelivery + ", paymentNo=" + paymentNo + "]";
+				+ ", orderDate=" + orderDate + ", orderDelivery=" + orderDelivery + ", orderCount=" + orderCount
+				+ ", paymentNo=" + paymentNo + ", cartStatus=" + cartStatus + "]";
 	}
 }

@@ -2,6 +2,32 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
+	<entry key="orderInsert2">
+	INSERT
+  INTO P_ORDER
+  (
+    ORDER_NO
+  , MEMBER_NO
+  , PRODUCT_NO
+  , ORDER_NAME
+  , ORDER_ADDRESS
+  , ORDER_PHONE
+  , ORDER_REQ
+  , ORDER_DELIVERY
+  )
+  VALUES
+  (
+    SEQ_ORDER.NEXTVAL
+  , ? 
+  , ? 
+  , ? 
+  , ? 
+  , ? 
+  , ? 
+  , 3000 
+  )	
+	</entry>
+
 	<entry key="orderInsert">
 	INSERT
   INTO P_ORDER
@@ -13,7 +39,8 @@
   , ORDER_ADDRESS
   , ORDER_PHONE
   , ORDER_REQ
-  , ORDER_DELIVERY  
+  , ORDER_DELIVERY
+  , ORDER_COUNT 
   )
   VALUES
   (
@@ -24,37 +51,61 @@
   , ? 
   , ? 
   , ? 
-  , 3000  
+  , 3000 
+  , ? 
   )	
 	</entry>
 
 	<entry key="paymentInsert">
-INSERT
-  INTO TOSS_PAYMENT
-  (
-    TOSS_PAYMENT_NO
-  , TOSS_PAYMENT_ONO
-  , CARD_NAME
-  , IMP_UID
-  , MERCHANT_UID
-  , PAY_AMOUNT
-  )
-  VALUES
-  (
-    SEQ_TOSS_PAYMENT.NEXTVAL
-  , SEQ_ORDER.CURRVAL
-  , '카드'
-  , ? 
-  , ? 
-  , ? 
-  )
+	INSERT
+	  INTO TOSS_PAYMENT
+	  (
+	    TOSS_PAYMENT_NO
+	  , TOSS_PAYMENT_ONO
+	  , CARD_NAME
+	  , IMP_UID
+	  , MERCHANT_UID
+	  , PAY_AMOUNT
+	  )
+	  VALUES
+	  (
+	    SEQ_TOSS_PAYMENT.NEXTVAL
+	  , SEQ_ORDER.CURRVAL
+	  , '카드'
+	  , ? 
+	  , ? 
+	  , ? 
+	  )
 	</entry>
 	
-	<entry key="orderUpdate">
+	<entry key="orderUpdate1">
 	UPDATE
        P_ORDER
    SET PAYMENT_NO = SEQ_TOSS_PAYMENT.CURRVAL
- WHERE PRODUCT_NO = ?	
+ WHERE PAYMENT_NO IS NULL
+	</entry>
+	
+	<entry key="orderUpdate2">
+	UPDATE
+       P_ORDER
+   SET PAYMENT_NO = (select * from(select toss_payment_no from toss_payment
+order by toss_payment_no desc)
+where rownum = 1)
+ WHERE PAYMENT_NO IS NULL
+	</entry>
+	
+	<entry key="updateOrderCount">
+	UPDATE CART
+	   SET CART_AMOUNT = CART_AMOUNT + 1
+	 WHERE PRODUCT_NO = ?
+	   AND MEMBER_NO = ?
+	</entry>
+	
+	<entry key="updateOrderCountMinus">
+	UPDATE CART
+	   SET CART_AMOUNT = CART_AMOUNT - 1
+	 WHERE PRODUCT_NO = ?
+	   AND MEMBER_NO = ?
 	</entry>
 	
 </properties>

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.cart.model.vo.Cart;
+import com.kh.order.model.vo.Order;
 
 import static com.kh.common.JDBCTemplate.*;
 
@@ -151,6 +152,26 @@ public class CartDao {
 		}
 		return result;
 	}
+	
+	public int cartStatusUpdate(Connection conn, int cno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("cartStatusUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	
 

@@ -1,11 +1,12 @@
+<%@page import="com.google.gson.Gson"%>
 <%@page import="com.kh.cart.model.vo.Cart"%>
 <%@page import="com.kh.product.model.vo.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<Cart> list = (ArrayList<Cart>)request.getAttribute("list");
-	request.getSession().setAttribute("list1", list);
+	ArrayList<Cart> list = (ArrayList<Cart>)request.getAttribute("list");	
+
 	// 카트번호, 유저이름, 상품이름, 장바구니담은수량, 원가, 장바구니수량합계, 이미지경로, 상품번호
 	int productCount = list.size();
 	
@@ -121,6 +122,11 @@
         text-align: center;
     }
 
+    #content4_2{
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+
     #content1_2c1{
         display: inline;
         float: right;
@@ -131,12 +137,13 @@
         border-bottom: 1px solid #d7d5d5;
     }
     
-    /* .count-wrap {position: relative;padding: 0 38px;border: 1px solid #ddd;overflow: hidden;width: 60px;}
-	.count-wrap > button {border: 0;background: #ddd;color: #000;width: 38px;height: 38px;position: absolute;top: 0;font-size: 12px;} */
+     .count-wrap {position: relative;padding: 0 38px;border: 1px solid #ddd;overflow: hidden;width: 60px;}
+	.count-wrap > button {border: 0;background: #ddd;color: #000;width: 38px;height: 38px;position: absolute;top: 0;font-size: 12px;} 
 
 	.count-wrap .inp {border: 0;height: 38px;text-align: center;display: block;width: 100%;}
     .count-wrap > button.minus {left: 0;}
 	.count-wrap > button.plus {right: 0;}
+    
 
     input::-webkit-inner-spin-button {
     appearance: none;
@@ -152,7 +159,7 @@
     #content2{height: 300px;}
     
     #content2>div{width: 100%;}
-    #content2_1{height: 20%;}
+    /* #content2_1{height: 20%;} */
     #content2_2{height: 80%;}
 
     .required{
@@ -162,6 +169,7 @@
         margin-inline-start: 0px;
         margin-inline-end: 0px;
         text-align: right;
+        margin: -15px 0 0;;
     }
 
     /*배송정보*/
@@ -169,7 +177,27 @@
         height: 400px;
     }
     #content3>div{width: 100%;}
-    #content3_1{height: 20%;}
+    /* #content3_1{height: 20%;} */
+    #content3_1>h6{
+    font-weight: bold;
+    margin: 0;
+    vertical-align: middle;
+    display: inline-block;
+    }
+    #content2_1>h6{
+    font-weight: bold;
+    margin: 0;
+    vertical-align: middle;
+    display: inline-block;
+    }
+    p{
+        display: block;
+    }
+
+    
+
+
+
     #content3_2{height: 80%;}
 
     /*결제수단*/
@@ -190,6 +218,7 @@
     }
     #content5>div{width: 100%;}
     #content5_1{
+        margin-top: 40px;
         height: 20%;
         border-bottom: 1px solid #d7d5d5;
 
@@ -213,7 +242,17 @@
     .tossimg{
         width: 180px;
         height: 50px;
+        border: 1px solid black;
     }
+
+    /*버튼*/
+    .selectdeletebtn{
+        cursor: pointer;
+    }
+
+    
+
+ 
     
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -260,30 +299,31 @@
                 </div>
                 <div id="content1_2b">
                     <tbody>  
-                                     	
+                            <% int pppno = 0; %>        		
                         	<% String mprice = ""; %>
-                        	<% int totalA = 0; %>
+                        	<% String pName = ""; %>
                         	<% if(list.isEmpty()){ %>
                         		<h2 align="center">장바구니가 비어있습니다.</h2>
                         	<% }else{ %>
-                    		<% for(Cart c : list){ %>                 	              		
-                    		<% mprice = c.getdPrice(); %>         		             
+                    		<% for(Cart c : list){ %>                		              	              		
+                    		<% mprice = c.getdPrice(); %> 
+                    		<% pName = c.getProductNo(); %>        		             
                         <tr class="cartList">
                             <td>
                                 <input type="checkbox" name="plist" value="<%= c.getPno()%>">
                                 <label for="product"><img src="<%= contextPath %>/<%= c.getTitleImg() %>" width="100" height="100"></label>
                             </td>
-                            <td><%= c.getProductNo() %></td>
+                            <td><%= pName %></td>
                             <td>                                                    
-	                            <div class="count-wrap _count">
-								    <button type="button" class="minus" onclick="minusTest();">감소</button>
+	                            <div class="count-wrap _count" style="width:120px">
+								    <button type="button" class="minus" data-product-no="<%= c.getPno() %>" onclick="minusTest();">-</button>
 								    <input type="number" class="inp" value="<%= c.getCartAmount()%>" />
-								    <button type="button" class="plus">증가</button> <!-- onclick="plusTest();" 지워도됨 -->
+								    <button type="button" class="plus" data-product-no="<%= c.getPno() %>">+</button> <!-- onclick="plusTest();" 지워도됨 -->
 								</div>
 								
                             </td>
                             <td>기본배송</td>
-                            <td>3,000원</td>
+                            <td>-</td>
                             <td class="mtotal"><%= mprice %>원</td>
                         </tr>                         
                         	<% } %>   
@@ -310,10 +350,13 @@
                 }
                 console.log(sumTotal);
                 $('#totalprice').text(sumTotal);
+                $('.toto').text(sumTotal);
 
                 
 
-            	$(plusList).click(function(){             		
+            	$(plusList).click(function(){               		
+            		let productNum = $(this).data('product-no');
+            		console.log(productNum)
     	        	// let cartCount = ++cartAmount; 여기에 있으면 클릭하자마자 증가가되버림
             		let value = $(this).parent().parent().siblings('.mtotal').text();  	    
             		let cartCount = $(this).siblings('.inp').val();
@@ -323,22 +366,37 @@
 
             		let originalPrice = ppprice / cartCount;
             		
-            		
             		//console.log(ppprice)
             		//console.log(cartAmount)
             		//console.log(originalPrice)
             		
             		let cartCountA = ++cartCount; // 항상 준비해야할 값을 다 뽑고 증가시키자! 증가하지 전위연산으로!        	
-	        		//console.log(value); // 21,700원
 	        		 $(this).parent().parent().siblings('.mtotal').text(originalPrice * cartCountA + "원");
 					let apple = originalPrice
             		//console.log(plusList.index(this));
             		//inputList.eq(plusList.index(this)).val();
             		
             		plusTest(plusList.index(this),apple); // 내가 클릭한 요소가 plusList에서 몇번째 요소인지?
+            								          				
+					$.ajax({
+            			url:"ocount.po",
+            			data:{
+            				count:cartCount,
+            				pno:productNum
+            			},
+            			success:function(result){
+            				if(result > 0){
+            				location.reload();            					
+            				}
+            			}, error:function(){
+            				console.log("ajax 통신 실패!");
+            			}	
+            		});	
             	})
 	        		
-            	$(minusList).click(function(){                     		
+            	$(minusList).click(function(){
+            		let productNum = $(this).data('product-no');
+            		console.log(productNum)
             		let value = $(this).parent().parent().siblings('.mtotal').text();
             		let cartCount = $(this).siblings('.inp').val();
             		
@@ -348,7 +406,7 @@
             		//console.log(cartAmount);
             		
             		let originalPrice = ppprice / cartCount;
-            		console.log(originalPrice)
+            		//console.log(originalPrice)
             		let cartAmount = --cartCount;
             		
       
@@ -356,7 +414,22 @@
             		$(this).parent().parent().siblings('.mtotal').text(originalPrice * cartAmount + "원");
             		
             		
-            		minusTest(minusList.index(this));
+            		minusTest(minusList.index(this)); 
+            		
+            		$.ajax({
+            			url:"ocountMinus.po",
+            			data:{
+            				count:cartCount,
+            				pno:productNum
+            			},
+            			success:function(result){
+            				if(result > 0){
+            				location.reload();            					
+            				}
+            			}, error:function(){
+            				console.log("ajax 통신 실패!");
+            			}	
+            		});	
             		
             	})
             })
@@ -388,18 +461,18 @@
 		                    	//$("#totalprice").text(Number(price * cartAmount));	
 		                    $("#totalprice").text(Number(totalPrice)+Number(apple));
 		                	}                  
-		                }
-	            	
+		                }            	
             </script>
             
+            <script>
             
-           
             
-                
+            </script>
+            
                     <div id="content1_2c">                       
-                        <span><a onclick="validate();">선택삭제</a></span>
+                        <span><a class="selectdeletebtn" onclick="validate();">선택삭제</a></span>
                         <div id="content1_2c1">
-                            <span>상품금액</span> <span id="totalprice"></span>                                      
+                            <span>상품금액</span> <span id="totalprice"></span>원                                      
                         </div>                
                     </div>
                     
@@ -426,14 +499,10 @@
                    			}, error:function(){
                    				console.log('ajax 통신 실패!');
                    			}
-                   		});
-                   		
-                   		
+                   		});  		
                    	}
                     </script>
                
-                
-
             </div>
         </div>
      
@@ -570,8 +639,7 @@
  
 	                        if (sameAddrRadio.checked) {
 	                        	rnameInput.value = '<%= m.getMemberName() %>';
-	                        	}
-                        	
+	                        	}                     	
                         }
                         
                         </script>
@@ -599,7 +667,7 @@
                                 배송메시지                             
                             </th>
                             <td style="padding: 10px;">
-                                <textarea id="omessage" maxlength="255" cols="70"></textarea>
+                                <textarea id="omessage" maxlength="255" cols="70" style="resize: none;"></textarea>
                             </td>
                         </tr>
                     </tbody>
@@ -730,7 +798,7 @@
                         <tr>
                             <td>
                                 <div>
-                                    <strong>14,900원</strong>
+                                    <strong class="toto"></strong>원
                                 </div>
                             </td>
 
@@ -743,7 +811,7 @@
                             <td>
                                 <div>
                                     <strong>
-                                        <span>14,900원</span>
+                                        <span class="toto"></span>원
                                     </strong>
                                 </div>
                             </td>
@@ -759,15 +827,13 @@
         <div id="content6">
             <div id="content6_1">
                 <a href="#" onclick="requestPay();" class="btn btn-dark">결제하기</a>
-                <a href="#" class="btn btn-dark">뒤로가기</a>
+                <!-- <button onclick="requestPay();" class="button button--winona button--border-thin button--round-s" data-text="결제하기"><span>결제하기</span></button> -->
+                <a href="javascript:window.history.back();" class="btn btn-dark">뒤로가기</a>
             </div>
         </div>
     </div>
     
-    <script>
-    	let count = 0;
-    	let proCount = <%= productCount %>;
-    
+    <script>   
         var IMP = window.IMP; 
         IMP.init("imp16540835"); 
       
@@ -778,12 +844,11 @@
         var milliseconds = today.getMilliseconds();
         var makeMerchantUid = hours +  minutes + seconds + milliseconds;
         
-
-        
         function requestPay() {	
         	var add1 = document.getElementById("sample2_address").value; 
         	let amount = $('#totalprice').text();
         	let price = Number(amount);
+        	console.log(price)
         	//let priceStr = totalPrice;
         	//let price = parseInt(priceStr.replace(/,/g, ''), 10);
         	
@@ -801,9 +866,7 @@
                 m_redirect_url : '{}'
             }, function (rsp) { // callback
                 if (rsp.success) {
-                    let userName = rsp.buyer_name;  
-	                    //test(rsp);
-               
+	                    test(rsp);             
                 } else {
                     console.log(rsp);
                 }
@@ -812,33 +875,98 @@
         }
         
         function test(rsp){
-        	//console.log(rsp)
         	let buyerAddr;
         	let buyerName;
-        	let buyerTel;
-        	
-        	let productNo = 0;       	
-        	var omessage = $("#omessage").val();
+        	let buyerTel;      		
+        	var omessage = $("#omessage").val();  
         	let iu;
         	let mc;      	
-        	let priceStr = '100';
-        	let price = parseInt(priceStr.replace(/,/g, ''), 10);
+        	let amount = $('#totalprice').text();
+        	let price = Number(amount);       	       	
+        	      	         
+        		<%	
+        			ArrayList<Integer> pnoList = new ArrayList<>();
+        			int pno = 0;
+        			for(Cart c :list){
+        				pno = c.getPno();
+        				pnoList.add(pno);
+        			}
+        			
+        			String pnoArrayJSON = new Gson().toJson(pnoList);
+        		%>
+        		
+        		<%
+        			ArrayList<Integer> cartCountList = new ArrayList<>();
+        			int cartCountNum = 0;
+        			for(Cart c :list){
+        				cartCountNum = c.getCartAmount();
+        				cartCountList.add(cartCountNum);
+        			}
+        		
+        			String cartArrayJSON = new Gson().toJson(cartCountList);
+        		
+        		%>
+        		
+        		var uniquePnoArray = JSON.parse('<%= pnoArrayJSON %>');
+        		var uniqueCartArray = JSON.parse('<%= cartArrayJSON %>');
+        	
+        		// console.log(uniquePnoArray); // [2,3]
+	        	$.ajax({
+	        		url:"manyInsert.po",
+	        		traditional : true,
+	        		data:{
+	        			buyerAddr:rsp.buyer_addr,
+	        			buyerName:rsp.buyer_name,
+	        			buyerTel:rsp.buyer_tel,
+	        			pno:uniquePnoArray,
+	        			omg:omessage,
+	        			iu:rsp.imp_uid,
+	        			mc:rsp.merchant_uid,
+	        			pr:price,
+	        			count:uniqueCartArray
+	        			},
+	        		success:function(result){
+	        			if(result > 0){
+	        				console.log("결제완료");  
+	        				clear();
+	        				location.href = '<%= contextPath %>/success.po'        					
+	        			}
+	        		}, error:function(){
+	        			console.log("ajax 통신 실패!");
+	        		}
+	        	})       		    	
+        }
+        
+        function clear(){
+        	<%	
+			ArrayList<Integer> cnoList = new ArrayList<>();
+			int cno = 0;
+			for(Cart c :list){
+				cno = c.getCartNo();
+				cnoList.add(cno);
+			}
+			
+			String cnoArrayJSON = new Gson().toJson(cnoList);
+			%>
+		
+		var uniqueCnoArray = JSON.parse('<%= cnoArrayJSON %>');
+        	
+		console.log(uniqueCnoArray);
+        	
         	$.ajax({
-        		url:"manyInsert.co",
+        		url:"cstatusUpdate.cr",
+        		traditional : true,
         		data:{
-        			buyerAddr:rsp.buyer_addr,
-        			buyerName:rsp.buyer_name,
-        			buyerTel:rsp.buyer_tel,
-        			cnt:count,
-        			omg:omessage,
-        			iu:rsp.imp_uid,
-        			mc:rsp.merchant_uid,
-        			pr:price
-        			},
+        			cno:uniqueCnoArray
+        		},
         		success:function(result){
-        			// 성공
+        			if(result > 0){
+        				console.log("장바구니 비우기 성공")
+        			}
+        		}, error:function(){
+        			console.log("ajax 통신 실패!");
         		}
-        	})
+        	});
         }
     </script>
 	

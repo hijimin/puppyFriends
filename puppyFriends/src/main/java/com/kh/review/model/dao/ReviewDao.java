@@ -31,7 +31,7 @@ public class ReviewDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectListCount");
-		
+			
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -100,6 +100,47 @@ public class ReviewDao {
 			pstmt.setInt(1, Integer.parseInt(r.getProduct()));
 			pstmt.setInt(2, Integer.parseInt(r.getReviewWriter()));
 			pstmt.setString(3, r.getReviewText());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deleteReview(Connection conn, int userNo, int reviewNum) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reviewNum);
+			pstmt.setInt(2, userNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateReview(Connection conn, int userNo, int reviewNum, String reviewText) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, reviewText);
+			pstmt.setInt(2, userNo);
+			pstmt.setInt(3, reviewNum);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

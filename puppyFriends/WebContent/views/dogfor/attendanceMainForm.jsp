@@ -265,7 +265,7 @@ body {
 			</table>
 		
 			<div class="footer">
-				<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=tm%>" id="goToday">today</a>
+				<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=ty%>&month=<%=tm%>" id="goToday">today</a>
 			</div>
 
 			

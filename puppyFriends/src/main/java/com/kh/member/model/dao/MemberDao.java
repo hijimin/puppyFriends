@@ -373,5 +373,75 @@ private Properties prop = new Properties();
 		return m;
 	}
 	
+	public String selectId(Connection conn, String userName, String email) {
+		
+		String userId = "";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userName);
+			pstmt.setString(2, email);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				userId = rset.getString("member_id");
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return userId;
+		
+	}
+	
+	public String selectPwd(Connection conn, String userName, String userId, String email) {
+		
+		String userPwd = "";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectPwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userName);
+			pstmt.setString(2, email);
+			pstmt.setString(3, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				userPwd = rset.getString("member_pwd");
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return userPwd;
+		
+	}
+	
+	
 	
 }

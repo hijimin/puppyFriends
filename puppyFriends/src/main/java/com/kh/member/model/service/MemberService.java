@@ -120,5 +120,36 @@ public class MemberService {
 		return m;
 	}
 	
+	public String selectId(String userName, String email) {
+		
+			Connection conn = getConnection();
+			
+			String userId = new MemberDao().selectId(conn, userName, email);
+		
+			close(conn);
+		
+			return userId;
+					
+	}
+	
+	public String selectPwd(String userName, String userId,String email) {
+		
+		Connection conn = getConnection();
+		
+		String userPwd = new MemberDao().selectPwd(conn, userName, userId, email);
+	
+		close(conn);
+	
+		return userPwd;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

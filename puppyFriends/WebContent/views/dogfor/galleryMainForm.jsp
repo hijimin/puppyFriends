@@ -115,7 +115,7 @@
 							            "</div>" +
 							            "</div>" +
 							            "<div class='img-2'>" +
-							            "<br>" + result[i].dogNo +
+							            result[i].dogNo +
 							            "</div>" +
 										"<div class='img-3' style='display: none;'>" +
 										result[i].content +

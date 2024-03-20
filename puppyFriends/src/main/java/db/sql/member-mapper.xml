@@ -159,4 +159,23 @@
 		   AND MEMBER_PWD = ?  
 	</entry>
 	
+	<entry key="selectId">
+		SELECT MEMBER_ID
+		  FROM MEMBER
+		 WHERE MEMBER_NAME = ?
+		   AND MEMBER_EMAIL = ?
+		   AND STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectPwd">
+		SELECT MEMBER_PWD
+		  FROM MEMBER
+		 WHERE MEMBER_NAME = ?
+		   AND MEMBER_EMAIL = ?
+		   AND MEMBER_ID = ?
+		   AND STATUS = 'Y'
+	</entry>
+	
+	
+	
 </properties>

@@ -40,16 +40,15 @@ public class ChattingFormController extends HttpServlet {
 		
 		
 		Chatting chat = new ChattingService().ChattingForm(memberId);
-		//int result = 1;	
-
-		//if(chat == null) { // 데이터 없음
-			//result = new ChattingService().insertChat();
-		//}
+		
+		
+		HttpSession session = request.getSession();
 		
 		//if(result > 0) {
-				request.setAttribute("chat", chat);		
-				request.getRequestDispatcher("views/chatting/boardChattingClient.jsp").forward(request, response);	
-				
+		
+		request.setAttribute("chat", chat);		
+		request.getRequestDispatcher("views/chatting/boardChattingClient.jsp").forward(request, response);				
+		
 		//}	
 			
 	} // doGet

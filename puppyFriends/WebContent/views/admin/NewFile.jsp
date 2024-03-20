@@ -50,7 +50,12 @@
 	
 	%>
 	
-	<form action="loginCon" method>
+	<form action="loginCon" method="post">
+		ID : <input type="text" name="mID"><br>
+		PW : <input type="password" name="mPW"><br>
+		<input type="submit" value="login">
+	</form>
+
    
 </body>
 </html>

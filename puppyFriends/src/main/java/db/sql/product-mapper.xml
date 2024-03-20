@@ -240,14 +240,32 @@ ORDER BY PRODUCT_COUNT DESC)A
 	</entry>
 	
 	<entry key="selectImgList">
-		SELECT 
-	       CHANGE_NAME
+		SELECT
+		   FILE_NO 
+	     , CHANGE_NAME
 	     , FILE_PATH
 	 FROM IMAGE
 	 JOIN PRODUCT ON(REF_BNO = PRODUCT_NO)
 	WHERE PRODUCT_NO = ?
 	</entry>
 	
+	<entry key="updateProduct">
+	UPDATE PRODUCT
+   SET PRODUCT_NAME = ?
+     , PRODUCT_DESC = ?
+     , PRODUCT_PRICE = ?
+     , PRODUCT_DISCOUNT = ?
+ WHERE PRODUCT_NO = ?
+	</entry>
+	
+	<entry key="updateImg">
+UPDATE IMAGE
+SET FILE_PATH = ?,
+    FILE_NAME = ?,
+    CHANGE_NAME = ?
+WHERE FILE_LEVEL = 1  
+AND REF_BNO IN (SELECT PRODUCT_NO FROM PRODUCT WHERE PRODUCT_NO = ?)
+	</entry>
 	
 
 		

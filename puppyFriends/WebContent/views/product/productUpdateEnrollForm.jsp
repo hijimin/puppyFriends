@@ -22,22 +22,22 @@
 
 		<div class="outer">
 
-        <form action="<%= contextPath %>/updateTest.pd" id="enroll-form" method="post" enctype="multipart/form-data">
+        <form id="enroll-form">
         	
             <div class="upup">         	
-                <select onchange="upTest(this);">
+                <select name="pno" id="productSelect" onchange="upTest(this.value);">
                     <option value="-" selected>-</option>
                 	<% for(Product p : list){ %>
-                    <option value="<%= p.getProductNo()%>"><%= p.getProductNo() %></option>
+                    <option  class="idid" value="<%= p.getProductNo()%>"><%= p.getProductNo() %></option>	
                     <% } %>
-                </select>
+                </select>              
+        
                 
             </div>
 
-
             <table align="center">     
                 <tr>
-                    <th width="100">상품명</th>
+                    <th width="100">상품명</th>                
                     <td colspan="3"><input type="text" name="pdname"></td>
                 </tr>
                 <tr>
@@ -60,7 +60,7 @@
                 <tr>
                     <th>대표상품이미지</th>
                     <td colspan="3" align="center">
-                        <img id="titleImg" width="250" height="170" onclick="chooseFile(1);">
+                        <img src="" id="titleImg" width="250" height="170" onclick="chooseFile(1);">
                     </td>
                 </tr>
                 
@@ -78,9 +78,6 @@
                         <img id="contentImg3" width="150" height="120" onclick="chooseFile(4);">  
                     </td>
                 </tr>
-                
-                
-                
                 
             </table>
 
@@ -128,23 +125,93 @@
                     }
                 }
 
+                
+                
+                
+                let dfileNo;
+                let fileNo;
+                
                 function upTest(pnum) {
                     $.ajax({
                         url:"upselect.pd",
                         data:{pnum:pnum},
-                        success:function(){
+                        success:function(map){
+                        	let p = map.p
+                        	
+                        	let productName = p.productName;
+                        	let productDesc = p.productDesc;
+                        	let price = p.price;
+                        	let discount = p.discount;                     
+                        	
+                        	let list = map.list
+                        	console.log(list)
+                        	
+                        	let dchangeName = list[0].changeName;
+                        	let dfilePath = list[0].filePath;
+                        	let changeName = list[1].changeName;
+                        	let filePath = list[1].filePath;
+                        	
+                        	dfileNo = list[0].fileNo;
+                        	fileNo = list[1].fileNo;
+                        	
+                        	
+                        	$('input[name="pdname"]').val(productName);
+                        	$('input[name="pddetail"]').val(productDesc);
+                        	$('input[name="oriprice"]').val(price);
+                        	$('input[name="discount"]').val(discount);
+                        	
+                        	console.log($('img[id="titleImg"]'));
+                        	$('img[id="titleImg"]').attr('src', '<%= contextPath%>/'+dfilePath+dchangeName);
+                        	// /는 문자열로 들어가야하기 떄문에 '로 묶어줘야함, 뒤에는 변수처리를 해줘야 '를 쓰면 안된다
+                        	// console.log(<%= contextPath%>/+dfilePath+dchangeName)
+                        	
+                        	$('img[id="contentImg1"]').attr('src', '<%= contextPath%>/'+filePath+changeName);
+                        	
+
 
                         }, error:function(){
-
+                        	console.log("ajax 통신 실패!");
                         }
                     })
-                }
+                    
+                }        
+                    function test02(){
+                    	var form = $('#enroll-form')[0];
+                    	console.log(form);
+                    	var formData = new FormData(form);
+                    	
+                    	$.ajax({
+                    		type:"post",
+                    		enctype:'multipart/form-data',
+                    	    url:'updateTest.pd',
+                    	    data:
+                    	    	formData,
+                    	    dataType:'json',
+                    	    processData:false,
+                    	    contentType:false,
+                    	    cache:false,
+                    	    success:function(data){
+                    	    	if(data > 0){
+                    	    	alert("상품수정완료!");
+                    	    	location.href='<%= contextPath%>'               	    		
+                    	    	}
+                    	    },
+                    	    error:function(e){
+                    	        console.log("error : ", e);
+                    	    }
+                    	});
+                    	
+                    }
             </script>
 			<br>
             <div align="center">
-                <button type="submit">수정하기</button>
+                <button type="button" onclick="test02();">수정하기</button>
             </div>                
         </form>
+        
+        <script>
+        
+        </script>
     </div>	
 </body>
 </html>

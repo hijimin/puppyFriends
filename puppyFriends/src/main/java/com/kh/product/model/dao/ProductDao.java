@@ -458,6 +458,8 @@ public class ProductDao {
 			
 			pstmt.setInt(1, produtNo);
 			
+			rset = pstmt.executeQuery();
+			
 			if(rset.next()) {
 				p = new Product();
 				p.setProductName(rset.getString("product_name"));
@@ -493,6 +495,7 @@ public class ProductDao {
 			
 			while(rset.next()) {
 				Image im = new Image();
+				im.setFileNo(rset.getInt("file_no"));
 				im.setChangeName(rset.getString("change_name"));
 				im.setFilePath(rset.getString("file_path"));
 				
@@ -505,6 +508,52 @@ public class ProductDao {
 			close(pstmt);
 		}
 		return list;	
+	}
+	
+	public int updateProduct(Connection conn, Product p) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, p.getProductName());
+			pstmt.setString(2, p.getProductDesc());
+			pstmt.setInt(3, Integer.parseInt(p.getPrice()));
+			pstmt.setInt(4, p.getDiscount());
+			pstmt.setInt(5, p.getProductNo());
+			
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateImg(Connection conn, Image im, Product p) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateImg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, im.getFilePath());
+			pstmt.setString(2, im.getFileName());
+			pstmt.setString(3, im.getChangeName());
+			pstmt.setInt(4, p.getProductNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 

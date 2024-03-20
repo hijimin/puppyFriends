@@ -144,8 +144,24 @@ public class ProductService {
 		Connection conn = getConnection();
 		ArrayList<Image> list = new ProductDao().selectImgList(conn, productNo);
 		close(conn);
-		return list;
+		return list;		
+	}
+	
+	public int updateProduct(Product p, Image im) {
+		Connection conn = getConnection();
 		
+		int result1 = new ProductDao().updateProduct(conn,p);
+		int result2 = 1;		
+		result2 = new ProductDao().updateImg(conn,im,p);
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1 * result2;
 	}
 	
 	

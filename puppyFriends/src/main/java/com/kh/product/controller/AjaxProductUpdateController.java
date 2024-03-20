@@ -35,7 +35,6 @@ public class AjaxProductUpdateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int productNo = Integer.parseInt(request.getParameter("pnum"));
-		
 		// 상품명, 상품상세설명, 원래가격, 할인율, 대표상품이미, 상세이미지
 		
 		Product p = new ProductService().selectProduct(productNo);
@@ -49,6 +48,7 @@ public class AjaxProductUpdateController extends HttpServlet {
 		
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(plist, response.getWriter());
+		
 	}
 
 	/**

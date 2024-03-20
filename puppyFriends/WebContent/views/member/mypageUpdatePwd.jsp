@@ -218,17 +218,12 @@ pageEncoding="UTF-8"%>
                       </li>
                       <li>
                         <a href="<%= request.getContextPath()%>/mypageProduct"
-                          >구매 내역 조회</a
+                          >장바구니 조회</a
                         >
                       </li>
                       <li>
                         <a href="<%= request.getContextPath()%>/mypageReservation"
                           >예약 조회</a
-                        >
-                      </li>
-                      <li>
-                        <a href="<%= request.getContextPath()%>/mypageBoard"
-                          >내가 쓴 글</a
                         >
                       </li>
                       <li>

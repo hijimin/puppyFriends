@@ -417,4 +417,34 @@ public class AdminDao {
 		
 	} // adminSelectOrder
 	
+	public ArrayList<Product> adminMainSelectProduct(Connection conn){
+		ArrayList<Product> apList = new ArrayList<Product>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminMainPr");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery(); 
+			
+			while(rset.next()) {
+				apList.add(new Product( rset.getInt("PRODUCT_NO"),
+									    rset.getString("PRODUCT_NAME"),
+									    rset.getInt("PRODUCT_STOCK"),
+									    rset.getDate("PRODUCT_UPDATE")
+									  ));
+				System.out.println(apList);
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return apList;
+		
+	}
+	
 } // CLASS

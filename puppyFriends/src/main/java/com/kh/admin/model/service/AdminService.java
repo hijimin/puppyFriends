@@ -126,4 +126,12 @@ public class AdminService {
 	    return oList;	
 	} // adminSelectOrder
 	
+	public ArrayList<Product> adminMainSelectProduct(){
+		Connection conn = getConnection();
+		ArrayList<Product> apList = new AdminDao().adminMainSelectProduct(conn);
+		
+		close(conn);
+		return apList;
+	}
+	
 } // class

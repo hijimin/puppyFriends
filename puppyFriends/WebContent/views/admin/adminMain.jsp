@@ -1,3 +1,4 @@
+<%@page import="com.kh.product.model.vo.Product"%>
 <%@page import="com.google.gson.reflect.TypeToken"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="java.util.Map"%>
@@ -20,6 +21,7 @@
 
    int yResult = (int)request.getAttribute("yResult"); 
    int nResult = (int)request.getAttribute("nResult");
+   ArrayList<Product> apList = (ArrayList<Product>)request.getAttribute("apList");
    
   
    List<Map<String, Object>> topClickedMenus = new ArrayList<>();
@@ -186,13 +188,20 @@
             padding-top: 100px;
         }  
 
-        .content{
-            width: 1300px;
+        .content1{
+            width: 710px;
             height: 730px;
             margin-top: 40px;
-            margin-left: 130px;
-            overflow: hidden; /* Prevents overflow of child elements */
+            margin-left: 100px;
+            overflow: hidden;
         }
+
+        .content2{      
+            margin-top: 40px;
+            margin-left: 50px;
+            overflow: hidden;
+        }
+
         
         .headerbar>h1>a{
             text-decoration: none;
@@ -209,19 +218,36 @@
         
         .c1{
            border:1px solid gray;
-           width:600px;
+           width:700px;
            height:310px;
            border-radius: 10px;
         }
         
         .c2{
            border:1px solid gray;
-            width: 600px;
+            width: 700px;
             height: 405px;
             margin-top: 10px;
             border-radius: 10px;
             color: gray;
         }
+
+       .c3 {
+        border: 1px solid gray;
+        width: 700px;
+        height: 310px;
+        border-radius: 10px;
+        color: gray;
+        float: right;
+        font-size: 25px;
+        word-spacing:30px;
+        padding-right: 35px;
+       }
+
+       .c3 table{
+        margin: 0 auto;
+        width: 700px;    
+       }
         
         a {
            color:gray;
@@ -256,6 +282,8 @@
         margin-top: 0px;
         margin-bottom: 5px;
        }
+
+       
 
     </style>
 </head>
@@ -293,12 +321,12 @@
             <br><br><br><br>
             <li class="product-admin" onmouseover="updateChart(4)"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a>
                 <ul class="product-data"><a href="<%= contextPath %>/AdminSelectProductList.pr?cpage=1"  style="color: white;">상품리스트</a></ul>
-                <ul class="adminOrder-data"><a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1">주문확인</a></ul>
+                <ul class="adminOrder-data"><a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1 style="color: white;">주문확인</a></ul>
             </li>
             
         </div>
 
-        <div class="content">
+        <div class="content1">
            <div class="c1">
             <canvas id="myChart" style="width: 100%; height: 100%;"></canvas>
             <script>
@@ -336,24 +364,45 @@
                 }
             </script>
             </div>
-            <div class="c2">
-                    <div class="ynm">
-                        <ul>
-                             <li><a href="adminSelectMember.me?cpage=1">이용기능 회원</a></li>
-                             <br>                 
-                            <li id="ymm"><%= yResult %></li>
-                             <br><hr><br>
-                            <li><a href="adminRestoreMemberList.me?cpage=1">정지회원</a></li>
-                            <br>
-                           <li id="nmm"><%= nResult %></li>                    
-                        </ul>                  
-                    </div>
-                 </div>
-            <div class="c3">
-                <!--  -->
+                <div class="c2">
+                        <div class="ynm">
+                            <ul>
+                                <li><a href="adminSelectMember.me?cpage=1">이용가능 회원</a></li>
+                                <br>                 
+                                <li id="ymm"><%= yResult %></li>
+                                <br><hr><br>
+                                <li><a href="adminRestoreMemberList.me?cpage=1">정지회원</a></li>
+                                <br>
+                            <li id="nmm"><%= nResult %></li>                    
+                            </ul>                  
+                        </div>
+                </div>
+            </div><!-- .content -->
+            <div class="content2">
+                <div class="c3"> 
+                    <table> 
+                        <thead align="center">
+                    <tr>
+                        <th width="150">상품번호</th>
+                        <th width="150">상품명</th>
+                        <th width="150">재고</th>
+                        <th width="150">업로드일자</th>
+                    </tr>
+                    </thead>
+                    <br><br>  
+                    <tbody align="center">     
+            	<% for(Product p : apList) { %>
+                    <tr>
+                        <td><%= p.getProductNo() %></td>
+                        <td> <%= p.getProductName() %></td>
+                        <td><% if(p.getStock() == 0) { %>품절<% } %></td>
+                        <td><%= p.getProductUpdate() %></td>
+                    </tr>                                          
+                <% } %> 
+                 </tbody>
+                </div>  
+            </table>
             </div>
-        </div><!-- .content -->
-    </div>
 </div>
 </body>
 </html>

@@ -104,6 +104,22 @@
 	</entry>
 	
 	
+	<entry key="adminMainPr">
+	  SELECT *
+		FROM (SELECT ROWNUM RNUM, P.*
+		          FROM(SELECT 
+		                PRODUCT_NO
+		              , PRODUCT_NAME		             
+		              , PRODUCT_STOCK
+		              , PRODUCT_UPDATE		             
+		          FROM PRODUCT
+		          WHERE PRODUCT_STOCK = 0
+		          ORDER 
+		             BY PRODUCT_NO ASC)P)
+		        WHERE RNUM BETWEEN 1 AND 5
+	</entry>
+	
+	
 	<entry key="adminProductDelete">
 		UPDATE
 		      PRODUCT
@@ -144,6 +160,18 @@
                        ORDER 
                           BY MEMBER_NO DESC) p)
             WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="">
+	
+	</entry>
+	
+	<entry key="">
+	
+	</entry>
+	
+	<entry key="">
+	
 	</entry>
 
 </properties>

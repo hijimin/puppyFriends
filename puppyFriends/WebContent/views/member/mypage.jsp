@@ -358,9 +358,9 @@
             <div class="modal-body" align="center">
               
               <form action="<%= contextPath %>/delete.me" method="post">
-                  <input type="hidden" name="userId" value="<%= memberId %>">
+                  <input type="hidden" name="memberId" value="<%= memberId %>">
                   <b>탈퇴 후 복구가 불가능합니다. <br> 정말로 탈퇴하시겠습니까? </b> <br><br>
-                  비밀번호 : <input type="password" name="userPwd" required> <br><br>
+                  비밀번호 : <input type="password" name="memberPwd" required> <br><br>
                      <button type="submit" class="btn btn-sm btn-danger" onclick="return deleteMember();">탈퇴하기</button>
               </form>
               

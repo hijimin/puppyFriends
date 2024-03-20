@@ -199,6 +199,29 @@ private Properties prop = new Properties();
 		
 	}
 	
+	public int deleteMember(Connection conn, String memberId, String memberPwd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberPwd);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	
 	
 	public Member kakaoLoginMember(Connection conn, String memberId, String memberName, String memberEmail) {

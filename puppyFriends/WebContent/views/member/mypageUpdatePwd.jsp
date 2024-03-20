@@ -185,6 +185,7 @@ pageEncoding="UTF-8"%>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
+  
     <%@ include file="../common/menubar.jsp" %>
 
       <form action="<%= contextPath %>/updatePwd.me" method="post">
@@ -207,12 +208,12 @@ pageEncoding="UTF-8"%>
                   <div class="mypage-select-main">
                     <ul>
                       <li>
-                        <a href="<%= request.getContextPath()%>/mypage"
+                        <a href="<%= contextPath%>/mypage"
                           >회원정보수정</a
                         >
                       </li>
                       <li>
-                        <a href="<%= request.getContextPath()%>/updatePwd"
+                        <a href="<%= contextPath%>/updatePwd"
                           >비밀번호변경</a
                         >
                       </li>
@@ -302,12 +303,26 @@ pageEncoding="UTF-8"%>
             <div class="modal-body" align="center">
               
               <form action="<%= contextPath %>/delete.me" method="post">
-                  <input type="hidden" name="userId" value="<%= loginUser.getMemberId() %>">
+                  <input type="hidden" name="memberId" value="<%= loginUser.getMemberId() %>">
                   <b>탈퇴 후 복구가 불가능합니다. <br> 정말로 탈퇴하시겠습니까? </b> <br><br>
-                  비밀번호 : <input type="password" name="userPwd" required> <br><br>
+                  비밀번호 : <input type="password" name="memberPwd1" required> <br><br>
                     <button type="submit" class="btn btn-sm btn-danger" onclick="return deleteMember();">탈퇴하기</button>
               </form>
               
+              <script>
+                /* function selectPwd(this){
+                  let deletePwd = this.value;
+                  deleteMember(deletePwd);
+                } */
+
+                function deleteMember(){
+                	console.log($("input[name=memberPwd1]"));
+                  if($("input[name=memberPwd1]").val() != <%= loginUser.getMemberPwd() %>){
+                    alert("비밀번호가 일치하지 않습니다.");
+                    return false;
+                  }
+                }
+              </script>
             </div>
 
 

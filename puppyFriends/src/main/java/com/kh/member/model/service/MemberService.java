@@ -96,6 +96,22 @@ public class MemberService {
 		
 	}
 	
+	public int deleteMember(String memberId, String memberPwd) {
+		Connection conn = getConnection();
+		int result = new MemberDao().deleteMember(conn, memberId, memberPwd);
+		
+		if(result > 0 ) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+		
+	}
+	
+	
+	
 	
 	public Member selectOrderMember(int userNo) {
 		Connection conn = getConnection();

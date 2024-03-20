@@ -489,26 +489,6 @@
                         for (let i = 0; i < result.length; i++) {
                           let rv = result[i];
 
-<<<<<<< HEAD
-			<!-- 상품상세조회 script -->
-			<script>
-                	// function pdtest(){
-                	// 	// location.href ="<%=contextPath%>/detail.pd?pno="+$(".content2_3c input").val();
-                	// }
-                	
-                	$(function(){               		
-                		$(".content2_3c").click(function(){
-                			location.href ='"<%=contextPath%>/detail.pd?pno=" + $(this).children(input).val()';
-									})
-				})
-			</script>
-=======
-                          let titleImg = rv.titleImg;
-                          let productName = rv.productName;
-                          let productDesc = rv.productDesc;
-                          let productNo = rv.productNo;
->>>>>>> product
-
                           value +=
                             "<div class='content2_3c'>" +
                             "<img id='img1' src='<%=contextPath%>/" +

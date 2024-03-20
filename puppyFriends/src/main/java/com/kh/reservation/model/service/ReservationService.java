@@ -9,6 +9,7 @@ import com.kh.common.model.vo.Image;
 //import com.kh.common.model.vo.PageInfo;
 import com.kh.reservation.model.dao.ReservationDao;
 import com.kh.reservation.model.vo.Hotel;
+import com.kh.reservation.model.vo.KinderClass;
 import com.kh.reservation.model.vo.Reservation;
 
 public class ReservationService {
@@ -96,7 +97,64 @@ public class ReservationService {
 		return img;
 	}
 
-	
+	public ArrayList<KinderClass> selectKinderClassService() {
+
+		Connection conn = getConnection();
+		
+		ArrayList<KinderClass> list = new ReservationDao().selectKinderClassService(conn);
+		
+		close(conn);
+				
+		return list;
+	}
+
+	public KinderClass selectClassDetail(int classNo) {
+		Connection conn = getConnection();
+		
+		KinderClass c = new ReservationDao().selectClassDetail(conn, classNo);
+		
+		close(conn);
+
+		return c;
+		
+		
+	}
+
+	public int selectClassRvCount(int classNo) {
+		Connection conn = getConnection();
+		int classrvCount = new ReservationDao().selectClassRvCount(conn, classNo);
+		
+		close(conn); 
+		return classrvCount;
+		
+	}
+
+	public ArrayList<Image> selectClassImgList(int classNo) {
+		Connection conn = getConnection();
+		ArrayList<Image> img = new ReservationDao().selectClassImgList(conn, classNo);
+		close(conn);
+		
+		return img;
+	}
+
+	public int deleteClass(int classNo) {
+	Connection conn = getConnection();
+			
+		int result = new ReservationDao().deleteClass(conn, classNo);
+		
+		if(result>0) {
+			commit(conn);
+			
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+
+
 
 	
 	

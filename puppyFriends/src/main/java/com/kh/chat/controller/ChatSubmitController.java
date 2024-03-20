@@ -45,18 +45,19 @@ public class ChatSubmitController extends HttpServlet {
 		
 		if(fromId == null || fromId.equals("") || toId == null || toId.equals("")
 				|| content == null || content.equals("")) { // 입력x
+			response.getWriter().print(result);
 			
 		}else { // 입력 o
 			result = new ChatService().submit(fromId, toId, content);
+			response.getWriter().print(result);
 		}
 		
+		/*
 		if(fromId == null || fromId.equals("") || toId == null || toId.equals("")
 				|| content == null || content.equals("")) {
-			response.getWriter().print(result);
 		}else {
-			response.getWriter().print(result);
 		}
-		
+		*/
 		
 		
 		

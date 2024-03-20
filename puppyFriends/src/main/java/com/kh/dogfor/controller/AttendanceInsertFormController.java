@@ -1,6 +1,8 @@
 package com.kh.dogfor.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +33,7 @@ public class AttendanceInsertFormController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String userNo = request.getParameter("userNo");
-		String date = request.getParameter("date");
+		String date = request.getParameter("date"); // 2024-03-13
 		String status = request.getParameter("status");
 		
 		Attendance at = new Attendance();
@@ -39,10 +41,34 @@ public class AttendanceInsertFormController extends HttpServlet {
 		at.setDate(date);
 		at.setStatus(status);
 		
-		int result = new DogforService().insertAttendance(at);
+		// 시스템 오늘날짜
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH)+1;
 		
-		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/attendance.at");
+		
+		// 출석 등록여부 확인
+		int check = new DogforService().checkAttendance(userNo, date);
+		
+		if(check == 1) { // 해당 날짜 존재 update
+			int update = new DogforService().updateAttendance(at);
+			
+			if(update > 0) {
+				response.getWriter().print("update good");
+			}else {
+				response.getWriter().print("update bad");
+			}
+			
+		}else { // 해당 날짜 없음 insert
+			int insert = new DogforService().insertAttendance(at);
+			
+			if(insert > 0) {
+				response.getWriter().print("insert good");
+			}else {
+				response.getWriter().print("insert bad");
+			}
+			
+			
 		}
 		
 		

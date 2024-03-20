@@ -93,10 +93,18 @@
             width: 100%;
             height: 10%;
         }
-        .introduce{
+       .introduce{
             width: 80%;
             height: 45%;
             border: 2px solid rgb(255, 222, 239);
+      
+            display: flex;
+      		flex-direction: column;
+            justify-content: space-between; /* 내용물을 상단과 하단에 분리 */
+        }
+              
+        #text_price {
+	        border-top: 2px solid rgb(255, 222, 239);
         }
         .btn_bar{
             width: 100%;
@@ -206,10 +214,20 @@
                 <div class="introduce">
                     <tr>
                         <td>
-                        <p style="text-align: left; padding: 10px;"><%= h.getHotelText() %></p>
-                             
+                         <p style="text-align: left; padding: 10px;"><%= h.getHotelText() %></p>
                         </td>
                     </tr>
+	                   <div id="text_price">
+                    	<p id="price" style="text-align: right; padding: 10px;"><%= h.getReservationPrice() %> 원 </p>
+				    </div>  
+				    <script>
+				        document.addEventListener('DOMContentLoaded', function() {
+				            var priceElement = document.getElementById('price');
+				            var price = priceElement.innerText.replace(' 원', '');
+				            price = parseInt(price, 10).toLocaleString();
+				            priceElement.innerText = price + ' 원';
+				        });
+				    </script>
                 </div>
                 
                 <div class="btn_bar">

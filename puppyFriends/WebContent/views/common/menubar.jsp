@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.kh.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -8,8 +10,21 @@
 	// 회원, 반려견 정보 담은 유저 정보
 	Member loginUser = (Member)session.getAttribute("loginUser"); // 일반 로그인 유저
 	
+	String userNo = "1";
+	if(loginUser != null){
+		userNo = Integer.toString(((Member)session.getAttribute("loginUser")).getMemberNo());
+	}
+	
 	String alertMsg = (String)session.getAttribute("alertMsg");
-
+	
+	SimpleDateFormat year1 = new SimpleDateFormat("yyyy");
+	SimpleDateFormat month1 = new SimpleDateFormat("MM");
+	
+	Date d = new Date();
+	
+	String nowYear = year1.format(d);       
+	int nowMonth = Integer.parseInt(month1.format(d));  
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -83,7 +98,7 @@
     background-color: rgb(255, 222, 239);
     position: sticky;
     top: 0;
-    z-index: 9999;
+    z-index: 999;
     }
 
     .navigator_tool>li {
@@ -190,7 +205,7 @@
 
         <div class="header">
             <div class="header_1">
-                <img src="resources/image/KakaoTalk_20240222_172839389.png" style="width: 200px; height: 200px; margin-left: 30px;">
+                <img src="resources/image/KakaoTalk_20240222_172839389.png" style="width: 250px; height: 250px; margin-left: 100px;">
             </div>
             <div class="header_2">
             	<div id="header"><h1 style="margin-top: 100px;"><a href="<%= contextPath %>" style="color: white; text-decoration: none;">puppy friend</a></h1></div>
@@ -248,13 +263,15 @@
             <li class="program"><a href="#">프로그램</a>
               <ul class="reservation">
                 <li class="hotel"><a href="<%= contextPath %>/hotel.hrv">호텔 예약</a></li>
-                <li class="kindergarten"><a href="#">유치원 예약</a></li>
+                <li class="kindergarten"><a href="<%= contextPath %>/kinderClass.crv">유치원 예약</a></li>
               </ul>
             </li>
-            <li class="dog_data"><a href="#">강아지정보</a>
+            <li class="dog_data"><a href="<%= contextPath %>/dogforMain.do?userNo=<%= userNo %>&year=<%= nowYear %>&month=<%= nowMonth %>">강아지정보</a>
                 <ul class="dog_data2">
-                   <li class="attend"><a href="<%= contextPath %>/dogforMain.do">출석부</a></li>
-                   <li class="gallery"><a href="#">갤러리</a></li>
+                	<% if(loginUser != null){ %>
+                   <li class="attend"><a href="<%= contextPath %>/attendance.at?userNo=<%= userNo %>&year=<%= nowYear %>&month=<%= nowMonth %>">출석부</a></li>
+                   <% } %>
+                   <li class="gallery"><a href="<%= contextPath %>/gallery.ga?cpage=1">갤러리</a></li>
                 </ul>
             </li>
 

@@ -1,23 +1,28 @@
-package com.kh.dogfor.controller;
+package com.kh.reservation.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.reservation.model.service.ReservationService;
+import com.kh.reservation.model.vo.KinderClass;
+
 /**
- * Servlet implementation class Socket2
+ * Servlet implementation class KinderClassReservationFormController
  */
-@WebServlet("/Socket2")
-public class Socket2 extends HttpServlet {
+@WebServlet("/kinderClass.crv")
+public class KinderClassReservationFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Socket2() {
+    public KinderClassReservationFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +31,16 @@ public class Socket2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		ReservationService cService = new ReservationService();
+		ArrayList<KinderClass> list = cService.selectKinderClassService();
+	
+		request.setAttribute("list", list);
+		
+		request.getRequestDispatcher("views/reservation/classReservationForm.jsp").forward(request, response);
+	
+	
+	
 	}
 
 	/**

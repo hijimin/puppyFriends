@@ -26,7 +26,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         width: 100%;
         height: 5%;
       }
-      .hotelName {
+      .hotel_Name {
         width: 100%;
         height: 10%;
       }
@@ -132,8 +132,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         프로그램 &gt; 호텔 예약 &gt; 호텔 등록 &nbsp; &nbsp;
       </div>
       <br /><br />
-      <div class="hotelName">
-        <h1 align="right" style="vertical-align: top">등록</h1>
+      <div class="hotel_Name">
+        <h1 align="right" style="vertical-align: top">호텔 등록</h1>
       </div>
 
       <form action="<%= contextPath %>/insert.hrv" id="enroll-form"
@@ -246,7 +246,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     type="number"
                     name="dNumber"
                     required
-                    placeholder="ex) 5마리"
+                    placeholder="ex) 30마리까지"
                     min="1"
                     max="30"
                     style="width: 45%"

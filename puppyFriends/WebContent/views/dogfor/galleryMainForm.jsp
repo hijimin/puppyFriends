@@ -47,6 +47,25 @@
 	.img-1{
 		height: 220px;
 	}
+	.modal-content{
+		width: 600px; 
+		height: 600px; 
+		border-radius: 3%; 
+		padding: 10px;
+	}
+	.modal-body2{
+		overflow-y: auto;
+		margin-top: 20px;
+	}
+	.modal-footer{
+		margin-top: 25px;
+	}
+	#img-area .img:hover{
+		cursor: pointer;
+		margin-top: -2px;
+		transform: translateY(-5px);
+		transform: scale(1.1);
+	}
 </style>
 </head>
 <body>
@@ -62,15 +81,44 @@
 				<a href="<%= contextPath %>/galleryEnrollForm.ga">사진등록</a>
 				<% } %>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="text" placeholder="강아지 이름을 입력해주세요">
-				<button>검색</button>
+				<input type="text" id="search" placeholder="강아지 이름을 입력해주세요" onkeyup="if(event.keyCode==13) search();">
+				<button onclick="search();">검색</button>
 			</div>
+
+			<script>
+				function search(){
+					$.ajax({
+						url:"search.ga",
+						data:{
+							name: $("#search").val(),
+						},
+						success:function(result){
+							let value = "";
+							for(let i=0; i<result.length; i++){
+								value += "<div class='img' align='center'>" +
+							            "<div class='img-1'>" +
+							            "<img src='" + result[i].filePath + "' style='width: 100%; height: 100%;'>" +
+							            "</div>" +
+							            "<div class='img-2'>" +
+							            "<br>" + result[i].dogNo +
+							            "</div>" +
+							            "</div>";
+							}
+							
+							$("#img-area").html(value);
+						}
+
+
+					})
+				}
+			</script>
 
 			<div id="img-area" >
 				<% for(Image i : list){ %>
 				<div class="img" align="center">
 					<div class="img-1"><img src="<%= contextPath %>/<%= i.getTitleImg() %>" style="width: 100%; height: 100%;"></div>
 					<div class="img-2"><br><%= i.getDogNo() %></div>
+					<div class="img-3" style="display: none;"><%= i.getContent() %></div>
 				</div>
 				<% } %>
 			</div>
@@ -92,8 +140,56 @@
             <% } %>
 			</div>
 
-
 		</div>
+		
+				<!-- Button to Open the Modal -->
+		<button type="button" id="modal" style="display: none;"  class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+		</button>
+		
+		<script>
+			$(function(){
+				
+				$("#img-area .img").click(function(){
+					$(".modal-title").html($(this).children().eq(1).text());
+					$(".modal-body1").html($(this).children().eq(0).html());
+					$(".modal-body2").html($(this).children().eq(2).html());
+					$("#modal").click();
+				})
+				
+				
+			})
+		</script>
+		
+		<!-- The Modal -->
+		<div class="modal" id="myModal" style="z-index: 9999;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header" style="height: 11%; width: 100%; ">
+		        <h3 class="modal-title" align="right" style="width: 57%;" ></h3>
+		        <button type="button" class="close" data-dismiss="modal" style="margin-left: 0;">&times;</button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body1" style="height: 65%; width: 100%; padding-top: 20px;">
+		        <!-- 사진 -->
+		      </div>
+
+			  <div class="modal-body2" style="height: 15%; width: 100%;" align="center">
+		        <!-- 내용 -->
+		      </div>
+		
+		      <!-- Modal footer -->
+		      <div class="modal-footer" style="height: 8%; width: 100%;">
+		        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+		      </div>
+		
+		    </div>
+		  </div>
+		</div>
+		
+		
 
 
 

@@ -383,11 +383,7 @@
               <% } %>
 
               <div class="search">
-                <input
-                  class="searchclass"
-                  type="text"
-                  placeholder="검색어 입력"
-                />
+                <input onkeyup="enterkey();" class="searchclass" type="text" placeholder="검색어 입력"/>
                 <img
                   onclick="searchTest();"
                   class="searchimg"
@@ -397,7 +393,23 @@
             </div>
 
             <script>
-              function searchTest() {}
+            function enterkey() {
+				if (window.event.keyCode == 13) {
+					let keyword = $(".searchclass").val();
+					
+					console.log(keyword);
+					
+					$.ajax({
+						url:"searchkeyword.pr",
+						data:{keyword:keyword},
+						success:function(){
+							console.log("되냐");
+						}, error:function(){
+							console.log("ajax 통신 실패!");
+						}
+					});
+				}
+            }
             </script>
 
             <div id="content">

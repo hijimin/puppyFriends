@@ -247,6 +247,7 @@ ORDER BY PRODUCT_COUNT DESC)A
 	 FROM IMAGE
 	 JOIN PRODUCT ON(REF_BNO = PRODUCT_NO)
 	WHERE PRODUCT_NO = ?
+	  AND IMAGE_TYPE = 1
 	</entry>
 	
 	<entry key="updateProduct">

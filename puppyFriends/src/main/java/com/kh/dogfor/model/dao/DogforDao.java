@@ -113,7 +113,8 @@ public class DogforDao {
 				list.add(new Image(rset.getInt("file_no"),
 						           rset.getString("dog_name"),
 						           rset.getString("content"),
-						           rset.getString("titleimg")));
+						           rset.getString("titleimg"),
+						           3));
 				
 			}
 			

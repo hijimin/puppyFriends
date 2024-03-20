@@ -77,7 +77,7 @@
 			<h1 align="center">강아지 갤러리</h1>
 
 			<div align="right" style="width: 1500px;">
-				<% if(loginUser != null){ %>
+				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")){ %>
 				<a href="<%= contextPath %>/galleryEnrollForm.ga">사진등록</a>
 				<% } %>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -93,6 +93,7 @@
 							name: $("#search").val(),
 						},
 						success:function(result){
+							console.log(result);
 							let value = "";
 							for(let i=0; i<result.length; i++){
 								value += "<div class='img' align='center'>" +

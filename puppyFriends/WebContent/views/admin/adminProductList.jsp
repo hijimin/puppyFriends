@@ -60,6 +60,7 @@ int maxPage = pi.getMaxPage();
 	background-color: rgb(255, 222, 239);
 	color: white;
 	box-sizing: border-box;
+	padding-top: 70px;
 }
 
 .sidebar>ul {
@@ -90,6 +91,7 @@ body button {
 	background-color: rgb(255, 167, 212);
 	color: white;
 	border: none;
+	background-color: #f5e3e1;
 }
 
 .mid>* {
@@ -120,9 +122,6 @@ h1 {
 	font-size: 20px;
 }
 
-th, td {
-	border: 1px solid gray;
-}
 
 .paging-area {
 	margin-right: 150px;
@@ -136,6 +135,7 @@ th, td {
 	margin-left: 1278px;
 	margin-bottom: 30px;
 	border-radius: 5px;
+	color: #ff2400;
 }
 
 .sidebar li ul {
@@ -170,6 +170,7 @@ th, td {
 	text-align: center;
 	list-style-type: none;
 	margin-right: 5px;
+	font-size: 20px;
 }
 
 .sidebar ul {
@@ -177,14 +178,49 @@ th, td {
 	text-align: center;
 	margin-top: 10px;
 }
+
+thead th {
+        background-color: #f5e3e1;
+        height: 40px;    
+        color: gray;
+        font-size: 20px;
+      }
+      
+      tbody th{
+        border-bottom : 1px solid #f5e3e1;
+        border-right: 1px solid #f5e3e1;
+        border-left: 1px solid #f5e3e1;
+      }
+
+      tbody td{
+        border-bottom : 1px solid #f5e3e1;
+        border-right: 1px solid #f5e3e1;
+        border-left: 1px solid #f5e3e1;
+      }
+
+      #checkOp1{
+        border-top-left-radius: 5px;
+      }
+
+      #checkOp2{
+        border-top-right-radius: 5px;
+      }
+
+      .list-area{
+        color: gray;
+      }
+      
+      a {
+      	text-decoration-line: none;
+		color: white;
+      }
+      
 </style>
 </head>
 <body>
 	<div class="outer">
 		<div class="headerbar">
-			<h1
-				style="color: rgb(255, 118, 189); display: inline; margin-left: 760px;">PuppyFriends
-				Manager</h1>
+			 <h1 style="display: inline; margin-left: 760px;"><a href="<%= contextPath %>/AdminMemberCount.me" style="color: white; text-decoration-line: none;">PuppyFriends Manager</a></h1>
 		</div>
 
 		<div class="mid">
@@ -220,28 +256,27 @@ th, td {
 				</li> <br /> <br /> <br /> <br />
 				<li class="product-admin"><a
 					href="<%=contextPath%>/list.pd?cpage=1">상품</a>
-					<ul class="product-data">
-						<a href="#" style="color: white">상품리스트</a>
-					</ul></li>
-			</div>
+					<ul class="product-data"><a href="#" style="color: white">상품리스트</a></ul>
+					<ul class="adminOrder-data"><a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1" style="color: white">주문확인</a></ul>
+				</li>
+				</div>
 
 			<div class="content">
-				<table class="list-area" align="center"
-					style="border: 1px solid gray">
+				<table class="list-area" align="center">
 					<br />
-					<h1>상품조회</h1>
+					<h1 style="color: gray;">Product</h1>
 					<br />
 					<br />
 					<thead align="center">
 						<tr>
-							<th width="45">선택</th>
+							<th width="50" id="checkOp1">선택</th>
 							<th width="150">상품번호</th>
 							<th width="150">상품이름</th>
 							<th width="150">상세정보</th>
 							<th width="150">가격</th>
 							<th width="150">재고수량</th>
 							<th width="250">등록일</th>
-							<th width="250">할인율</th>
+							<th width="250" id="checkOp2">할인율</th>
 						</tr>
 					</thead>
 
@@ -276,8 +311,7 @@ th, td {
 							}
 							%>
 						</form>
-						<button type="submit" id="productDeleteBtn"
-							onclick="productDelete()">상품삭제</button>
+						<button type="submit" id="productDeleteBtn" onclick="productDelete()">상품삭제</button>
 					</tbody>
 				</table>
 
@@ -313,20 +347,11 @@ th, td {
 					<%
 					}
 					%>
-					<%
-					for (int p = startPage; p <= endPage; p++) {
-					%>
-					<%
-					if (p == currentPage) {
-					%>
-					<button style="background-color: pink"><%=p%></button>
-					<%
-					} else {
-					%>
-					<button
-						onclick="location.href='<%=contextPath%>/adminSelectMember.me?cpage=<%=p%>'">
-						<%=p%>
-					</button>
+					<% for (int p = startPage; p <= endPage; p++) { %>
+					<% if (p == currentPage) { %>
+					<button style="background-color: #f5e3e1"><%=p%></button>
+					<% } else { %>
+					<button onclick="location.href='<%=contextPath%>/adminSelectMember.me?cpage=<%=p%>'"><%=p%></button>
 					<%
 					}
 					%>
@@ -336,9 +361,7 @@ th, td {
 					<%
 					if (currentPage != maxPage) {
 					%>
-					<button
-						onclick="location.href='<%=contextPath%>/adminSelectMember.me?cpage=<%=currentPage + 1%>'">
-						&gt;</button>
+					<button onclick="location.href='<%=contextPath%>/adminSelectMember.me?cpage=<%=currentPage + 1%>'">&gt;</button>
 					<%
 					}
 					%>

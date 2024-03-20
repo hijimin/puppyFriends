@@ -18,6 +18,7 @@ import static com.kh.common.JDBCTemplate.*;
 import com.kh.common.model.vo.AdminPageInfo;
 import com.kh.member.model.vo.Dog;
 import com.kh.member.model.vo.Member;
+import com.kh.order.model.vo.Order;
 import com.kh.product.model.vo.Product;
 
 public class AdminDao {
@@ -376,5 +377,44 @@ public class AdminDao {
 		return nResult;
 		
 	} // nCountMember
+	
+	public ArrayList<Order> adminSelectOrder(Connection conn, AdminPageInfo pi){
+		ArrayList<Order> oList = new ArrayList<Order>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminSelectOrder");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				oList.add(new Order(  rset.getInt("ORDER_NO"),
+									  rset.getString("MEMBER_NO"),
+									  rset.getString("PRODUCT_NO"),
+									  rset.getString("ORDER_NAME"),
+									  rset.getDate("ORDER_DATE"),
+									  rset.getInt("PAYMENT_NO"),
+									  rset.getInt("PRODUCT_DISCOUNT"),
+									  rset.getString("ORDER_STATUS")
+									  ));
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return oList;
+		
+	} // adminSelectOrder
 	
 } // CLASS

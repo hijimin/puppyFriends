@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.model.service.AdminService;
 import com.kh.common.model.vo.AdminPageInfo;
-import com.kh.product.model.vo.Product;
+import com.kh.order.model.vo.Order;
 
 /**
- * Servlet implementation class AdminSelectProductListController
+ * Servlet implementation class AdminSelectOrderController
  */
-@WebServlet("/AdminSelectProductList.pr")
-public class AdminSelectProductListController extends HttpServlet {
+@WebServlet("/AdminSelectOrder.od")
+public class AdminSelectOrderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminSelectProductListController() {
+    public AdminSelectOrderController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +32,6 @@ public class AdminSelectProductListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int listCount;   
 		int currentPage; 
 		int pageLimit;   
@@ -64,13 +63,13 @@ public class AdminSelectProductListController extends HttpServlet {
 		
 		AdminPageInfo pi = new AdminPageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Product> pList = new AdminService().adminSelectPRoductList(pi);
+		ArrayList<Order> oList = new AdminService().adminSelectOrder(pi);
 		
 		request.setAttribute("pi", pi);
-		request.setAttribute("pList", pList);
-		request.getRequestDispatcher("views/admin/adminProductList.jsp").forward(request, response);
+		request.setAttribute("oList", oList);
+		request.getRequestDispatcher("views/admin/adminOrderCheck.jsp").forward(request, response);
 		
-	} // doGet
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

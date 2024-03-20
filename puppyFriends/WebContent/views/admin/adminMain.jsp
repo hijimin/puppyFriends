@@ -208,10 +208,10 @@
         }
         
         .c1{
-             border:1px solid gray;
+           border:1px solid gray;
            width:600px;
            height:310px;
-            border-radius: 10px;
+           border-radius: 10px;
         }
         
         .c2{
@@ -293,6 +293,7 @@
             <br><br><br><br>
             <li class="product-admin" onmouseover="updateChart(4)"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a>
                 <ul class="product-data"><a href="<%= contextPath %>/AdminSelectProductList.pr?cpage=1"  style="color: white;">상품리스트</a></ul>
+                <ul class="adminOrder-data"><a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1">주문확인</a></ul>
             </li>
             
         </div>

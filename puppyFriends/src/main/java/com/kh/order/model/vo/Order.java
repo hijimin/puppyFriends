@@ -13,6 +13,7 @@ public class Order {
 	 private Date orderDate;
 	 private int orderDelivery;
 	 private int paymentNo;
+	 private String status; 
 	 
 	 public Order() {}
 
@@ -31,6 +32,32 @@ public class Order {
 		this.paymentNo = paymentNo;
 	}
 	
+	
+	
+
+	public Order(int orderNo, String orderUser, String productNo, String orderName, Date orderDate, int orderDelivery,
+			int paymentNo, String status) {
+		super();
+		this.orderNo = orderNo;
+		this.orderUser = orderUser;
+		this.productNo = productNo;
+		this.orderName = orderName;
+		this.orderDate = orderDate;
+		this.orderDelivery = orderDelivery;
+		this.paymentNo = paymentNo;
+		this.status = status;
+	}
+	
+	
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public int getOrderNo() {
 		return orderNo;
@@ -111,12 +138,14 @@ public class Order {
 	public void setPaymentNo(int paymentNo) {
 		this.paymentNo = paymentNo;
 	}
-	
 
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", orderUser=" + orderUser + ", productNo=" + productNo + ", orderName="
 				+ orderName + ", orderAddress=" + orderAddress + ", orderPhone=" + orderPhone + ", orderReq=" + orderReq
-				+ ", orderDate=" + orderDate + ", orderDelivery=" + orderDelivery + ", paymentNo=" + paymentNo + "]";
+				+ ", orderDate=" + orderDate + ", orderDelivery=" + orderDelivery + ", paymentNo=" + paymentNo
+				+ ", status=" + status + "]";
 	}
+	
+	
 }

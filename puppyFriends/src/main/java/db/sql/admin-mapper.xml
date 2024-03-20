@@ -127,8 +127,23 @@
 	</entry>
 	
 	
-	<entry key="">
-	
+	<entry key="adminSelectOrder">
+		 SELECT *
+           FROM(SELECT ROWNUM RNUM, p.*
+                   FROM(SELECT
+                           ORDER_NO
+                         , MEMBER_NO
+                         , PRODUCT_NO
+                         , ORDER_NAME
+                         , ORDER_DATE
+                         , ORDER_COUNT
+                         , PAYMENT_NO
+                         , ORDER_STATUS
+                       FROM P_ORDER
+                       WHERE ORDER_STATUS = 'Y'
+                       ORDER 
+                          BY MEMBER_NO DESC) p)
+            WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
 </properties>

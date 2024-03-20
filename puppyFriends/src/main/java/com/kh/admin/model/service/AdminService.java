@@ -10,6 +10,7 @@ import com.kh.admin.model.dao.AdminDao;
 import com.kh.common.model.vo.AdminPageInfo;
 import com.kh.member.model.vo.Dog;
 import com.kh.member.model.vo.Member;
+import com.kh.order.model.vo.Order;
 import com.kh.product.model.vo.Product;
 
 public class AdminService {
@@ -117,4 +118,12 @@ public class AdminService {
 		return nResult;
 	}
 
+	public ArrayList<Order> adminSelectOrder(AdminPageInfo pi) {
+		Connection conn = getConnection();
+		ArrayList<Order> oList = new AdminDao().adminSelectOrder(conn, pi);
+		
+		close(conn);
+	    return oList;	
+	} // adminSelectOrder
+	
 } // class

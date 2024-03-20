@@ -58,6 +58,7 @@
             background-color: rgb(255, 222, 239);
             color: white;
             box-sizing: border-box;
+            padding-top: 70px;
         }
 
         .sidebar>ul{
@@ -208,7 +209,8 @@
             </li>
             <br><br><br><br>
             <li class="product-admin"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a>
-                <ul class="product-data"><a href=""  style="color: white;">상품리스트</a></ul>
+                <ul class="product-data"><a href="<%= contextPath %>/list.pd?cpage=1"  style="color: white;">상품리스트</a></ul>
+            	<ul class="adminOrder-data"><a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1" style="color: white">주문확인</a></ul>
             </li>
             
         </div>

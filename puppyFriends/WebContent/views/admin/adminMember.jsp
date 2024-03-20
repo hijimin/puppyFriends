@@ -40,7 +40,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     
-   
+  
     
    <style>
         .outer{
@@ -66,13 +66,13 @@
             background-color: rgb(255, 222, 239);
             color: white;
             box-sizing: border-box;
+            padding-top: 70px;
         }
 
         .sidebar>ul{
             margin: 0;
             padding-left: 50px;
-            padding-top: 70px;
-          
+            padding-top: 70px;        
         }
 
         .sidebar a{
@@ -92,7 +92,7 @@
         }
         
         body button{
-            background-color: rgb(255, 167, 212);
+            background-color: #f5e3e1;
             color : white;
             border : none;
             
@@ -113,21 +113,15 @@
             margin-left: 130px;
         }
 
-        .list-area{
-            font-size: 20px;
-        }
+        
 
         h1{
-            margin-left: 560px;
+            margin-left: 510px;
         }
 
         .list-area td{
             margin-left: 320px;
             font-size: 20px;
-        }
-
-        th, td{
-            border: 1px solid gray;
         }
 
         .paging-area{
@@ -142,10 +136,11 @@
             margin-left: 1278px;
             margin-bottom: 30px;
             border-radius: 5px;
+            color: #ff2400;
         }
         
          .sidebar li ul {
-        display: none;
+             display: none;
       	 }
 
         .sidebar li:hover > ul {
@@ -184,6 +179,39 @@
             margin-top: 10px;
 
         }
+
+      thead th {
+        background-color: #f5e3e1;
+        height: 40px;    
+        color: gray;
+        font-size: 20px;
+      }
+      
+      tbody th{
+        border-bottom : 1px solid #f5e3e1;
+        border-right: 1px solid #f5e3e1;
+        border-left: 1px solid #f5e3e1;
+      }
+
+      tbody td{
+        border-bottom : 1px solid #f5e3e1;
+        border-right: 1px solid #f5e3e1;
+        border-left: 1px solid #f5e3e1;
+      }
+
+      #checkOp1{
+        border-top-left-radius: 5px;
+      }
+
+      #checkOp2{
+        border-top-right-radius: 5px;
+      }
+
+      .list-area{
+        color: gray;
+      }
+
+      
        
     </style>
 </head>
@@ -191,7 +219,7 @@
 
    <div class="outer">
         <div class="headerbar">
-                <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 760px;"><a href="<%= contextPath %>/AdminMemberCount.me">PuppyFriends Manager</a></h1>
+                <h1 style="display: inline; margin-left: 760px;"><a href="<%= contextPath %>/AdminMemberCount.me" style="color: white; text-decoration-line: none;">PuppyFriends Manager</a></h1>
         </div>
     
         <div class="mid">
@@ -201,7 +229,7 @@
             <li class="memberMana"><a href="<%= contextPath %>/adminSelectMember.me?cpage=1">회원</a>
                 <ul class="memberData" style="color: white;">
                     <li><a href="<%= contextPath %>/adminSelectMember.me?cpage=1"  style="color: white;">회원조회</a></li><br>
-                    <li><a href="<%= contextPath %>/adminRestoreMemberList.me?cpage=1"  style="color: white;">추방복구</a></li>
+                    <li><a href="<%= contextPath %>/adminRestoreMemberList.me?cpage=1"  style="color: white;">회원복구</a></li>
                 </ul>
             </li> 
             <br><br><br><br>
@@ -221,26 +249,27 @@
             <br><br><br><br>
             <li class="product-admin"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a>
                 <ul class="product-data"><a href="<%= contextPath %>/AdminSelectProductList.pr?cpage=1"  style="color: white;">상품리스트</a></ul>
+           		<ul class="adminOrder-data"><a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1" style="color: white">주문확인</a></ul>
             </li>
             
         </div>
 
 
             <div class="content">
-                <table class="list-area" align="center"  style="border: 1px solid gray;">
+                <table class="list-area" align="center">
                     <br>
-                    <h1>회원조회</h1>
+                    <h1 style="color: gray;">MemberSelect</h1>
                     <br><br>
                     <thead align="center">
                         <tr>
-                        	<th width="45">선택</th>
+                        	<th width="50" id="checkOp1">선택</th>
                             <th width="150">회원번호</th>
                             <th width="150">회원아이디</th>
                             <th width="150">회원이름</th>
                             <th width="150">반려견식별번호</th>
                             <th width="150">반려견이름</th>
                             <th width="250">회원이메일</th>
-                            <th width="250">전화번호</th>
+                            <th width="250" id="checkOp2">전화번호</th>
                         </tr>
                         
                     </thead>
@@ -257,8 +286,8 @@
                                     <td><%= m.getDogName() %></td>
                                     <td><%= m.getMemberEmail() %></td>
                                     <td><%= m.getMemberPhone() %></td>
-                                </tr>
-                        	<% } %>
+                                </tr>                               
+                        	<% } %>                           
 							</form>
                             <button type="submit" id="deleteBtn" onclick="deleteConfirm()">강제추방</button>
                         </tbody>
@@ -306,7 +335,7 @@
                     
                     <% for(int p=startPage; p<=endPage; p++) { %>
                         <% if(p == currentPage) { %>
-                        <button style="background-color:pink;"><%= p %></button>
+                        <button style="background-color:#f5e3e1; border-radius: 5px;"><%= p %></button>
                         <% } else { %>
                         <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= p %>'"><%= p %></button>
                         <% } %>
@@ -323,6 +352,14 @@
         
         
     </div>
+    
+  <!-- <div class="container"> -->
+  <!-- <h2>Alerts</h2> -->
+  <!-- <p>Alerts are created with the .alert class, followed by a contextual color classes:</p>
+  <div class="alert alert-warning">
+    <strong>Warning!</strong> This alert box could indicate a warning that might need attention.
+  </div>
+  </div> -->
 
 
 

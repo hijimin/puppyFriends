@@ -42,7 +42,7 @@ public class ChattingFormController extends HttpServlet {
 		Chatting chat = new ChattingService().ChattingForm(memberId);
 		
 		
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
 		
 		//if(result > 0) {
 		

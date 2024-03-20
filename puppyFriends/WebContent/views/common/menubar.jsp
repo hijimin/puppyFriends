@@ -281,7 +281,9 @@
             <li class="board_All"><a href="#">게시판</a>
             	<ul class="board_Detail">
             		<li class="noticeBoard"><a href="#">공지사항</a></li>
+            		<% if(loginUser != null){ %>
             		<li class="chattingBoard"><a href="<%= contextPath %>/chatForm.ch">모임게시판</a></li>
+            		 <% } %>
             	</ul>
             </li>
             

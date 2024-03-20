@@ -33,6 +33,9 @@
 <title>PUPPY</title>
 <style>
     
+    div{/*border: 1px solid red;*/ box-sizing: border-box;}
+
+
     body{
             margin: 0px;
     }
@@ -178,7 +181,10 @@
     
     }
     
-    
+    .before-login button{border: 0; background-color: transparent; margin-left: 20px; color: white;}
+    .after-login>a{text-decoration: none; color: white;}
+    .after-login>a:hover{color: pink;}
+    .after-login{padding-left: 20px;}
 
     /* 네비바 스타일 끝 */
 
@@ -218,18 +224,9 @@
 
                     <!-- case1. 로그인 전 -->
                     <% if(loginUser == null) {%>
-	                    <form action="<%= contextPath %>/loginform.me" method="post">
-	            
-	                        <table align="center">
-	                            
-	                            <tr>
-	                                <th colspan="2">
-	                                    <button type="submit">로그인</button>
-	                                    <button onclick="location.href='<%= contextPath %>/enrollpage.me'" type="button">회원가입</button>
-	                                </th>
-	                            </tr>
-	                        </table>
-	            
+	                    <form class="before-login" action="<%= contextPath %>/loginform.me" method="post">
+                            <button type="submit">로그인</button> 
+                            <button onclick="location.href='<%= contextPath %>/enrollpage.me'" type="button">회원가입</button>
 	                    </form>
                 	<% }else {  %>
             
@@ -238,8 +235,10 @@
 	                    <div>
 	            		
 	                        <b><%= loginUser.getMemberName() %>님</b>의 방문을 환영합니다 <br><br>
-	                        <div align="center">
-	                        	<a href="<%= contextPath %>/AdminMemberCount.me">관리자</a>
+	                        <div class="after-login">
+	                        	<% if(loginUser.getMemberNo() == 1) { %>
+	                        		<a href="<%= contextPath %>/AdminMemberCount.me">관리자</a>
+	                        	<% } %>
 	                            <a href="<%= contextPath %>/mypage">마이페이지</a>
 	                            <a href="<%= contextPath %>/logout">로그아웃</a>
 	                        </div>
@@ -278,10 +277,14 @@
             <li class="goods"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a></li>
             
             
-            <li class="board_All"><a href="#">게시판</a>
+            <li class="board_All"><a href="">게시판</a>
             	<ul class="board_Detail">
+<<<<<<< HEAD
             		<li class="noticeBoard"><a href="#">공지사항</a></li>
             		<% if(loginUser != null){ %>
+=======
+            		<li class="noticeBoard"><a href="<%= contextPath %>/list.no">공지사항</a></li>
+>>>>>>> notice
             		<li class="chattingBoard"><a href="<%= contextPath %>/chatForm.ch">모임게시판</a></li>
             		 <% } %>
             	</ul>

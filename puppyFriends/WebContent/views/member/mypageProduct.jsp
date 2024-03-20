@@ -1,105 +1,308 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-   div{box-sizing: border-box; border: 1px solid red;}
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <style>
+      div {
+        border: 1px solid red;
+        box-sizing: border-box;
+      }
 
-.mypage-wrap{height: 1000px;}
+      .mypage-wrap {
+        width: 100%;
+        height: 1000px;
+      }
+      .mypage-form {
+        height: 100%;
+        width: 80%;
+      }
+      .mypage-header {
+        height: 10%;
+      }
+      .mypage-menu-empty {
+        height: 30%;
+      }
+      .mypage-order {
+        height: 25%;
+        padding: 0;
+        margin: 0;
+      }
+      .mypage-order li {
+        float: left;
+        padding: 0px 5px;
+        height: 100%;
+        /* border: 1px solid red; */
+        list-style-type: none;
+        margin: 0px;
+      }
 
-.mypage-sidespace{
-    width: 60%;
-    height: 100%;
-    margin: auto;
-}
+      .mypage-order a {
+        /* border: 1px solid red; */
+        text-decoration: none;
+        font-size: 14px;
+        color: black;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      span {
+        font-size: 14px;
+      }
 
-.mypage-header{height: 100px;}
+      .mypage-order a:hover {
+        color: black;
+        text-decoration: none;
+      }
 
-.mypage-header>div{float: left;}
+      .mypage-content {
+        height: 90%;
+        display: flex;
+      }
+      .mypage-select-zone {
+        width: 15%;
+      }
+      .mypage-select-header {
+        height: 10%;
+      }
+      .mypage-select-header > h2 {
+        text-align: left;
+        margin-top: 20px;
+      }
+      .mypage-content-zone {
+        width: 85%;
+      }
+      .line {
+        border: 1px solid black;
+        width: 100%;
+      }
 
-.header-logo{
-    height: 100%;
-    width: 20%;
-    background-color: rgb(255, 222, 239);
-    cursor: pointer;
-    
-}
-.header-logo>h2{margin-top: 25px; text-align: center;}
+      .mypage-select-main {
+        height: 90%;
+      }
+      .mypage-select-main > ul {
+        /* border: 1px solid blue; */
+        list-style-type: none;
+        padding: 16px 0px;
+        text-align: left;
+        padding-left: 0px;
+        height: 100%;
+      }
 
-.header-title{width: 55%; height: 100%;}
-.header-title>h1{margin-left: 17px; margin-top: 20px;}
+      .mypage-select-main a {
+        text-decoration: none;
+        color: black;
+        font-size: 16px;
+        font-weight: 800;
+      }
 
-.header-info{width: 25%; height: 100%;}
-.header-info>div{float: right;}
+      .mypage-select-main li {
+        margin-top: 40px;
+      }
+      .mypage-select-main a:hover {
+        color: black;
+      }
 
-.info-alram, .info-user{
-    width: 50px;
-    height: 50px;
-    margin-top: 20px;
-}
-.info-alram{margin-right: 20px; margin-top: 28px;}
+      .mypage-content-side {
+        width: 98%;
+        height: 100%;
+        padding: 30px 0px;
+      }
+      .mypage-content-main {
+        width: 95%;
+        height: 55%;
+      }
 
-.mypage-content{width: 100%; height: 900px;}
-.mypage-content>div{float: left;}
-.mypage-content1{width: 20%; height: 100%; background-color: rgb(255, 222, 239);}
-.mypage-content2{width: 80%; height: 100%;}
+      .mypage-change-pwd {
+        width: 80%;
+        height: 80%;
+        margin-top: 30px;
+      }
 
-.member-info, .select-reservation,
-.product-info, .board-info, .mileage-info{
-    height: 20%;
-    text-align: center;
-    padding-top: 60px;
-    cursor: pointer;
-}
-    
+      .change-pwd-main {
+        height: 85%;
+      }
+      .change-pwd-button {
+        height: 15%;
+      }
+      .change-pwd-button > div {
+        float: left;
+      }
+      .input-row {
+        width: 90%;
+        height: 20%;
+        display: flex;
+        margin-top: 20px;
+      }
+      .input-title {
+        width: 30%;
+        height: 100%;
+        padding-top: 20px;
+      }
+      .input-group {
+        width: 80%;
+        height: 100%;
+        padding: 12px 20px 0px 0px;
+      }
+      .input-group>input{
+        flex: 1;
+        border-style: none;
+        background-color: #f6f6f6;
+        border-radius: 5px;
+    }
 
-</style>
-<script src="https://kit.fontawesome.com/d48d14d77f.js" crossorigin="anonymous"></script>
+      .cancle-update-button,
+      .register-update-button {
+        width: 50%;
+        height: 100%;
+      }
 
-</head>
-<body>
-    
-	<div class="mypage-wrap">
-        <div class="mypage-sidespace">
+      .cancle-update-button > button,
+      .register-update-button > button {
+        width: 70%;
+        height: 100%;
+      }
+    </style>
+    <script
+      src="https://kit.fontawesome.com/d48d14d77f.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
 
-            <div class="mypage-header">
-                <div class="header-logo">
-                    <h2 onclick="location.href='<%= request.getContextPath() %>'">PUPPYFRIENDS</h2>
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+  
+    <%@ include file="../common/menubar.jsp" %>
+
+      <form action="<%= contextPath %>/updatePwd.me" method="post">
+          <div class="mypage-wrap" align="center">
+            <div class="mypage-form">
+              <div class="mypage-header">
+                <div class="mypage-menu-empty"></div>
+                <div class="mypage-order">
+                  <li><a href="">Home ></a></li>
+                  <li><a href="">Mypage ></a></li>
+                  <li><span>비밀번호변경</span></li>
                 </div>
-                
-                <div class="header-title"><h1>상품</h1></div>
-                
-                <div class="header-info">
-                    <div class="info-user">
-                        <i class="fa-regular fa-circle-user fa-3x"></i>
+              </div>
+              <div class="mypage-content">
+                <div class="mypage-select-zone">
+                  <div class="mypage-select-header">
+                    <h2>MY PAGE</h2>
+                  </div>
+                  <div class="line"></div>
+                  <div class="mypage-select-main">
+                    <ul>
+                      <li>
+                        <a href="<%= contextPath%>/mypage"
+                          >회원정보수정</a
+                        >
+                      </li>
+                      <li>
+                        <a href="<%= contextPath%>/updatePwd"
+                          >비밀번호변경</a
+                        >
+                      </li>
+                      <li>
+                        <a href="<%= request.getContextPath()%>/mypageProduct"
+                          >장바구니 조회</a
+                        >
+                      </li>
+                      <li>
+                        <a href="<%= request.getContextPath()%>/mypageReservation"
+                          >예약 조회</a
+                        >
+                      </li>
+                      <li>
+                        <a data-toggle="modal" href="#deleteModal"
+                          >회원탈퇴</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+
+                <div class="mypage-content-zone">
+                  <div class="mypage-content-side">
+                    <div class="mypage-content-main">
+                        <div class="mypage-change-pwd">
+                          <div class="change-pwd-main">
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="info-alram">
-                        <i class="fa-solid fa-bell fa-2x"></i>
-                    </div>
-                </div>
+                  </div>
+              </div>
             </div>
-            
-            <div class="mypage-content">
-                <div class="mypage-content1">
-                    <div class="member-info" onclick="location.href='<%=request.getContextPath()%>/mypage'"><h2>회원</h2></div> 
-                    <div class="select-reservation" onclick="location.href='<%=request.getContextPath()%>/confirmReservation'"><h2>예약 조회</h2></div>
-                    <div class="product-info" onclick="location.href='<%=request.getContextPath()%>/confirmProduct'"><h2>상품</h2></div> 
-                    <div class="board-info" onclick="location.href='<%=request.getContextPath()%>/confirmBoard'"><h2>게시판</h2></div>
-                    <div class="mileage-info" onclick="location.href='<%=request.getContextPath()%>/confirmMileage'"><h2>쿠폰함</h2></div>
-                </div>
-                <div class="mypage-content2">
-                    <h2>이곳은 상품 조회 페이지</h2>
-                </div>
+          </div>
+      </form>
+      <script>
+        function validatePwd(){
+          if($("input[name=updatePwd]").val() != $("input[name=checkPwd]").val()){
+            alert("변경할 비밀번호가 일치하지 않습니다.");
+            return false;
+          }
+        }
+      </script>
+      
+      <!-- 회원탈퇴용 Modal -->
+      <div class="modal" id="deleteModal">
+        <div class="modal-dialog" style="margin-top: 250px;">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">회원탈퇴</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            
+
+            <!-- Modal body -->
+            <div class="modal-body" align="center">
+              
+              <form action="<%= contextPath %>/delete.me" method="post">
+                  <input type="hidden" name="memberId" value="<%= loginUser.getMemberId() %>">
+                  <b>탈퇴 후 복구가 불가능합니다. <br> 정말로 탈퇴하시겠습니까? </b> <br><br>
+                  비밀번호 : <input type="password" name="memberPwd1" required> <br><br>
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return deleteMember();">탈퇴하기</button>
+              </form>
+              
+              <script>
+                /* function selectPwd(this){
+                  let deletePwd = this.value;
+                  deleteMember(deletePwd);
+                } */
+
+                function deleteMember(){
+                	console.log($("input[name=memberPwd1]"));
+                  if($("input[name=memberPwd1]").val() != <%= loginUser.getMemberPwd() %>){
+                    alert("비밀번호가 일치하지 않습니다.");
+                    return false;
+                  }
+                }
+              </script>
+            </div>
+
+
+          </div>
         </div>
-            
-    </div>
-        
-        
-        
-</body>
+      </div>
+
+  </body>
 </html>

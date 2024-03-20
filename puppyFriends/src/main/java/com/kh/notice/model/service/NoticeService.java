@@ -11,6 +11,18 @@ import com.kh.notice.model.vo.Notice;
 
 public class NoticeService {
 
+	public ArrayList<Notice> noticeList(){
+		Connection conn = getConnection();
+		
+		ArrayList<Notice> list = new NoticeDao().noticeList(conn);
+		
+		close(conn);
+		
+		return list;
+		
+	}
+	
+	
 	public ArrayList<Notice> selectNoticeList(AdminPageInfo pi) {
 		
 		Connection conn = getConnection();

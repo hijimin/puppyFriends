@@ -6,7 +6,7 @@ public class Notice {
 
 	private int noticeNo;
 	private String noticeWriter;
-	private String noticeTitile;
+	private String noticeTitle;
 	private String noticeContent;
 	private int count;
 	private Date createDate;
@@ -15,12 +15,27 @@ public class Notice {
 	
 	public Notice() {}
 
-	public Notice(int noticeNo, String noticeWriter, String noticeTitile, String noticeContent, int count,
+	
+	
+	
+	public Notice(int noticeNo, String noticeTitle, String noticeWriter, int count, Date createDate) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeWriter = noticeWriter;
+		this.count = count;
+		this.createDate = createDate;
+	}
+
+
+
+
+	public Notice(int noticeNo, String noticeWriter, String noticeTitle, String noticeContent, int count,
 			Date createDate, Date modifyDate, String status) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeWriter = noticeWriter;
-		this.noticeTitile = noticeTitile;
+		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
 		this.count = count;
 		this.createDate = createDate;
@@ -28,12 +43,12 @@ public class Notice {
 		this.status = status;
 	}
 
-	public Notice(int noticeNo, String noticeWriter, String noticeTitile, String noticeContent, int count,
+	public Notice(int noticeNo, String noticeWriter, String noticeTitle, String noticeContent, int count,
 			Date createDate, Date modifyDate) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeWriter = noticeWriter;
-		this.noticeTitile = noticeTitile;
+		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
 		this.count = count;
 		this.createDate = createDate;
@@ -41,11 +56,11 @@ public class Notice {
 	}
 
 
-	public Notice(int noticeNo, String noticeWriter, String noticeTitile, String noticeContent, Date createDate, String status) {
+	public Notice(int noticeNo, String noticeWriter, String noticeTitle, String noticeContent, Date createDate, String status) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeWriter = noticeWriter;
-		this.noticeTitile = noticeTitile;
+		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
 		this.createDate = createDate;
 		this.status = status;
@@ -67,12 +82,12 @@ public class Notice {
 		this.noticeWriter = noticeWriter;
 	}
 
-	public String getNoticeTitile() {
-		return noticeTitile;
+	public String getnoticeTitle() {
+		return noticeTitle;
 	}
 
-	public void setNoticeTitile(String noticeTitile) {
-		this.noticeTitile = noticeTitile;
+	public void setnoticeTitle(String noticeTitle) {
+		this.noticeTitle = noticeTitle;
 	}
 
 	public String getNoticeContent() {
@@ -117,7 +132,7 @@ public class Notice {
 
 	@Override
 	public String toString() {
-		return "Notice [noticeNo=" + noticeNo + ", noticeWriter=" + noticeWriter + ", noticeTitile=" + noticeTitile
+		return "Notice [noticeNo=" + noticeNo + ", noticeWriter=" + noticeWriter + ", noticeTitle=" + noticeTitle
 				+ ", noticeContent=" + noticeContent + ", count=" + count + ", createDate=" + createDate
 				+ ", modifyDate=" + modifyDate + ", status=" + status + "]";
 	}

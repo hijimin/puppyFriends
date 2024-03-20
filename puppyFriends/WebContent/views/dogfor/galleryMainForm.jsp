@@ -22,30 +22,36 @@
 	.outer{
 		width: 1903px;
 		margin: auto;
-		margin-top: 50px;
+		margin-top: 0px;
 		margin-bottom: 50px;
 
 	}
 	#img-area{
 		margin-top: 50px;
-		width: 1500px;
+		width: 1600px;
 		height: auto;
 		margin: auto;
 		padding-left: 130px;
 		margin-bottom: 50px;
 	}
 	.img{
-		width: 350px;
-		height: 250px;
-		margin: 30px;
+		width: 400px;
+		height: 350px;
+		margin: 10px;
 		display: inline-block;
-		margin-top: 50px;
+		margin-top: 20px;
 	}
 	.img *{
 		width: 100%;
 	}
 	.img-1{
-		height: 220px;
+		height: 300px;
+		background-color: rgb(247,247,247);
+		padding-top: 40px;
+	}
+	.img-2{
+		padding-top: 5px;
+		font-size: 20px;
 	}
 	.modal-content{
 		width: 600px; 
@@ -66,6 +72,9 @@
 		transform: translateY(-5px);
 		transform: scale(1.1);
 	}
+	#glasses:hover{
+		cursor: pointer;
+	}
 </style>
 </head>
 <body>
@@ -75,14 +84,16 @@
 		<div class="outer">
 
 			<h1 align="center">강아지 갤러리</h1>
-
-			<div align="right" style="width: 1500px;">
-				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")){ %>
-				<a href="<%= contextPath %>/galleryEnrollForm.ga">사진등록</a>
-				<% } %>
+			<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")){ %>
+			<a href="<%= contextPath %>/galleryEnrollForm.ga" style="padding-left: 1450px;">사진등록</a>
+			<br><br>
+			<% } %>
+			
+			<div style="width: 1630px; padding-left: 1230px; display: flex;">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="text" id="search" placeholder="강아지 이름을 입력해주세요" onkeyup="if(event.keyCode==13) search();">
-				<button onclick="search();">검색</button>
+				<input type="text" id="search" placeholder="강아지 이름을 입력해주세요" onkeyup="if(event.keyCode==13) search();" style="flex: 0.7;">&nbsp;
+				<img src="resources/upfiles/2024032017062027950.jpg" id="glasses" style="height: 50px; width: 50px;" onclick="search();">
+				<br><br>
 			</div>
 
 			<script>
@@ -93,15 +104,21 @@
 							name: $("#search").val(),
 						},
 						success:function(result){
-							console.log(result);
 							let value = "";
 							for(let i=0; i<result.length; i++){
 								value += "<div class='img' align='center'>" +
 							            "<div class='img-1'>" +
+										"<div style='height: 85%; width: 80%; border: 7px solid black; filter: drop-shadow(5px 5px 5px #494949)'>" +
+										"<div style='height: 100%; width: 100%; border: 4px solid white;'>" +		
 							            "<img src='" + result[i].filePath + "' style='width: 100%; height: 100%;'>" +
+							            "</div>" +
+							            "</div>" +
 							            "</div>" +
 							            "<div class='img-2'>" +
 							            "<br>" + result[i].dogNo +
+							            "</div>" +
+										"<div class='img-3' style='display: none;'>" +
+										result[i].content +
 							            "</div>" +
 							            "</div>";
 							}
@@ -117,8 +134,8 @@
 			<div id="img-area" >
 				<% for(Image i : list){ %>
 				<div class="img" align="center">
-					<div class="img-1"><img src="<%= contextPath %>/<%= i.getTitleImg() %>" style="width: 100%; height: 100%;"></div>
-					<div class="img-2"><br><%= i.getDogNo() %></div>
+					<div class="img-1"><div style="height: 85%; width: 80%; border: 7px solid black; filter: drop-shadow(5px 5px 5px #494949)"><div style="height: 100%; width: 100%; border: 4px solid white;"><img src="<%= contextPath %>/<%= i.getTitleImg() %>" style="width: 100%; height: 100%;"></div></div></div>
+					<div class="img-2"><%= i.getDogNo() %></div>
 					<div class="img-3" style="display: none;"><%= i.getContent() %></div>
 				</div>
 				<% } %>
@@ -148,17 +165,12 @@
 		</button>
 		
 		<script>
-			$(function(){
-				
-				$("#img-area .img").click(function(){
-					$(".modal-title").html($(this).children().eq(1).text());
-					$(".modal-body1").html($(this).children().eq(0).html());
-					$(".modal-body2").html($(this).children().eq(2).html());
-					$("#modal").click();
-				})
-				
-				
-			})
+			$(document).on("click", "#img-area .img", function() {
+				$(".modal-title").html($(this).children().eq(1).text());
+				$(".modal-body1").html($(this).children().eq(0).html());
+				$(".modal-body2").html($(this).children().eq(2).html());
+				$("#modal").click();
+			});
 		</script>
 		
 		<!-- The Modal -->
@@ -168,29 +180,42 @@
 		
 		      <!-- Modal Header -->
 		      <div class="modal-header" style="height: 11%; width: 100%; ">
-		        <h3 class="modal-title" align="right" style="width: 57%;" ></h3>
+		        <h3 class="modal-title" align="right" style="width: 60%;" ></h3>
 		        <button type="button" class="close" data-dismiss="modal" style="margin-left: 0;">&times;</button>
 		      </div>
 		
 		      <!-- Modal body -->
-		      <div class="modal-body1" style="height: 65%; width: 100%; padding-top: 20px;">
+		      <div class="modal-body1" style="height: 70%; width: 100%; margin-top: 50px; margin-left: 50px;">
 		        <!-- 사진 -->
 		      </div>
 
-			  <div class="modal-body2" style="height: 15%; width: 100%;" align="center">
+			  <div class="modal-body2" style="height: 18%; width: 100%; margin-top: 0px; border: 1px solid #dee2e6" align="center">
 		        <!-- 내용 -->
 		      </div>
 		
 		      <!-- Modal footer -->
-		      <div class="modal-footer" style="height: 8%; width: 100%;">
-		        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+		      <div class="modal-footer" style="height: 8%; width: 100%; margin-top: 0px; border: 0px;">
+				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")){ %>
+		        <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal">Update</button>
+		        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" onclick="deleteGallery();">Delete</button>
+		        <% } %>
+		        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
 		      </div>
 		
 		    </div>
 		  </div>
 		</div>
 		
-		
+		<script>
+			function deleteGallery(){
+				var Gdelete = confirm("삭제하시겠습니까?");
+				
+				if(Gdelete){
+					location.href="<%= contextPath %>/delete.ga"
+				}
+
+			}
+		</script>
 
 
 

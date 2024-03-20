@@ -55,19 +55,17 @@ body {
 	font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
 }
 
+
+.change-date1:hover, .change-date2:hover{
+	text-decoration: none;
+}
 .change-date1{
-  color: black !important;
-  text-decoration: none;
-  cursor: pointer;
+	position: absolute;
+	left: 50px;
 }
 .change-date2{
-  color: black !important;
-  text-decoration: none;
-  cursor: pointer;
-}
-a:active, a:hover {
-	text-decoration: underline;
-	color: #F28011;
+	position: absolute;
+	right: 50px;
 }
 
 .calendar {
@@ -76,17 +74,23 @@ a:active, a:hover {
 	margin-left: 350px;
 }
 .calendar .title{
-	height: 37px;
-	line-height: 37px;
+	height: 100px;
 	text-align: center;
 	font-weight: 600;
+	border-radius: 12px 12px 0px 0px;
+	padding-top: 29px;
+	position: relative;
+}
+.calendar .title h3, .calendar .title h3 a{
+	color: white !important;
 }
 
 .calendar table {
 	width: 100%;
 	height: 100%;
 	border-collapse: collapse;
-	border-spacing: 0;
+	border-radius: 10px;
+	border-spacing: 30;
 }
 
 .calendar table tbody td{
@@ -98,11 +102,11 @@ a:active, a:hover {
 }
 
 .calendar table thead td{
-	height: 30px;
+	height: 70px !important;
 	padding: 10px;
 	border: 1px solid #ccc;
 	text-align: center;
-	background: #f6f6f6; 
+	
 }
 
 .calendar table td:nth-child(7n+1){
@@ -116,7 +120,7 @@ a:active, a:hover {
 }
 .calendar table td.today{
 	font-weight:700;
-	background: #E6FFFF;
+	background: lightgray;
 }
 
 .calendar .footer{
@@ -168,14 +172,14 @@ a:active, a:hover {
 }
 #no{
 	color: red;
-	font-size: 20px;
-	font-weight: 700;
+	font-size: 17px;
+	font-weight: 500;
 	padding-top: 10px;
 }
 #yes{
 	color: blue;
-	font-size: 20px;
-	font-weight: 700;
+	font-size: 17px;
+	font-weight: 500;
 	padding-top: 10px;
 }
 #goToday{
@@ -190,38 +194,37 @@ a:active, a:hover {
 	<%@ include file="../common/menubar.jsp" %>
 
 	<h2 align="center">출석부</h2>
-
-	<div id="enroll" align="right"><a href="<%= contextPath %>/enroll.at">출석등록</a></div>
 	
 	<div class="outer1">
 		<div class="calendar">
 			<div class="title">
+				<h3>
 				<% if(month == 1){ %>
-					<a class="change-date1" href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year-1%>&month=<%=12%>" onclick="next();"><</a>
+					<a class="change-date1" href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year-1%>&month=<%=12%>">&lt;</a>
 				<% }else{ %>
-					<a class="change-date2" href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=month-1%>" onclick="next();"><</a>
+					<a class="change-date1" href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=month-1%>">&lt;</a>
 				<% } %>
 				
 				<label id="yymm"><%=year%>년 <%=month%>월</label>
 				
 				<% if(month == 12){ %>
-					<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year+1%>&month=<%=1%>" onclick="next();">></a>
+					<a class="change-date2" href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year+1%>&month=<%=1%>">&gt;</a>
 				<% }else{ %>
-					<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=month+1%>" onclick="next();">></a>
+					<a class="change-date2" href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=month+1%>">&gt;</a>
 				<% } %>
-			
+				</h3>
 			</div>
-			<br>
+			
 			<table>
 				<thead>
 					<tr>
-						<td>일</td>
-						<td>월</td>
-						<td>화</td>
-						<td>수</td>
-						<td>목</td>
-						<td>금</td>
-						<td>토</td>
+						<td>Sun</td>
+						<td>Mon</td>
+						<td>Tue</td>
+						<td>Wed</td>
+						<td>Thu</td>
+						<td>Fri</td>
+						<td>Sat</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -262,7 +265,7 @@ a:active, a:hover {
 			</table>
 		
 			<div class="footer">
-				<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=tm%>" id="goToday">오늘날짜로</a>
+				<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=tm%>" id="goToday">today</a>
 			</div>
 
 			
@@ -285,9 +288,11 @@ a:active, a:hover {
 
 	</div>
 	<br><br><br><br><br>
-	
+	<p id="change-month" style="display: none;"><%=month%></p>
 
 	<%@ include file="../common/footerbar.jsp" %>
+
+	
 
 
 	<script>
@@ -333,6 +338,87 @@ a:active, a:hover {
 		<% } %>
 
 	<% } %>
+
+	<script>
+		function change(){
+
+    let month = parseInt($("#change-month").html());
+    	switch (month) {
+        case 1: 
+            $(".calendar .title").css("backgroundColor", "#16a085");
+			$(".calendar table thead td").css("color", "#16a085")
+            break;
+        case 2:
+            $(".calendar .title").css("backgroundColor", "#1abc9c");
+			$(".calendar table thead td").css("color", "#1abc9c")
+            break;
+        case 3:
+            $(".calendar .title").css("backgroundColor", "#c0392b");
+			$(".calendar table thead td").css("color", "#c0392b")
+            break;
+        case 4:
+            $(".calendar .title").css("backgroundColor", "#27ae60");
+			$(".calendar table thead td").css("color", "#27ae60")
+            break;
+        case 5:
+            $(".calendar .title").css("backgroundColor", "#FF6860");
+			$(".calendar table thead td").css("color", "#FF6860")
+            break;
+        case 6:
+            $(".calendar .title").css("backgroundColor", "#f39c12");
+			$(".calendar table thead td").css("color", "#f39c12")
+            break;
+        case 7:
+            $(".calendar .title").css("backgroundColor", "yellowgreen");
+			$(".calendar table thead td").css("color", "yellowgreen")
+            break;
+        case 8:
+            $(".calendar .title").css("backgroundColor", "#e67e22");
+			$(".calendar table thead td").css("color", "#e67e22")
+            break;
+        case 9:
+            $(".calendar .title").css("backgroundColor", "#2ecc71");
+			$(".calendar table thead td").css("color", "#2ecc71")
+            break;
+        case 10:
+            $(".calendar .title").css("backgroundColor", "#e74c3c");
+			$(".calendar table thead td").css("color", "#e74c3c")
+            break;
+        case 11:
+            $(".calendar .title").css("backgroundColor", "#d35400");
+			$(".calendar table thead td").css("color", "#d35400")
+            break;
+        case 12:
+            $(".calendar .title").css("backgroundColor", "#2c3e50");
+			$(".calendar table thead td").css("color", "#2c3e50")
+            break;
+			}
+		};
+
+		$(document).ready(function() {
+		change();
+		});
+
+	</script>
+
+	<script>
+		function storeScrollPosition() {
+			localStorage.setItem("scrollPosition", window.scrollY);
+		}
+		
+		function restoreScrollPosition() {
+			let scrollPosition = localStorage.getItem("scrollPosition");
+			if (scrollPosition !== null) {
+				window.scrollTo(0, parseInt(scrollPosition));
+				localStorage.removeItem("scrollPosition");
+			}
+		}
+		
+		window.addEventListener("scroll", storeScrollPosition);
+		
+		window.addEventListener("load", restoreScrollPosition);
+	</script>
+
 
 </body>
 </html>

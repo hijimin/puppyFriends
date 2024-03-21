@@ -74,6 +74,46 @@ private Properties prop = new Properties();
 		
 	}
 	
+	public Member kakaoLoginMember(Connection conn, String memberId, String memberName, String memberEmail) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("kakaoLoginMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member();
+				m.setMemberNo(rset.getInt("member_no"));
+				m.setMemberId(rset.getString("member_id"));
+				m.setMemberName(rset.getString("member_name"));
+				m.setMemberEmail(rset.getString("member_email"));
+				m.setDogNo(rset.getInt("dog_no"));
+				m.setDogName(rset.getString("dog_name"));
+				m.setDogSize(rset.getString("dog_size"));
+				m.setDogValue(rset.getString("dog_value"));
+				m.setDogAge(rset.getInt("dog_age"));
+				m.setDogGender(rset.getString("dog_gender"));
+				m.setDogVaccine(rset.getString("dog_vaccine"));
+				m.setDogSignificant(rset.getString("dog_significant"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+	
 	
 	public int updateMember(Connection conn, Member m) {
 		int result = 0;
@@ -224,35 +264,7 @@ private Properties prop = new Properties();
 	
 	
 	
-	public Member kakaoLoginMember(Connection conn, String memberId, String memberName, String memberEmail) {
-		Member m = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("kakaoLoginMember");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, memberId);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				m = new Member(rset.getInt("member_no"),
-							   rset.getString("member_id"),
-							   rset.getString("member_name"),
-							   rset.getString("member_email"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return m;
-	}
+	
 	
 	
 	

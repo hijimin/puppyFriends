@@ -154,7 +154,7 @@
 </head>
 <body>
     <%@ include file="../common/menubar.jsp" %>
-	<form id="detail-form" action="<%= contextPath %>/detail.hrv" method="post" enctype="multipart/form-data">
+	<form id="detail-form" action="<%= contextPath %>/detail.hrv?hno=<%= h.getHotelNo() %>" method="post" enctype="multipart/form-data">
 	<div class="outer">
  
         <div align="right" class="outer_name">
@@ -234,9 +234,9 @@
                 <div class="btn_bar" style="padding-bottom: 1%;">
                 <input type="hidden" id="hno" value="<%= h.getHotelNo() %>">
                 <% if(loginUser != null && loginUser.getDogSize().equals(h.getHotelSize())) { %>
-                    <button class="btn-open-modal" id="makehotelRv">예약하기// onclick 예정 , 예약 alert 띄운 후 동의 시 결제 페이지로 넘어감 alert 이후 결제 페이지로 넘어가게</button> 
+                    <button type="submit" class="btn-open-modal" id="makehotelRv">예약하기</button> 
                 <% } else { %>
-                    <button class="btn-open-modal" disabled >예약하기</button> 
+                    <button type="button" class="btn-open-modal" disabled >예약하기</button> 
               	<% } %> 
                 </div>
 
@@ -267,14 +267,13 @@
 			
 			$("#makehotelRv").click(function() {
 			      var confirmSubmit = confirm("호텔 예약을 하시겠습니까?");
-			    	  var hno = $("#hno").val();
+		    	  var hno = $("#hno").val();
 			      if (confirmSubmit) {
-				      location.href = "<%= contextPath %>/detail.hrv?hno=" + hno;
-				      
+					  				    	  
+			    	  $(this).prop('disabled', true);
+			    	  
 			      } else{
 			    	  alert("예약이 취소되었습니다.");
-				      location.href = "<%= contextPath %>/detail.hrv?hno=" + hno;
-				      
 			      }
 			      
 			   });

@@ -285,14 +285,9 @@
             
             <li class="board_All"><a href="">게시판</a>
             	<ul class="board_Detail">
-<<<<<<< HEAD
-            		<li class="noticeBoard"><a href="#">공지사항</a></li>
-            		<% if(loginUser != null){ %>
-=======
             		<li class="noticeBoard"><a href="<%= contextPath %>/list.no">공지사항</a></li>
->>>>>>> notice
             		<li class="chattingBoard"><a href="<%= contextPath %>/chatForm.ch">모임게시판</a></li>
-            		 <% } %>
+            		
             	</ul>
             </li>
             

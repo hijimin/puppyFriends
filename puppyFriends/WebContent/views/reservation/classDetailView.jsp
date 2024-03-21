@@ -160,7 +160,7 @@
 </head>
 <body>
     <%@ include file="../common/menubar.jsp" %>
-	<form id="detail-form" action="<%= contextPath %>/detail.crv" method="post" enctype="multipart/form-data">
+	<form id="detail-form" action="<%= contextPath %>/detail.crv?cno=<%= c.getClassNo() %>" method="post" enctype="multipart/form-data">
 	<div class="outer">
  
         <div align="right" class="outer_name">
@@ -240,10 +240,9 @@
                 
                 <div class="btn_bar" style="padding-bottom: 1%;">
                  <% if(loginUser != null && loginUser.getDogSize().equals(c.getClassSize())) { %>
-                     등록된 사이즈와 동일하지 않을 시 자동으로 예약 버튼 막힘
-                    <button class="btn-open-modal" >예약하기// onclick 예정 , 예약 alert 띄운 후 동의 시 결제 페이지로 넘어감 alert 이후 결제 페이지로 넘어가게</button> 
+                    <button type="submit" class="btn-open-modal" id="makeClassRv" >예약하기</button> 
                  <% } else { %>
-                    <button class="btn-open-modal" disabled >예약하기</button> 
+                    <button type="button" class="btn-open-modal" disabled >예약하기</button> 
                  <% } %>
                 </div>
 
@@ -251,7 +250,6 @@
                 	<a href="<%= contextPath %>/kinderClass.crv" class="C_back" style="padding-bottom: 1%;">뒤로가기</a> <br>
                 </div>
 
-				관리자도 삭제 가능, 트레이너는 트레이너 것만 삭제 가능하게
 				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")) { %>
                 <div class="btn_bar1">
                 <a href="#" onclick="confirmDelete('<%= c.getClassNo() %>')" class="C_delete">삭제하기</a>
@@ -270,6 +268,19 @@
 			    	alert("삭제가 취소되었습니다.");
 			    }
 			}
+			
+			$("#makeClassRv").click(function() {
+			      var confirmSubmit = confirm("유치원 예약을 하시겠습니까?");
+		    	  var cno = $("#cno").val();
+			      if (confirmSubmit) {
+					  				    	  
+			    	  $(this).prop('disabled', true);
+			    	  
+			      } else{
+			    	  alert("예약이 취소되었습니다.");
+			      }
+			      
+			   });
 			</script>
 
             <br><br>

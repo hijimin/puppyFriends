@@ -123,7 +123,15 @@ public class Product {
 		this.discount = discount;
 	}
 	
-	
+	public Product(int productNo, String productName, int stock, Date productUpdate) {
+		super();
+		this.productNo = productNo;
+		this.productName = productName;
+		this.stock = stock;
+		this.productUpdate = productUpdate;
+	}
+
+
 
 	public Product(int productNo) {
 		super();

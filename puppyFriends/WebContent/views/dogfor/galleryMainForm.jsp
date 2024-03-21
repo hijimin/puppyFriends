@@ -115,7 +115,7 @@
 							            "</div>" +
 							            "</div>" +
 							            "<div class='img-2'>" +
-							            "<br>" + result[i].dogNo +
+							            result[i].dogNo +
 							            "</div>" +
 										"<div class='img-3' style='display: none;'>" +
 										result[i].content +
@@ -137,6 +137,7 @@
 					<div class="img-1"><div style="height: 85%; width: 80%; border: 7px solid black; filter: drop-shadow(5px 5px 5px #494949)"><div style="height: 100%; width: 100%; border: 4px solid white;"><img src="<%= contextPath %>/<%= i.getTitleImg() %>" style="width: 100%; height: 100%;"></div></div></div>
 					<div class="img-2"><%= i.getDogNo() %></div>
 					<div class="img-3" style="display: none;"><%= i.getContent() %></div>
+					<div class="img-4" style="display: none;"><%= i.getFileNo() %></div>
 				</div>
 				<% } %>
 			</div>
@@ -208,10 +209,13 @@
 		
 		<script>
 			function deleteGallery(){
+
+				var imgNum = $(".img-4").html();
+
 				var Gdelete = confirm("삭제하시겠습니까?");
 				
 				if(Gdelete){
-					location.href="<%= contextPath %>/delete.ga"
+					location.href="delete.ga?pnum=" + imgNum;
 				}
 
 			}

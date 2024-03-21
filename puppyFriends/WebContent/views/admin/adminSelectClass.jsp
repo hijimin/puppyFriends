@@ -1,3 +1,4 @@
+<%@page import="com.kh.reservation.model.vo.Reservation"%>
 <%@page import="com.kh.common.model.vo.AdminPageInfo"%>
 <%@page import="com.kh.member.model.vo.Member"%>
 <%@page import="java.util.ArrayList"%>
@@ -13,7 +14,7 @@
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");
     
-    ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
+    ArrayList<Reservation> crList = (ArrayList<Reservation>)request.getAttribute("crList");
     
     AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi");
     int currentPage = pi.getCurrentPage();
@@ -253,7 +254,6 @@
             </li>
             <br><br><br><br>
             <li class="reservation" onmouseover="updateChart(5)">예약
-            <ul class="classReservation"><a href="<%= contextPath %>/AdminSelectClass.rc?cpage=1" style="color: white;">수업예약</a></ul>
             <ul class="hotelReservation"><a href="<%= contextPath %>/AdminSelectReservation.re?cpage=1" style="color: white;">호텔예약</a></ul>
             </li>
         </div>
@@ -262,38 +262,41 @@
             <div class="content">
                 <table class="list-area" align="center">
                     <br>
-                    <h1 style="color: gray;">MemberSelect</h1>
+                    <h1 style="color: gray;">ClassReservation</h1>
                     <br><br>
                     <thead align="center">
                         <tr>
-                        	<th width="50" id="checkOp1">선택</th>
+                        	
+                            <th width="150">예약번호</th>
                             <th width="150">회원번호</th>
-                            <th width="150">회원아이디</th>
-                            <th width="150">회원이름</th>
-                            <th width="150">반려견식별번호</th>
-                            <th width="150">반려견이름</th>
-                            <th width="250">회원이메일</th>
-                            <th width="250" id="checkOp2">전화번호</th>
+                            <th width="150">결제번호</th>
+                            <th width="150">예약시작일</th>
+                            <th width="150">예약종료일</th>
+                            <th width="250">예약일자</th>
+                            <th width="250" id="checkOp2">상태</th>
                         </tr>
                         
                     </thead>
                   
                         <tbody align="center">
                             <form id="deleteForm" action="adminDelete.me" method="post"  onsubmit="return confirmDelete()">
-                            <% for(Member m : list) {  %>
+                            <% for(Reservation cr : crList) {  %>
                                 <tr>
-                                    <th><input type="checkbox" value="<%= m.getMemberNo() %>" name="deleteMember"></th>
-                                    <td id="detailInfo"><%= m.getMemberNo() %></td>
-                                    <td><%= m.getMemberId() %></td>
-                                    <td><%= m.getMemberName() %></td>
-                                    <td><%= m.getDogNo() %></td>
-                                    <td><%= m.getDogName() %></td>
-                                    <td><%= m.getMemberEmail() %></td>
-                                    <td><%= m.getMemberPhone() %></td>
+                                    
+                                    <td id="detailInfo"><%= cr.getReservationNo() %></td>
+                                    <td><%= cr.getMemberNo() %></td>
+                                    <td><%= cr.getPaymentNo() %></td>
+                                    <td><%= cr.getReservationStart() %></td>
+                                    <td><%= cr.getReservationEnd() %></td>
+                                    <td><%= cr.getWritingDate() %></td>
+                                    <td><% if(cr.getReservationStatus().equals("N")) { %>
+                                    	예약취소
+                                    <% } else { %>   	
+                                    	예약완료
+                                    <% } %></td>
                                 </tr>                               
                         	<% } %>                           
-							</form>
-                            <button type="submit" id="deleteBtn" onclick="deleteConfirm()">강제추방</button>
+							</form>        
                         </tbody>
                         
                        

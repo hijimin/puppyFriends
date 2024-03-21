@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.model.service.AdminService;
 import com.kh.member.model.vo.Member;
+import com.kh.product.model.vo.Product;
 
 /**
  * Servlet implementation class AdminMemberCountController
@@ -34,10 +35,11 @@ public class AdminMemberCountController extends HttpServlet {
 		
 		int yResult = new AdminService().yCountMember();
 		int nResult = new AdminService().nCountMember();
+		ArrayList<Product> apList = new AdminService().adminMainSelectProduct();
 		
 		request.setAttribute("yResult", yResult);
 		request.setAttribute("nResult", nResult);
-		
+		request.setAttribute("apList", apList);
 		request.getRequestDispatcher("views/admin/adminMain.jsp").forward(request, response);
 		
 	}

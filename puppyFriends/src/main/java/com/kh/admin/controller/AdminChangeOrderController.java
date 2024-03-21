@@ -1,4 +1,4 @@
-package com.kh.dogfor.controller;
+package com.kh.admin.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.dogfor.model.service.DogforService;
+import com.kh.admin.model.service.AdminService;
 
 /**
- * Servlet implementation class GalleryDeleteController
+ * Servlet implementation class AdminChangeOrderController
  */
-@WebServlet("/delete.ga")
-public class GalleryDeleteController extends HttpServlet {
+@WebServlet("/AdminChangeOrder.or")
+public class AdminChangeOrderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryDeleteController() {
+    public AdminChangeOrderController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,22 +30,23 @@ public class GalleryDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String pnum = request.getParameter("pnum");
+		request.setCharacterEncoding("UTF-8");
 		
-		int result = new DogforService().deleteImg(pnum);
+		String[] changeOrderString = request.getParameterValues("changeOrder");
+		int[] changeOrder = new int[changeOrderString.length];
 		
-		HttpSession session = request.getSession();
+		 for (int i = 0; i < changeOrderString.length; i++) {
+			 changeOrder[i] = Integer.parseInt(changeOrderString[i]);
+		    }
 		
-		if(result > 0) { // 성공
-			session.setAttribute("alertMsg", "삭제 성공");
-			response.sendRedirect(request.getContextPath()+ "/gallery.ga?cpage=1");
-		}else { // 실패
-			session.setAttribute("alertMsg", "삭제 실패");
-			response.sendRedirect(request.getContextPath()+ "/gallery.ga?cpage=1");
-		}
-		
-		
-	}
+		 int[] result = new AdminService().changeOrder(changeOrder);
+		 
+		 if (result != null){	
+		    	HttpSession session = request.getSession();
+		    	response.sendRedirect(request.getContextPath() + "/AdminSelectOrder.od?cpage=1");	
+		    } 
+		 
+	} // doGet
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

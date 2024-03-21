@@ -77,7 +77,7 @@
                 <br>
 		        <% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")) { %>
                     <div class="create-notice">
-                        <button class="btn btn-sm btn-secondary">글작성</button>
+                        <button onclick="location.href='<%= contextPath %>/enrollForm.no'" class="btn btn-sm btn-secondary">글작성</button>
                     </div>
 	        	<% } %>
 
@@ -112,9 +112,9 @@
     
     <script>
     	$(function(){
-    		$(".notice-post-top>div").click(function(){
+    		$(".notice-post-top").click(function(){
     			const num = $(this).children().eq(0).text();
-    			// console.log(num);
+    			
     			
     			// /jsp/요청할url?키=벨류&키=벨류
     			// 요청시전달값(키=벨류) == 쿼리스트링

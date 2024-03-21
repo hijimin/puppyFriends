@@ -11,16 +11,16 @@ import com.kh.notice.model.service.NoticeService;
 import com.kh.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeViewController
+ * Servlet implementation class NoticeUpdateFormController
  */
-@WebServlet("/detail.no")
-public class NoticeViewController extends HttpServlet {
+@WebServlet("/updateForm.no")
+public class NoticeUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeViewController() {
+    public NoticeUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +31,10 @@ public class NoticeViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int noticeNo = Integer.parseInt(request.getParameter("num"));
 		
-		int result = new NoticeService().increaseCount(noticeNo);
+		Notice n = new NoticeService().selectDetailView(noticeNo);
 		
-		if(result>0) {
-			Notice n = new NoticeService().selectDetailView(noticeNo);
-			
-			request.setAttribute("notice", n);
-			request.getRequestDispatcher("views/notice/noticeView.jsp").forward(request, response);
-		}else {
-			request.setAttribute("alertMsg", "공지사항 상세 조회 실패");
-			request.getRequestDispatcher("views/common/menubar.jsp").forward(request, response);
-		}
+		request.setAttribute("n", n);
+		request.getRequestDispatcher("views/notice/noticeUpdateForm.jsp").forward(request, response);
 	}
 
 	/**

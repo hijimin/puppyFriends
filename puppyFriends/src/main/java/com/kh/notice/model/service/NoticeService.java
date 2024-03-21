@@ -57,4 +57,60 @@ public class NoticeService {
 		return n;
 	}
 	
+	public Notice selectDetailView(int noticeNo) {
+		Connection conn = getConnection();
+		
+		Notice n = new NoticeDao().selectDetailView(conn, noticeNo);
+		
+		close(conn);
+		
+		return n;
+	}
+	
+	public int noticeUpdate(int noticeNo, String title, String content) {
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().noticeUpdate(conn, noticeNo, title, content);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public int insertNotice(Notice n) {
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().insertNotice(conn, n);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public int deleteNotice(int noticeNo) {
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().deleteNotice(conn, noticeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
 } // class

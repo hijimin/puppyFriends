@@ -35,7 +35,7 @@
         <table id="detail-area" border="1">
             <tr>
                 <th width="70">제목</th>
-                <td colspan="3" width="430"><%= n.getNoticeTitle() %></td>
+                <td colspan="3" width="430"><%= n.getnoticeTitle() %></td>
             </tr>
             <tr>
                 <th>작성자</th>
@@ -55,7 +55,7 @@
         <div>
             <a href="<%= contextPath %>/list.no" class="btn btn-sm btn-secondary">목록가기</a>
             
-            <% if(loginUser != null && loginUser.getUserId().equals(n.getNoticeWriter())) { %>
+            <% if(loginUser != null && loginUser.getMemberId().equals(n.getNoticeWriter())) { %>
 	            <!-- 현재 로그인한 사용자가 해당 글을 쓴 본인일 경우에만 보이게 -->
 	            <a href="<%= contextPath %>/updateForm.no?num=<%= n.getNoticeNo() %>" class="btn btn-sm btn-warning">수정하기</a>
 	            <a href="<%= contextPath%>/delete.no?num=<%= n.getNoticeNo() %>" class="btn btn-sm btn-danger">삭제하기</a>

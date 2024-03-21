@@ -52,20 +52,52 @@
 		WHERE NOTICE_NO = ?
 	</entry>
 	
-	<entry key="">
-		
+	<entry key="selectDetailView">
+		SELECT
+			   NOTICE_NO
+			 , NOTICE_TITLE
+			 , NOTICE_CONTENT
+			 , MEMBER_ID
+			 , CREATE_DATE
+		  FROM NOTICE
+		  JOIN MEMBER ON (NOTICE_WRITER = MEMBER_NO)
+		 WHERE NOTICE_NO = ?
 	</entry>
 	
-	<entry key="">
-		
+	<entry key="noticeUpdate">
+		UPDATE
+			   NOTICE
+		   SET NOTICE_TITLE = ?
+		     , NOTICE_CONTENT = ?
+		 WHERE NOTICE_NO = ?
+		   		
 	</entry>
 	
-	<entry key="">
-		
+	<entry key="deleteNotice">
+		UPDATE
+		  	   NOTICE
+		   SET NOTICE_STATUS = 'N'
+		 WHERE NOTICE_NO = ?
 	</entry>
 	
-	<entry key="">
-		
+	<entry key="insertNotice">
+		INSERT
+		  INTO NOTICE
+		     ( 
+		       NOTICE_NO
+		     , NOTICE_TITLE
+		     , NOTICE_CONTENT
+		     , NOTICE_WRITER
+		     , CREATE_DATE
+		     )
+		     VALUES
+		     (
+		       SEQ_NOTICE.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , SYSDATE
+		     )
 	</entry>
 	
 	<entry key="">

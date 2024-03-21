@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.notice.model.service.NoticeService;
-import com.kh.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeViewController
+ * Servlet implementation class NoticeUpdateController
  */
-@WebServlet("/detail.no")
-public class NoticeViewController extends HttpServlet {
+@WebServlet("/update.no")
+public class NoticeUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeViewController() {
+    public NoticeUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,17 +28,20 @@ public class NoticeViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
 		int noticeNo = Integer.parseInt(request.getParameter("num"));
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
 		
-		int result = new NoticeService().increaseCount(noticeNo);
+		int result = new NoticeService().noticeUpdate(noticeNo, title, content);
 		
-		if(result>0) {
-			Notice n = new NoticeService().selectDetailView(noticeNo);
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "수정되었습니다");
 			
-			request.setAttribute("notice", n);
-			request.getRequestDispatcher("views/notice/noticeView.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/detail.no?num=" + noticeNo);
 		}else {
-			request.setAttribute("alertMsg", "공지사항 상세 조회 실패");
+			request.setAttribute("alertMsg", "수정실패");
 			request.getRequestDispatcher("views/common/menubar.jsp").forward(request, response);
 		}
 	}

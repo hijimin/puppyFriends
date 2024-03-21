@@ -165,7 +165,23 @@ import static com.kh.common.JDBCTemplate.*;
 		
 	}
 	
-	
+	public int deleteImg(String pnum) {
+		
+		Connection conn = getConnection();
+		
+		int result = new DogforDao().deleteImg(conn, pnum);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
 	
 	
 	

@@ -13,6 +13,9 @@
 <head>
 <meta charset="UTF-8">
 <title>WebSocket Basic</title>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
 <style>
         
         * {
@@ -133,12 +136,18 @@
     #date{
         font-size: 10px;
     }
+    #btn1:hover{
+        transform: scale(1.1);
+    }
     </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
 <body>
 
+    <script> 
+		AOS.init(); 
+	</script>
 	
 
    	<% if(userId.equals("")){ %>
@@ -146,14 +155,19 @@
     <% }else{ %>
    	 	<button id="btn1" onclick="chatting();">톡</button>
    	<% } %>
-	
     <script>
+        
+
         function chatting(){
 
             if($(".wrapCh").css("display") == "block"){
-                $(".wrapCh").css("display", "none");
+                $("#btn1").css("padding", "7px 12px")
+                $("#btn1").html("톡");
+                $(".wrapCh").slideUp();
             }else{
-                $(".wrapCh").css("display", "block");
+                $("#btn1").css("padding", "4.5px 5.5px")
+                $("#btn1").html("<img src='resources/upfiles/2024032112224035274.png' style='width:33px; height=36px;'>");
+                $(".wrapCh").slideDown();
                 var chatContainer = document.querySelector('.chat');
     			chatContainer.scrollTop = chatContainer.scrollHeight;
             }
@@ -162,19 +176,14 @@
         
         function scrollToBottom() {
         	
-
 			var chatContainer = document.querySelector('.chat');
-			
-        	$(".chat").hover(function() {  },
-        			function() {chatContainer.scrollTop = chatContainer.scrollHeight;});
-        	
-			
+        	chatContainer.scrollTop = chatContainer.scrollHeight;;			
 		}
         
 
     </script>
     
-    <div class="wrapCh" style="display: none;">
+    <div class="wrapCh" style="display: none;" >
         <div class="chat">
         	
             <!-- <div class="ch ch1">
@@ -196,6 +205,7 @@
     
     
     <script>
+
 	    function selectChatList(){
 
 	    	
@@ -241,7 +251,6 @@
 	                   
 	                $(".chat").html(value);
 	                var chatContainer = document.querySelector('.chat');
-	    			chatContainer.scrollTop = chatContainer.scrollHeight;
 	            },
 	            error:function(){
 	                // console.log("ajax 통신 실패");
@@ -309,7 +318,31 @@
         	
             
        })
+
+
         
+        var divElement = $(".chat")
+
+            function checkScrollPosition() {
+          
+            var scrollTop = divElement.scrollTop();
+            var scrollHeight = divElement.prop('scrollHeight');
+            var clientHeight = divElement.innerHeight();
+            var atBottom = scrollHeight - scrollTop - clientHeight;
+    
+            if (atBottom < 91) {
+                yourFunction();
+            }
+        };
+
+        checkScrollPosition();
+
+        setInterval(checkScrollPosition, 300);
+
+        function yourFunction() {
+            scrollToBottom();
+        }
+
 	</script>
 	
 	

@@ -154,7 +154,7 @@
 </head>
 <body>
     <%@ include file="../common/menubar.jsp" %>
-	<form id="detail-form" action="<%= contextPath %>/detail.hrv?hno=<%= h.getHotelNo() %>" method="post" enctype="multipart/form-data">
+	<form id="detail-form" action="<%= contextPath %>/make.hrv?hno=<%= h.getHotelNo() %>" method="post">
 	<div class="outer">
  
         <div align="right" class="outer_name">

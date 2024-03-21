@@ -477,13 +477,20 @@ a:focus {
                     <th>내용작성</th>
                     <td>
                       <textarea rows="2"style="resize: none; width: 1020px; height: 130px;" id="reviewContent"></textarea>
+                      <!-- <button class="insertbtn" onclick="insertReview();">리뷰등록</button> -->
+                    </td>
+                    <td>
+                      <button class="insertbtn" onclick="insertReview();">리뷰등록</button>
                     </td>
                   </tr>
                 </table>
+
                 <br />
-                <div align="center">
+
+                <!-- <div align="center">
                   <button class="insertbtn" onclick="insertReview();">리뷰등록</button>
-                </div>
+                </div> -->
+                
               </div>
             </div>
             

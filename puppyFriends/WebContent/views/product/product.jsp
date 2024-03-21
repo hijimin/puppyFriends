@@ -399,7 +399,7 @@
             </div>
 
             <script>
-            	<% if(loginUser.getMemberId().equals("ADMIN")){%>
+            	<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")){%>
               		$(".search").css("display","none");
                   $("#bestproduct").css("padding-left", "0px").css("padding-top", "0px");
             	<% } %>
@@ -585,6 +585,9 @@
                     <div id="next-btn" onclick="nextSlide()">&#10095;</div>
                   </div>
                 </div>
+                <br>
+                <br>
+                <br>
 
                 <div id="content2_2">
                   <div align="right" style="width: 90%; margin-bottom: 5px">
@@ -637,14 +640,11 @@
                         for (let i = 0; i < result.length; i++) {
                           let rv = result[i];
 
-<<<<<<< HEAD
-=======
                           let titleImg = rv.titleImg;
                           let productName = rv.productName;
                           let productDesc = rv.productDesc;
                           let productNo = rv.productNo;
 
->>>>>>> product
                           value +=
                             "<div class='content2_3c'>" +
                             "<img id='img1' src='<%=contextPath%>/" +
@@ -883,6 +883,11 @@
                     })
                   });
                 </script>
+
+                <br>
+                <br>
+                <br>
+
 
                 <!-- 페이징바 -->
                 <div id="content2_4">

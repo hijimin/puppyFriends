@@ -874,8 +874,8 @@
                 <!-- 상품상세조회 script -->
                 <script>
                   $(function () {
-                    $(".content2_3c").click(function () {
-                      location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).children("input").val();
+                    $(".content2_3c").click(function () {                  	
+                      location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).children("input").val();                   
                     });
                     $(".slideimgg").click(function(){
                       console.log($(this).siblings("input"));

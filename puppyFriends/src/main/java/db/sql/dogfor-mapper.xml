@@ -135,7 +135,12 @@
 	 WHERE IMAGE_TYPE = 3
 </entry>
 
-
+<entry key="deleteImg">
+	DELETE 
+	  FROM IMAGE
+	 WHERE FILE_NO = ?
+	   AND IMAGE_TYPE = 3
+</entry>
 
 
 

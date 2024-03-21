@@ -30,6 +30,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="icon" sizes="32x32" type="image/png" href="resources/image/closeupimg.png">
 <title>PUPPY</title>
 <style>
     
@@ -180,6 +181,9 @@
         transform: translateX(0%);
     
     }
+    .introduce:hover{
+        cursor: pointer;
+    }
     
     .before-login button{border: 0; background-color: transparent; margin-left: 20px; color: white;}
     .after-login>a{text-decoration: none; color: white;}
@@ -199,6 +203,49 @@
     }
   
     li, div{font-size: 20px;}
+    
+    /* --------------------------------------- */
+    .SMN_effect-35 a {
+        overflow: visible;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transition: color .4s;
+        transition: color .4s
+        }
+
+        @keyframes eff24-move {
+        30% {
+            -webkit-transform: translate3d(0, -5px, 0) rotate(5deg);
+            transform: translate3d(0, -5px, 0) rotate(5deg)
+        }
+        50% {
+            -webkit-transform: translate3d(0, -3px, 0) rotate(-4deg);
+            transform: translate3d(0, -3px, 0) rotate(-4deg)
+        }
+        80% {
+            -webkit-transform: translate3d(0, 0, 0) rotate(-3deg);
+            transform: translate3d(0, 0, 0) rotate(-3deg)
+        }
+        100% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg)
+        }
+        }
+
+        .SMN_effect-35 a:hover {
+        -webkit-animation-name: eff24-move;
+        animation-name: eff24-move;
+        -webkit-animation-duration: .4s;
+        animation-duration: .4s;
+        -webkit-animation-timing-function: linear;
+        animation-timing-function: linear;
+        -webkit-animation-iteration-count: 1;
+        animation-iteration-count: 1
+        }
+    
     
     /* 네비바 스타일 끝 */
 
@@ -272,11 +319,11 @@
             </div>
         </div>
 
-        <ul class="navigator_tool" align="center">
-            <li class="navi_menu"><a href="#">홈</a></li>
-            <li class="menu_intro"><a href="#">소개</a>
+        <ul class="navigator_tool align-center expanded text-center SMN_effect-35" align="center">
+            <li class="navi_menu"><a href="<%= contextPath %>">홈</a></li>
+            <li class="menu_intro"><a onclick="goMap();" style="color: white;" class="introduce">소개</a>
                 <ul class="welcome">
-                    <li><a href="#">오시는 길</a></li>
+                    <li><a onclick="goMap();" class="introduce">오시는 길</a></li>
                 </ul>
             </li>
             <li class="program"><a href="#">프로그램</a>
@@ -307,7 +354,36 @@
             
 
         </ul> <br>
+	
+		 <p id="HOME_PATH" style="display: none;"><%= contextPath %></p>
+        <script>
+            function goMap(){
+                const homePath = $("#HOME_PATH").text() + "/";
 
+                if(window.location.pathname === homePath){
+                    window.scrollTo({
+                        top:3400,
+                        behavior:'smooth'
+                    });
+
+                }else{
+
+                    location.href = homePath;
+
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // 페이지의 HTML이 완전히 로드된 후 실행될 함수
+                        window.scrollTo({
+                            top: 3400,
+                            behavior: 'smooth'
+                        });
+                    });
+
+                    
+                        
+                }
+
+            }
+        </script>
 
 
 </body>

@@ -591,9 +591,9 @@
 
                 <div id="content2_2">
                   <div align="right" style="width: 90%; margin-bottom: 5px">
-                    <a href="#" onclick="orderSelect(1);">인기순|</a
-                    ><a href="#" onclick="recentSelect(1);">최신순|</a
-                    ><a href="#" onclick="countSelect(1);">조회순</a>
+                    <button onclick="orderSelect(1);">인기순|</button>
+                    <button onclick="recentSelect(1);">최신순|</button>
+                    <button onclick="countSelect(1);">조회순</button>
                   </div>
                 </div>
 
@@ -650,7 +650,9 @@
                             "<img id='img1' src='<%=contextPath%>/" +
                             titleImg +
                             "' alt='Slide 4' width='100%' height='300'>" +
-                            "<input type='hidden' id='pdno' name='pno' value='productNo'>" +
+                            "<input type='hidden' id='pdno' name='pno' value='" +
+                            productNo +
+                            "'>" +
                             "<div style='margin: 0; border: 0px;'>" +
                             productName +
                             "</div>" +
@@ -733,7 +735,9 @@
                             "<img id='img1' src='<%=contextPath%>/" +
                             titleImg +
                             "' alt='Slide 4' width='100%' height='300'>" +
-                            "<input type='hidden' id='pdno' name='pno' value='productNo'>" +
+                            "<input type='hidden' id='pdno' name='pno' value='" +
+                            productNo +
+                            "'>" +
                             "<div style='margin: 0; border: 0px;'>" +
                             productName +
                             "</div>" +
@@ -818,7 +822,9 @@
                             "<img id='img1' src='<%=contextPath%>/" +
                             titleImg +
                             "' alt='Slide 4' width='100%' height='300'>" +
-                            "<input type='hidden' id='pdno' name='pno' value='productNo'>" +
+                            "<input type='hidden' id='pdno' name='pno' value='" +
+                            productNo +
+                            "'>" +
                             "<div style='margin: 0; border: 0px;'>" +
                             productName +
                             "</div>" +
@@ -873,6 +879,7 @@
                
                 <!-- 상품상세조회 script -->
                 <script>
+<<<<<<< HEAD
                   $(function () {
                     $(".content2_3c").click(function () {                  	
                       location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).children("input").val();                   
@@ -881,7 +888,30 @@
                       console.log($(this).siblings("input"));
                       location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).siblings("input").val();
                     })
+=======
+                  
+                  
+                  $(document).on("click", ".content2_3c", function() {
+                	  location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).children("input").val();
+>>>>>>> 2b47743fb0523cc27117b43c6b2662478bab3cf8
                   });
+      				
+                  $(document).on("click", ".slideimgg", function(){
+                    location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).siblings("input").val();
+                  })
+      			
+                  
+                </script>
+                <script>
+                  // $(function () {
+                  //   $(".content2_3c").click(function () {                     
+                  //     location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).children("input").val();                   
+                  //   });
+                  //   $(".slideimgg").click(function(){
+                  //     console.log($(this).siblings("input"));
+                  //     location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).siblings("input").val();
+                  //   })
+                  // });
                 </script>
 
                 <br>
@@ -945,6 +975,9 @@
               }
             </script>
 
+            <%@ include file="../chatting/chatting.jsp" %>
+              
+            <%@ include file="../common/topBtn.jsp" %>
             <%@ include file="../common/footerbar.jsp"%>
           </body>
         </html></Product

@@ -1,4 +1,4 @@
-package com.kh.dogfor.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,21 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.dogfor.model.service.DogforService;
+import com.google.gson.Gson;
+import com.kh.member.model.service.MemberService;
 
 /**
- * Servlet implementation class GalleryDeleteController
+ * Servlet implementation class SearchIdController
  */
-@WebServlet("/delete.ga")
-public class GalleryDeleteController extends HttpServlet {
+@WebServlet("/searchId.me")
+public class SearchIdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryDeleteController() {
+    public SearchIdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +30,16 @@ public class GalleryDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String pnum = request.getParameter("pnum");
+		String userName = request.getParameter("userName");
+		String email = request.getParameter("email");
 		
-		int result = new DogforService().deleteImg(pnum);
+		String userId = new MemberService().selectId(userName, email);
 		
-		HttpSession session = request.getSession();
-		
-		if(result > 0) { // 성공
-			session.setAttribute("alertMsg", "삭제 성공");
-			response.sendRedirect(request.getContextPath()+ "/gallery.ga?cpage=1");
-		}else { // 실패
-			session.setAttribute("alertMsg", "삭제 실패");
-			response.sendRedirect(request.getContextPath()+ "/gallery.ga?cpage=1");
+		if(userId.equals("")) { // 실패
+			response.getWriter().print("NNN");
+		}else { // 성공
+			response.setContentType("application/json; charset=UTF-8");
+			new Gson().toJson(userId, response.getWriter());
 		}
 		
 		

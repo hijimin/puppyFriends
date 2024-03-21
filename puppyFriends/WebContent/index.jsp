@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>PuppyFriends</title>
+<link rel="icon" sizes="32x32" type="image/png" href="resources/image/closeupimg.png">
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
 	div{
 		box-sizing: border-box;
@@ -161,14 +163,22 @@
 	opacity:1;
 	transform:scale(1);
 	}
-	   
+	 #productBtn:hover, #kindBtn:hover{
+		transform: scale(1.1);
+	 }  
 </style>
 <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=9165mfbte9"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
 </head>
 <body>
 
 	<%@ include file="views/common/menubar.jsp" %>
 
+	<script> 
+		AOS.init(); 
+	</script>
 	<div id="main-outer">
 		<div class="main-content1">
 			<div class="swiper mySwiper">
@@ -186,27 +196,59 @@
 				</div>
 			  </div>
 		</div>
+
+		
+        	
+            
+            
+        
 		<div class="main-content2">
+			
 			<div class="main-content2-1">
-				<div class="img-wrapper1">
-					<img src="resources/image/tower1.PNG"/>
-					<div class="light"></div>
-					<div class="btn-plus1"><span>둘러보기</span></div>
-				  </div>
-			</div>
+					<div data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
+					<div class="img-wrapper1" onclick="goProduct();">
+						<img src="https://pethroom.com/pethroom/videos/Cassava_pc.gif"/>
+						<div class="light"></div>
+						<div class="btn-plus1"><span>둘러보기</span></div>
+					</div>
+				</div>
+			</div>	
 			<!--  -->
 			<div class="main-content2-2">
-				<div class="img-wrapper2">
+				<div data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
+				<div class="img-wrapper2" onclick="goKind();">
 				<img src="resources/upfiles/2024031915013656200.png"/>
 				<div class="light"></div>
 				<div class="btn-plus2"><span>둘러보기</span></div>
+				</div>
 			  </div></div>
-			<div class="main-content2-3" align="center"><h1>호텔</h1></div>
+			  
+			<div class="main-content2-3" align="center">
+				<div data-aos="fade-up" data-aos-duration="800" data-aos-once="true">
+				<button style="background-color: rgb(255, 118, 189); color: white; border: none; border-radius: 10px; width: 80px; padding-top: 5px;"  onclick="goProduct();" id="productBtn"><h2>상품</h2></button>
+				</div>
+			</div>
 			<!--  -->
-			<div class="main-content2-4" align="center"><h1>유치원</h1></div>
+			<div class="main-content2-4" align="center">
+				<div data-aos="fade-up" data-aos-duration="800" data-aos-once="true">
+				<button style="background-color: rgb(255, 118, 189); color: white;  border: none; border-radius: 10px; width: 115px; padding-top: 5px;" onclick="goKind();" id="kindBtn"><h2>유치원</h2></button>
+				</div>
+			</div>
+		</div>
 		</div>
 		
-	</div>
+
+
+
+	<script>
+		function goProduct(){
+			location.href=HOME_PATH + "/list.pd?cpage=1"
+		}
+		function goKind(){
+			location.href=HOME_PATH + "/kinderClass.crv"
+		}
+	</script>
+
 
 	<div id="nol" style="width: 1903px; height: 2200px;" >
 
@@ -215,7 +257,7 @@
 
 	<div class="main-content3">
 		<div class="main-content3-1">
-			<div id="map"></div>
+			<div id="map" style="border: 5px solid rgb(198, 224, 255); border-radius: 50%;"></div>
 
 			<script>
 			var HOME_PATH = window.HOME_PATH || '.';

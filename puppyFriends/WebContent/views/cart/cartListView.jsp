@@ -240,9 +240,16 @@
     }
     
     .tossimg{
-        width: 180px;
-        height: 50px;
-        border: 1px solid black;
+        width: 150px;
+        height: 40px;
+        margin-right: 50px;
+        /* border: 1px solid black; */
+        cursor: pointer;
+    }
+
+    .kakaoimg{
+        height: 40px;
+        cursor: pointer;
     }
 
     /*버튼*/
@@ -775,8 +782,8 @@
                 <p>결제수단</p>
             </div>
             <div id="content4_2">
-                
-                <img class="tossimg" src="resources/image/logo-toss-pay.png">
+                <img class="tossimg" src="resources/image/logo-toss-pay.png" onclick="requestPay();">
+                <img class="kakaoimg" src="resources/image/payment_icon_yellow_medium.png" onclick="requestPay1();">
             </div>
         </div>
 
@@ -826,7 +833,7 @@
 
         <div id="content6">
             <div id="content6_1">
-                <a href="#" onclick="requestPay();" class="btn btn-dark">결제하기</a>
+                <!-- <a href="#" onclick="requestPay();" class="btn btn-dark">결제하기</a> -->
                 <!-- <button onclick="requestPay();" class="button button--winona button--border-thin button--round-s" data-text="결제하기"><span>결제하기</span></button> -->
                 <a href="javascript:window.history.back();" class="btn btn-dark">뒤로가기</a>
             </div>
@@ -968,6 +975,142 @@
         		}
         	});
         }
+    </script>
+    
+    
+    
+    
+      <script>
+    var IMP = window.IMP; 
+    IMP.init("imp67011510"); 
+  
+    var today = new Date();   
+    var hours = today.getHours(); // 시
+    var minutes = today.getMinutes();  // 분
+    var seconds = today.getSeconds();  // 초
+    var milliseconds = today.getMilliseconds();
+    var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+    
+
+    function requestPay1() {
+    	var add1 = document.getElementById("sample2_address").value; 
+    	let amount = $('#totalprice').text();
+    	let price = Number(amount);
+    	
+        IMP.request_pay({
+            pg : 'kakaopay',
+            merchant_uid: "IMP"+makeMerchantUid, 
+            name : '당근 10kg',
+            amount : price,
+            buyer_email : '<%= m.getEmail1() + '@' %><%= m.getEmail2()%>',
+            buyer_name : '<%= m.getMemberName()%>',
+            buyer_tel : '<%= "010" + '-' + m.getPhone1() + '-' + m.getPhone2()%>',
+            buyer_addr : add1,
+            buyer_postcode : '123-456'
+        }, function (rsp) { // callback
+            if (rsp.success) {
+            	test1(rsp);
+            } else {
+                console.log(rsp);
+            }
+        });
+    }
+    
+    
+    function test1(rsp){
+    	let buyerAddr;
+    	let buyerName;
+    	let buyerTel;      		
+    	var omessage = $("#omessage").val();  
+    	let iu;
+    	let mc;      	
+    	let amount = $('#totalprice').text();
+    	let price = Number(amount);       	       	
+    	      	         
+    		<%	
+    			ArrayList<Integer> pnoList1 = new ArrayList<>();
+    			int pno1 = 0;
+    			for(Cart c :list){
+    				pno1 = c.getPno();
+    				pnoList1.add(pno1);
+    			}
+    			
+    			String pnoArrayJSON1 = new Gson().toJson(pnoList1);
+    		%>
+    		
+    		<%
+    			ArrayList<Integer> cartCountList1 = new ArrayList<>();
+    			int cartCountNum1 = 0;
+    			for(Cart c :list){
+    				cartCountNum1 = c.getCartAmount();
+    				cartCountList1.add(cartCountNum1);
+    			}
+    		
+    			String cartArrayJSON1 = new Gson().toJson(cartCountList1);
+    		
+    		%>
+    		
+    		var uniquePnoArray = JSON.parse('<%= pnoArrayJSON1 %>');
+    		var uniqueCartArray = JSON.parse('<%= cartArrayJSON1 %>');
+    	
+    		// console.log(uniquePnoArray); // [2,3]
+        	$.ajax({
+        		url:"manyInsert.po",
+        		traditional : true,
+        		data:{
+        			buyerAddr:rsp.buyer_addr,
+        			buyerName:rsp.buyer_name,
+        			buyerTel:rsp.buyer_tel,
+        			pno:uniquePnoArray,
+        			omg:omessage,
+        			iu:rsp.imp_uid,
+        			mc:rsp.merchant_uid,
+        			pr:price,
+        			count:uniqueCartArray
+        			},
+        		success:function(result){
+        			if(result > 0){
+        				console.log("결제완료");  
+        				clear();
+        				location.href = '<%= contextPath %>/success.po'        					
+        			}
+        		}, error:function(){
+        			console.log("ajax 통신 실패!");
+        		}
+        	})       		    	
+    }
+    
+    function clear(){
+    	<%	
+		ArrayList<Integer> cnoList1 = new ArrayList<>();
+		int cno1 = 0;
+		for(Cart c :list){
+			cno1 = c.getCartNo();
+			cnoList1.add(cno1);
+		}
+		
+		String cnoArrayJSON1 = new Gson().toJson(cnoList1);
+		%>
+	
+	var uniqueCnoArray = JSON.parse('<%= cnoArrayJSON1 %>');
+    	
+	console.log(uniqueCnoArray);
+    	
+    	$.ajax({
+    		url:"cstatusUpdate.cr",
+    		traditional : true,
+    		data:{
+    			cno:uniqueCnoArray
+    		},
+    		success:function(result){
+    			if(result > 0){
+    				console.log("장바구니 비우기 성공")
+    			}
+    		}, error:function(){
+    			console.log("ajax 통신 실패!");
+    		}
+    	});
+    }
     </script>
 	
 	<%@ include file="../common/footerbar.jsp"%>

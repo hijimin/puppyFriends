@@ -208,9 +208,16 @@
     }
     
     .tossimg{
-        width: 180px;
-        height: 50px;
-        border: 1px solid black;
+        width: 150px;
+        height: 40px;
+        margin-right: 50px;
+        /* border: 1px solid black; */
+        cursor: pointer;
+    }
+
+    .kakaoimg{
+        height: 40px;
+        cursor: pointer;
     }
 
     .selectdeletebtn{
@@ -570,7 +577,8 @@
             </div>
             <div id="content4_2">
                 
-                <img class="tossimg" src="resources/image/logo-toss-pay.png">
+                <img class="tossimg" src="resources/image/logo-toss-pay.png" onclick="requestPay();">
+                <img class="kakaoimg" src="resources/image/payment_icon_yellow_medium.png" onclick="requestPay1();">
             </div>
         </div>
 
@@ -620,7 +628,7 @@
 
         <div id="content6">
             <div id="content6_1">
-                <a href="#" onclick="requestPay();" class="btn btn-dark">결제하기</a>
+                <!-- <a href="#" class="btn btn-dark">결제하기</a> -->
                 <a href="javascript:window.history.back();" class="btn btn-dark">뒤로가기</a>
             </div>
         </div>
@@ -695,6 +703,73 @@
         		}
         	})
         }
+    </script>
+    
+    <script>
+    var IMP = window.IMP; 
+    IMP.init("imp67011510"); 
+  
+    var today = new Date();   
+    var hours = today.getHours(); // 시
+    var minutes = today.getMinutes();  // 분
+    var seconds = today.getSeconds();  // 초
+    var milliseconds = today.getMilliseconds();
+    var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+    
+
+    function requestPay1() {
+    	var add1 = document.getElementById("sample2_address").value; 
+    	let priceStr = '<%= p.getdPrice()%>';
+    	let price = parseInt(priceStr.replace(/,/g, ''), 10);
+    	
+        IMP.request_pay({
+            pg : 'kakaopay',
+            merchant_uid: "IMP"+makeMerchantUid, 
+            name : '당근 10kg',
+            amount : price,
+            buyer_email : '<%= m.getEmail1() + '@' %><%= m.getEmail2()%>',
+            buyer_name : '<%= m.getMemberName()%>',
+            buyer_tel : '<%= "010" + '-' + m.getPhone1() + '-' + m.getPhone2()%>',
+            buyer_addr : add1,
+            buyer_postcode : '123-456'
+        }, function (rsp) { // callback
+            if (rsp.success) {
+            	test1(rsp);
+            } else {
+                console.log(rsp);
+            }
+        });
+    }
+    
+    function test1(rsp){
+    	let buyerAddr;
+    	let buyerName;
+    	let buyerTel;
+    	let productNo = '<%= p1.getProductNo() %>';
+    	var omessage = $("#omessage").val();
+    	let iu;
+    	let mc;      	
+    	let priceStr = '<%= p1.getdPrice()%>';
+    	let price = parseInt(priceStr.replace(/,/g, ''), 10);
+    	$.ajax({
+    		url:"insert.po",
+    		data:{
+    			buyerAddr:rsp.buyer_addr,
+    			buyerName:rsp.buyer_name,
+    			buyerTel:rsp.buyer_tel,
+    			pno:productNo,
+    			omg:omessage,
+    			iu:rsp.imp_uid,
+    			mc:rsp.merchant_uid,
+    			pr:price
+    			},
+    		success:function(result){
+    			if(result > 0){ 
+    				location.href = '<%= contextPath %>/success.po'
+    			}
+    		}
+    	})
+    }
     </script>
     
 

@@ -58,7 +58,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
           #content2 {
             height: auto;
-            padding-left: 170px;
+            padding-left: 270px;
             padding-top: 50px;
           }
 
@@ -71,6 +71,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             width: 1300px;
             height: auto;
             margin: auto;
+            margin-top: 20px;
           }
           .review > div {
             width: 100%;
@@ -460,7 +461,7 @@ a:focus {
           <div id="content3">
             <% if(loginUser != null){ %>
             <div class="review">
-              <div class="review0"><p>리뷰를 작성해 주세요!!</p></div>
+              <div class="review0"><p>리뷰를 작성해 주세요.</p></div>
 
               <div class="review1">
                 <table>
@@ -530,9 +531,7 @@ a:focus {
             		  let loginUserName = '<%= loginUser.getMemberId() %>';	
             		  let review = $(".review4");
             		  if(list.length == 0){
-            			  review.append("<p>" + "작성된 리뷰가 없습니다" + "</p>");
-            			  
-            			  
+            			  review.append("<p align=\"center\" calss=\"reviewnono\">" + "작성된 리뷰가 없습니다." + "</p>"); 
             		  }else{
             			  
             			  
@@ -559,7 +558,7 @@ a:focus {
             				        $review.find('.updaterv').html("<a href=\"#\" class=\"update-review\" data-review-text=\"" + list[i].reviewText + "\" data-review-no=\"" + list[i].reviewNo + "\">수정</a>");
             				    }
             				}
-            			  
+            		         
             			  $('.delete-review').on('click', function(event) {
             				    event.preventDefault();
   
@@ -589,6 +588,12 @@ a:focus {
           				  })
           				});  
             		  }
+                  if (list.length > 0) {
+      		            $paging.show(); 
+      		        } else {
+      		            $paging.hide(); 
+      		        }
+            			 
             		}, error:function(){
             			console.log("aJax 통신 실패!");
             		}

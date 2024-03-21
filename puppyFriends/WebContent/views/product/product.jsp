@@ -42,6 +42,13 @@
 
               #bestproduct {
                 height: 180px;
+                padding-top: 100px;
+                padding-left: 1000px;
+              }
+
+              .search{
+                /* padding-bottom: 100px; */
+                /* padding-left: 1000px; */
               }
 
               #content > div {
@@ -380,23 +387,164 @@
               </div>
               <% } %>
 
-              <!-- <div class="search">
-                <input
-                  class="searchclass"
-                  type="text"
-                  placeholder="검색어 입력"
-                />
+              
+              <div class="search">
+                <input onchange="test();" onkeyup="enterkey();" class="searchclass" type="text" placeholder="검색어 입력"/>
                 <img
-                  onclick="searchTest();"
+                  onclick="test();"
                   class="searchimg"
                   src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
                 />
-              </div> -->
+              </div>
             </div>
 
             <script>
-              function searchTest() {}
+            	<% if(loginUser.getMemberId().equals("ADMIN")){%>
+              		$(".search").css("display","none");
+                  $("#bestproduct").css("padding-left", "0px").css("padding-top", "0px");
+            	<% } %>
             </script>
+
+
+
+             <script>
+              function test() {
+                loadMoreData();
+                  let lastScroll = 0;
+              
+                  $(document).scroll(function(e){
+                      // 현재 높이 저장
+                      var currentScroll = $(this).scrollTop();
+                      // 전체 문서의 높이
+                      var documentHeight = $(document).height();
+                      // (현재 화면상단 + 현재 화면 높이)
+                      var nowHeight = $(this).scrollTop() + $(window).height();
+              
+                      // 스크롤이 아래로 내려갔을 때만 해당 이벤트 진행
+                      if(currentScroll > lastScroll){
+                          // nowHeight을 통해 현재 화면의 끝이 어디까지 내려왔는지 파악 가능
+                          // 전체 문서의 높이에 일정량 근접했을 때 글 더 불러오기
+                          if(documentHeight < (nowHeight + (documentHeight * 0.1))){
+                              console.log("이제 여기서 데이터를 더 불러와 주면 된다.");
+                              // 데이터를 더 불러와야 함
+                              
+                          }
+                      }
+              
+                      // 현재 위치 최신화
+                      lastScroll = currentScroll;
+                  });
+              
+                  function loadMoreData() {
+                      let keyword = $(".searchclass").val();
+                      $.ajax({
+                          url: "searchkeyword.pr",
+                          data: {keyword: keyword},
+                          success: function(result){
+                              let $paging = $(".page_nation");	                        
+                              $("#content2_3").html("");
+                              $paging.html("");
+                              let value = "";
+              
+                              for (let i = 0; i < result.length; i++) {
+                                  let rv = result[i];
+                                  let titleImg = rv.titleImg;
+                                  let productName = rv.productName;
+                                  let productDesc = rv.productDesc;
+                                  let productNo = rv.productNo;
+              
+                                  value += "<div class='content2_3c'>" +
+                                      "<img id='img1' src='<%=contextPath%>/" + titleImg + "' alt='Slide 4' width='100%' height='300'>" +
+                                      "<input type='hidden' id='pdno' name='pno' value='productNo'>" +
+                                      "<div style='margin: 0; border: 0px;'>" + productName + "</div>" +
+                                      "<div class='name_sub'>" + productDesc + "</div>" +
+                                      "<div class='priceGroup'>" +
+                                      "<div class='custom_pro' d-price='29900' d-custom='23900'>" + rv.discount + "%</div>" +
+                                      "<div class='prs prsLine'>" + rv.price + "원</div>" +
+                                      "<div class='prs prsBold'>" + rv.dPrice + "원</div>" +
+                                      "</div>" +
+                                      "</div>";
+                              }
+                              $("#content2_3").append(value);
+                          },
+                          error: function(){
+                              console.log("ajax 통신 실패!");
+                          }
+                      });
+                  }
+              
+                  function enterkey(event) {
+                      if (event.keyCode === 13) {
+                          // Enter 키 눌렸을 때 실행할 작업
+                          loadMoreData();
+                      }
+                  }
+              };
+              </script> 
+
+
+<!--
+            <script>
+            function enterkey() {
+				if (window.event.keyCode == 13) {
+					let keyword = $(".searchclass").val();							
+					
+					$.ajax({
+						url:"searchkeyword.pr",
+						data:{keyword:keyword},
+						success:function(result){
+							let $paging = $(".page_nation");	                        
+							
+							 $("#content2_3").html("");
+							 $paging.html("");
+							 
+							let value = "";
+
+	                        for (let i = 0; i < result.length; i++) {
+	                          let rv = result[i];
+
+	                          let titleImg = rv.titleImg;
+	                          let productName = rv.productName;
+	                          let productDesc = rv.productDesc;
+	                          let productNo = rv.productNo;
+
+	                          value +=
+	                            "<div class='content2_3c'>" +
+	                            "<img id='img1' src='<%=contextPath%>/" +
+	                            titleImg +
+	                            "' alt='Slide 4' width='100%' height='300'>" +
+	                            "<input type='hidden' id='pdno' name='pno' value='productNo'>" +
+	                            "<div style='margin: 0; border: 0px;'>" +
+	                            productName +
+	                            "</div>" +
+	                            "<div class='name_sub'>" +
+	                            productDesc +
+	                            "</div>" +
+	                            "<div class='priceGroup'>" +
+	                            "<div class='custom_pro' d-price='29900' d-custom='23900'>" +
+	                            rv.discount +
+	                            "%" +
+	                            "</div>" +
+	                            "<div class='prs prsLine'>" +
+	                            rv.price +
+	                            "원" +
+	                            "</div>" +
+	                            "<div class='prs prsBold'>" +
+	                            rv.dPrice +
+	                            "원" +
+	                            "</div>" +
+	                            "</div>" +
+	                            "</div>";
+	                        }
+	                        $("#content2_3").html(value);
+						}, error:function(){
+							console.log("ajax 통신 실패!");
+						}
+					});
+				}
+            }
+            </script>
+            -->
 
             <div id="content">
               <div id="content_2">
@@ -489,6 +637,14 @@
                         for (let i = 0; i < result.length; i++) {
                           let rv = result[i];
 
+<<<<<<< HEAD
+=======
+                          let titleImg = rv.titleImg;
+                          let productName = rv.productName;
+                          let productDesc = rv.productDesc;
+                          let productNo = rv.productNo;
+
+>>>>>>> product
                           value +=
                             "<div class='content2_3c'>" +
                             "<img id='img1' src='<%=contextPath%>/" +

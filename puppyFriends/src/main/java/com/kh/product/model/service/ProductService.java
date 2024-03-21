@@ -164,6 +164,14 @@ public class ProductService {
 		return result1 * result2;
 	}
 	
+	public ArrayList<Product> keywordSearch(String keyWord){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().keywordSearch(conn, keyWord);
+		close(conn);
+		return list;
+	}
+	
 	
 	
 

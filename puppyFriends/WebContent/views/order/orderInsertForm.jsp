@@ -638,7 +638,7 @@
     	
     
         var IMP = window.IMP; 
-        IMP.init("imp16540835"); 
+        IMP.init("imp88805724"); 
       
         var today = new Date();   
         var hours = today.getHours(); // 시
@@ -707,7 +707,7 @@
     
     <script>
     var IMP = window.IMP; 
-    IMP.init("imp67011510"); 
+    IMP.init("imp88805724"); 
   
     var today = new Date();   
     var hours = today.getHours(); // 시
@@ -715,7 +715,7 @@
     var seconds = today.getSeconds();  // 초
     var milliseconds = today.getMilliseconds();
     var makeMerchantUid = hours +  minutes + seconds + milliseconds;
-    
+
 
     function requestPay1() {
     	var add1 = document.getElementById("sample2_address").value; 

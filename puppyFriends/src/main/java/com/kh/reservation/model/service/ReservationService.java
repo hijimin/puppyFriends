@@ -171,6 +171,22 @@ public class ReservationService {
 
 		return result1 * result2 * result3;
 	}
+
+	public int makeAclassReservation(int userNo, int classNo, Reservation rv) {
+		Connection conn = getConnection();
+		
+		int result1 = new ReservationDao().makeAclassReservationNext(conn);
+		int result2 = new ReservationDao().makeAclassReservation(conn, userNo, classNo, rv);
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1 * result2;
+	}
 	
 	
 	

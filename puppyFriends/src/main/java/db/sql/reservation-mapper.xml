@@ -309,6 +309,37 @@
 	  )
 	
 	</entry>
+	
+	<entry key="makeAclassReservationNext">
+		SELECT SEQ_CLASS.NEXTVAL FROM DUAL
+	</entry>
+	
+	<entry key="makeAclassReservation">
+	
+	  INSERT
+	    INTO RESERVATION
+	       (
+	         RESERVATION_NO
+	       , MEMBER_NO
+	       , PROGRAM_NO
+	       , FACILITY_NO
+	       , RESERVATION_START
+		   , RESERVATION_END
+		   , RESERVATION_PRICE
+	       )
+	       VALUES
+	      ( 
+	        SEQ_RESERVATION.NEXTVAL
+	      , ?
+	      , ?
+	      , 4
+	      , ?
+	      , ?
+	      , ?
+	      )
+	      
+      
+	</entry>
 
 </properties>
 

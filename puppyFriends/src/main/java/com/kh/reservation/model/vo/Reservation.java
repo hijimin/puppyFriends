@@ -76,6 +76,32 @@ public class Reservation {
 	}
 
 	
+
+	public Reservation(int reservationNo, int programNo, int facilityNo, Date reservationStart, Date reservationEnd,
+			int reservationPrice) {
+		super();
+		this.reservationNo = reservationNo;
+		this.programNo = programNo;
+		this.facilityNo = facilityNo;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.reservationPrice = reservationPrice;
+	}
+
+	
+	
+	// makeAclassReservation
+	public Reservation(int reservationNo, Date reservationStart, Date reservationEnd, int reservationPrice) {
+		super();
+		this.reservationNo = reservationNo;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.reservationPrice = reservationPrice;
+	}
+
+	
+	
+
 	public int getHcount() {
 		return hcount;
 	}

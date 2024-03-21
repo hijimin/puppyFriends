@@ -585,6 +585,9 @@
                     <div id="next-btn" onclick="nextSlide()">&#10095;</div>
                   </div>
                 </div>
+                <br>
+                <br>
+                <br>
 
                 <div id="content2_2">
                   <div align="right" style="width: 90%; margin-bottom: 5px">
@@ -883,6 +886,10 @@
                     })
                   });
                 </script>
+
+                <br>
+                <br>
+                
 
                 <!-- 페이징바 -->
                 <div id="content2_4">

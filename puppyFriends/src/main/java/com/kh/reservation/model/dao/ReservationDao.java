@@ -565,6 +565,53 @@ ArrayList<KinderClass> list = new ArrayList<KinderClass>(); // [텅 빈 리스�
 		return result;
 	}
 
+	public int makeAclassReservation(Connection conn, int userNo, int classNo, Reservation rv) {
+		int result = 0; 
+		
+		PreparedStatement pstmt = null;
+//		boolean result = false;
+		
+		String sql = prop.getProperty("makeAclassReservation");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rv.getMemberNo());
+			pstmt.setInt(2, classNo);
+			pstmt.setDate(3, rv.getReservationStart());
+			pstmt.setDate(4, rv.getReservationEnd());
+			pstmt.setInt(5, rv.getReservationPrice());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			close(pstmt);
+		}
+		return result;
+
+	}
+
+	public int makeAclassReservationNext(Connection conn) {
+		int result = 0; 
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("makeAclassReservationNext");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
 
 
 

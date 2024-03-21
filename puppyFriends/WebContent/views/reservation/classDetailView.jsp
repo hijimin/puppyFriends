@@ -160,7 +160,7 @@
 </head>
 <body>
     <%@ include file="../common/menubar.jsp" %>
-	<form id="detail-form" action="<%= contextPath %>/detail.crv?cno=<%= c.getClassNo() %>" method="post" enctype="multipart/form-data">
+	<form id="detail-form" action="<%= contextPath %>/make.crv?cno=<%= c.getClassNo() %>&start=<%= c.getReservationStart() %>&end=<%= c.getReservationEnd() %>" method="post">
 	<div class="outer">
  
         <div align="right" class="outer_name">
@@ -217,6 +217,11 @@
             
             <div class="text" align="right"> <!-- 오른쪽 맵 -->
                 <div class="period">기간 : <%= c.getReservationStart() %> ~ <%= c.getReservationEnd() %> </div> <br><br>
+                
+                <input type="hidden" name="reservationStart" value="<%= c.getReservationStart() %>" >
+                <input type="hidden" name="reservationEnd" value="<%= c.getReservationEnd() %>" >
+                <input type="hidden" name="reservationPrice" value="<%= c.getReservationPrice() %>" >
+                
                 <div>( <%= c.getcCount() %> / <%= c.getdNumber() %> ) , <%= c.getClassSize() %> </div>
                 <div class="introduce">
                     <tr>
@@ -245,6 +250,8 @@
                     <button type="button" class="btn-open-modal" disabled >예약하기</button> 
                  <% } %>
                 </div>
+                
+                
 
                 <div class="btn_bar1">
                 	<a href="<%= contextPath %>/kinderClass.crv" class="C_back" style="padding-bottom: 1%;">뒤로가기</a> <br>
@@ -256,6 +263,7 @@
                 </div>
                 <% } %>
             </div>
+            
 
 			<script>
 			// 삭제 alert
@@ -269,18 +277,22 @@
 			    }
 			}
 			
-			$("#makeClassRv").click(function() {
-			      var confirmSubmit = confirm("유치원 예약을 하시겠습니까?");
-		    	  var cno = $("#cno").val();
-			      if (confirmSubmit) {
-					  				    	  
-			    	  $(this).prop('disabled', true);
-			    	  
-			      } else{
-			    	  alert("예약이 취소되었습니다.");
-			      }
+			
+			 $("#makeClassRv").click(function() {
+			        var confirmSubmit = confirm("유치원 예약을 하시겠습니까?");
+			        var cno = $("#cno").val();
+			        if (confirmSubmit) {
+			            $(this).prop('disabled', true); // 고객 등록 정보 있으면 버튼 비활성화로 수정
+
+			            // AJAX 대신 form 제출을 사용
+			            $("#detail-form").submit();
+			        } else {
+			            alert("예약이 취소되었습니다.");
+			        }
+			    });
 			      
-			   });
+			      
+			   
 			</script>
 
             <br><br>
@@ -288,8 +300,6 @@
         </div>
     </div>
   </form>
-
-
     
     <%@ include file="../common/topBtn.jsp" %> <br>
     <%@ include file="../common/footerbar.jsp" %>

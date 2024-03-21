@@ -12,6 +12,7 @@ import com.kh.member.model.vo.Dog;
 import com.kh.member.model.vo.Member;
 import com.kh.order.model.vo.Order;
 import com.kh.product.model.vo.Product;
+import com.kh.reservation.model.vo.Reservation;
 
 public class AdminService {
 	
@@ -67,6 +68,7 @@ public class AdminService {
 		
 	}
 	
+	
 	public int[] adminStartRestoreMember(int[] adminStartRestoreMember) {
 		Connection conn = getConnection();
 		int[] result = new AdminDao().adminStartRestoreMember(conn,  adminStartRestoreMember);
@@ -80,6 +82,7 @@ public class AdminService {
 		    return result;		
 	} // adminStartRestoreMember
 
+	
 	public ArrayList<Product> adminSelectPRoductList(AdminPageInfo pi){
 		Connection conn = getConnection();
 		ArrayList<Product> pList = new AdminDao().adminSelectProductList(conn, pi);
@@ -88,6 +91,7 @@ public class AdminService {
 		return pList;
 		
 	} // adminSelectPRoductList
+	
 	
 	public int[] adminDeleteProduct(int[] adminDeleteProduct) {
 		Connection conn = getConnection();
@@ -102,6 +106,7 @@ public class AdminService {
 	    return result;
 	}
 	
+	
 	public int yCountMember() {
 		Connection conn = getConnection();
 		int yResult = new AdminDao().yCountMember(conn);
@@ -109,6 +114,7 @@ public class AdminService {
 		close(conn);
 		return yResult;
 	}
+	
 	
 	public int nCountMember() {
 		Connection conn = getConnection();
@@ -118,6 +124,7 @@ public class AdminService {
 		return nResult;
 	}
 
+	
 	public ArrayList<Order> adminSelectOrder(AdminPageInfo pi) {
 		Connection conn = getConnection();
 		ArrayList<Order> oList = new AdminDao().adminSelectOrder(conn, pi);
@@ -125,6 +132,7 @@ public class AdminService {
 		close(conn);
 	    return oList;	
 	} // adminSelectOrder
+	
 	
 	public ArrayList<Product> adminMainSelectProduct(){
 		Connection conn = getConnection();
@@ -134,4 +142,56 @@ public class AdminService {
 		return apList;
 	}
 	
+	public int[] changeOrder(int[] changeOrder) {
+		Connection conn = getConnection();
+		int[] result = new AdminDao().changeOrder(conn, changeOrder);
+		
+		 if (result != null) {
+		        commit(conn);
+		    } else {
+		        rollback(conn);
+		    }
+		    close(conn);
+		    return result;		
+	} // changeOrder
+	
+	
+	
+	public ArrayList<Order> adminSelectDelivery(AdminPageInfo pi) {
+		Connection conn = getConnection();
+		ArrayList<Order> deList = new AdminDao().adminSelectDelivery(conn, pi);
+		
+		close(conn);
+	    return deList;	
+	} // adminSelectOrder
+	
+	
+	public Order adminOrderInfo(int orderNo){
+		Connection conn = getConnection();
+		Order o = new AdminDao().adminOrderInfo(conn,orderNo);
+		
+		close(conn);
+		return o;
+		
+	}
+	
+	public ArrayList<Reservation> adminSelectHotel(AdminPageInfo pi){
+		Connection conn = getConnection();
+		ArrayList<Reservation> hrList = new AdminDao().adminSelectHotel(conn, pi);
+		
+		close(conn);
+		return hrList;
+	}
+	
+	public ArrayList<Reservation> adminSelectClass(AdminPageInfo pi){
+		Connection conn = getConnection();
+		ArrayList<Reservation> crList = new AdminDao().adminSelectHotel(conn, pi);
+		
+		close(conn);
+		return crList;
+	}
+	
 } // class
+
+
+	

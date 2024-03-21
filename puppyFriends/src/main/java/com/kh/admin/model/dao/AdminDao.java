@@ -20,6 +20,7 @@ import com.kh.member.model.vo.Dog;
 import com.kh.member.model.vo.Member;
 import com.kh.order.model.vo.Order;
 import com.kh.product.model.vo.Product;
+import com.kh.reservation.model.vo.Reservation;
 
 public class AdminDao {
 	
@@ -402,7 +403,7 @@ public class AdminDao {
 									  rset.getString("ORDER_NAME"),
 									  rset.getDate("ORDER_DATE"),
 									  rset.getInt("PAYMENT_NO"),
-									  rset.getInt("PRODUCT_DISCOUNT"),
+									  rset.getInt("ORDER_COUNT"),
 									  rset.getString("ORDER_STATUS")
 									  ));
 			}			
@@ -444,6 +445,202 @@ public class AdminDao {
 		}
 		
 		return apList;
+		
+	}
+	
+	public int[] changeOrder(Connection conn, int[] changeOrder) {
+        int[] result = null;
+        PreparedStatement pstmt = null;
+        String sql = prop.getProperty("adminChangeOrderStatus");
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            
+            for (int i = 0; i < changeOrder.length; i++) {
+                pstmt.setInt(1, changeOrder[i]);
+                pstmt.executeUpdate();
+            }
+            
+            result = changeOrder;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        return result;
+        
+    } // changeOrder
+	
+	public ArrayList<Order> adminSelectDelivery(Connection conn, AdminPageInfo pi){
+		ArrayList<Order> deList = new ArrayList<Order>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminSelectDelivery");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				deList.add(new Order(  rset.getInt("ORDER_NO"),
+									  rset.getString("MEMBER_NO"),
+									  rset.getString("PRODUCT_NO"),
+									  rset.getString("ORDER_NAME"),
+									  rset.getDate("ORDER_DATE"),
+									  rset.getInt("PAYMENT_NO"),
+									  rset.getInt("ORDER_COUNT"),
+									  rset.getString("ORDER_STATUS")
+									  ));
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return deList;
+		
+	} // adminOrderDelivery
+	
+	
+public Order adminOrderInfo(Connection conn, int orderNo){
+		
+		Order o = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminOrderDetailView");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, orderNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+						o = new Order(rset.getInt("ORDER_NO"),
+								 rset.getString("MEMBER_NO"),							 
+								 rset.getString("PRODUCT_NO"),
+								 rset.getString("ORDER_NAME"),
+								 rset.getString("ORDER_ADDRESS"),
+								 rset.getString("ORDER_PHONE"),
+								 rset.getString("ORDER_REQ"),
+								 rset.getDate("ORDER_DATE"),
+								 rset.getInt("ORDER_DELIVERY"),
+								 rset.getInt("ORDER_COUNT"),
+								 rset.getInt("PAYMENT_NO"),
+								 rset.getString("ORDER_STATUS")
+								 );
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return o;
+		
+	} // adminOrderInfo
+
+	
+	public ArrayList<Reservation> adminSelectHotel(Connection conn, AdminPageInfo pi){
+		ArrayList<Reservation> hrList = new ArrayList<Reservation>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminSelectHotel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+
+			rset = pstmt.executeQuery();
+			
+		while(rset.next()) {
+			hrList.add(new Reservation(   rset.getInt("RESERVATION_NO"),
+										  rset.getInt("MEMBER_NO"),
+										  rset.getInt("PROGRAM_NO"),
+										  rset.getInt("FACILITY_NO"),
+										  rset.getDate("WRITING_DATE"),
+										  rset.getDate("RESERVATION_START"),
+										  rset.getDate("RESERVATION_END"),
+										  rset.getInt("RESERVATION_PRICE"),
+										  rset.getInt("PAYMENT_NO"),
+										  rset.getString("RESERVATION_STATUS")
+										  ));
+		}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return hrList;
+		
+	} // adminSelectHotel
+	
+	public ArrayList<Reservation> adminSelectClass(Connection conn, AdminPageInfo pi){
+		ArrayList<Reservation> crList = new ArrayList<Reservation>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminSelectClass");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+
+			rset = pstmt.executeQuery();
+			
+		while(rset.next()) {
+			crList.add(new Reservation(   rset.getInt("RESERVATION_NO"),
+										  rset.getInt("MEMBER_NO"),
+										  rset.getInt("PROGRAM_NO"),
+										  rset.getInt("FACILITY_NO"),
+										  rset.getDate("WRITING_DATE"),
+										  rset.getDate("RESERVATION_START"),
+										  rset.getDate("RESERVATION_END"),
+										  rset.getInt("RESERVATION_PRICE"),
+										  rset.getInt("PAYMENT_NO"),
+										  rset.getString("RESERVATION_STATUS")
+										  ));
+		}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return crList;
 		
 	}
 	

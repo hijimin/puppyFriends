@@ -116,7 +116,7 @@
 		          WHERE PRODUCT_STOCK = 0
 		          ORDER 
 		             BY PRODUCT_NO ASC)P)
-		        WHERE RNUM BETWEEN 1 AND 5
+		        WHERE RNUM BETWEEN 1 AND 15
 	</entry>
 	
 	
@@ -158,17 +158,111 @@
                        FROM P_ORDER
                        WHERE ORDER_STATUS = 'Y'
                        ORDER 
-                          BY MEMBER_NO DESC) p)
+                          BY ORDER_NO DESC) p)
             WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
+	<entry key="adminSelectDelivery">
+		SELECT *
+           FROM(SELECT ROWNUM RNUM, p.*
+                   FROM(SELECT
+                           ORDER_NO
+                         , MEMBER_NO
+                         , PRODUCT_NO
+                         , ORDER_NAME
+                         , ORDER_DATE
+                         , ORDER_COUNT
+                         , PAYMENT_NO
+                         , ORDER_STATUS
+                       FROM P_ORDER
+                       WHERE ORDER_STATUS = 'N'
+                       ORDER 
+                          BY ORDER_NO DESC) p)
+            WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="adminChangeOrderStatus">
+		UPDATE
+		      P_ORDER
+		  SET
+		     ORDER_STATUS = 'N'
+		WHERE ORDER_NO = ?
+	</entry>
+	
+	<entry key="adminOrderDelivery">
+		UPDATE
+		      P_ORDER
+		   SET
+		     ORDER_STATUS = 'Y'
+		 WHERE ORDER_NO = ?
+	</entry>
+	
+	<entry key="adminOrderDetailView">
+		SELECT               
+              ORDER_NO
+            , MEMBER_NO
+            , PRODUCT_NO
+            , ORDER_NAME
+            , ORDER_ADDRESS
+            , ORDER_PHONE
+            , ORDER_REQ
+            , ORDER_DATE
+            , ORDER_DELIVERY
+            , ORDER_COUNT
+            , PAYMENT_NO
+            , ORDER_STATUS
+        FROM P_ORDER
+  		WHERE ORDER_NO = ?
+	</entry>
+	
+	<entry key="adminSelectHotel">
+		 SELECT *
+		  FROM (SELECT ROWNUM RNUM, P.*
+		          FROM(SELECT 
+		                RESERVATION_NO
+		              , MEMBER_NO
+		              , PROGRAM_NO
+		              , FACILITY_NO
+		              , WRITING_DATE
+		              , RESERVATION_START
+		              , RESERVATION_END
+                      , RESERVATION_PRICE
+                      , PAYMENT_NO
+                      , RESERVATION_STATUS
+		          FROM  RESERVATION
+		          WHERE FACILITY_NO = 2
+		          ORDER 
+		             BY RESERVATION_START DESC)P)
+		        WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	<entry key="adminSelectClass">
+		SELECT *
+		  FROM (SELECT ROWNUM RNUM, P.*
+		          FROM(SELECT 
+		                RESERVATION_NO
+		              , MEMBER_NO
+		              , PROGRAM_NO
+		              , FACILITY_NO
+		              , WRITING_DATE
+		              , RESERVATION_START
+		              , RESERVATION_END
+                      , RESERVATION_PRICE
+                      , PAYMENT_NO
+                      , RESERVATION_STATUS
+		          FROM  RESERVATION
+		          WHERE FACILITY_NO = 4
+		          ORDER 
+		             BY RESERVATION_START DESC)P)
+		        WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
 	<entry key="">
 	
 	</entry>
 	
-	<entry key="">
-	
-	</entry>
 	
 	<entry key="">
 	

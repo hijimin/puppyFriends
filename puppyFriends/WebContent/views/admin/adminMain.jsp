@@ -30,6 +30,7 @@ topClickedMenus.add(Map.of("menu", "회원", "clicks", 0));
 topClickedMenus.add(Map.of("menu", "채팅", "clicks", 0));
 topClickedMenus.add(Map.of("menu", "반려견정보", "clicks", 0));
 topClickedMenus.add(Map.of("menu", "상품", "clicks", 0));
+topClickedMenus.add(Map.of("menu", "예약", "clicks", 0));
 
 
 List<String> menuNames = new ArrayList<>();
@@ -236,7 +237,7 @@ String clickCountsJson = new Gson().toJson(clickCounts);
        .c3 {
         border: 1px solid gray;
         width: 680px;
-        height: 310px;
+        height: 727px;
         border-radius: 10px;
         color: gray;
         float: right;
@@ -248,14 +249,6 @@ String clickCountsJson = new Gson().toJson(clickCounts);
        .c3 table{
         margin: 0 auto;
         width: 700px;    
-       }
-
-       .c4 {
-            border: 1px solid gray;
-            width: 714px;
-            height: 405px;
-            border-radius: 10px;
-            margin-top: 76px;
        }
         
         a {
@@ -296,6 +289,7 @@ String clickCountsJson = new Gson().toJson(clickCounts);
         color: red;
        }
 
+       
 
     </style>
 </head>
@@ -303,7 +297,7 @@ String clickCountsJson = new Gson().toJson(clickCounts);
 
    <div class="outer">
         <div class="headerbar">
-                <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 760px;"><a href="<%= contextPath %>">PuppyFriends Manager</a></h1>
+                <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 760px;"><a href="<%= contextPath %>" style="font-size: 40px;">PuppyFriends Manager</a></h1>
         </div>
     
     <div class="mid">
@@ -333,7 +327,13 @@ String clickCountsJson = new Gson().toJson(clickCounts);
             <br><br><br><br>
             <li class="product-admin" onmouseover="updateChart(4)"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a>
                 <ul class="product-data"><a href="<%= contextPath %>/AdminSelectProductList.pr?cpage=1"  style="color: white;">상품리스트</a></ul>
-                <ul class="adminOrder-data"><a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1"style="color: white;">주문확인</a></ul>
+                <ul class="adminOrder-data"><a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1" style="color: white;">주문확인</a></ul>
+            	<ul class="adminDelivery"><a href="<%= contextPath %>/AdminSelectDelivery.de?cpage=1" style="color: white;">배송완료상품</a></ul>
+            </li>
+            <br><br><br><br>
+            <li class="reservation" onmouseover="updateChart(5)">예약
+            <ul class="classReservation"><a href="<%= contextPath %>/AdminSelectClass.rc?cpage=1" style="color: white;">수업예약</a></ul>
+            <ul class="hotelReservation"><a href="<%= contextPath %>/AdminSelectReservation.re?cpage=1" style="color: white;">호텔예약</a></ul>
             </li>
             
         </div>
@@ -414,7 +414,6 @@ String clickCountsJson = new Gson().toJson(clickCounts);
                  <br>
                 </div>  
             </table>
-            <div class="c4"></div>
             </div>
 </div>
 </body>

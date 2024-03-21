@@ -1,4 +1,4 @@
-<%@page import="com.kh.member.model.vo.Dog"%>
+<%@page import="com.kh.order.model.vo.Order"%>
 <%@page import="com.kh.common.model.vo.AdminPageInfo"%>
 <%@page import="com.kh.member.model.vo.Member"%>
 <%@page import="java.util.ArrayList"%>
@@ -13,9 +13,15 @@
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");
-    
-    Dog d = (Dog)request.getAttribute("d"); 
 	
+	ArrayList<Order> deList = (ArrayList<Order>)request.getAttribute("deList");
+    
+    AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi");
+    int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+   	
    %>
     
     
@@ -23,7 +29,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 회원 상세</title>
+<title>배송중 상품</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	
   <!-- jQuery library -->
@@ -34,6 +40,9 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+   
+    
    <style>
         .outer{
             width: 1903px;
@@ -85,15 +94,15 @@
         }
         
         body button{
-            background-color: rgb(255, 167, 212);
+            background-color: #f5e3e1;
             color : white;
             border : none;
             
         }
 
         .mid>*{
-            float: left;
-        }
+                float: left;
+            }
 
         .headerbar h1{
             padding-top: 100px;
@@ -102,16 +111,16 @@
         .content{
             width: 1400px;
             height: 650px;
-            margin-top: 100px;
-        }
-
-        .content a {
-            margin-left: 1130px;
+            margin-top: 33px;
+            margin-left: 50px;
         }
 
         .list-area{
             font-size: 20px;
-            margin-left: 290px;
+        }
+
+        h1{
+            margin-left: 560px;
         }
 
         .list-area td{
@@ -119,16 +128,24 @@
             font-size: 20px;
         }
 
-        thead th{
-            border-bottom: 1px solid #f5e3e1;
-        }
-        
 
         .paging-area{
             margin-right: 150px;
         }
+        
+        .list-area>tbody>tr>#detailInfo:hover{
+        	cursor: pointer;
+        }
 
-       .sidebar li ul {
+        #deleteBtn{
+            margin-left: 1235px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            background-color: #f5e3e1;
+            color: gray;
+        }
+        
+         .sidebar li ul {
         display: none;
       	 }
 
@@ -154,6 +171,14 @@
             font-size: 20px;
         }
         
+        .sidebar li{        
+           color: rgb(255, 118, 189);
+            font-size: 20px;
+            text-align:center;
+            list-style-type: none;
+            margin-right: 5px;
+        }
+        
          .sidebar ul{
             padding-left: 0px;
             text-align:center;
@@ -161,52 +186,53 @@
 
         }
 
-        fieldset{
-            margin-left: 250px;
-        }
-        
-        legend{
-            margin-left: 365px;
-        }
-
-        .dsa {
-            color: red;
-            text-align: center;
-            font-size: 25px;
-        }
-
-       .dsf {
-        margin-left: 20px;
-       }
-
-       textarea {
-        border-radius: 10px;
-       }
-
-      .list-area th{
-        text-align: center;
+        thead th {
         background-color: #f5e3e1;
-        border-bottom: 1px solid gray;
+        height: 40px;    
+        color: gray;
+        font-size: 20px;
+      }
+      
+      tbody th{
+        border-bottom : 1px solid #f5e3e1;
+        border-right: 1px solid #f5e3e1;
+        border-left: 1px solid #f5e3e1;
       }
 
-      .list-area td{
-        text-align: center;
-        background-color: #f5e3e1;
+      tbody td{
+        border-bottom : 1px solid #f5e3e1;
+        border-right: 1px solid #f5e3e1;
+        border-left: 1px solid #f5e3e1;
       }
 
-    
+      #checkOp1{
+        border-top-left-radius: 5px;
+      }
+
+      #checkOp2{
+        border-top-right-radius: 5px;
+      }
+
+      .list-area{
+        color: gray;
+      }
        
+      a {
+      	text-decoration-line: none;
+		color: white;
+      }
+
     </style>
 </head>
 <body>
 
    <div class="outer">
         <div class="headerbar">
-                <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 580px;">회원번호&nbsp; : &nbsp;<%= d.getMemberNo() %>&nbsp;번님의 반려견 상세정보</h1>
+                <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 760px;"><a href="<%= contextPath %>/AdminMemberCount.me">PuppyFriends Manager</a></h1>
         </div>
     
         <div class="mid">
-            <div class="sidebar">
+           <div class="sidebar">
             <li class="boardAdmin"><a href="#" >공지사항</a></li>
             <br><br><br>
             <li class="memberMana"><a href="<%= contextPath %>/adminSelectMember.me?cpage=1">회원</a>
@@ -231,9 +257,8 @@
             </li>
             <br><br><br><br>
             <li class="product-admin"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a>
-                <ul class="product-data"><a href="<%= contextPath %>/list.pd?cpage=1"  style="color: white;">상품리스트</a></ul>
-            	<ul class="adminOrder-data"><a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1" style="color: white">주문확인</a></ul>
-                <ul class="adminDelivery"><a href="<%= contextPath %>/AdminSelectDelivery.de?cpage=1" style="color: white;">배송완료상품</a></ul>
+                <ul class="product-data"><a href="<%= contextPath %>/AdminSelectProductList.pr?cpage=1"  style="color: white;">상품리스트</a></ul>
+            	<ul class="adminOrder-data"><a href="#" style="color: white">주문확인</a></ul>
             </li>
             <br><br><br><br>
             <li class="reservation" onmouseover="updateChart(5)">예약
@@ -243,41 +268,92 @@
         </div>
 
 
-
             <div class="content">
-                <a href="<%= contextPath %>/adminSelectMember.me?cpage=1" class="btn btn-sm btn-secondary" style="background-color:#f5e3e1; color: gray; border: none;">목록으로</a>
-                <br>
                 <table class="list-area" align="center">
-                      <br>
-                       <thead align="center">
+                    <br>
+                    <h1 style="color: gray;">Delivery</h1>
+                    <br><br>
+                    <thead align="center">
                         <tr>
-                            <th width="150" style="border-top-left-radius: 10px;">반려견 식별번호</th>
-                            <th width="150">반려견이름</th>
-                            <th width="150">견종</th>
-                            <th width="150">반려견나이</th>
-                            <th width="150" style="border-top-right-radius: 10px;">필수접종 여부</th>
+                            <th width="150" id="checkOp1">주문번호</th>
+                            <th width="150">회원번호</th>
+                            <th width="150">상품번호</th>
+                            <th width="150">받는사람</th>
+                            <th width="250">주문날짜</th>
+                            <th width="250" id="checkOp2">배송상태</th>
                         </tr>
-                        </thead>
                         
-                       <tbody align="center" style="margin-top: 50px;">
-                        <tr>
-                        <td id="d1" style="border-bottom-left-radius: 10px;"><%= d.getDogNo() %></td>                 
-                        <td><%= d.getDogName() %></td> 
-                        <td><%= d.getDogValue() %></td> 
-                        <td><%= d.getDogAge() %>
-                        <td id="d2" style="border-bottom-right-radius: 10px;"><%= d.getDogVaccine() %>
-                        </tr>
-                    </tbody>                 	
+                    </thead>
+                  
+                        <tbody align="center">
+                            <form id="deleteForm" action="AdminSelectDelivery.de" method="post"  onsubmit="return confirmDelete()"> 
+                                <% for(Order o : deList) { %>
+                                <tr>                                  
+                                    <td id="detailInfo" id="checkOp3"><%= o.getOrderNo() %></td>
+                                    <td><%= o.getOrderUser() %></td>
+                                    <td><%= o.getProductNo() %></td>
+                                    <td><%= o.getOrderName() %></td>
+                                    <td><%= o.getOrderDate() %></td>
+                                    <td id="checkOp3" style="color: lightblue;"><% if(o.getStatus().equals("N")){ %>배송완료<% } %>                               
+                                </tr> 
+                                <% } %>          	
+							</form>               
+                        </tbody>
+                        
+                       
+                    
                 </table>
+                                
+
+				<script>
+					$(function(){
+						$(".list-area>tbody>tr>#detailInfo").click(function(){
+							location.href='<%= contextPath %>/adminDog.me?mno=' + $(this).text();
+						})
+					})
+					
+				    function deleteConfirm() {
+						
+				        var check = $("input[type=checkbox]").is(":checked") == true;
+						  if(!check){ // 아무것도 체크안함
+					        	alert("상품을 선택 후 배송완료버튼을 눌러주세요");
+					        	return;
+					        }       
+						  
+				        var result = confirm("배송중완료로 변경 하시겠습니까?");
+					       if(result){
+					            document.getElementById("deleteForm").submit();
+					            alert("변경 완료되었습니다!");
+					        } else {							        	
+					        	alert("취소 되었습니다.");
+					        }
+				        
+						     
+					}
+					
+				</script>
+				
+			
                 <br><br>
-                <fieldset>
-                <legend>특이사항</legend>                  
-                    <% if(d.getDogSignificant() == null) { %>                  
-                    <textarea class="dsa" cols="60" rows="1" style="resize: none;" readonly>특이사항 미입력</textarea>
-                   <% } else { %>
-                   <textarea class="dsf" cols="90" rows="15" style="resize: none;" readonly><%= d.getDogSignificant() %></textarea>
-                   <% } %>
-                </fieldset>
+                
+                <div class="paging-area" align="center">
+                    <% if(currentPage != 1) { %>
+                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage - 1 %>'"> &lt; </button>
+                    <% } %>
+                    
+                    <% for(int p=startPage; p<=endPage; p++) { %>
+                        <% if(p == currentPage) { %>
+                        <button style="background-color:#f5e3e1"><%= p %></button>
+                        <% } else { %>
+                        <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= p %>'"><%= p %></button>
+                        <% } %>
+                    <% } %>
+                    
+                    <% if(currentPage != maxPage) { %>
+                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage + 1 %>'"> &gt; </button>
+                    <% } %>
+                </div>
+                <br>
             </div>
             
         </div>
@@ -285,8 +361,7 @@
         
     </div>
 
-</body>
-</html>
+
 
 </body>
 </html>

@@ -37,7 +37,26 @@ public class Reservation {
 	}
 	
 	
-	  // HotelEnrollController
+	
+	
+	  public Reservation(int reservationNo, int memberNo, int programNo, int facilityNo, Date writingDate,
+			Date reservationStart, Date reservationEnd, int reservationPrice, int paymentNo, String reservationStatus
+			) {
+		super();
+		this.reservationNo = reservationNo;
+		this.memberNo = memberNo;
+		this.programNo = programNo;
+		this.facilityNo = facilityNo;
+		this.writingDate = writingDate;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.reservationPrice = reservationPrice;
+		this.paymentNo = paymentNo;
+		this.reservationStatus = reservationStatus;
+	}
+
+
+	// HotelEnrollController
 	public Reservation(int reservationPrice) {
 		super();
 		this.reservationPrice = reservationPrice;

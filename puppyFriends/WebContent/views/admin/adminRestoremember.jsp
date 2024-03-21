@@ -112,7 +112,7 @@
         }
 
         h1{
-            margin-left: 560px;
+            margin-left: 470px;
         }
 
         .list-area td{
@@ -219,7 +219,7 @@
 
 	<div class="outer">
         <div class="headerbar">
-            <h1 style="display: inline; margin-left: 760px;"><a href="<%= contextPath %>/AdminMemberCount.me" style="color: white; text-decoration-line: none;">PuppyFriends Manager</a></h1>
+            <h1 style="display: inline; margin-left: 700px;"><a href="<%= contextPath %>/AdminMemberCount.me" style="color: white; text-decoration-line: none;">PuppyFriends Manager</a></h1>
         </div>
     
         <div class="mid">
@@ -250,8 +250,13 @@
             <li class="product-admin"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a>
                 <ul class="product-data"><a href="<%= contextPath %>/AdminSelectProductList.pr?cpage=1"  style="color: white;">상품리스트</a></ul>
                 <ul class="adminOrder-data"><a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1" style="color: white">주문확인</a></ul>
+                <ul class="adminDelivery"><a href="<%= contextPath %>/AdminSelectDelivery.de?cpage=1" style="color: white;">배송완료상품</a></ul>
             </li>
-            
+            <br><br><br><br>
+            <li class="reservation" onmouseover="updateChart(5)">예약
+            <ul class="classReservation"><a href="<%= contextPath %>/AdminSelectClass.rc?cpage=1" style="color: white;">수업예약</a></ul>
+            <ul class="hotelReservation"><a href="<%= contextPath %>/AdminSelectReservation.re?cpage=1" style="color: white;">호텔예약</a></ul>
+            </li>
         </div>
 
 
@@ -298,19 +303,13 @@
                 </table>
                                 
 
-				<script>
-					$(function(){
-						$(".list-area>tbody>tr>#restoreInfo").click(function(){
-							location.href='<%= contextPath %>/adminDog.me?mno=' + $(this).text();
-						})
-					})
-					
+				<script>	
 				    function restoreConfirm() {
 						
 				        var check = $("input[type=checkbox]").is(":checked") == true;
-						  if(!check){ // 아무것도 체크안함
+						  if(!check){ 
 					        	alert("체크박스를 선택 후 복구버튼을 눌러주세요");
-					        	return;
+					        	return false;
 					        }       
 						  
 				        var result = confirm("해당 회원을 복구 하시겠습니까?");
@@ -321,7 +320,7 @@
 					        	alert("취소 되었습니다.");
 					        }
 				        
-						     
+					       return false;
 					}
 					
 				</script>

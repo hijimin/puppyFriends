@@ -258,9 +258,13 @@
             <br><br><br><br>
             <li class="product-admin"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a>
                 <ul class="product-data"><a href="<%= contextPath %>/AdminSelectProductList.pr?cpage=1"  style="color: white;">상품리스트</a></ul>
-            	<ul class="adminOrder-data"><a href="#" style="color: white">주문확인</a></ul>
+                <ul class="adminDelivery"><a href="<%= contextPath %>/AdminSelectDelivery.de?cpage=1" style="color: white;">배송완료상품</a></ul>
             </li>
-            
+            <br><br><br><br>
+            <li class="reservation" onmouseover="updateChart(5)">예약
+            <ul class="classReservation"><a href="<%= contextPath %>/AdminSelectClass.rc?cpage=1" style="color: white;">수업예약</a></ul>
+            <ul class="hotelReservation"><a href="<%= contextPath %>/AdminSelectReservation.re?cpage=1" style="color: white;">호텔예약</a></ul>
+            </li>
         </div>
 
 
@@ -283,16 +287,17 @@
                     </thead>
                   
                         <tbody align="center">
-                            <form id="deleteForm" action="adminDelete.me" method="post"  onsubmit="return confirmDelete()">
+                            <form id="deleteForm" action="AdminChangeOrder.or" method="post"  onsubmit="return confirmDelete()">
                             <% for(Order o : oList) {  %>
                                 <tr>
-                                    <th><input type="checkbox" value="<%= o.getOrderNo() %>" name="deleteMember" id="checkOp3"></th>
+                                    <th><input type="checkbox" value="<%= o.getOrderNo() %>" name="changeOrder" id="checkOp3"></th>
                                     <td id="detailInfo"><%= o.getOrderNo() %></td>
                                     <td><%= o.getOrderUser() %></td>
                                     <td><%= o.getProductNo() %></td>
                                     <td><%= o.getOrderName() %></td>
                                     <td><%= o.getOrderDate() %></td>
-                                    <td id="checkOp3"><%= o.getStatus() %></td>                               
+                                    <td id="checkOp3"><% if(o.getStatus().equals("Y")){ %>배송전<% } %>
+                                    </td>                               
                                 </tr>
                         	<% } %>
 							</form>
@@ -307,7 +312,7 @@
 				<script>
 					$(function(){
 						$(".list-area>tbody>tr>#detailInfo").click(function(){
-							location.href='<%= contextPath %>/adminDog.me?mno=' + $(this).text();
+							location.href='<%= contextPath %>/AdminOrderDetailView.or?mno=' + $(this).text();
 						})
 					})
 					
@@ -315,14 +320,14 @@
 						
 				        var check = $("input[type=checkbox]").is(":checked") == true;
 						  if(!check){ // 아무것도 체크안함
-					        	alert("체크박스를 선택 후 추방버튼을 눌러주세요");
+					        	alert("상품을 선택 후 배송버튼을 눌러주세요");
 					        	return;
 					        }       
 						  
-				        var result = confirm("해당 회원을 삭제 하시겠습니까?");
+				        var result = confirm("배송중으로 변경 하시겠습니까?");
 					       if(result){
 					            document.getElementById("deleteForm").submit();
-					            alert("삭제 완료되었습니다!");
+					            alert("변경 완료되었습니다!");
 					        } else {							        	
 					        	alert("취소 되었습니다.");
 					        }

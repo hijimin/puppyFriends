@@ -1,3 +1,4 @@
+<%@page import="com.kh.order.model.vo.Order"%>
 <%@page import="com.kh.member.model.vo.Dog"%>
 <%@page import="com.kh.common.model.vo.AdminPageInfo"%>
 <%@page import="com.kh.member.model.vo.Member"%>
@@ -14,7 +15,7 @@
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");
     
-    Dog d = (Dog)request.getAttribute("d"); 
+    Order o = (Order)request.getAttribute("o");
 	
    %>
     
@@ -23,7 +24,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 회원 상세</title>
+<title>관리자 주문 상세</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	
   <!-- jQuery library -->
@@ -111,7 +112,7 @@
 
         .list-area{
             font-size: 20px;
-            margin-left: 290px;
+            margin-left: 200px;
         }
 
         .list-area td{
@@ -202,7 +203,7 @@
 
    <div class="outer">
         <div class="headerbar">
-                <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 580px;">회원번호&nbsp; : &nbsp;<%= d.getMemberNo() %>&nbsp;번님의 반려견 상세정보</h1>
+                <h1 style="color: rgb(255, 118, 189); display: inline; margin-left: 700px;"><%= o.getOrderName() %>&nbsp;님의 주문정보</h1>
         </div>
     
         <div class="mid">
@@ -245,37 +246,45 @@
 
 
             <div class="content">
-                <a href="<%= contextPath %>/adminSelectMember.me?cpage=1" class="btn btn-sm btn-secondary" style="background-color:#f5e3e1; color: gray; border: none;">목록으로</a>
+                <a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1" class="btn btn-sm btn-secondary" style="background-color:#f5e3e1; color: gray; border: none;">목록으로</a>
                 <br>
                 <table class="list-area" align="center">
                       <br>
                        <thead align="center">
                         <tr>
-                            <th width="150" style="border-top-left-radius: 10px;">반려견 식별번호</th>
-                            <th width="150">반려견이름</th>
-                            <th width="150">견종</th>
-                            <th width="150">반려견나이</th>
-                            <th width="150" style="border-top-right-radius: 10px;">필수접종 여부</th>
+                            <th width="50" style="border-top-left-radius: 10px;">주문번호</th>
+                            <th width="50">회원번호</th>
+                            <th width="50">상품번호</th>
+                            <th width="100">받는사람</th>
+                            <th width="200">주소</th>
+                            <th width="200">전화번호</th>
+                            <th width="200">주문날짜</th>
+                            <th width="50">상품수량</th>
+                            <th width="50" style="border-top-right-radius: 10px;">결제번호</th>
                         </tr>
                         </thead>
                         
                        <tbody align="center" style="margin-top: 50px;">
                         <tr>
-                        <td id="d1" style="border-bottom-left-radius: 10px;"><%= d.getDogNo() %></td>                 
-                        <td><%= d.getDogName() %></td> 
-                        <td><%= d.getDogValue() %></td> 
-                        <td><%= d.getDogAge() %>
-                        <td id="d2" style="border-bottom-right-radius: 10px;"><%= d.getDogVaccine() %>
+                        <td id="d1" style="border-bottom-left-radius: 10px;"><%= o.getOrderNo() %></td>                 
+                        <td><%= o.getOrderUser() %></td> 
+                        <td><%= o.getProductNo() %></td> 
+                        <td><%= o.getOrderName() %></td>
+                        <td><%= o.getOrderAddress() %></td>
+                        <td><%= o.getOrderPhone() %></td>
+                        <td><%= o.getOrderDate() %></td>
+                        <td><%= o.getOrderCount() %></td>
+                        <td id="d2" style="border-bottom-right-radius: 10px;"><%= o.getPaymentNo() %></td>
                         </tr>
                     </tbody>                 	
                 </table>
                 <br><br>
                 <fieldset>
-                <legend>특이사항</legend>                  
-                    <% if(d.getDogSignificant() == null) { %>                  
+                <legend>요청사항</legend>                  
+                    <% if(o.getOrderReq() == null) { %>
                     <textarea class="dsa" cols="60" rows="1" style="resize: none;" readonly>특이사항 미입력</textarea>
                    <% } else { %>
-                   <textarea class="dsf" cols="90" rows="15" style="resize: none;" readonly><%= d.getDogSignificant() %></textarea>
+                   <textarea class="dsf" cols="90" rows="15" style="resize: none;" readonly></textarea>
                    <% } %>
                 </fieldset>
             </div>

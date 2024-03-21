@@ -72,7 +72,7 @@
 	<div class="outer" align="center">
         <div class="notice-page">
             <div class="notice-header">
-                <br><br><br>
+                <br><br>
                 <h1 align="center">공지사항</h1>
                 <br>
 		        <% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")) { %>

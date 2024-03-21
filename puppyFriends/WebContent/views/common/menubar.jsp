@@ -186,6 +186,20 @@
     .after-login>a:hover{color: pink;}
     .after-login{padding-left: 20px;}
 
+    @font-face {
+        font-family: 'omyu_pretty';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-size: 20px;
+    }
+
+    *{
+        font-family: 'omyu_pretty';
+    }
+  
+    li, div{font-size: 20px;}
+    
     /* 네비바 스타일 끝 */
 
 </style>

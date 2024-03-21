@@ -154,6 +154,7 @@
 	 <%
 	 	int memberNo = loginUser.getMemberNo();
 	 	String memberId = loginUser.getMemberId(); // 아이디
+	 	String memberPwd = (loginUser.getMemberPwd()) == null ? "" : loginUser.getMemberPhone();
 	 	String memberName = loginUser.getMemberName(); // 회원이름
 	 	String email = loginUser.getMemberEmail(); // 회원 이메일
 	 	String phone = (loginUser.getMemberPhone()) == null ? "" : loginUser.getMemberPhone(); // 전화번호

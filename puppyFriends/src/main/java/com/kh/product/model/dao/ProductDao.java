@@ -556,6 +556,36 @@ public class ProductDao {
 		return result;
 	}
 	
+	public ArrayList<Product> keywordSearch(Connection conn, String keyWord){
+		ArrayList<Product> list = new ArrayList<Product>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("keywordSearch");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + keyWord + "%");
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Product(rset.getInt("product_no"),
+						rset.getString("product_name"),
+						rset.getString("product_desc"),
+						rset.getString("price"),
+						rset.getInt("product_discount"),
+						rset.getString("titleimg"),
+						rset.getString("dprice")));			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;	
+	}
+	
 
 	
 

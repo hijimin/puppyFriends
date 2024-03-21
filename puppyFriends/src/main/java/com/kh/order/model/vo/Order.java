@@ -54,8 +54,24 @@ public class Order {
 		this.status = status;
 	}
 	
-	
-	
+	public Order(int orderNo, String orderUser, String productNo, String orderName, String orderAddress,
+			String orderPhone, String orderReq, Date orderDate, int orderDelivery, int orderCount, int paymentNo,
+			String status, String cartStatus) {
+		super();
+		this.orderNo = orderNo;
+		this.orderUser = orderUser;
+		this.productNo = productNo;
+		this.orderName = orderName;
+		this.orderAddress = orderAddress;
+		this.orderPhone = orderPhone;
+		this.orderReq = orderReq;
+		this.orderDate = orderDate;
+		this.orderDelivery = orderDelivery;
+		this.orderCount = orderCount;
+		this.paymentNo = paymentNo;
+		this.status = status;
+		this.cartStatus = cartStatus;
+	}
 
 	public String getStatus() {
 		return status;

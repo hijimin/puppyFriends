@@ -302,9 +302,9 @@
 	                    <div>
 	            		
 	                        <b><%= loginUser.getMemberName() %>님</b>의 방문을 환영합니다 <br><br>
-	                        <div class="after-login">
-	                        	<% if(loginUser.getMemberNo() == 1) { %>
-	                        		<a href="<%= contextPath %>/AdminMemberCount.me">관리자</a>
+	                        <div align="center">
+	                        	<% if(loginUser.getMemberName().equals("관리자")) { %>
+	                        	<a href="<%= contextPath %>/AdminMemberCount.me">관리자</a>
 	                        	<% } %>
 	                            <a href="<%= contextPath %>/mypage">마이페이지</a>
 	                            <a href="<%= contextPath %>/logout">로그아웃</a>

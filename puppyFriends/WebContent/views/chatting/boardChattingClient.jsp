@@ -184,7 +184,7 @@
    var webSocket = new WebSocket(serverUrl);
    
    function sendMessage(isChat) {
-       var chatMessage = $("#chatMessage").val(); 
+       var chatMessage = $("#chatMessage").val().trim(); 
        if (isChat !== true || chatMessage !== "") {
            var message = {
         	   type: (isChat !== false ? "CHAT" : "COMMAND"),

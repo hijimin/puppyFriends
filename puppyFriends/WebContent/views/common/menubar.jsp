@@ -300,7 +300,7 @@
             
 	                    <!-- case2. 로그인 후 -->
 						
-	                    <div>
+	                    <div class="after-login">
 	            		
 	                        <b><%= loginUser.getMemberName() %>님</b>의 방문을 환영합니다 <br><br>
 	                        <div align="center">

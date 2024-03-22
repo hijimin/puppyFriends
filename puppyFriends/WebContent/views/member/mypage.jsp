@@ -191,8 +191,6 @@
                             <% if(memberPwd != "") { %>
                            	 <li><a href="<%= request.getContextPath()%>/updatePwd">비밀번호변경</a></li>
                             <% } %>
-                            <li><a href="<%= request.getContextPath()%>/mypageProduct">장바구니 조회</a></li>
-                            <li><a href="<%= request.getContextPath()%>/mypageReservation">예약 조회</a></li>
                             <li><a data-toggle="modal" href="#deleteModal">회원탈퇴</a></li>
                         </ul>
                     </div>

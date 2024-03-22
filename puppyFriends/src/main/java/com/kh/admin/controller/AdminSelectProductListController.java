@@ -42,7 +42,7 @@ public class AdminSelectProductListController extends HttpServlet {
 		int startPage;   
 		int endPage;
 		
-		listCount = new AdminService().adminSelectListCount();
+		listCount = new AdminService().adminProduct();
 		
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		

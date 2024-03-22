@@ -43,7 +43,7 @@ public class AdminSelectReservationController extends HttpServlet {
 		int startPage;   
 		int endPage;
 		
-		listCount = new AdminService().adminSelectListCount();
+		listCount = new AdminService().adminHotelCount();
 		
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		

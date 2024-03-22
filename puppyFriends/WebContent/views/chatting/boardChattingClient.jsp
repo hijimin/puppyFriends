@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style>
     .chat-window {
-        width: 806px;
+        width: 785px;
         height: 700px;
         overflow-y: auto;
         padding: 10px;     
@@ -180,7 +180,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 <script>
-   var serverUrl = "ws://" + window.location.hostname + ":" + window.location.port + "${pageContext.request.contextPath}/ChatingServer";
+   var serverUrl = "ws://192.168.20.36:8083${pageContext.request.contextPath}/ChatingServer";
    var webSocket = new WebSocket(serverUrl);
    
    function sendMessage(isChat) {

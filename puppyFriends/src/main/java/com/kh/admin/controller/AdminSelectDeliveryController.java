@@ -43,7 +43,7 @@ public class AdminSelectDeliveryController extends HttpServlet {
 		int startPage;   
 		int endPage;
 		
-		listCount = new AdminService().adminSelectListCount();
+		listCount = new AdminService().adminDelivery();
 		
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		

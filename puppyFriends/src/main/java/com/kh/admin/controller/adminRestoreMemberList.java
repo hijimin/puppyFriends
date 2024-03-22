@@ -43,7 +43,7 @@ public class adminRestoreMemberList extends HttpServlet {
 		int startPage;   
 		int endPage;
 		
-		listCount = new AdminService().adminSelectListCount();
+		listCount = new AdminService().adminRestore();
 		
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		

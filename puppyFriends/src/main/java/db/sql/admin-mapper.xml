@@ -26,9 +26,52 @@
 		  SELECT 
 		      COUNT(*) AS count
 		  FROM MEMBER
-		  WHERE STATUS = 'Y'
+		    WHERE STATUS = 'Y'
 	</entry>
 	
+	<entry key="adminRestore">
+		 SELECT 
+		      COUNT(*) AS count
+		  FROM MEMBER
+		    WHERE STATUS = 'N'
+	</entry>
+	
+	<entry key="adminProduct">
+		SELECT 
+		      COUNT(*) AS count
+		  FROM PRODUCT
+		 WHERE PRODUCT_STATUS = 'Y'
+	</entry>
+	
+	<entry key="adminSelectOrderList">
+		SELECT 
+		      COUNT(*) AS count
+		  FROM P_ORDER
+		 WHERE ORDER_STATUS = 'Y'
+	</entry>
+	
+	
+	<entry key="adminDelivery">
+		SELECT 
+		      COUNT(*) AS count
+		  FROM P_ORDER
+		 WHERE ORDER_STATUS = 'N'
+	</entry>
+	
+	<entry key="adminHotelCount">
+		SELECT 
+		      COUNT(*) AS count
+		  FROM RESERVATION
+		 WHERE RESERVATION_STATUS = 'Y'
+	</entry>
+	
+	
+	<entry key="adminClassCount">
+		SELECT 
+		      COUNT(*) AS count
+		  FROM RESERVATION
+		 WHERE RESERVATION_STATUS = 'Y'
+	</entry>
 	
 	<entry key="adminDogInfo">
 		 SELECT 
@@ -238,29 +281,34 @@
 	
 	
 	<entry key="adminSelectClass">
-		SELECT *
-		  FROM (SELECT ROWNUM RNUM, P.*
-		          FROM(SELECT 
-		                RESERVATION_NO
-		              , MEMBER_NO
-		              , PROGRAM_NO
-		              , FACILITY_NO
-		              , WRITING_DATE
-		              , RESERVATION_START
-		              , RESERVATION_END
+		 SELECT *
+        FROM (SELECT ROWNUM RNUM, P.*
+                FROM(SELECT 
+                      RESERVATION_NO
+                    , MEMBER_NO
+                    , PROGRAM_NO
+                    , FACILITY_NO
+                    , WRITING_DATE
+                    , RESERVATION_START
+                    , RESERVATION_END
                       , RESERVATION_PRICE
                       , PAYMENT_NO
                       , RESERVATION_STATUS
-		          FROM  RESERVATION
-		          WHERE FACILITY_NO = 4
-		          ORDER 
-		             BY RESERVATION_START DESC)P)
-		        WHERE RNUM BETWEEN ? AND ?
+                FROM  RESERVATION
+                WHERE FACILITY_NO = 4
+                AND RESERVATION_STATUS = 'Y'
+                ORDER 
+                   BY RESERVATION_START DESC)P)
+              WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
 	
-	<entry key="">
-	
+	<entry key="deleteReservation">
+		UPDATE
+		      RESERVATION
+		  SET
+		     RESERVATION_STATUS = 'N'
+		WHERE RESERVATION_NO = ?
 	</entry>
 	
 	

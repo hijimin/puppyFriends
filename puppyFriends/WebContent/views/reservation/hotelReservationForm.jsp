@@ -115,7 +115,7 @@
         display:block;
         margin:0 3px;
         float:left;
-        border:1px solid #e6e6e6;
+        border:1px solid #FFDEEF;
         width:28px;
         height:28px;
         line-height:28px;
@@ -129,25 +129,25 @@
         border:1px solid #ccc;
     }
     .page_nation .pprev {
-        background:#f8f8f8 url('resources/product_img/page_pprev.png') no-repeat center center;
+        background:#FFDEEF no-repeat center center;
         margin-left:0;
     }
     .page_nation .prev {
-        background:#f8f8f8 url('resources/product_img/page_prev.png') no-repeat center center;
+        background:#FFDEEF  no-repeat center center;
         margin-right:7px;
     }
     .page_nation .next {
-        background:#f8f8f8 url('resources/product_img/page_next.png') no-repeat center center;
+        background:#FFDEEF no-repeat center center;
         margin-left:7px;
     }
     .page_nation .nnext {
-        background:#f8f8f8 url('resources/product_img/page_nnext.png') no-repeat center center;
+        background:#FFDEEF no-repeat center center;
         margin-right:0;
     }
     .page_nation a.active {
-        background-color:#42454c;
+        background-color:#FFDEEF;
         color:#fff;
-        border:1px solid #42454c;
+        border:1px solid #f899ca;
     }
     
    
@@ -207,15 +207,13 @@
         
             <div id="content2_4">
                 <div class="page_nation">
-                    <a class="arrow pprev" href="#"></a>
-                    <a class="arrow prev" href="#"></a>
+                    <a class="arrow pprev" href="#">&lt;&lt;</a>
+                    <a class="arrow prev" href="#">&lt;</a>
                     <a href="#" class="active">1</a>
                     <a href="#">2</a>
                     <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a class="arrow next" href="#"></a>
-                    <a class="arrow nnext" href="#"></a>
+                    <a class="arrow next" href="#">&gt;</a>
+                    <a class="arrow nnext" href="#">&gt;&gt;</a>
                  </div>
                 </div>
 

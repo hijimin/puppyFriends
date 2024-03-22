@@ -127,7 +127,9 @@
     
 	
 	
+	<%@ include file="../chatting/chatting.jsp" %>
 	
+	<%@ include file="../common/topBtn.jsp" %>
 	
 	<%@ include file="../common/footerbar.jsp" %>	
 

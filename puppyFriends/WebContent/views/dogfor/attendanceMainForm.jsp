@@ -265,7 +265,7 @@ body {
 			</table>
 		
 			<div class="footer">
-				<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=year%>&month=<%=tm%>" id="goToday">today</a>
+				<a href="<%= contextPath %>/attendance.at?userNo=<%= loginUser.getMemberNo() %>&year=<%=ty%>&month=<%=tm%>" id="goToday">today</a>
 			</div>
 
 			
@@ -328,17 +328,25 @@ body {
 	
 		<% }else{ %>
 		
+			<% if(!at.getDate().substring(8, 10).equals("01")){ %>
 			<script type="text/javascript">
 			
 			
 			findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html(findElementByText("<%= Integer.parseInt(at.getDate().substring(8, 10)) %>").html() + "<br> <div id='no'>결석</div>");
 			
 			</script>
+			<% } %>
 			
 		<% } %>
 
 	<% } %>
 
+	<% if(month == 3){%>
+	<script type="text/javascript">
+				findElementByText("1").html("<div style='color:red;'>" + findElementByText("1").html() + "</div>" + " <div id='no'>삼일절</div>");
+		
+	</script>
+	<%}%>
 	<script>
 		function change(){
 
@@ -418,6 +426,10 @@ body {
 		
 		window.addEventListener("load", restoreScrollPosition);
 	</script>
+
+	<%@ include file="../chatting/chatting.jsp" %>
+		
+	<%@ include file="../common/topBtn.jsp" %>
 
 
 </body>

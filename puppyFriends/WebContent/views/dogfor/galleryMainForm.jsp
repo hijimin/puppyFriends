@@ -32,7 +32,7 @@
 		height: auto;
 		margin: auto;
 		padding-left: 130px;
-		margin-bottom: 50px;
+		margin-bottom: 30px;
 	}
 	.img{
 		width: 400px;
@@ -75,6 +75,21 @@
 	#glasses:hover{
 		cursor: pointer;
 	}
+	#page-img button{
+		width: 30px;
+		height: 33px;
+	}
+	.modal-body1>div{
+		width: 382px !important;
+		height: 322px !important;
+	}
+	.modal-body1>div img{
+		width: 360px !important;
+		height: 300px !important;
+	}
+	#gallery-title:hover{
+		cursor: pointer;
+	}
 </style>
 </head>
 <body>
@@ -83,15 +98,21 @@
 
 		<div class="outer">
 
-			<h1 align="center">강아지 갤러리</h1>
+			<h1 align="center" onclick="reload();" id="gallery-title">강아지 갤러리</h1>
 			<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")){ %>
-			<a href="<%= contextPath %>/galleryEnrollForm.ga" style="padding-left: 1450px;">사진등록</a>
+			<a href="<%= contextPath %>/galleryEnrollForm.ga" style="padding-left: 1450px; text-decoration: none;">사진등록</a>
 			<br><br>
 			<% } %>
+
+			<script>
+				function reload(){
+					location.reload();
+				}
+			</script>
 			
 			<div style="width: 1630px; padding-left: 1230px; display: flex;">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="text" id="search" placeholder="강아지 이름을 입력해주세요" onkeyup="if(event.keyCode==13) search();" style="flex: 0.7;">&nbsp;
+				<input type="text" id="search" placeholder="강아지 이름을 입력해주세요" onkeyup="if(event.keyCode==13) search();" style="flex: 0.7; margin-top: 8px; height: 40px !important;">&nbsp;
 				<img src="resources/upfiles/2024032017062027950.jpg" id="glasses" style="height: 50px; width: 50px;" onclick="search();">
 				<br><br>
 			</div>
@@ -142,7 +163,7 @@
 				<% } %>
 			</div>
 
-			<div id="page" align="center">
+			<div id="page-img" align="center">
 				<% if(currentPage != 1){ %>
             <button onclick="location.href='<%= contextPath %>/gallery.ga?cpage=<%= currentPage-1 %>'"> &lt; </button>
             <% } %>
@@ -170,6 +191,7 @@
 				$(".modal-title").html($(this).children().eq(1).text());
 				$(".modal-body1").html($(this).children().eq(0).html());
 				$(".modal-body2").html($(this).children().eq(2).html());
+				$(".modal-body3").html($(this).children().eq(3).html());
 				$("#modal").click();
 			});
 		</script>
@@ -186,18 +208,18 @@
 		      </div>
 		
 		      <!-- Modal body -->
-		      <div class="modal-body1" style="height: 70%; width: 100%; margin-top: 50px; margin-left: 50px;">
+		      <div class="modal-body1" style="height: 70%; width: 100%; margin-top: 30px; margin-left: 50px;">
 		        <!-- 사진 -->
 		      </div>
 
 			  <div class="modal-body2" style="height: 18%; width: 100%; margin-top: 0px; border: 1px solid #dee2e6" align="center">
 		        <!-- 내용 -->
 		      </div>
+			  <div class="modal-body3" style="display: none;"></div>
 		
 		      <!-- Modal footer -->
 		      <div class="modal-footer" style="height: 8%; width: 100%; margin-top: 0px; border: 0px;">
 				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")){ %>
-		        <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal">Update</button>
 		        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" onclick="deleteGallery();">Delete</button>
 		        <% } %>
 		        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
@@ -210,7 +232,7 @@
 		<script>
 			function deleteGallery(){
 
-				var imgNum = $(".img-4").html();
+				var imgNum = $(".modal-body3").html();
 
 				var Gdelete = confirm("삭제하시겠습니까?");
 				
@@ -221,7 +243,9 @@
 			}
 		</script>
 
-
+	<%@ include file="../chatting/chatting.jsp" %>
+		
+	<%@ include file="../common/topBtn.jsp" %>
 
 	<%@ include file="../common/footerbar.jsp" %>
 

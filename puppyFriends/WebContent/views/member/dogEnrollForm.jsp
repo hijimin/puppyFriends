@@ -143,6 +143,16 @@
         resize: none;
     }
 
+    #enroll-button{
+        margin-top: 40px;
+        width: 100%;
+        height: 40px;
+        border-radius: 5px;
+        border: 0px;
+        background-color: rgb(255, 222, 239);
+        color: white;
+    }
+
     
 </style>
 </head>
@@ -233,7 +243,7 @@
 	                            <textarea name="dogSignificant" id="dog-sig"></textarea>
                             </div>
 	                    </div>
-                        <button>회원가입</button>
+                        <button id="enroll-button">회원가입</button>
                     </form>
                 </div>
             </div>

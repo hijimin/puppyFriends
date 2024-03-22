@@ -175,9 +175,10 @@
         border-radius: 5px;
         border: 0px;
         background-color: rgb(255, 222, 239);    
+        color: white;
     }
 
-    .id-check, .pwd-check, .name-check, .email-check, .phone-check{
+    .id-check, .pwd-check, .name-check, .email-check, .phone-check, .pwd-confirm{
         display:none;
         color:red;
         
@@ -228,7 +229,7 @@
                                     <i class="fa-solid fa-key fa-2x"></i>
                                 </div>
                                 <div class="pwd-input-window">
-                                    <input type="password" name="memberPwd" placeholder="비밀번호 *" required><br>
+                                    <input type="password" id="memberPwd" name="memberPwd" placeholder="비밀번호 *" required><br>
                                 </div>
                             </div>
                             <div class="check-input">
@@ -236,12 +237,13 @@
                                     <i class="fa-solid fa-lock fa-2x"></i>
                                 </div>
                                 <div class="check-input-window">
-                                    <input type="password" name="checkPwd" placeholder="비밀번호 확인" required>
+                                    <input type="password" id="checkPwd" name="checkPwd" placeholder="비밀번호 확인" required>
                                 </div>
                             </div>
 	                    </div>
                         <div class="id-check"></div>
                         <div class="pwd-check"></div>
+                        <div class="pwd-confirm"></div>
                         
 	                    <br>
 	                    
@@ -251,7 +253,7 @@
                                     <i class="fa-regular fa-user fa-2x"></i>
                                 </div>
                                 <div class="name-input-window">
-                                    <input type="text" name="memberName" placeholder="이름 *" required >
+                                    <input type="text" id="memberName" name="memberName" placeholder="이름 *" required >
                                 </div>
                             </div>
                             <div class="email-input">
@@ -259,7 +261,7 @@
                                     <i class="fa-solid fa-envelope fa-2x"></i>
                                 </div>
                                 <div class="email-input-window">
-                                    <input type="text" name="memberEmail" placeholder="이메일 *" required >
+                                    <input type="text" id="memberEmail" name="memberEmail" placeholder="이메일 *" required >
                                 </div>
                             </div>
                             <div class="phone-input">
@@ -267,18 +269,18 @@
                                     <i class="fa-solid fa-mobile-button fa-2x"></i>
                                 </div>
                                 <div class="phone-input-window">
-	                                <input type="text" name="memberPhone" placeholder="전화번호 *" required>
+	                                <input type="text" id="memberPhone" name="memberPhone" placeholder="전화번호 *" required>
                                 </div>
                             </div>
 	                    </div>
-                        <div class="name-check">·이름 : 필수 정보입니다.</div>
-                        <div class="email-check">·이메일 : 필수 정보입니다.</div>
-                        <div class="phone-check">·전화번호 : 필수 정보입니다.</div>
+                        <div class="name-check"></div>
+                        <div class="email-check"></div>
+                        <div class="phone-check"></div>
                         <div class="empty-space"></div>
                         
                     </div>
                     <div class="enroll-form-footer">
-                        <input type="submit" value="다음" class="next-page-button" disabled>
+                        <input type="submit" id="enroll-button" value="다음" class="next-page-button">
                     </div>
                 </form>
             </div>
@@ -297,26 +299,26 @@
         var userIdCheck = RegExp(/^[A-Za-z0-9]{5,11}$/);
         $(".id-input-window>input").keyup(function(){
             if(!userIdCheck.test($(".id-input-window>input").val())){
-                $(".id-check").html("·아이디 : 대/소문자, 숫자로 5~11자리까지 가능합니다.").css("display", "block");
+                $(".id-check").html("·아이디 : 대/소문자, 숫자로 5~11자리까지 가능합니다.").css({display:"block", fontSize:"12px"});
                 $(".id-input").css("border", "2px solid #ff3f3f");
                 $(".id-input-window>input").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
             }
         });
 
 
-        // pwd 입력시
+        // 아이디 없이 비밀번호만 입력시
         $(".pwd-input-window>input").focus(function(){
             $(".pwd-input").css("border", "2px solid rgb(255, 222, 239)").css("border-top", "none");
             
             if($(".id-input input").val() == ""){
-                $(".id-check").css("display", "block").html("·아이디 : 필수 정보입니다.");
+                $(".id-check").html("·아이디 : 필수 정보입니다.").css({display:"block", fontSize:"12px"});
                 $(".id-input").css("border", "2px solid #ff3f3f");
                 $(".id-input-window>input").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
 
             }else{ // id 입력창에 무언가 있을때 아이디 검사
 
                 if(!userIdCheck.test($(".id-input-window>input").val())){
-                    $(".id-check").html("·아이디는 : 대/소문자, 숫자로 5~11자리까지 가능합니다.").css("display", "block");
+                    $(".id-check").html("·아이디는 : 대/소문자, 숫자로 5~11자리까지 가능합니다.").css({display:"block", fontSize:"12px"});
                     $(".id-input").css("border", "2px solid #ff3f3f");
                     $(".id-input-window>input").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
                 }else{
@@ -329,18 +331,18 @@
             
         });
         
-        var userPwdCheck = RegExp(/^[a-z\d!@#$%^&*]{8,15}$/);
+        var userPwdCheck = RegExp(/^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/);
+
+        // 비밀번호 입력시
         $(".pwd-input-window>input").keyup(function(){
             if(!userPwdCheck.test($(".pwd-input-window>input").val())){
-                $(".pwd-check").html("·비밀번호 : 대/소문자, 숫자, 특수문자(!@#$%^&*)를 포함한 8~15자리로 만들어야합니다.").css("display", "block");
+                $(".pwd-check").html("·비밀번호 : 소문자, 숫자, 특수문자를 포함한 8~16자리로 만들어야합니다.").css({display:"block", fontSize:"12px"});
                 $(".pwd-input").css("border", "2px solid #ff3f3f");
                 $(".pwd-input-window>input").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
             }
         });
 
-
-
-        // check pwd 입력
+        // 비밀번호 없이 일치 여부 확인시
         $(".check-input-window>input").focus(function(){
             $(".check-input").css({border:"2px solid rgb(255, 222, 239)", borderTop:"none"})
 
@@ -352,7 +354,7 @@
 
             }else{ // pwd 입력창에 무언가 있을 때 pwd 검사
                 if(!userPwdCheck.test($(".pwd-input-window>input").val())){
-                    $(".pwd-check").html("·비밀번호 : 대/소문자, 숫자, 특수문자(!@#$%^&*)를 포함한 8~15자리로 만들어야합니다.").css("display", "block");
+                    $(".pwd-check").html("·비밀번호 : 소문자, 숫자, 특수문자를 포함한 8~15자리로 만들어야합니다.").css({display:"block", fontSize:"12px"});
                     $(".pwd-input").css({border:"2px solid #ff3f3f"});
                     $(".pwd-input-window>input").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
                 }else{
@@ -364,55 +366,118 @@
             }
         })
 
-
-        // name 입력
-        $(".name-input-window>input").focus(function(){
-            $(".name-input").css("border", "2px solid rgb(255, 222, 239)");
-        });
-
-        // email 입력
-        $(".email-input-window>input").focus(function(){
-            $(".email-input").css("border", "2px solid rgb(255, 222, 239)").css("border-top", "none");
-            
-            if($(".name-input input").val() == ""){
-                $(".name-check").css("display", "block");
-                $(".name-input").css("border", "2px solid #ff3f3f");
-                $(".name-input-window>input").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
-                
-            }
-        });
-
-        // phone 입력
-        $(".phone-input-window>input").focus(function(){
-            $(".phone-input").css({border:"2px solid rgb(255, 222, 239)", borderTop:"none"})
-
-            if($(".email-input input").val() == ""){
-                $(".email-check").css("display", "block");
-                $(".email-input").css("border", "2px solid #ff3f3f");
-                $(".email-input-window>input").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
-                $(".name-input").css("border-bottom", "none")
+        // 비밀번호 확인 입력시 비밀번호 확인창 변경
+        $(".pwd-input-window>input, .check-input-window>input").keyup(function(){
+            let pwd1 = $("#memberPwd").val();
+            let pwd2 = $("#checkPwd").val();
+            if(pwd1 != "" || pwd2 != ""){
+                if(pwd1 == pwd2){
+                    $(".pwd-confirm").html("·비밀번호가 일치합니다").css({display:"block", color:"green"});
+                    $(".check-input").css({border:"2px solid rgb(255, 222, 239)"});
+                }else{
+                    $(".pwd-confirm").html("·비밀번호가 일치하지 않습니다").css({display:"block", color:"red", fontSize:"12px"});
+                    $(".check-input").css({border:"2px solid #ff3f3f"});
+                }
             }
         })
 
-        
-
 
         
+    
 
-        // $(".pwd-input-window>input").change(function(){
-        //     $(".pwd-check").css("display", "none");
-        //     $(".pwd-input-window>input").addClass("changeplaceholder2").css({textDecoration:"none", color:"black"});
-        // });
-
-        $(".name-input-window>input").change(function(){
-            $(".name-check").css("display", "none");
-            $(".name-input-window>input").addClass("changeplaceholder2").css({textDecoration:"none", color:"black"});
+        // name 입력
+        $("#memberName").focus(function(){
+            $(".name-input").css("border", "2px solid rgb(255, 222, 239)");
         });
 
-        $(".email-input-window>input").change(function(){
-            $(".email-check").css("display", "none");
-            $(".email-input-window>input").addClass("changeplaceholder2").css({textDecoration:"none", color:"black"});
+        var nameCheck = RegExp(/^[가-힣]{2,6}$/);
+        $("#memberName").keyup(function(){
+            if(!nameCheck.test($("#memeberName").val())){
+                $(".name-check").html("·이름 : 한글로 2~6글자로 입력해주세요.").css({display:"block", fontSize:"12px"});
+                $(".name-input").css("border", "2px solid #ff3f3f");
+                $("#memberName").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
+            }
         });
+
+
+
+        // name 없이 email 입력
+        $("#memberEmail").focus(function(){
+            $(".email-input").css("border", "2px solid rgb(255, 222, 239)").css("border-top", "none");
+            
+            if($("#memberName").val() == ""){
+                $(".name-check").html("·이름 : 필수 정보입니다.").css({display:"block", fontSize:"12px"});
+                $(".name-input").css("border", "2px solid #ff3f3f");
+                $(".name-input-window>input").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
+                
+            }else{ // name 입력창에 무언가 있을때 아이디 검사
+
+                if(!nameCheck.test($("#memberName").val())){
+                    $(".name-check").html("·이름 : 한글로 2~6글자로 입력해주세요.").css({display:"block", fontSize:"12px"});
+                    $(".name-input").css("border", "2px solid #ff3f3f");
+                    $("#memberName").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
+                }else{ // name 정규식에 일치 할 시
+                    $(".name-check").css("display", "none");
+                    $(".name-input").css("border", "2px solid rgb(255, 222, 239)");
+                    $("#memberName").addClass("changeplaceholder2").css({textDecoration:"none", color:"black"});
+                }
+
+                }
+        });
+
+        // email 입력
+        var emailCheck = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+        $("#memberEmail").keyup(function(){
+            if(!emailCheck.test($("#memberEmail").val())){
+                $(".email-check").html("·이메일 : 형식에 맞게 작성해주세요").css({display:"block", fontSize:"12px"});
+                $(".email-input").css("border", "2px solid #ff3f3f");
+                $("#memberEmail").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
+            }
+        });
+
+
+        // email 값 없이 phone 입력
+        $("#memberPhone").focus(function(){
+            $(".phone-input").css({border:"2px solid rgb(255, 222, 239)", borderTop:"none"})
+
+            if($("#memberEmail").val() == ""){
+                $(".email-check").html("·이메일 : 필수 정보입니다.").css({display:"block", fontSize:"12px"});
+                $(".email-input").css("border", "2px solid #ff3f3f");
+                $("#memberEmail").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
+                $(".name-input").css("border-bottom", "none")
+            }else{ // 이메일에 값이 있을 때
+                
+                if(!emailCheck.test($("#memberEmail").val())){
+                    $(".email-check").html("·이메일 : 형식에 맞게 작성해주세요").css({display:"block", fontSize:"12px"});
+                    $(".email-input").css("border", "2px solid #ff3f3f");
+                    $("#memberEmail").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
+                }else{ // email 정규식에 일치 할 시
+                    $(".email-check").css("display", "none");
+                    $(".email-input").css("border", "2px solid rgb(255, 222, 239)");
+                    $("#memberEmail").addClass("changeplaceholder2").css({textDecoration:"none", color:"black"});
+                }
+
+            }
+        });
+
+
+        // phone 입력
+        var phoneCheck = RegExp(/(01[016789])+-([1-9]{1}[0-9]{2,3})+-([0-9]{4})$/);
+        $("#memberPhone").keyup(function(){
+            if(!phoneCheck.test($("#memberPhone").val())){
+                $(".phone-check").html("·전화번호 : 형식에 맞게 작성해주세요").css({display:"block", fontSize:"12px"});
+                $(".phone-input").css("border", "2px solid #ff3f3f");
+                $("#memberPhone").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
+            }else{ // 형식에 맞게 처리 했을 때
+                $(".phone-check").css("display", "none");
+                $(".phone-input").css("border", "2px solid rgb(255, 222, 239)");
+                $("#memberPhone").addClass("changeplaceholder2").css({textDecoration:"none", color:"black"});
+            }
+
+        });
+
+    
+        
     })
 </script>
 

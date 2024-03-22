@@ -54,6 +54,10 @@
     #content2_2{height: 85%; padding-top: 100px}
     
     .kakaologin{margin-top: 15px;}
+
+    #search-id:hover, #search-pwd:hover{
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -93,9 +97,17 @@
                     </form>
                     <br>
                     <a href="<%= request.getContextPath() %>/enrollpage.me" style="text-decoration: none; color: gray;">회원가입</a> | 
-                    <a  style="text-decoration: none; color: gray;">아이디 찾기</a> | 
-                    <a  style="text-decoration: none; color: gray;">비밀번호 찾기</a>
+                    <a onclick="newIdWindow();" style="text-decoration: none; color: gray;" id="search-id">아이디 찾기</a> | 
+                    <a onclick="newPwdWindow();" style="text-decoration: none; color: gray;" id="search-pwd">비밀번호 찾기</a>
                     
+                    <script>
+	                    function newIdWindow() {
+	                        window.open('<%= request.getContextPath() %>/searchIdForm.me', 'popup', 'width=500,height=700,left=700,top=100,statusbar=no,location=no,menubar=no,scrollbars=no,resizable=no');
+	                    }
+                    	function newPwdWindow(){
+                    		window.open('<%= request.getContextPath() %>/searchPwdForm.me', 'popup',  'width=500,height=700,left=700,top=100,statusbar=no,location=no,menubar=no,scrollbars=no,resizable=no')
+                    	}
+                    </script>
                     
                     <div class="kakaologin">
                         <a href="javascript:kakaoLogin()"><img src="resources/image/kakao_login_medium_narrow.png" style="width: 200px"></a>

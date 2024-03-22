@@ -89,6 +89,7 @@
         margin-top: 7px;
         font-size: 13px;
         border-radius: 10px;
+        word-wrap:break-word;
     }
     .wrapCh .ch #content::before {
         position: absolute;
@@ -150,11 +151,12 @@
 	</script>
 	
 
-   	<% if(userId.equals("")){ %>
+   	<% if(userId.equals("") || userId.equals("ADMIN")){ %>
    	
     <% }else{ %>
    	 	<button id="btn1" onclick="chatting();">톡</button>
    	<% } %>
+
     <script>
         
 
@@ -166,7 +168,7 @@
                 $(".wrapCh").slideUp();
             }else{
                 $("#btn1").css("padding", "4.5px 5.5px")
-                $("#btn1").html("<img src='resources/upfiles/2024032112224035274.png' style='width:33px; height=36px;'>");
+                $("#btn1").html("<img src='resources/upfiles/2024032209163136986.png' style='width:33px; height=36px;'>");
                 $(".wrapCh").slideDown();
                 var chatContainer = document.querySelector('.chat');
     			chatContainer.scrollTop = chatContainer.scrollHeight;
@@ -197,8 +199,8 @@
             
 
         </div>
-        <div class="input" align="right">
-            <input type="text" id="messageInput" onkeyup="if(event.keyCode==13) enter();"> <button id="btn2" onclick="submitFunction();">전송</button>
+        <div class="input" align="right" style="display: flex;">
+            <input type="text" style="flex: 1; border-radius: 3px; margin-left: 100px; margin-right: 5px;" id="messageInput" onkeyup="if(event.keyCode==13) enter();"> <button id="btn2" onclick="submitFunction();">전송</button>
         </div>
 
     </div>

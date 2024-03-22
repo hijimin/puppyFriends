@@ -64,6 +64,7 @@
     .header_3{
         width: 25%;
         height: 100%;
+        padding: 100px 100px;
     }
     .navigator{
         width: 1903px;
@@ -278,16 +279,16 @@
 
         <div class="header">
             <div class="header_1">
-                <img src="resources/image/KakaoTalk_20240222_172839389.png" style="width: 250px; height: 250px; margin-left: 100px;">
+                <img src="resources/image/KakaoTalk_20240222_172839389.png" style="width: 300px; height: 300px; margin-left: 100px;">
             </div>
             <div class="header_2">
-            	<div id="header"><h1 style="margin-top: 100px;"><a href="<%= contextPath %>" style="color: white; text-decoration: none;">puppy friend</a></h1></div>
+            	<div id="header"><h1 style="margin-top: 100px;"><a href="<%= contextPath %>" style="color: white; text-decoration: none; font-size: 70px;">puppy friend</a></h1></div>
                 
             </div>
 
             <div class="header_3">
 
-                <div class="login-area">
+                
 
                     <!-- case1. 로그인 전 -->
                     <% if(loginUser == null) {%>
@@ -315,7 +316,7 @@
 	                    
             		
             
-                </div>
+                
             </div>
         </div>
 
@@ -334,7 +335,7 @@
             </li>
             <li class="dog_data"><a href="<%= contextPath %>/dogforMain.do?userNo=<%= userNo %>&year=<%= nowYear %>&month=<%= nowMonth %>">강아지정보</a>
                 <ul class="dog_data2">
-                	<% if(loginUser != null){ %>
+                	<% if(loginUser != null || (loginUser != null && loginUser.getMemberId().equals("ADMIN"))){ %>
                    <li class="attend"><a href="<%= contextPath %>/attendance.at?userNo=<%= userNo %>&year=<%= nowYear %>&month=<%= nowMonth %>">출석부</a></li>
                    <% } %>
                    <li class="gallery"><a href="<%= contextPath %>/gallery.ga?cpage=1">갤러리</a></li>

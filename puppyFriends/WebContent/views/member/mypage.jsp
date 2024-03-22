@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
 
-    div{border: 1px solid white; box-sizing: border-box;}
+    div{/*border: 1px solid white;*/ box-sizing: border-box;}
 
     .mypage-wrap{width: 100%; height: 1000px;}    
     .mypage-form{height: 100%; width: 80%;}
@@ -188,7 +188,9 @@
                     <div class="mypage-select-main">
                         <ul>
                             <li><a href="<%= request.getContextPath()%>/mypage">회원정보수정</a></li>
-                            <li><a href="<%= request.getContextPath()%>/updatePwd">비밀번호변경</a></li>
+                            <% if(memberPwd != "") { %>
+                           	 <li><a href="<%= request.getContextPath()%>/updatePwd">비밀번호변경</a></li>
+                            <% } %>
                             <li><a href="<%= request.getContextPath()%>/mypageProduct">장바구니 조회</a></li>
                             <li><a href="<%= request.getContextPath()%>/mypageReservation">예약 조회</a></li>
                             <li><a data-toggle="modal" href="#deleteModal">회원탈퇴</a></li>

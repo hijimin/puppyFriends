@@ -95,11 +95,11 @@ public class KinderClassMakeAreservationController extends HttpServlet {
 			if (result > 0) {
 
 				HttpSession session = request.getSession();
-				session.setAttribute("alertMsg", "성공");
+				session.setAttribute("alertMsg", "유치원이 예약되었습니다.");
 				response.sendRedirect(request.getContextPath() + "/detail.crv?cno=" + classNo);
 //			}
 		} else {
-			request.setAttribute("errorMsg", "실패");
+			request.setAttribute("errorMsg", "유치원 예약이 실패하였습니다.");
 
 		}
 

@@ -186,7 +186,7 @@
     }
     
     .before-login button{border: 0; background-color: transparent; margin-left: 20px; color: white;}
-    .after-login>a{text-decoration: none; color: white;}
+    .after-login>a{text-decoration: none; color: white !important;}
     .after-login>a:hover{color: pink;}
     .after-login{padding-left: 20px;}
 
@@ -344,7 +344,7 @@
             <li class="goods"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a></li>
             
             
-            <li class="board_All"><a href="">게시판</a>
+            <li class="board_All"><a href="<%= contextPath %>/list.no">게시판</a>
             	<ul class="board_Detail">
             		<li class="noticeBoard"><a href="<%= contextPath %>/list.no">공지사항</a></li>
             		<li class="chattingBoard"><a href="<%= contextPath %>/chatForm.ch">모임게시판</a></li>

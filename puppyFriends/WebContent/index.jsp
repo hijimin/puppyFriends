@@ -165,10 +165,7 @@
 	}
 	 #productBtn:hover, #kindBtn:hover{
 		transform: scale(1.1);
-	 } 
-	 .way-come li{
-	 font-size:25px;
-	 } 
+	 }  
 </style>
 <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=9165mfbte9"></script>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
@@ -286,7 +283,7 @@
 			</script>
 		</div>
 		<div class="main-content3-2">
-			<ul class="way-come">
+			<ul>
 				<li>주소 : 서울특별시 강남구 강남구 테헤란로14길 6</li><br><br>
 				<li>대중교통 : 알아서 타고오세요</li><br><br>
 				<li>이용시간 : 오전 9시부터 오후 6시</li><br><br>

@@ -616,6 +616,7 @@ ArrayList<KinderClass> list = new ArrayList<KinderClass>(); // [텅 빈 리스�
 
 
 
+
 	
 
 

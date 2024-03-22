@@ -56,6 +56,8 @@ public class KinderClassMakeAreservationController extends HttpServlet {
 		String reservationPrice = request.getParameter("reservationPrice").replaceAll(",", "");
 		rv.setReservationPrice(Integer.parseInt(reservationPrice));
 		
+		
+		
 //		if (c.getClassNo() == rv.getProgramNo()) {
 
 //		rv.setReservationNo(Integer.parseInt(request.getParameter("reservationNo")));
@@ -93,9 +95,9 @@ public class KinderClassMakeAreservationController extends HttpServlet {
 			int result = new ReservationService().makeAclassReservation(userNo, classNo, rv);
 
 			if (result > 0) {
-
 				HttpSession session = request.getSession();
 				session.setAttribute("alertMsg", "유치원이 예약되었습니다.");
+				request.setAttribute("result", result);
 				response.sendRedirect(request.getContextPath() + "/detail.crv?cno=" + classNo);
 //			}
 		} else {

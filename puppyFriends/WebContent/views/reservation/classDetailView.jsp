@@ -8,6 +8,13 @@
     
     <%
     
+    int result = 0;
+    if(request.getAttribute("result") != null){
+    	if((int)request.getAttribute("result") != 0){
+    		result = (int)request.getAttribute("result"); 
+    	}
+    }
+    
     KinderClass c = (KinderClass)request.getAttribute("c");
     int classrvCount = (int)request.getAttribute("classrvCount");
     ArrayList<Image> img = (ArrayList<Image>)request.getAttribute("img");
@@ -246,7 +253,11 @@
                 
                 <div class="btn_bar">
                  <% if(loginUser != null && loginUser.getDogSize().equals(c.getClassSize())) { %>
-                    <button type="submit" class="btn-open-modal" style="height: 43px;" id="makeClassRv" >예약하기</button> 
+                 	<% if(result != 0){ %>
+                    <button type="submit" class="btn-open-modal" style="height: 43px;" id="makeClassRv" disabled>예약하기</button>
+                    <% }else{ %>
+                    <button type="submit" class="btn-open-modal" style="height: 43px;" id="makeClassRv" >예약하기</button>
+                    <% } %> 
                  <% } else { %>
                     <button type="button" class="btn-open-modal" style="height: 43px;" disabled >예약하기</button> 
                  <% } %>

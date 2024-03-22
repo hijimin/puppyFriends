@@ -9,15 +9,14 @@
 <style>
 
     .outer{
-        background-color: #810005;
-        color: white;
+        color: black;
         width: 1000px;
         height: 500px;
         margin: auto;
         margin-top: 50px;
     }
 
-    #enroll-form table{border: 1px solid white;}
+    #enroll-form table{border: 1px solid black;}
     #enroll-form input, #enroll-form textarea{
         width: 100%;
         box-sizing: border-box;
@@ -25,6 +24,7 @@
 </style>
 </head>
 <body>
+
 
 	<%@ include file="../common/menubar.jsp" %>
 

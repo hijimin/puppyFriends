@@ -298,6 +298,18 @@ a:focus {
 #reviewContent, #reviewContent1{
   border: 1px solid rgb(240, 240, 240);
 }
+.insertbtn:active{
+  transform: translateY(4px);
+}
+.update-review, .delete-review{
+  border: 0;
+  outline: 0;
+  background-color:transparent;
+}
+.delete-review{
+  color: red;
+}
+
         </style>
         <script
           src="https://kit.fontawesome.com/5de30c093c.js"
@@ -480,7 +492,7 @@ a:focus {
                       <!-- <button class="insertbtn" onclick="insertReview();">리뷰등록</button> -->
                     </td>
                     <td>
-                      <button class="insertbtn" onclick="insertReview();">리뷰등록</button>
+                      <button id="clickbtn" class="insertbtn" onclick="return insertReview();">리뷰등록</button>
                     </td>
                   </tr>
                 </table>
@@ -561,8 +573,10 @@ a:focus {
 
             
             				    if (loginUserName === list[i].reviewWriter) {        				    	
-            				        $review.find('.deleterv').html("<a href=\"#\" class=\"delete-review\" data-review-no=\"" + list[i].reviewNo + "\">삭제</a>");
-            				        $review.find('.updaterv').html("<a href=\"#\" class=\"update-review\" data-review-text=\"" + list[i].reviewText + "\" data-review-no=\"" + list[i].reviewNo + "\">수정</a>");
+            				        // $review.find('.deleterv').html("<a href=\"#\" class=\"delete-review\" data-review-no=\"" + list[i].reviewNo + "\">삭제</a>");
+                            $review.find('.deleterv').html("<button class=\"delete-review\" data-review-no=\"" + list[i].reviewNo + "\">삭제</button>");
+            				        // $review.find('.updaterv').html("<a href=\"#\" class=\"update-review\" data-review-text=\"" + list[i].reviewText + "\" data-review-no=\"" + list[i].reviewNo + "\">수정</a>");
+            				        $review.find('.updaterv').html("<button class=\"update-review\" data-review-text=\"" + list[i].reviewText + "\" data-review-no=\"" + list[i].reviewNo + "\">수정</button>");
             				    }
             				}
             		         
@@ -656,6 +670,13 @@ a:focus {
 
 
             function insertReview(){
+                  let btnclick = document.getElementById("clickbtn")
+                  let text = document.getElementById("reviewContent");
+                  if(text.value == ""){
+                    alert("리뷰 내용을 작성해주세요!")
+                    return false;
+                  }
+
             	$.ajax({
             		url:"rinsert.rv",
             		data:{pno:<%= p1.getProductNo()%>,

@@ -172,6 +172,7 @@
     /*결제수단*/
     #content4{
         height: 200px;
+        margin-top: 20px;
     }
 
     #content4>div{width: 100%;}
@@ -184,6 +185,7 @@
     /*최종결제 확인*/
     #content5{
         height: 200px;
+        margin-top: 20px;
     }
     #content5>div{width: 100%;}
     #content5_1{
@@ -223,7 +225,12 @@
     .selectdeletebtn{
         cursor: pointer;
     }
-    
+    thead>tr{
+        text-align: center;
+    }
+    .centercenter{
+        text-align: center;
+    }
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -296,8 +303,12 @@
                     
                     <script>
                     	function validate(){
-                    		 alert('정말 삭제하시겠습니까?');                   		
-                    		location.href='<%= contextPath%>/delete.od'                 		
+                            if(!confirm("삭제하시겠습니까?")){
+
+                            }else{
+                                location.href='<%= contextPath%>/delete.od'                 		
+                            }
+                    		//  alert('정말 삭제하시겠습니까?');                   		
                     	}
                     </script>
                
@@ -599,19 +610,19 @@
                     <tbody>
                         <tr>
                             <td>
-                                <div>
+                                <div class="centercenter">
                                     <strong><%= p.getdPrice() %>원</strong>
                                 </div>
                             </td>
 
                             <td>
-                                <div>
+                                <div class="centercenter">
                                     <strong>0원</strong>
                                 </div>
                             </td>
 
                             <td>
-                                <div>
+                                <div class="centercenter">
                                     <strong>
                                         <span><%= p.getdPrice() %>원</span>
                                     </strong>

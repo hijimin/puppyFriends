@@ -98,7 +98,7 @@
             width: 100%;
             height: 10%;
         }
-        .introduce{
+        .classintroduce{
             width: 80%;
             height: 45%;
             border: 2px solid rgb(255, 222, 239);
@@ -119,7 +119,7 @@
             position: relative;
         }
         .btn_bar>button{
-            padding: 10px 15px;
+            padding: 3px 15px;
             border: none;
             background-color: rgb(255, 222, 239);
             position: absolute;
@@ -129,15 +129,16 @@
         }
         .btn_bar1{
             width: 100%;
-            height: 5%;
+            height: 4.8%;
             position: relative;
+            bottom: -10px;
         }
         .btn_bar1>.C_back{
-            padding: 10px 15px;
+            padding: 6px 15px;
             border: none;
             background-color: rgb(255, 222, 239);
             position: absolute;
-            bottom: 0;
+            bottom: -5;
             right: 0;
             border-radius: 20px;
             text-decoration: none;
@@ -149,7 +150,7 @@
             border: none;
             background-color: rgb(255, 222, 239);
             position: absolute;
-            bottom: 0;
+            bottom: -9px;
             right: 0;
             border-radius: 20px;
             text-decoration: none;
@@ -223,7 +224,7 @@
                 <input type="hidden" name="reservationPrice" value="<%= c.getReservationPrice() %>" >
                 
                 <div>( <%= c.getcCount() %> / <%= c.getdNumber() %> ) , <%= c.getClassSize() %> </div>
-                <div class="introduce">
+                <div class="classintroduce">
                     <tr>
                         <td>
                         <p style="text-align: left; padding: 10px;"><%= c.getClassText() %> </p>
@@ -243,23 +244,23 @@
 				</div>
 
                 
-                <div class="btn_bar" style="padding-bottom: 1%;">
+                <div class="btn_bar">
                  <% if(loginUser != null && loginUser.getDogSize().equals(c.getClassSize())) { %>
-                    <button type="submit" class="btn-open-modal" id="makeClassRv" >예약하기</button> 
+                    <button type="submit" class="btn-open-modal" style="height: 43px;" id="makeClassRv" >예약하기</button> 
                  <% } else { %>
-                    <button type="button" class="btn-open-modal" disabled >예약하기</button> 
+                    <button type="button" class="btn-open-modal" style="height: 43px;" disabled >예약하기</button> 
                  <% } %>
                 </div>
                 
                 
 
                 <div class="btn_bar1">
-                	<a href="<%= contextPath %>/kinderClass.crv" class="C_back" style="padding-bottom: 1%;">뒤로가기</a> <br>
+                	<a href="<%= contextPath %>/kinderClass.crv" class="C_back">뒤로가기</a> <br>
                 </div>
 
 				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")) { %>
                 <div class="btn_bar1">
-                <a href="#" onclick="confirmDelete('<%= c.getClassNo() %>')" class="C_delete">삭제하기</a>
+                <a href="#" onclick="confirmDelete('<%= c.getClassNo() %>')" class="C_delete" style="height: 43px;">삭제하기</a>
                 </div>
                 <% } %>
             </div>

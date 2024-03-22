@@ -94,7 +94,7 @@
             width: 100%;
             height: 10%;
         }
-       .introduce{
+       .Hotelintroduce{
             width: 80%;
             height: 45%;
             border: 2px solid rgb(255, 222, 239);
@@ -113,7 +113,7 @@
             position: relative;
         }
         .btn_bar>button{
-            padding: 10px 15px;
+            padding: 3px 15px;
             border: none;
             background-color: rgb(255, 222, 239);
             position: absolute;
@@ -123,27 +123,27 @@
         }
         .btn_bar1{
             width: 100%;
-            height: 5%;
+            height: 4.8%;
             position: relative;
+            bottom: -10px;
         }
         .btn_bar1>.H_back{
-            padding: 10px 15px;
+            padding: 6px 15px;
             border: none;
             background-color: rgb(255, 222, 239);
             position: absolute;
-            bottom: 0;
+            bottom: -5;
             right: 0;
             border-radius: 20px;
             text-decoration: none;
             color: white;
-        
         }
         .btn_bar1>.H_delete{
             padding: 10px 15px;
             border: none;
             background-color: rgb(255, 222, 239);
             position: absolute;
-            bottom: 0;
+            bottom: -9px;
             right: 0;
             border-radius: 20px;
             text-decoration: none;
@@ -212,7 +212,7 @@
             <div class="text" align="right"> <!-- 오른쪽 맵 -->
                 <div class="period">기간 : <%= h.getHotelStart() %> ~ <%= h.getHotelEnd() %> </div> <br><br>
                 <div>( <%= hotelrvCount %> / <%= h.getdNumber() %>) , <%= h.getHotelSize() %> </div>
-                <div class="introduce">
+                <div class="Hotelintroduce">
                     <tr>
                         <td>
                          <p style="text-align: left; padding: 10px;"><%= h.getHotelText() %></p>
@@ -231,22 +231,22 @@
 				    </script>
                 </div>
                 
-                <div class="btn_bar" style="padding-bottom: 1%;">
+                <div class="btn_bar">
                 <input type="hidden" id="hno" value="<%= h.getHotelNo() %>">
                 <% if(loginUser != null && loginUser.getDogSize().equals(h.getHotelSize())) { %>
-                    <button type="submit" class="btn-open-modal" id="makehotelRv">예약하기</button> 
+                    <button type="submit" class="btn-open-modal" style="height: 43px;" id="makehotelRv">예약하기</button> 
                 <% } else { %>
-                    <button type="button" class="btn-open-modal" disabled >예약하기</button> 
+                    <button type="button" class="btn-open-modal" style="height: 43px;" disabled >예약하기</button> 
               	<% } %> 
                 </div>
 
-                <div class="btn_bar1" style="padding-bottom: 1%;">
-                	<a href="<%= contextPath %>/hotel.hrv" class="H_back" style="padding-bottom: 1%;">뒤로가기</a> <br>
+                <div class="btn_bar1">
+                	<a href="<%= contextPath %>/hotel.hrv" class="H_back">뒤로가기</a> <br>
                 </div>
 
 				<% if(loginUser != null && loginUser.getMemberId().equals("ADMIN")) { %>
                 <div class="btn_bar1">
-                <a href="#" onclick="confirmDelete('<%= h.getHotelNo() %>')" class="H_delete">삭제하기</a>
+                <a href="#" onclick="confirmDelete('<%= h.getHotelNo() %>')" style="height: 43px;" class="H_delete">삭제하기</a>
                 </div>
                 <% } %>
             </div>

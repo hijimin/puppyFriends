@@ -591,7 +591,7 @@ a:focus {
 
             			if(currentPage != 1){
             				//$paging.append("<button onclick='selectReviewList(" + (currentPage-1) + ");'>" &lt; </button>)
-            				$paging.append("<button onclick='selectReviewList(" + (currentPage - 1) + ");'>&lt;</button>");
+            				$paging.append("<button class='rvpagebtn' onclick='selectReviewList(" + (currentPage - 1) + ");'>&lt;</button>");
             			}
 
             			for(let p=startPage; p<=endPage; p++){
@@ -607,7 +607,7 @@ a:focus {
             			}
 
             			if(currentPage != maxPage){
-            				$paging.append("<button onclick='selectReviewList(" + (currentPage + 1) + ");'>&gt;</button>");
+            				$paging.append("<button class='rvpagebtn' onclick='selectReviewList(" + (currentPage + 1) + ");'>&gt;</button>");
             			}
 
             		  let list = map.reviewList

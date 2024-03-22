@@ -94,7 +94,7 @@
             width: 100%;
             height: 10%;
         }
-       .introduce{
+       .introduce1{
             width: 80%;
             height: 45%;
             border: 2px solid rgb(255, 222, 239);
@@ -212,7 +212,7 @@
             <div class="text" align="right"> <!-- 오른쪽 맵 -->
                 <div class="period">기간 : <%= h.getHotelStart() %> ~ <%= h.getHotelEnd() %> </div> <br><br>
                 <div>( <%= hotelrvCount %> / <%= h.getdNumber() %>) , <%= h.getHotelSize() %> </div>
-                <div class="introduce">
+                <div class="introduce1">
                     <tr>
                         <td>
                          <p style="text-align: left; padding: 10px;"><%= h.getHotelText() %></p>

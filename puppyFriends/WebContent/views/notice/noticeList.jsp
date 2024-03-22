@@ -19,7 +19,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    div{border: 1px solid white; box-sizing: border-box;}
+    div{/*border: 1px solid white;*/ box-sizing: border-box;}
 
     .outer{
         width: 100%;

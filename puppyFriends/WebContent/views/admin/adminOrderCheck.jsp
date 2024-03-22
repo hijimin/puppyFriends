@@ -342,19 +342,19 @@
                 
                 <div class="paging-area" align="center">
                     <% if(currentPage != 1) { %>
-                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage - 1 %>'"> &lt; </button>
+                    <button onclick="location.href='<%= contextPath %>/AdminSelectOrder.od?cpage=<%= currentPage - 1 %>'" style="background-color:#f5e3e1; border-radius: 5px;"> &lt; </button>
                     <% } %>
                     
                     <% for(int p=startPage; p<=endPage; p++) { %>
                         <% if(p == currentPage) { %>
-                        <button style="background-color:#f5e3e1"><%= p %></button>
+                        <button style="background-color:#f5e3e1" ><%= p %></button>
                         <% } else { %>
-                        <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= p %>'"><%= p %></button>
+                        <button onclick="location.href='<%= contextPath %>/AdminSelectOrder.od?cpage=<%= p %>'" style="background-color:#f5e3e1; border-radius: 5px;"><%= p %></button>
                         <% } %>
                     <% } %>
                     
                     <% if(currentPage != maxPage) { %>
-                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage + 1 %>'"> &gt; </button>
+                    <button onclick="location.href='<%= contextPath %>/AdminSelectOrder.od?cpage=<%= currentPage + 1 %>'" style="background-color:#f5e3e1; border-radius: 5px;"> &gt; </button>
                     <% } %>
                 </div>
                 <br>

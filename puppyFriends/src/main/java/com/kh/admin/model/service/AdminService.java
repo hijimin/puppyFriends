@@ -16,6 +16,8 @@ import com.kh.reservation.model.vo.Reservation;
 
 public class AdminService {
 	
+	
+	
 	public int adminSelectListCount() {
 		Connection conn = getConnection();
 		int listCount = new AdminDao().adminSelectListCount(conn);
@@ -23,8 +25,64 @@ public class AdminService {
 		close(conn);
 		return listCount;
 		
-	}
-
+	} //
+	
+	public int adminRestore() {
+		Connection conn = getConnection();
+		int listCount = new AdminDao().adminRestore(conn);
+		
+		close(conn);
+		return listCount;
+		
+	} //
+	
+	public int adminProduct() {	
+		Connection conn = getConnection();
+		int listCount = new AdminDao().adminProduct(conn);
+		
+		close(conn);
+		return listCount;
+		
+	} //
+	
+	public int adminSelectOrderList() {	
+		Connection conn = getConnection();
+		int listCount = new AdminDao().adminSelectOrderList(conn);
+		
+		close(conn);
+		return listCount;
+		
+	} //
+	
+	public int adminDelivery() {	
+		Connection conn = getConnection();
+		int listCount = new AdminDao().adminDelivery(conn);
+		
+		close(conn);
+		return listCount;
+		
+	} //
+	
+	
+	
+	public int adminHotelCount() {	
+		Connection conn = getConnection();
+		int listCount = new AdminDao().adminHotelCount(conn);
+		
+		close(conn);
+		return listCount;
+		
+	} //
+	
+	public int adminClassCount() {	
+		Connection conn = getConnection();
+		int listCount = new AdminDao().adminClassCount(conn);
+		
+		close(conn);
+		return listCount;
+		
+	} //
+	
 	public ArrayList<Member> adminSelectMember(AdminPageInfo pi){
 			Connection conn = getConnection();
 			ArrayList<Member> list = new AdminDao().adminSelectMember(conn, pi);
@@ -185,10 +243,24 @@ public class AdminService {
 	
 	public ArrayList<Reservation> adminSelectClass(AdminPageInfo pi){
 		Connection conn = getConnection();
-		ArrayList<Reservation> crList = new AdminDao().adminSelectHotel(conn, pi);
+		ArrayList<Reservation> crList = new AdminDao().adminSelectClass(conn, pi);
 		
 		close(conn);
 		return crList;
+	}
+	
+	
+	public int[] adminDeleteRe(int[] adminReservation) {
+		Connection conn = getConnection();
+	    int[] result = new AdminDao().adminDeleteRe(conn, adminReservation);
+
+	    if (result != null) {
+	        commit(conn);
+	    } else {
+	        rollback(conn);
+	    }
+	    close(conn);
+	    return result;
 	}
 	
 } // class

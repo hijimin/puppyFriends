@@ -66,6 +66,176 @@ public class AdminDao {
 		
 	} // adminSelectListCount
 	
+		public int adminRestore(Connection conn) {
+		
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql =prop.getProperty("adminRestore");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+				
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+		
+	} // adminSelectListCount
+	
+	
+		public int adminProduct(Connection conn) {
+		
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql =prop.getProperty("adminProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+				
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+		
+	} // adminSelectListCount
+	
+		
+		public int adminSelectOrderList(Connection conn) {
+			
+			int listCount = 0;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql =prop.getProperty("adminSelectOrderList");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+					
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					listCount = rset.getInt("count");
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return listCount;
+			
+		} // adminSelectListCount
+				
+		public int adminDelivery(Connection conn) {
+			
+			int listCount = 0;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql =prop.getProperty("adminDelivery");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+					
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					listCount = rset.getInt("count");
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return listCount;
+			
+		} // adminSelectListCount
+		
+		public int adminHotelCount(Connection conn) {
+			
+			int listCount = 0;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql =prop.getProperty("adminHotelCount");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+					
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					listCount = rset.getInt("count");
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return listCount;
+			
+		} // adminSelectListCount
+		
+		public int adminClassCount(Connection conn) {
+			
+			int listCount = 0;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql =prop.getProperty("adminClassCount");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+					
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					listCount = rset.getInt("count");
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return listCount;
+			
+		} // adminSelectListCount
+		
 	
 	public ArrayList<Member> adminSelectMember(Connection conn, AdminPageInfo pi){
 		
@@ -639,9 +809,40 @@ public Order adminOrderInfo(Connection conn, int orderNo){
 			close(rset);
 			close(pstmt);
 		}
-		
+		System.out.println(crList);
 		return crList;
 		
 	}
 	
+	
+	public int[] adminDeleteRe(Connection conn, int[] adminReservation) {
+        int[] result = null;
+        PreparedStatement pstmt = null;
+        String sql = prop.getProperty("deleteReservation");
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            
+            for (int i = 0; i < adminReservation.length; i++) {
+                pstmt.setInt(1, adminReservation[i]);
+                pstmt.executeUpdate();
+            }
+            
+            result = adminReservation;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        return result;
+        
+    } // changeOrder
 } // CLASS

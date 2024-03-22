@@ -29,7 +29,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 회원조회</title>
+<title>호텔예약관리</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	
   <!-- jQuery library -->
@@ -229,6 +229,7 @@
             <br><br><br>
             <li class="memberMana"><a href="<%= contextPath %>/adminSelectMember.me?cpage=1">회원</a>
                 <ul class="memberData" style="color: white;">
+                    <li><a href="<%= contextPath %>/adminSelectMember.me?cpage=1"  style="color: white;">회원조회</a></li><br>
                     <li><a href="<%= contextPath %>/adminRestoreMemberList.me?cpage=1"  style="color: white;">회원복구</a></li>
                 </ul>
             </li> 
@@ -337,19 +338,19 @@
                 
                 <div class="paging-area" align="center">
                     <% if(currentPage != 1) { %>
-                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage - 1 %>'"> &lt; </button>
+                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage - 1 %>'" style="background-color:#f5e3e1; border-radius: 5px;"> &lt; </button>
                     <% } %>
                     
                     <% for(int p=startPage; p<=endPage; p++) { %>
                         <% if(p == currentPage) { %>
                         <button style="background-color:#f5e3e1; border-radius: 5px;"><%= p %></button>
                         <% } else { %>
-                        <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= p %>'"><%= p %></button>
+                        <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= p %>'" style="background-color:#f5e3e1; border-radius: 5px;"><%= p %></button>
                         <% } %>
                     <% } %>
                     
                     <% if(currentPage != maxPage) { %>
-                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage + 1 %>'"> &gt; </button>
+                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage + 1 %>'" style="background-color:#f5e3e1; border-radius: 5px;"> &gt; </button>
                     <% } %>
                 </div>
                 <br>

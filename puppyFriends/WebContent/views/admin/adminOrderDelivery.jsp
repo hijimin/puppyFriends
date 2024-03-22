@@ -29,7 +29,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>배송중 상품</title>
+<title>배송완료상품</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	
   <!-- jQuery library -->
@@ -258,7 +258,7 @@
             <br><br><br><br>
             <li class="product-admin"><a href="<%= contextPath %>/list.pd?cpage=1">상품</a>
                 <ul class="product-data"><a href="<%= contextPath %>/AdminSelectProductList.pr?cpage=1"  style="color: white;">상품리스트</a></ul>
-            	<ul class="adminOrder-data"><a href="#" style="color: white">주문확인</a></ul>
+            	<ul class="adminOrder-data"><a href="<%= contextPath %>/AdminSelectOrder.od?cpage=1" style="color: white">주문확인</a></ul>
             </li>
             <br><br><br><br>
             <li class="reservation" onmouseover="updateChart(5)">예약
@@ -320,7 +320,7 @@
 					        	return;
 					        }       
 						  
-				        var result = confirm("배송중완료로 변경 하시겠습니까?");
+				        var result = confirm("배송완료로 변경 하시겠습니까?");
 					       if(result){
 					            document.getElementById("deleteForm").submit();
 					            alert("변경 완료되었습니다!");
@@ -338,19 +338,19 @@
                 
                 <div class="paging-area" align="center">
                     <% if(currentPage != 1) { %>
-                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage - 1 %>'"> &lt; </button>
+                    <button onclick="location.href='<%= contextPath %>/AdminSelectDelivery.de?cpage=<%= currentPage - 1 %>'" style="background-color:#f5e3e1; border-radius: 5px;"> &lt; </button>
                     <% } %>
                     
                     <% for(int p=startPage; p<=endPage; p++) { %>
                         <% if(p == currentPage) { %>
                         <button style="background-color:#f5e3e1"><%= p %></button>
                         <% } else { %>
-                        <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= p %>'"><%= p %></button>
+                        <button onclick="location.href='<%= contextPath %>/AdminSelectDelivery.de?cpage=<%= p %>'" style="background-color:#f5e3e1; border-radius: 5px;"><%= p %></button>
                         <% } %>
                     <% } %>
                     
                     <% if(currentPage != maxPage) { %>
-                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage + 1 %>'"> &gt; </button>
+                    <button onclick="location.href='<%= contextPath %>/AdminSelectDelivery.de?cpage=<%= currentPage + 1 %>'" style="background-color:#f5e3e1; border-radius: 5px;"> &gt; </button>
                     <% } %>
                 </div>
                 <br>

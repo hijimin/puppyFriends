@@ -156,9 +156,6 @@
                         <ul>
                             <li><a href="<%= request.getContextPath()%>/mypage">회원정보수정</a></li>
                             <li><a href="<%= request.getContextPath()%>/updatePwd">비밀번호변경</a></li>
-                            <li><a href="<%= request.getContextPath()%>/mypageProduct">구매 내역 조회</a></li>
-                            <li><a href="<%= request.getContextPath()%>/mypageReservation">예약 조회</a></li>
-                            <li><a href="<%= request.getContextPath()%>/mypageBoard">내가 쓴 글</a></li>
                             <li><a href="<%= request.getContextPath()%>/deleteMember">회원탈퇴</a></li>
                         </ul>
                     </div>

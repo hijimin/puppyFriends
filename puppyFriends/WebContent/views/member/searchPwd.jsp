@@ -31,7 +31,7 @@
         border-top: 1px solid lightgray;
         margin-top: 30px;
     }
-    #search{
+    .search{
         width: 100px;
         height: 45px;
         background-color: rgb(255, 222, 239);
@@ -46,6 +46,8 @@
         width: 90%;
 
     }
+
+    #pwd{margin-top: 100px;}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
@@ -62,7 +64,7 @@
             </tr>
             <tr>
                 <th height="50">아이디 :</th>
-                <td><input type="text" id="check-email" requeired></td>
+                <td><input type="text" id="check-id" required></td>
             </tr>
             <tr>
                 <th height="50">이메일 :</th>
@@ -70,14 +72,14 @@
             </tr>
         </table>
         
-        <button onclick="searchPwd();">조회하기</button>
+        <button onclick="searchPwd();" class="search">조회하기</button>
         
-        <h2>조회결과</h2>
+        <h2 align="center">조회결과</h2>
         
-        <div id="result-wrap">
-            <span id="pwd"></span>
+        <div id="result-wrap" align="center">
+            <span id="pwd" onkeydown="checkNumber();"></span>
         </div> 
-        <button>확인</button>
+        <button class="search" >확인</button>
     </div>
 
     <script>
@@ -110,16 +112,17 @@
                 },
                 success:function(result){
                     console.log(result)
+                    
 
                     if(result === 'NNN'){
                         $("#result-wrap").html("조회된 결과가 없습니다")
                     }else{
-                        $("#result-wrap").html(
-                              "조회하신 비밀번호는"
-                            +  "<span id='pwd'>" + result + "</span>"
-                            + "입니다."
-                        );
+                        checkNumber(result);
                     }
+                    
+                    $("#pwd").html(
+                        "조회하신 비밀번호는 **** 입니다."
+                );
                     
                 },
                 error:function(){
@@ -129,11 +132,26 @@
 
             })
 
-
-
-                
-
         }
+
+        function checkNumber(result){
+
+
+                $(".search").mousedown(() => {
+
+                    $("#pwd").html(
+                        "조회하신 비밀번호는"+ result + "입니다."
+                );
+                $(".search").mouseup(() => {
+                    $("#pwd").html(
+                        "조회하신 비밀번호는 ****입니다."
+                );
+                
+                });
+
+                });
+        }
+        
     </script>
 
 

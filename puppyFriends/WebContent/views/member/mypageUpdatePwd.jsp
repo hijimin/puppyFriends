@@ -208,7 +208,7 @@ pageEncoding="UTF-8"%>
                   <div class="mypage-select-main">
                     <ul>
                       <li><a href="<%= request.getContextPath()%>/mypage">회원정보수정</a></li>
-                      <% if(memberPwd != "") { %>
+                      <% if(loginUser.getMemberPwd() != "") { %>
                         <li><a href="<%= request.getContextPath()%>/updatePwd">비밀번호변경</a></li>
                       <% } %>
                       <li><a data-toggle="modal" href="#deleteModal">회원탈퇴</a></li>

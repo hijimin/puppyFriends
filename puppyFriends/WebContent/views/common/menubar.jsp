@@ -187,7 +187,7 @@
     }
     
     .before-login button{border: 0; background-color: transparent; margin-left: 20px; color: white;}
-    .after-login>a{text-decoration: none; color: white !important;}
+    .after-login>a{text-decoration: none; color: white;}
     .after-login>a:hover{color: pink;}
     .after-login{padding-left: 20px;}
 
@@ -300,10 +300,10 @@
             
 	                    <!-- case2. 로그인 후 -->
 						
-	                    <div class="after-login">
+	                    <div >
 	            		
 	                        <b><%= loginUser.getMemberName() %>님</b>의 방문을 환영합니다 <br><br>
-	                        <div align="center">
+	                        <div class="after-login">
 	                        	<% if(loginUser.getMemberName().equals("관리자")) { %>
 	                        	<a href="<%= contextPath %>/AdminMemberCount.me">관리자</a>
 	                        	<% } %>

@@ -36,6 +36,9 @@ public class SearchPwdController extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String email = request.getParameter("email");
 		
+		System.out.println(userName + userId + email);
+		
+		
 		String userPwd = new MemberService().selectPwd(userName, userId, email);
 				
 		if(userPwd.equals("")) { // 실패

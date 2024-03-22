@@ -36,7 +36,7 @@ public class LoginController extends HttpServlet {
 
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
-
+		
 		
 		
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 		
 		if(loginUser == null) {
 	         session.setAttribute("alertMsg", "아이디 또는 비밀번호가 다릅니다");
-	         RequestDispatcher view = request.getRequestDispatcher("views/common/login.jsp");
+	         RequestDispatcher view = request.getRequestDispatcher("views/common/login2.jsp");
 	         view.forward(request, response);
 	      } else {
 	    	  session.setAttribute("loginUser", loginUser);

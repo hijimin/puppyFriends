@@ -51,7 +51,7 @@
              ROW_NUMBER()OVER(PARTITION BY FROM_ID ORDER BY CHAT_DATE DESC) AS RNK
              FROM CHAT
        ) C
- WHERE C.RNK = 1
+ WHERE C.RNK = 1 AND C.FROM_ID != 'ADMIN'
 </entry>
 
 <entry key="memberChat">

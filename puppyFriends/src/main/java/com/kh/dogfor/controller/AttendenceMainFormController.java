@@ -44,8 +44,8 @@ public class AttendenceMainFormController extends HttpServlet {
 		
 		ArrayList<Attendance> list = new DogforService().selectAttendanceList(userNo);
 		//System.out.println(list.get(0).getDate()); // 년 월 일
-		//System.out.println(list.get(0).getDate().substring(0, 4)); // 월
-		//System.out.println(list.get(0).getDate().substring(5, 7)); // 일
+		//System.out.println(list.get(0).getDate().substring(0, 4)); // 년
+		//System.out.println(list.get(0).getDate().substring(5, 7)); // 월
 		
 		ArrayList<Attendance> userList = new ArrayList<Attendance>();
 		
@@ -88,8 +88,13 @@ public class AttendenceMainFormController extends HttpServlet {
         double roundedNumber = 0;
         
         if(yes != 0) {
+        	if(month == 3) {
+        		per = (double)yes/(weekdaysCount-1)*100;
+        		roundedNumber = Math.round(per * 10.0) / 10.0;
+        	}else {
         	per = (double)yes/weekdaysCount*100;
-        	roundedNumber = Math.round(per * 10.0) / 10.0;
+    		roundedNumber = Math.round(per * 10.0) / 10.0;
+        	}
         }
 		
 		request.setAttribute("per", roundedNumber);

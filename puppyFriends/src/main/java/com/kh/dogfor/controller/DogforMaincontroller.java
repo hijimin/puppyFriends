@@ -76,7 +76,7 @@ public class DogforMaincontroller extends HttpServlet {
          int totalDays = yearMonth.lengthOfMonth();
 
          // 해당 월의 평일 수 계산
-         int weekdaysCount = 0;
+         int weekdaysCount = -1;
 
          for (int day = 1; day <= totalDays; day++) {
              LocalDate date = LocalDate.of(currentYear, currentMonth, day);

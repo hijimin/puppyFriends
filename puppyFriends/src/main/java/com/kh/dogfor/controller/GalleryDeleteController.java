@@ -31,6 +31,7 @@ public class GalleryDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String pnum = request.getParameter("pnum");
+		System.out.println(pnum);
 		
 		int result = new DogforService().deleteImg(pnum);
 		

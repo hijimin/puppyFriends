@@ -65,12 +65,10 @@
 	</entry>
 	
 	<entry key="selectProductListCount">
-		SELECT
-	       COUNT(*) "count"
+	SELECT
+	       count(*) count
 	  FROM PRODUCT
-	  JOIN IMAGE ON(PRODUCT_NO = REF_BNO)
 	 WHERE PRODUCT_STATUS = 'Y'
-	   AND FILE_LEVEL = 1
 	</entry>
 	
 	<entry key="selectProductPageList">

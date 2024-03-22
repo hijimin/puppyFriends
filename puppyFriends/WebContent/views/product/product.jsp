@@ -893,21 +893,10 @@
                
                 <!-- 상품상세조회 script -->
                 <script>
-<<<<<<< HEAD
-                  $(function () {
-                    $(".content2_3c").click(function () {                  	
-                      location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).children("input").val();                   
-                    });
-                    $(".slideimgg").click(function(){
-                      console.log($(this).siblings("input"));
-                      location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).siblings("input").val();
-                    })
-=======
                   
                   
                   $(document).on("click", ".content2_3c", function() {
                 	  location.href ="<%=contextPath%>/detail.pd?pno=" +$(this).children("input").val();
->>>>>>> 2b47743fb0523cc27117b43c6b2662478bab3cf8
                   });
       				
                   $(document).on("click", ".slideimgg", function(){

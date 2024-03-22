@@ -394,10 +394,24 @@ a:focus {
                 </script>
                 
                 <script>
+               
+                
                   function cartTest2(){
+                	  
+                	  let login = null;
+                	  <% if(loginUser != null) { %>
+                	  	login = '<%= loginUser.getMemberId() %>';
+                	  <%  }%>
                   	// 중복체크하고
                   	// 상품명이 중복이면 업데이트 컨트롤러타게
                   	// 중복이 아니면 isnert함수호출
+                  	
+                  	
+                  	if(!login){ // 펄씨
+                  		alert("로그인 후 이용해주세요!");
+                  		return;
+                  	}
+                  	
 
                   	$.ajax({
                   		url:"cartCheck.cr",
@@ -460,6 +474,8 @@ a:focus {
                   function cartTest1(){
                   	location.href='<%= contextPath %>/cartList.cr?pno=<%= p1.getProductNo()%>';
                   }
+                 
+                  
                 </script>
               </div>
             </div>
@@ -507,7 +523,56 @@ a:focus {
             </div>
             
             
-            <script>         
+           
+            <% }else{ %>
+            	<div><p>로그인 후 이용해주세요</p></div>
+            <% } %>
+          </div>
+
+          <div id="content4">
+            <div class="review4"><!-- 리뷰 큰통div--></div>
+          </div>
+
+          <br /><br />
+
+          <!-- 페이징바 -->
+          <div class="paging-area" align="center"></div>
+
+          <script>
+
+
+            function insertReview(){
+                  let btnclick = document.getElementById("clickbtn")
+                  let text = document.getElementById("reviewContent");
+                  if(text.value == ""){
+                    alert("리뷰 내용을 작성해주세요!")
+                    return false;
+                  }
+
+            	$.ajax({
+            		url:"rinsert.rv",
+            		data:{pno:<%= p1.getProductNo()%>,
+            			  content:$("#reviewContent").val()
+            			  },
+            		type:"post",
+            		success:function(result){ // result에는 0 또는 1이 있음
+            			if(result > 0){
+            				$("#reviewContent").val("");
+            				selectReviewList(1); // 한번 더 조회하기위해 호출해줘야함!!!
+            			}
+            		}, error:function(){
+            			console.log("리뷰 작성용 ajax 통신 실패!")
+            		}
+
+            	});
+            }
+          </script>
+
+          <script>
+            // 처음 최초로 한번만 실행되는 함수! window.onload는 한번 실행하고 끝나고 그냥 function은 계속 사용할 수 있다1
+            // 처음 페이지를 1page로 그리기 위해서 selectReviewList를 호출하면서 매개변수로 값 1을 줌
+           
+            
             function selectReviewList(cpage){
             	// capage에 1이 꽂히고 rvList.rv로 가서 1page의 currentPage를 생성함
             	$.ajax({
@@ -547,7 +612,10 @@ a:focus {
 
             		  let list = map.reviewList
             		  let reviewNo = list.reviewNo;
-            		  let loginUserName = '<%= loginUser.getMemberId() %>';	
+            		  let loginUserName = '';
+            		  <% if(loginUser != null){ %>
+            		 	 loginUserName = '<%= loginUser.getMemberId() %>';
+            		  <% } %>
             		  let review = $(".review4");
             		  if(list.length == 0){
             			  review.append("<p align=\"center\" calss=\"reviewnono\">" + "작성된 리뷰가 없습니다." + "</p>"); 
@@ -598,7 +666,7 @@ a:focus {
           				     
           			
           				  reviewContentDiv.html('<textarea rows="2"style="resize: none; width: 1020px; height: 130px;" id="reviewContent1"></textarea>')          				        	
-          				  $('.update-review').html('<button id="revModify"> 수정 </button>')
+          				  $('.update-review').html('<button class="update-review" id="revModify"> 수정 </button>')
           				  
           				  $('#revModify').on('click', function(){
           					var newReviewText = $('#reviewContent1').val();
@@ -651,54 +719,9 @@ a:focus {
             		}
             	})          	
             }
-          </script>
-            <% }else{ %>
-            	<div><p>로그인 후 이용해주세요</p></div>
-            <% } %>
-          </div>
-
-          <div id="content4">
-            <div class="review4"><!-- 리뷰 큰통div--></div>
-          </div>
-
-          <br /><br />
-
-          <!-- 페이징바 -->
-          <div class="paging-area" align="center"></div>
-
-          <script>
-
-
-            function insertReview(){
-                  let btnclick = document.getElementById("clickbtn")
-                  let text = document.getElementById("reviewContent");
-                  if(text.value == ""){
-                    alert("리뷰 내용을 작성해주세요!")
-                    return false;
-                  }
-
-            	$.ajax({
-            		url:"rinsert.rv",
-            		data:{pno:<%= p1.getProductNo()%>,
-            			  content:$("#reviewContent").val()
-            			  },
-            		type:"post",
-            		success:function(result){ // result에는 0 또는 1이 있음
-            			if(result > 0){
-            				$("#reviewContent").val("");
-            				selectReviewList(1); // 한번 더 조회하기위해 호출해줘야함!!!
-            			}
-            		}, error:function(){
-            			console.log("리뷰 작석용 ajax 통신 실패!")
-            		}
-
-            	});
-            }
-          </script>
-
-          <script>
-            // 처음 최초로 한번만 실행되는 함수! window.onload는 한번 실행하고 끝나고 그냥 function은 계속 사용할 수 있다
-            // 처음 페이지를 1page로 그리기 위해서 selectReviewList를 호출하면서 매개변수로 값 1을 줌
+       
+            
+            
             $(function () {
               selectReviewList(1);
             });

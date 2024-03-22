@@ -87,7 +87,7 @@
               /*페이징바 세로길이*/
               #content2_4 {
                 height: 60px;
-                margin-bottom: 100px;
+                margin-bottom: 100px;             
               }
 
               /* #content2_3>div{height: 100%; float: left;} */
@@ -214,7 +214,7 @@
               .page_nation {
                 display: inline-block;
                 margin-top: 10px;
-                margin-left: 37%;
+                margin-left: 40%;
               }
 
               .page_nation .none {
@@ -353,6 +353,20 @@
 
               .slideimgg{
                 cursor: pointer;
+              }
+              .threebtn, .rvpagebtn{
+                border: 0;
+                outline: 0;
+                background-color:transparent;
+              }
+              .rvpagebtn:active{
+                transform: translateY(4px);
+              }
+              .active:active{
+                transform: translateY(4px);
+              }
+              .newcolor{
+                color: white;
               }
             </style>
             <link
@@ -556,7 +570,7 @@
                       <div class="slide">
                         <div class="tag1">
                           <span style="background-color: #f7af36">BEST</span
-                            ><span style="background-color: #e84200">new</span>
+                            ><span class="newcolor" style="background-color: #e84200">new</span>
                           </div>
                           
                           <img class="slideimgg" src="<%=contextPath%>/<%=p.getTitleImg()%>" alt="Slide 1" width="100%" height="350"/>
@@ -591,9 +605,9 @@
 
                 <div id="content2_2">
                   <div align="right" style="width: 90%; margin-bottom: 5px">
-                    <button onclick="orderSelect(1);">인기순|</button>
-                    <button onclick="recentSelect(1);">최신순|</button>
-                    <button onclick="countSelect(1);">조회순</button>
+                    <button class="threebtn" onclick="orderSelect(1);">인기순 |</button>
+                    <button class="threebtn" onclick="recentSelect(1);">최신순 |</button>
+                    <button class="threebtn" onclick="countSelect(1);">조회순</button>
                   </div>
                 </div>
 
@@ -616,20 +630,20 @@
 
                         if (currentPage != 1) {
                           $paging.append(
-                            "<button onclick='orderSelect(" +(currentPage - 1) +");'>&lt;</button>");
+                            "<button class='rvpagebtn' onclick='orderSelect(" +(currentPage - 1) +");'>&lt;</button>");
                         }
 
                         for (let p = startPage; p <= endPage; p++) {
                           if (p == currentPage) {
-                            $paging.append("<button class='rvpagebtn'>" + p + "</button>");
+                            $paging.append("<button class='rvpagebtn'>" + p + "&nbsp;&nbsp; </button>");
                           } else {
-                            $paging.append("<button class='rvpagebtn' onclick='orderSelect("+p+");'>" + p +"</button>");
+                            $paging.append("<button class='rvpagebtn' onclick='orderSelect("+p+");'>" + p +"&nbsp;&nbsp; </button>");
                           }
                         }
 
                         if (currentPage != maxPage) {
                           $paging.append(
-                            "<button onclick='orderSelect(" + (currentPage + 1) +");'>&gt;</button>"
+                            "<button class='rvpagebtn' onclick='orderSelect(" + (currentPage + 1) +");'>&gt;</button>"
                           );
                         }
 
@@ -700,20 +714,20 @@
                         
                         if (currentPage != 1) {
                             $paging.append(
-                              "<button onclick='recentSelect(" +(currentPage - 1) +");'>&lt;</button>");
+                              "<button class='rvpagebtn' onclick='recentSelect(" +(currentPage - 1) +");'>&lt;</button>");
                           }
 
                           for (let p = startPage; p <= endPage; p++) {
                             if (p == currentPage) {
-                              $paging.append("<button class='rvpagebtn'>" + p + "</button>");
+                              $paging.append("<button class='rvpagebtn'>" + p + "&nbsp;&nbsp; </button>");
                             } else {
-                              $paging.append("<button class='rvpagebtn' onclick='recentSelect("+p+");'>" + p +"</button>");
+                              $paging.append("<button class='rvpagebtn' onclick='recentSelect("+p+");'>" + p +"&nbsp;&nbsp; </button>");
                             }
                           }
 
                           if (currentPage != maxPage) {
                             $paging.append(
-                              "<button onclick='recentSelect(" + (currentPage + 1) +");'>&gt;</button>"
+                              "<button class='rvpagebtn' onclick='recentSelect(" + (currentPage + 1) +");'>&gt;</button>"
                             );
                           }
                         
@@ -788,20 +802,20 @@
                         
                         if (currentPage != 1) {
                             $paging.append(
-                              "<button onclick='countSelect(" +(currentPage - 1) +");'>&lt;</button>");
+                              "<button class='rvpagebtn' onclick='countSelect(" +(currentPage - 1) +");'>&lt;</button>");
                           }
 
                           for (let p = startPage; p <= endPage; p++) {
                             if (p == currentPage) {
-                              $paging.append("<button class='rvpagebtn'>" + p + "</button>");
+                              $paging.append("<button class='rvpagebtn'>" + p + "&nbsp;&nbsp;</button>");
                             } else {
-                              $paging.append("<button class='rvpagebtn' onclick='countSelect("+p+");'>" + p +"</button>");
+                              $paging.append("<button class='rvpagebtn' onclick='countSelect("+p+");'>" + p +"&nbsp;&nbsp;</button>");
                             }
                           }
 
                           if (currentPage != maxPage) {
                             $paging.append(
-                              "<button onclick='countSelect(" + (currentPage + 1) +");'>&gt;</button>"
+                              "<button class='rvpagebtn' onclick='countSelect(" + (currentPage + 1) +");'>&gt;</button>"
                             );
                           }
                           

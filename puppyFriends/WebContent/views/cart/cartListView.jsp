@@ -257,6 +257,14 @@
         cursor: pointer;
     }
 
+    thead>tr{
+        text-align: center;
+    }
+
+    .centercenter{
+        text-align: center;
+    }
+
     
 
  
@@ -488,7 +496,12 @@
                     	if ($('input[name=plist]:checked').length > 0) {
                             var selectedValue = $('input[name=plist]:checked').val();
                             
-                            checkdelete(selectedValue);
+                            if(!confirm("삭제하시겠습니까?")){
+
+                            }else{
+                                checkdelete(selectedValue);                                              		
+                            }
+
                         } 
   	                         
                     }
@@ -804,19 +817,19 @@
                     <tbody>
                         <tr>
                             <td>
-                                <div>
+                                <div class="centercenter">
                                     <strong class="toto"></strong>원
                                 </div>
                             </td>
 
                             <td>
-                                <div>
+                                <div class="centercenter">
                                     <strong>0원</strong>
                                 </div>
                             </td>
 
                             <td>
-                                <div>
+                                <div class="centercenter">
                                     <strong>
                                         <span class="toto"></span>원
                                     </strong>
@@ -842,7 +855,7 @@
     
     <script>   
         var IMP = window.IMP; 
-        IMP.init("imp16540835"); 
+        IMP.init("imp88805724"); 
       
         var today = new Date();   
         var hours = today.getHours(); // 시
@@ -982,7 +995,7 @@
     
       <script>
     var IMP = window.IMP; 
-    IMP.init("imp67011510"); 
+    IMP.init("imp88805724"); 
   
     var today = new Date();   
     var hours = today.getHours(); // 시

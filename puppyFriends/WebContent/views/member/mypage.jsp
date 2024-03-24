@@ -361,12 +361,26 @@
               <form action="<%= contextPath %>/delete.me" method="post">
                   <input type="hidden" name="memberId" value="<%= memberId %>">
                   <b>탈퇴 후 복구가 불가능합니다. <br> 정말로 탈퇴하시겠습니까? </b> <br><br>
-                  비밀번호 : <input type="password" name="memberPwd" required> <br><br>
+                  비밀번호 : <input type="password" name="memberPwd1" required> <br><br>
                      <button type="submit" class="btn btn-sm btn-danger" onclick="return deleteMember();">탈퇴하기</button>
               </form>
               
             </div>
-      
+      		
+      		<script>
+                /* function selectPwd(this){
+                  let deletePwd = this.value;
+                  deleteMember(deletePwd);
+                } */
+
+                function deleteMember(){
+                	console.log($("input[name=memberPwd1]"));
+                  if($("input[name=memberPwd1]").val() != <%= loginUser.getMemberPwd() %>){
+                    alert("비밀번호가 일치하지 않습니다.");
+                    return false;
+                  }
+                }
+              </script>
       
           </div>
         </div>

@@ -19,62 +19,59 @@ import com.kh.member.model.vo.Member;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public LoginController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
-		
-		
+
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
-		
+
 		HttpSession session = request.getSession();
-		
-		
-		if(loginUser == null) {
-	         session.setAttribute("alertMsg", "아이디 또는 비밀번호가 다릅니다");
-	         RequestDispatcher view = request.getRequestDispatcher("views/common/login2.jsp");
-	         view.forward(request, response);
-	      } else {
-	    	  session.setAttribute("loginUser", loginUser);
-	    	  response.sendRedirect(request.getContextPath());      	         
-	         } 
-	         
-	         
-	     }
-		
-		
-		// if(loginUser == null) {
-			// session.setAttribute("alertMsg", "아이디 및 비밀번호가 일치하지 않습니다.");
-			// response.sendRedirect(request.getContextPath() + "/views/common/login.jsp");
-			// }
-		
-		
-		// 기존존재
-		// session.setAttribute("loginUser", loginUser);
-		// response.sendRedirect(request.getContextPath());
-		
-		
-	
-	
-	
+
+		if (loginUser == null) {
+			session.setAttribute("alertMsg", "아이디 또는 비밀번호가 다릅니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/login2.jsp");
+			view.forward(request, response);
+		} else if (loginUser.getStatus().equals("N")) {
+			session.setAttribute("alertMsg", "탈퇴한 회원입니다.");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/login2.jsp");
+			view.forward(request, response);
+		} else {
+			session.setAttribute("loginUser", loginUser);
+			response.sendRedirect(request.getContextPath());
+		}
+
+	}
+
+	// if(loginUser == null) {
+	// session.setAttribute("alertMsg", "아이디 및 비밀번호가 일치하지 않습니다.");
+	// response.sendRedirect(request.getContextPath() + "/views/common/login.jsp");
+	// }
+
+	// 기존존재
+	// session.setAttribute("loginUser", loginUser);
+	// response.sendRedirect(request.getContextPath());
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

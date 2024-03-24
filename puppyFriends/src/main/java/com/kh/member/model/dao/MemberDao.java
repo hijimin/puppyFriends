@@ -51,6 +51,7 @@ private Properties prop = new Properties();
 				m.setMemberName(rset.getString("member_name"));
 				m.setMemberEmail(rset.getString("member_email"));
 				m.setMemberPhone(rset.getString("member_phone"));
+				m.setStatus(rset.getString("status"));
 				m.setDogNo(rset.getInt("dog_no"));
 				m.setDogName(rset.getString("dog_name"));
 				m.setDogSize(rset.getString("dog_size"));

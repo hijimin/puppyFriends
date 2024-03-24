@@ -48,9 +48,7 @@ pageEncoding="UTF-8"%>
         height: 100%;
         display: block;
       }
-      span {
-        font-size: 14px;
-      }
+      
 
       .mypage-order a:hover {
         color: black;

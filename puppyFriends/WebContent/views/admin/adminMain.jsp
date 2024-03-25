@@ -110,7 +110,7 @@ String clickCountsJson = new Gson().toJson(clickCounts);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
    <style>
         .outer{
-            width: 1800px;
+            width: 1903px;
             height: 950px;
             margin: auto;
         }

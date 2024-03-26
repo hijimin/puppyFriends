@@ -138,7 +138,7 @@ ERD:
 <br/>
 <br/>
 
-## 프로젝트를 통해 느낌점
+## :heavy_exclamation_mark: 프로젝트를 통해 느낀점
 <br/>
 :boy: 윤상연
 <br/>

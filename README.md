@@ -1,11 +1,11 @@
-# PuppyFriends  
+## PuppyFriends  
 <br/>
 
-# :dog2: 프로젝트 소개
+## :dog2: 프로젝트 소개
 <br/>
 <br/>
 
-# :alarm_clock: 개발기간
+## :alarm_clock: 개발기간
 - 2024.01.17 (수) ~ 2024.03.25 (금)
 - 2024.01.17 (수) ~ 2024.01.23 (화) : kickoff 미팅
 
@@ -26,7 +26,7 @@
 <br/>
 <br/>
 
-# :family: 멤버 : 윤상연(Leader), 박민규, 박지민, 류은송, 이상용
+## :family: 멤버 : 윤상연(Leader), 박민규, 박지민, 류은송, 이상용
 :boy: 윤상연 
 <br/>
 
@@ -66,6 +66,92 @@
 - 인기, 조회, 최신순서를 통한 조회
 - 상품 리뷰 등록, 수정, 삭제
 - 키워드 검색
+<br/>
 
+:girl: 류은송
+<br/>
 
-  
+-유치원(클래스)
+- 날짜를 지정하여 등록
+- 상세 페이지에서 반려견 사이즈와 일치시 예약 가능
+<br/>
+
+-호텔
+- 관리자가 날짜를 지정하여 등록 및 삭제
+<br/>
+
+:boy: 이상용
+<br/>
+
+-회원
+- 로그인, 회원가입
+- 마이페이지를 이용한 회원 정보 수정 및 탈퇴
+- 비밀번호 변경
+<br/>
+
+-게시판
+- 공지사항 작성, 수정, 삭제
+<br/>
+<br/>
+<br/>
+
+## :wrench: 개발환경
+- OS : Windows10
+- IDE : Eclipse, , VSCode
+- Server : Apach Tomcat 9.0
+- DBMS : Oracle
+- Languages : Java, HTML, CSS, JavaScript, JQuery, JSP, SQL
+- Management : Git, GitHub, SourceTree
+<br/>
+<br/>
+
+## :pushpin: 기술스택
+- FrontEnd : HTML5, CSS3, JavaScripts, JQuery, Ajax
+- BackEnd : Java 11, JSP & Servlet
+<br/>
+<br/>
+
+## :floppy_disk: 설계
+ERD:
+<br/>
+![image](https://github.com/hijimin/puppyFriends/assets/147786615/25de1f20-27f5-42ef-a991-7316584da368)
+<br/>
+<br/>
+
+## :mag: 프로젝트 Q&A
+:question: **프로젝트 기획 의도**
+<br/>
+
+현재 반려견에 대한 인식의 변화와 반려견과 함께하는 1인 가구가 많이 증가했습니다.
+혼자 반려견을 키우기 때문에 출근, 외출 시 반려견이 혼자 남게됨으로 반려견이 외롭지 않게 반려견과 교류하고 내가 집을 비운 시간 동안 나의 반려견을 케어 해주는 애견 유치원이 많이 생겨 났습니다.
+애견사업의 규모가 커지면서 유치원 내에서 수업 외에도 호텔, 상품구매 등을 해결 할 수 있는 업체들이 등장 했습니다.
+위 업체의 특징은 100% 예약제로 운영되면서 여러가지 사업을 한번에 관리 하는데 이를 효율적으로 관리 할 수 있도록 사이트를 개발하게 되었습니다.
+<br/>
+<br/>
+
+## :hatched_chick: 프로젝트 특징
+<br/>
+
+-실시간 유치원 클래스&호텔 예약, 상품 구매, 관리자와의 1:1 채팅 등 사용자에게 편리함을 제공 할 수 있는 PuppyFriends 입니다.<br/>
+-특징2<br/>
+-특징3<br/>
+<br/>
+<br/>
+
+## 프로젝트를 통해 느낌점
+<br/>
+:boy: 윤상연
+<br/>
+:boy: 박민규
+<br/>
+:girl: 박지민
+<br/>
+:girl: 류은송
+<br/>
+:boy: 이상용  
+<br/>
+<br/>
+<br/>
+<br/>
+## 프로젝트 구현
+

@@ -163,6 +163,8 @@ ERD:
 ## :blue_heart: 프로젝트 구현
 ### :girl: 박지민
 #### :smile: 상품 등록 및 수정
+
+![상품등록](https://github.com/hijimin/puppyFriends/assets/147786615/4c8fdd76-a991-4cdc-b992-cc72c898218e)
 - 상품등록
 <br/>
 

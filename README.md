@@ -172,7 +172,7 @@ ERD:
 -상품수정
 <br/>
 
-![상품수정](https://github.com/hijimin/puppyFriends/assets/147786615/1219e0a7-890a-44e1-a706-d87294f4967e)
+![상품수정1](https://github.com/hijimin/puppyFriends/assets/147786615/73611dc7-5dfc-45cb-ac93-e7ff15e30a5f)
 
 #### :smile: 상품 키워드 검색
 

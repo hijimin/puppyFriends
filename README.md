@@ -169,8 +169,7 @@ ERD:
 
 ![Honeycam 2024-03-27 21-30-32](https://github.com/hijimin/puppyFriends/assets/147786615/97967a26-495a-4449-9bf5-9edce2f7c3ba)
 
-<br/>
+-상품수정
 <br/>
 
--상품수정
 ![상품수정](https://github.com/hijimin/puppyFriends/assets/147786615/1219e0a7-890a-44e1-a706-d87294f4967e)

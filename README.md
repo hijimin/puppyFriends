@@ -178,4 +178,6 @@ ERD:
 
 -상품검색
 <br/>
-  
+
+![Honeycam 2024-03-28 08-16-41](https://github.com/hijimin/puppyFriends/assets/147786615/a7e16007-5682-45d4-a477-a1ab2869ad1a)
+

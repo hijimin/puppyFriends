@@ -181,3 +181,9 @@ ERD:
 
 ![상품검색1](https://github.com/hijimin/puppyFriends/assets/147786615/415666e3-8f80-48db-a43c-104257cae2f7)
 
+#### :smile: 상품 인기순, 최신순, 조회순 조회
+
+-상품조회
+<br/>
+
+![상품조회](https://github.com/hijimin/puppyFriends/assets/147786615/dea4284c-2dbe-48a7-af5e-8f326f3ab972)

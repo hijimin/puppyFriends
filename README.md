@@ -161,5 +161,5 @@ ERD:
 <br/>
 <br/>
 ## :blue_heart: 프로젝트 구현
-<hr>
+### :girl: 박지민
 

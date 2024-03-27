@@ -164,8 +164,7 @@ ERD:
 ### :girl: 박지민
 #### :smile: 상품 등록 및 수정
 
-![상품등록](https://github.com/hijimin/puppyFriends/assets/147786615/4c8fdd76-a991-4cdc-b992-cc72c898218e)
 - 상품등록
 <br/>
 
-![상품등록](https://github.com/hijimin/puppyFriends/assets/147786615/36c3a0a2-4ea1-4099-9105-a80a7167864e)
+![Honeycam 2024-03-27 21-30-32](https://github.com/hijimin/puppyFriends/assets/147786615/97967a26-495a-4449-9bf5-9edce2f7c3ba)

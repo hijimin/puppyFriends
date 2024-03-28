@@ -204,3 +204,12 @@ ERD:
 <br/>
 
 ![장바구니삭제](https://github.com/hijimin/puppyFriends/assets/147786615/baf33c7d-2c7e-411f-855a-19b8a918b5bd)
+
+#### :smile: 상품결제(토스페이, 카카오페이)
+
+-토스페이결제
+<br/>
+
+![토스결제](https://github.com/hijimin/puppyFriends/assets/147786615/e2ca2312-af0a-4853-82a8-9b276ac80160)
+
+

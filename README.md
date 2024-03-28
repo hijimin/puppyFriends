@@ -212,4 +212,9 @@ ERD:
 
 ![토스결제](https://github.com/hijimin/puppyFriends/assets/147786615/e2ca2312-af0a-4853-82a8-9b276ac80160)
 
+-카카오페이결제
+<br/>
 
+#### :smile: 상품 리뷰 등록, 수정, 삭제
+
+### :boy: 박민규

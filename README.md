@@ -134,9 +134,10 @@ ERD:
 ## :hatched_chick: 프로젝트 특징
 <br/>
 
--실시간 유치원 클래스&호텔 예약, 상품 구매, 관리자와의 1:1 채팅 등 사용자에게 편리함을 제공 할 수 있는 PuppyFriends 입니다.<br/>
+-실시간 유치원 클래스&호텔 다른 사이트들과는 다르게 온라인으로 직접적인 예약가능 (타 사이트 경우 전화 or 카톡 상담을 통한 오프라인 예약) <br/>
+-상품 구매, 배송, 카카오 또는 토스 결제가 되고, 관리자와의 1:1 채팅 등 고객에게 편리함을 제공 할 수 있는 PuppyFriends 입니다.<br/>
 -일반 회원가입과 카카오 회원가입을 제공하며 로그인 후 회원이라면 누구나 단체채팅 이용이 가능합니다.<br/>
--특징3<br/>
+-<br/>
 <br/>
 <br/>
 
@@ -172,7 +173,7 @@ ERD:
 :boy: 이상용
 <br/>
 <br/>
--상용느낀점
+-
 
 ## :blue_heart: 프로젝트 구현
 ### :girl: 박지민
@@ -358,26 +359,50 @@ ERD:
 ### :girl: 류은송
 
 ### : 유치원
+<br/>
 - 유치원 등록,리셋,삭제
+
+  
   ![유치원등록](https://github.com/hijimin/puppyFriends/assets/151510137/bbdafdc2-de37-464b-ba37-bf8aabe9f0fa)
+
   ![유치원리셋](https://github.com/hijimin/puppyFriends/assets/151510137/0c859e48-d321-4247-b9ab-2c222c8593ec)
+
   ![유치원삭제](https://github.com/hijimin/puppyFriends/assets/151510137/51c67f2b-092d-4bf8-adae-1a7f4d01bc31)
+
+  
 
 
 - 유치원 예약
+
+  
   ![유치원예약](https://github.com/hijimin/puppyFriends/assets/151510137/38bba44a-116b-4f6d-bdd1-008e88310846)
+
+  
 
 ### : 홈 메뉴
 - 탑버튼, 메뉴바
+  
   ![탑버튼_메뉴바](https://github.com/hijimin/puppyFriends/assets/151510137/e7e2439f-d2c0-441b-8785-9d40569b8abb)
+
+  
 
 ### : 호텔
 - 호텔 등록,리셋,삭제
+  
   ![호텔등록](https://github.com/hijimin/puppyFriends/assets/151510137/7a661bb8-3bfa-4359-94cd-754eb04b1f9d)
+
+
   ![호텔리셋](https://github.com/hijimin/puppyFriends/assets/151510137/a47117e5-1d74-418d-8746-60b7fd4abd5e)
+
+
   ![호텔삭제](https://github.com/hijimin/puppyFriends/assets/151510137/3670e84e-cbf6-4a2c-8a62-9f8d551339df)
 
+
+  
+
 - 호텔 예약
+
+  
   ![호텔예약](https://github.com/hijimin/puppyFriends/assets/151510137/6b9362dc-b484-4978-a428-aead090438ed)
 
 

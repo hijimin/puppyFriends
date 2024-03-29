@@ -215,6 +215,8 @@ ERD:
 -카카오페이결제
 <br/>
 
+![KakaoTalk_20240329_001202091](https://github.com/hijimin/puppyFriends/assets/147786615/67ef8820-19d9-4d62-bd5c-43973a801d3c)
+
 #### :smile: 상품 리뷰 등록, 수정, 삭제
 
 ### :boy: 박민규

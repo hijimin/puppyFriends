@@ -232,6 +232,12 @@ ERD:
 
 #### :smile: 상품 리뷰 등록, 수정, 삭제
 
+-리뷰 등록
+<br/>
+
+![리뷰등록](https://github.com/hijimin/puppyFriends/assets/147786615/05d76c62-c598-40ba-977e-285c34d51a42)
+
+
 ### :boy: 박민규
 
 #### : 메인페이지

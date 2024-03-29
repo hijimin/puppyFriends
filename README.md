@@ -325,7 +325,7 @@ ERD:
 
  - 단체채팅 + 귓속말
    ![Honeycam 2024-03-29 14-42-36](https://github.com/hijimin/puppyFriends/assets/151510176/6b045a71-1049-4de9-a87b-333e879a865c)
-   <br/><br/>
+   <br/><br/><br/>
    ![Honeycam 2024-03-29 14-44-01](https://github.com/hijimin/puppyFriends/assets/151510176/bbd2720e-817d-412d-b9a9-6eaeabca8258)
 
 

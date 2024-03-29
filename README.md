@@ -298,5 +298,28 @@ ERD:
 
  ### :boy: 윤상연
  - 관리자 메인 페이지
-   ![Honeycam 2024-03-29 13-41-34](https://github.com/hijimin/puppyFriends/assets/151510176/a58109d8-1169-492e-8900-d7911af88ab2)
+   ![Honeycam 2024-03-29 13-45-59](https://github.com/hijimin/puppyFriends/assets/151510176/1776ae9f-5b17-44d6-b060-b0a977d361d3)
+   
+ - 관리자 회원조회 및 삭제
+   ![Honeycam 2024-03-29 13-50-04](https://github.com/hijimin/puppyFriends/assets/151510176/b9e86a42-f9db-4780-a752-a724e89d32cc)
+   <br/>
+   ![Honeycam 2024-03-29 13-55-46](https://github.com/hijimin/puppyFriends/assets/151510176/696ede69-f46c-4f77-b1a7-02199a053476)
+
+ - 관리자 회원복구
+   ![Honeycam 2024-03-29 13-52-32](https://github.com/hijimin/puppyFriends/assets/151510176/caf9afea-7399-4145-8b64-586245162b54)
+
+  - 상품리스트
+    ![Honeycam 2024-03-29 13-58-23](https://github.com/hijimin/puppyFriends/assets/151510176/e01e299c-ad35-4e19-9f9a-58a5449b5703)
+
+ - 주문
+   ![Honeycam 2024-03-29 14-00-29](https://github.com/hijimin/puppyFriends/assets/151510176/070457aa-9045-4748-9ca4-c01e128c4d53)
+   <br/>
+   ![Honeycam 2024-03-29 14-01-46](https://github.com/hijimin/puppyFriends/assets/151510176/85a14408-5cc5-4af2-803a-4b6b2f9e965f)
+
+   
+
+
+
+
+
 

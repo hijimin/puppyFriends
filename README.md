@@ -298,4 +298,5 @@ ERD:
 
  ### :boy: 윤상연
  - 관리자 메인 페이지
- - 
+   ![Honeycam 2024-03-29 13-41-34](https://github.com/hijimin/puppyFriends/assets/151510176/a58109d8-1169-492e-8900-d7911af88ab2)
+

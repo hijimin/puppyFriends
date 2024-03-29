@@ -313,9 +313,17 @@ ERD:
 
  - 주문
    ![Honeycam 2024-03-29 14-00-29](https://github.com/hijimin/puppyFriends/assets/151510176/070457aa-9045-4748-9ca4-c01e128c4d53)
+    <br/>
+   ![Honeycam 2024-03-29 14-06-08](https://github.com/hijimin/puppyFriends/assets/151510176/ee280346-9f65-4bfd-b0bd-34eff16c0e2b)
    <br/>
    ![Honeycam 2024-03-29 14-01-46](https://github.com/hijimin/puppyFriends/assets/151510176/85a14408-5cc5-4af2-803a-4b6b2f9e965f)
 
+ - 예약확인
+   ![Honeycam 2024-03-29 14-08-07](https://github.com/hijimin/puppyFriends/assets/151510176/e2dfcd83-776b-4a57-a336-8d7ded343301)
+    <br/>
+    ![Honeycam 2024-03-29 14-18-39](https://github.com/hijimin/puppyFriends/assets/151510176/9d2bc17d-c72d-4c27-93c8-290a2dcaf673)
+
+ - 단체채팅
    
 
 

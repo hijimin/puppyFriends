@@ -233,3 +233,45 @@ ERD:
 #### :smile: 상품 리뷰 등록, 수정, 삭제
 
 ### :boy: 박민규
+
+#### : 메인페이지
+![메인페이지](https://github.com/hijimin/puppyFriends/assets/151510050/7bce4156-17c6-4155-a1df-ef46865635dd)
+
+- 오시는길
+  ![오시는길](https://github.com/hijimin/puppyFriends/assets/151510050/d180d184-0962-4650-8fd7-d87b366ea7c2)
+
+
+#### : 출석부
+- 출석부 등록
+![출석부 등록](https://github.com/hijimin/puppyFriends/assets/151510050/c73840e5-8f38-4d8f-8d1a-ef97059b2c66)
+
+- 회원 출석부 조회
+  ![회원 출석부 조회](https://github.com/hijimin/puppyFriends/assets/151510050/80a70ce5-7f11-4664-a037-1214be0c1ef0)
+
+  
+- 관리자 출석부 조회
+![출석부 조회](https://github.com/hijimin/puppyFriends/assets/151510050/1030c281-4972-49ad-a977-2b7fb4a4169b)
+
+- 출석부 수정 
+![출석부 변경](https://github.com/hijimin/puppyFriends/assets/151510050/680da669-fffd-4a81-9da0-fb64a4c7e50c)
+
+#### : 갤러리
+- 갤러리 조회
+![갤러리 조회](https://github.com/hijimin/puppyFriends/assets/151510050/74c89229-566b-423f-957e-0f6d4b58f6df)
+
+- 갤러리 등록
+ ![갤러리등록](https://github.com/hijimin/puppyFriends/assets/151510050/08ada5fb-2bb5-462d-a19e-a2bda3a484be)
+
+- 갤러리 검색
+   ![갤러리 검색](https://github.com/hijimin/puppyFriends/assets/151510050/7945393c-9c22-4bae-89f3-4a731bda6971)
+
+#### : 채팅
+- 회원 채팅 조회
+  ![회원 채팅 조회](https://github.com/hijimin/puppyFriends/assets/151510050/b64276b0-00cb-426e-a1e6-c19b408e0234)
+
+- 관리자 채팅 조회
+  ![관리자 회원 채팅 조회](https://github.com/hijimin/puppyFriends/assets/151510050/d956d5ba-616d-4152-b400-586a55ce5234)
+
+- 1대1 채팅
+ ![관리자 회원 1대1 채팅](https://github.com/hijimin/puppyFriends/assets/151510050/8e4a372a-c498-4304-ae1d-1a3c3d01cb8a)
+ 

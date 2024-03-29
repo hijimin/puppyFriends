@@ -237,6 +237,11 @@ ERD:
 
 ![리뷰등록](https://github.com/hijimin/puppyFriends/assets/147786615/05d76c62-c598-40ba-977e-285c34d51a42)
 
+-리뷰 수정
+<br/>
+
+![리뷰수정](https://github.com/hijimin/puppyFriends/assets/147786615/9fac21ee-5ddc-4e36-bbc8-1aaadf7d420e)
+
 
 ### :boy: 박민규
 

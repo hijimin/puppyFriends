@@ -329,7 +329,25 @@ ERD:
  - 단체채팅(귓속말)
   ![Honeycam 2024-03-29 15-07-57](https://github.com/hijimin/puppyFriends/assets/151510176/ab45c664-3687-43bd-9cf1-26854c007861)
 
+### :boy: 이상용
 
+- 일반 로그인, 회원가입
+  ![일반로그인](https://github.com/hijimin/puppyFriends/assets/151510137/3da7158b-92d2-402f-9ac8-3cd6c8aadeae)
+  ![회원가입](https://github.com/hijimin/puppyFriends/assets/151510137/30db4bdc-3257-4ecb-9993-c96d287e15f1)
+
+- 카카오(API) 회원가입
+  ![카카오_회원가입](https://github.com/hijimin/puppyFriends/assets/151510137/f0af0633-6fbc-4618-afb9-0d84a295aefc)
+
+- 회원정보수정
+  ![회원정보수정](https://github.com/hijimin/puppyFriends/assets/151510137/39776cd2-decf-403f-95b3-75ce7c6f697a)
+
+- 비밀번호변경
+  ![비밀번호변경](https://github.com/hijimin/puppyFriends/assets/151510137/8348c2c0-e579-4116-ad5d-5444672a05f8)
+
+- 공지사항 등록, 수정, 삭제
+  ![공지작성](https://github.com/hijimin/puppyFriends/assets/151510137/8c1da559-ed2b-4211-98d5-77820129a7a6)
+  ![공지수정](https://github.com/hijimin/puppyFriends/assets/151510137/1ead4e89-5960-4ed8-91f0-91fb1075824e)
+  ![공지삭제](https://github.com/hijimin/puppyFriends/assets/151510137/bf716667-8a03-4820-9109-1895e9a8bad8)
 
 
 

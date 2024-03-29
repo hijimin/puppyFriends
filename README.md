@@ -357,6 +357,7 @@ ERD:
 
 ### :girl: 류은송
 
+### : 유치원
 - 유치원 등록,리셋,삭제
   ![유치원등록](https://github.com/hijimin/puppyFriends/assets/151510137/bbdafdc2-de37-464b-ba37-bf8aabe9f0fa)
   ![유치원리셋](https://github.com/hijimin/puppyFriends/assets/151510137/0c859e48-d321-4247-b9ab-2c222c8593ec)
@@ -366,9 +367,11 @@ ERD:
 - 유치원 예약
   ![유치원예약](https://github.com/hijimin/puppyFriends/assets/151510137/38bba44a-116b-4f6d-bdd1-008e88310846)
 
+### : 홈 메뉴
 - 탑버튼, 메뉴바
   ![탑버튼_메뉴바](https://github.com/hijimin/puppyFriends/assets/151510137/e7e2439f-d2c0-441b-8785-9d40569b8abb)
 
+### : 호텔
 - 호텔 등록,리셋,삭제
   ![호텔등록](https://github.com/hijimin/puppyFriends/assets/151510137/7a661bb8-3bfa-4359-94cd-754eb04b1f9d)
   ![호텔리셋](https://github.com/hijimin/puppyFriends/assets/151510137/a47117e5-1d74-418d-8746-60b7fd4abd5e)

@@ -4,7 +4,6 @@
 ## :dog2: 프로젝트 소개
 <br/>
 <br/>
-![모집글작성](https://github.com/hijimin/puppyFriends/assets/147786615/a34adb15-e8b1-416c-a5f1-60f19cec2ca7)
 
 ## :alarm_clock: 개발기간
 - 2024.01.17 (수) ~ 2024.03.25 (금)
@@ -190,6 +189,7 @@ ERD:
 <br/>
 
 ![Honeycam 2024-03-27 21-30-32](https://github.com/hijimin/puppyFriends/assets/147786615/97967a26-495a-4449-9bf5-9edce2f7c3ba)
+![모집글작성](https://github.com/hijimin/puppyFriends/assets/147786615/a34adb15-e8b1-416c-a5f1-60f19cec2ca7)
 
 -상품수정
 <br/>

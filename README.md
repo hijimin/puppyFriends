@@ -2,8 +2,6 @@
 <br/>
 
 ## :dog2: 프로젝트 소개
-<br/>
-<br/>
 <b>PuppyFriends : 이러이러한 사이트</b>
 
 ## :alarm_clock: 개발기간

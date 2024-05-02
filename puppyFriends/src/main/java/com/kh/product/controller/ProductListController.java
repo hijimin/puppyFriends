@@ -55,6 +55,13 @@ public class ProductListController extends HttpServlet {
 			endPage = maxPage;
 		}
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		System.out.println(listCount);
+		System.out.println(currentPage);
+		System.out.println(pageLimit);
+		System.out.println(boardLimit);
+		System.out.println(maxPage);
+		System.out.println(startPage);
+		System.out.println(endPage);
 		
 		ArrayList<Product> list1 = new ProductService().selectProductPageList(pi);
 		

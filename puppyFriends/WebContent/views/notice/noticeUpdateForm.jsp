@@ -12,15 +12,15 @@
 <style>
 
     .outer{
-        background-color: #810005;
-        color: white;
+        
+        color: black;
         width: 1000px;
         height: 500px;
         margin: auto;
         margin-top: 50px;
     }
 
-    #update-form table{border: 1px solid white;}
+    #update-form table{border: 1px solid black;}
     #update-form input, #update-form textarea{
         width: 100%;
         box-sizing: border-box;

@@ -42,7 +42,7 @@ public class AdminSelectClass extends HttpServlet {
 		int startPage;   
 		int endPage;
 		
-		listCount = new AdminService().adminSelectListCount();
+		listCount = new AdminService().adminClassCount();
 		
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		

@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style>
     .chat-window {
-        width: 806px;
+        width: 801px;
         height: 700px;
         overflow-y: auto;
         padding: 10px;     
@@ -136,7 +136,6 @@
             border:1px solid rgb(255, 222, 239);
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
-            
         }
        
        #chatMessage:focus{
@@ -169,7 +168,7 @@
         <div id="chattingMsg" class="col-md-6 offset-md-3">     
             <div class="chat-window" id="chatWindow" align="center"></div>
             <div class="text-send d-flex"> 
-                <textarea type="text" id="chatMessage" rows="1" cols="100" onkeyup="if(event.keyCode==13) sendMessage(true);"></textarea>
+                <textarea type="text" id="chatMessage" rows="1" cols="78" onkeyup="if(event.keyCode==13) sendMessage(true);"></textarea>
                 <button class="send-btn" onclick="sendMessage(true)">전송</button> 
               
             </div>
@@ -180,7 +179,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 <script>
-   var serverUrl = "ws://" + window.location.hostname + ":" + window.location.port + "${pageContext.request.contextPath}/ChatingServer";
+   var serverUrl = "ws://192.168.20.36:8083${pageContext.request.contextPath}/ChatingServer";
    var webSocket = new WebSocket(serverUrl);
    
    function sendMessage(isChat) {

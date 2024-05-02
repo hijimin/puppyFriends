@@ -29,7 +29,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 회원조회</title>
+<title>수업예약관리</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	
   <!-- jQuery library -->
@@ -229,6 +229,7 @@
             <br><br><br>
             <li class="memberMana"><a href="<%= contextPath %>/adminSelectMember.me?cpage=1">회원</a>
                 <ul class="memberData" style="color: white;">
+                    <li><a href="<%= contextPath %>/adminSelectMember.me?cpage=1"  style="color: white;">회원조회</a></li><br>
                     <li><a href="<%= contextPath %>/adminRestoreMemberList.me?cpage=1"  style="color: white;">회원복구</a></li>
                 </ul>
             </li> 
@@ -266,7 +267,7 @@
                     <br><br>
                     <thead align="center">
                         <tr>
-                        	
+                        	<th width="50" id="checkOp1">선택</th>
                             <th width="150">예약번호</th>
                             <th width="150">회원번호</th>
                             <th width="150">결제번호</th>
@@ -279,10 +280,10 @@
                     </thead>
                   
                         <tbody align="center">
-                            <form id="deleteForm" action="adminDelete.me" method="post"  onsubmit="return confirmDelete()">
+                            <form id="deleteForm" action="AdminDeleteReservation.re" method="post"  onsubmit="return confirmDelete()">
                             <% for(Reservation cr : crList) {  %>
-                                <tr>
-                                    
+                                <tr>   
+                                	<th><input type="checkbox" value="<%= cr.getReservationNo() %>" name="deleteReservation"></th>
                                     <td id="detailInfo"><%= cr.getReservationNo() %></td>
                                     <td><%= cr.getMemberNo() %></td>
                                     <td><%= cr.getPaymentNo() %></td>
@@ -296,7 +297,8 @@
                                     <% } %></td>
                                 </tr>                               
                         	<% } %>                           
-							</form>        
+							</form>       
+							  <button type="submit" id="deleteBtn" onclick="deleteConfirm()">예약취소</button> 
                         </tbody>
                         
                        
@@ -315,14 +317,14 @@
 						
 				        var check = $("input[type=checkbox]").is(":checked") == true;
 						  if(!check){ // 아무것도 체크안함
-					        	alert("체크박스를 선택 후 추방버튼을 눌러주세요");
+					        	alert("체크박스를 선택 후 취소버튼을 눌러주세요");
 					        	return;
 					        }       
 						  
-				        var result = confirm("해당 회원을 삭제 하시겠습니까?");
+				        var result = confirm("예약을 취소 하시겠습니까?");
 					       if(result){
 					            document.getElementById("deleteForm").submit();
-					            alert("삭제 완료되었습니다!");
+					            alert("예약취소가 완료되었습니다!");
 					        } else {							        	
 					        	alert("취소 되었습니다.");
 					        }
@@ -337,19 +339,19 @@
                 
                 <div class="paging-area" align="center">
                     <% if(currentPage != 1) { %>
-                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage - 1 %>'"> &lt; </button>
+                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage - 1 %>'" style="background-color:#f5e3e1; border-radius: 5px;"> &lt; </button>
                     <% } %>
                     
                     <% for(int p=startPage; p<=endPage; p++) { %>
                         <% if(p == currentPage) { %>
                         <button style="background-color:#f5e3e1; border-radius: 5px;"><%= p %></button>
                         <% } else { %>
-                        <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= p %>'"><%= p %></button>
+                        <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= p %>'" style="background-color:#f5e3e1; border-radius: 5px;"><%= p %></button>
                         <% } %>
                     <% } %>
                     
                     <% if(currentPage != maxPage) { %>
-                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage + 1 %>'"> &gt; </button>
+                    <button onclick="location.href='<%= contextPath %>/adminSelectMember.me?cpage=<%= currentPage + 1 %>'" style="background-color:#f5e3e1; border-radius: 5px;"> &gt; </button>
                     <% } %>
                 </div>
                 <br>

@@ -110,7 +110,7 @@ String clickCountsJson = new Gson().toJson(clickCounts);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
    <style>
         .outer{
-            width: 1800px;
+            width: 1903px;
             height: 950px;
             margin: auto;
         }
@@ -302,7 +302,7 @@ String clickCountsJson = new Gson().toJson(clickCounts);
     
     <div class="mid">
         <div class="sidebar">
-            <li class="boardAdmin" onmouseover="updateChart(0)"><a href="#" >공지사항</a></li>
+            <li class="boardAdmin" onmouseover="updateChart(0)"><a href="<%= contextPath %>/list.no?cpage=1" >공지사항</a></li>
             <br><br><br>
             <li class="memberMana" onmouseover="updateChart(1)"><a href="<%= contextPath %>/adminSelectMember.me?cpage=1">회원</a>
                 <ul class="memberData" style="color: white;">

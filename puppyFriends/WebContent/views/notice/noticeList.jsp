@@ -61,6 +61,7 @@
     .notice-header{border-bottom: 2px solid #666666;}
     .notice-number, .notice-title, .notice-writer, .notice-count, .notice-create-date{
         border-bottom: 1px solid lightgray;
+        cursor: pointer;
     }
 </style>
 </head>

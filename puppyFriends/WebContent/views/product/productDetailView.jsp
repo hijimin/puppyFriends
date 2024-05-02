@@ -362,10 +362,15 @@ a:focus {
 
                 <div class="cart">
                   <div>
-                    <button onclick="cartTest2();" class="button button--winona button--border-thin button--round-s" data-text="Add To Cart"><span>Add To Cart</span></button>
+                    <% if(p1.getStock() == 0){ %>
+                    <button onclick="cartTest2();" class="button button--winona button--border-thin button--round-s" data-text="Add To Cart" disabled><span>Add To Cart</span></button>
+                    <% }else{ %>
+                      <button onclick="cartTest2();" class="button button--winona button--border-thin button--round-s" data-text="Add To Cart"><span>Add To Cart</span></button> 
+                      <% } %>
                     <!-- <a onclick="cartTest2();" class="btn btn-sm btn-warning"
                       >장바구니</a
                     > -->
+
 
 					<% if(p1.getStock() == 0){ %>
 					<button style="color: #fa0404;" disabled onclick="location.href='<%= contextPath %>/order.od?pno=<%= p1.getProductNo() %>'" class="button button--winona button--border-thin button--round-s" data-text="품절"><span>품절</span></button>
@@ -591,7 +596,7 @@ a:focus {
 
             			if(currentPage != 1){
             				//$paging.append("<button onclick='selectReviewList(" + (currentPage-1) + ");'>" &lt; </button>)
-            				$paging.append("<button onclick='selectReviewList(" + (currentPage - 1) + ");'>&lt;</button>");
+            				$paging.append("<button class='rvpagebtn' onclick='selectReviewList(" + (currentPage - 1) + ");'>&lt;</button>");
             			}
 
             			for(let p=startPage; p<=endPage; p++){
@@ -607,7 +612,7 @@ a:focus {
             			}
 
             			if(currentPage != maxPage){
-            				$paging.append("<button onclick='selectReviewList(" + (currentPage + 1) + ");'>&gt;</button>");
+            				$paging.append("<button class='rvpagebtn' onclick='selectReviewList(" + (currentPage + 1) + ");'>&gt;</button>");
             			}
 
             		  let list = map.reviewList

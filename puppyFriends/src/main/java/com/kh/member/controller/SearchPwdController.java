@@ -30,9 +30,14 @@ public class SearchPwdController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		request.setCharacterEncoding("UTF-8");
+		
 		String userName = request.getParameter("userName");
 		String userId = request.getParameter("userId");
 		String email = request.getParameter("email");
+		
+		System.out.println(userName + userId + email);
+		
 		
 		String userPwd = new MemberService().selectPwd(userName, userId, email);
 				

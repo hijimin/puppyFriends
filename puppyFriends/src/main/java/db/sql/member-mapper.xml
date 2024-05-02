@@ -9,6 +9,7 @@
 	     , MEMBER_NAME
 	     , MEMBER_EMAIL
 	     , MEMBER_PHONE
+	     , STATUS
 	     , DOG_NO
 	     , DOG_NAME
 	     , DOG_SIZE
@@ -21,7 +22,6 @@
 	  JOIN DOG USING (MEMBER_NO)
 	 WHERE MEMBER_ID = ?
 	   AND MEMBER_PWD = ?
-	   AND STATUS = 'Y'
 	</entry>
 	
 	<entry key="kakaoLoginMember">

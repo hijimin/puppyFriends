@@ -165,10 +165,7 @@
 	}
 	 #productBtn:hover, #kindBtn:hover{
 		transform: scale(1.1);
-	 } 
-	 .way-come li{
-	 font-size:25px;
-	 } 
+	 }  
 </style>
 <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=9165mfbte9"></script>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
@@ -187,10 +184,11 @@
 			<div class="swiper mySwiper">
 				<div class="swiper-wrapper">
 				  <div class="swiper-slide"><img src="resources/upfiles/2024022717015057486.jpg" alt=""></div>
-				  <div class="swiper-slide"><img src="resources/upfiles/2024031916011178538.png" alt=""></div>
+				  <div class="swiper-slide"><img src="resources/upfiles/2024032217290797100.jpg" alt=""></div>				  
 				  <div class="swiper-slide"><img src="resources/upfiles/2024031914335439204.jpg" alt=""></div>
 				  <div class="swiper-slide"><img src="resources/upfiles/2024031914334488648.jpg" alt=""></div>
 				  <div class="swiper-slide"><img src="resources/upfiles/2024031914333789382.jpg" alt=""></div>
+				  <div class="swiper-slide"><img src="resources/upfiles/2024032217203674934.jpg" alt=""></div>
 				  <div class="swiper-slide"><img src="resources/upfiles/2024031914333158121.jpg" alt=""></div>
 				  <div class="swiper-slide"><img src="resources/upfiles/2024031914353236074.jpg" alt=""></div>
 				  <div class="swiper-slide"><img src="resources/upfiles/2024031914352576930.jpg" alt=""></div>
@@ -286,11 +284,11 @@
 			</script>
 		</div>
 		<div class="main-content3-2">
-			<ul class="way-come">
+			<ul>
 				<li>주소 : 서울특별시 강남구 강남구 테헤란로14길 6</li><br><br>
-				<li>대중교통 : 알아서 타고오세요</li><br><br>
+				<li>대중교통 : 2호선 환승역 역삼역 3번 출구에서 10분 거리에 있습니다.</li><br><br>
 				<li>이용시간 : 오전 9시부터 오후 6시</li><br><br>
-				<li>시설물 : 많음</li><br><br>
+				<li>시설물 : 호텔, 유치원</li><br><br>
 			</ul>
 		</div>
 	</div>

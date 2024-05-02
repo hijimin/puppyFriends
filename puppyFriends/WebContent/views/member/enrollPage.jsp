@@ -347,7 +347,7 @@
             $(".check-input").css({border:"2px solid rgb(255, 222, 239)", borderTop:"none"})
 
             if($(".pwd-input input").val() == ""){
-                $(".pwd-check").css("display", "block").html("·비밀번호 : 필수 정보입니다.");
+                $(".pwd-check").css({display:"block", fontSize:"12px"}).html("·비밀번호 : 필수 정보입니다.");
                 $(".pwd-input").css({border:"2px solid #ff3f3f"});
                 $(".pwd-input-window>input").addClass("changeplaceholder").css({textDecoration:"underline", color:"#ff3f3f"});
                 $(".id-input").css("border-bottom", "none");
